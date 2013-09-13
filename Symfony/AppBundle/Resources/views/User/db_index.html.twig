@@ -1,0 +1,34 @@
+{% extends 'YawAppBundle:Layouts:index_layout.html.twig' %}
+
+{% block left_nav %}
+    {% include 'YawAppBundle:User:db_sidebar.html.twig' %}
+{% endblock %}
+
+{% block body %}
+	<script type="text/javascript">
+	    $(document).ready(function() {
+			document.getElementById("settings__user_dashboard_menu").style.display="block";
+			document.getElementById("label_settings__user_dashboard_menu").style.display="none";
+
+			document.getElementById("details__user_dashboard_menu").style.display="block";
+			document.getElementById("label_details__user_dashboard_menu").style.display="none";
+			
+		});
+	</script>
+	{% if checkout_id != 'none' %}
+		<script type="text/javascript">
+		    $(function(){
+		        $('#upgradeSuccessPopup').click();
+		    });
+		</script>
+	{% endif %}
+	<a id="upgradeSuccessPopup" class="ajax" data-target="../security/login/upgradeSuccessPopup" data-action="Yaw.SecurityRegister.showPopup" href="" data-match=""></a>
+    <div id="user_dashboard_content">
+        {# content loads by ajax #}
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            $('#user_dashboard_menu').find('a.current').click();
+        });
+    </script>
+{% endblock %}

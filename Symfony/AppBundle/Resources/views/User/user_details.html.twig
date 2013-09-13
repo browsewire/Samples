@@ -1,0 +1,118 @@
+{% if WpAccountExists == 'True' %}
+	<script type="text/javascript">
+		$(document).ready(function() {
+			document.getElementById("successPopup" ).click();
+		});
+	</script>
+{% endif %}
+
+<script type="text/javascript">
+	
+	    $(document).ready(function() 
+		{ 
+			//alert("{{WpAccountExists}}");
+			document.getElementById("settings__user_dashboard_menu").style.display="block";
+			document.getElementById("label_settings__user_dashboard_menu").style.display="none";
+
+			document.getElementById("details__user_dashboard_menu").style.display="block";
+			document.getElementById("label_details__user_dashboard_menu").style.display="none";
+
+			document.getElementById("preview__user_dashboard_menu").style.display="none";
+			document.getElementById("label_preview__user_dashboard_menu").style.display="block";
+
+			document.getElementById("socialFeed__user_dashboard_menu").style.display="none";
+			document.getElementById("label_socialFeed__user_dashboard_menu").style.display="block";
+		});
+	
+	
+	    WePay.OAuth2.button_init(document.getElementById('start_oauth2'), {
+		"client_id":"{{ client_id }}",
+		"scope":["manage_accounts","view_balance","collect_payments","view_user","send_money","preapprove_payments"],
+		"user_name": "{{ user.firstName }} {{ user.lastName }}",
+		"user_email": "{{ user.email }}",
+		"redirect_uri": "http://www.angelwishesnetwork.com/user/dashboard",
+		"top":100, // control the positioning of the popup with the top and left params
+		"left":100,
+		//"state":"robot", // this is an optional parameter that lets you persist some state value through the flow
+		"callback":function(data) 
+				   {
+						//alert(data.code+" --- "+data['code']);return false;
+						//window.location.href="https://www.wepay.com/v2/oauth2/token?client_id=47791&redirect_uri=http://www.angelwishesnetwork.com/user/dashboard&client_secret=9b5d33d682&code="+data.code;
+
+						//alert(data.user.user_id);
+		   				//document.getElementById("successPopup" ).click();
+						/*console.log(data);
+						{
+			 				 "client_id":"{{ client_id }}",
+			 				 "client_secret":"{{ client_secret }}",
+			 				 "redirect_uri":"http://dev.yourangelwishes.com/user/dashboard",
+			  				 "code":data.code
+						}*/
+						
+						document.getElementById("hidCode").value=data.code;
+						document.frmCode.submit();
+						
+					}
+	    });
+	
+</script>
+
+<style>
+	h1, h2, h3, h4, h5, h6, li, td, p, a, span, div 
+	{
+		font-family: BerlinSans,Lucida Sans,Arial,sans-serif;;
+		font-weight:lighter;
+	}
+	a.wepay-widget-button 
+	{
+		-moz-box-sizing: inherit !important;
+		-moz-user-select: none;
+		border: 1px solid lightgrey;
+		border-radius: 50px 50px 50px 50px !important;
+		
+	}
+	a.wepay-widget-button.wepay-green 
+	{
+		background-color: white !important;
+		background-repeat: repeat-x;
+		box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset;
+		border: 1px solid lightgrey !important;
+		color: #FFFFFF  !important;
+		background-image:none !important;
+	}
+	
+</style>
+<form name="frmCode" id="frmCode" method="POST" action="http://www.angelwishesnetwork.com/user/dashboard">
+	<input type="hidden" name="hidCode" id="hidCode">
+</form>
+
+<div id="user_dashboard_content" class="col-main-content">
+	<h2>To Finalize</h2>
+	<div class="content-block" style="border:1px solid;">
+		<div id="create_wepay_account" style="margin-left:20px !important;margin-bottom: 300px !important;">
+			<h3>Step 1 - Set up your online payments</h3>
+			<h6 style="float: right; top: 0px; margin-top: -100px;">{{ user.email }}</h6>
+			<div>
+				<a id="start_oauth2" class="wepay-logo-button" style="width:auto;background-image: -moz-linear-gradient(center top , white, white) !important;padding: 13px !important;">
+					<img style="background-color: white !important;
+						background-repeat: repeat-x;
+						background-image: -moz-linear-gradient(center top , white, white) !important;
+						box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset;
+						color: #FFFFFF  !important;" src="{{ 'wepay-logo.png' | imagine_filter('button_service_logo') }}" alt=""/>
+					<!--<img href="https://www.wepay.com/v2/oauth2/authorize?client_id=47791&redirect_uri=http://dev.yourangelwishes.com/user/dashboard&scope=collect_payments" src="{{ 'wepay-logo.png' | imagine_filter('button_service_logo') }}" alt=""/>-->
+				</a>
+			</div>
+    
+			<div><br/>
+				<p>Wepay is an online payment service provider that enables you to receive <br/>
+				   payments from donors on Angel Wishes.<a href="https://www.wepay.com/v2/oauth2/authorize?client_id=47791&scope=manage_accounts,view_balance,collect_payments,view_user,send_money,preapprove_payments&redirect_uri=http://www.angelwishesnetwork.com/user/dashboard&user_name={{ user.firstName }}%20{{ user.lastName }}&user_email={{ user.email }}&popup=1" target="_blank"><u>Click to Setup</u></a></p>
+		
+			<a id="successPopup" class="ajax" data-target="../security/login/successPopup" data-action="Yaw.SecurityRegister.showPopup" href="" data-match="">
+			
+		</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+

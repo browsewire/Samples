@@ -1,0 +1,302 @@
+<div id="user_dashboard_content" class="col-main-content">
+	<h2>To Finalize</h2>
+	<script src='http://connect.facebook.net/en_US/all.js'></script>
+	<script type="text/javascript">
+	
+	    $(document).ready(function() {
+			document.getElementById("settings__user_dashboard_menu").style.display="block";
+			document.getElementById("label_settings__user_dashboard_menu").style.display="none";
+
+			document.getElementById("details__user_dashboard_menu").style.display="none";
+			document.getElementById("label_details__user_dashboard_menu").style.display="block";
+
+			document.getElementById("preview__user_dashboard_menu").style.display="none";
+			document.getElementById("label_preview__user_dashboard_menu").style.display="block";
+
+			document.getElementById("verification__user_dashboard_menu").style.display="none";
+			document.getElementById("label_verification__user_dashboard_menu").style.display="block";
+
+			document.getElementById("socialFeed__user_dashboard_menu").style.display="block";
+			document.getElementById("label_socialFeed__user_dashboard_menu").style.display="none";
+		});
+
+		function updatetemplateid(id)
+		{
+			document.getElementById('templateid').value = id;
+		}
+
+		function updateSelectedLinkId(id)
+		{
+			document.getElementById('hidSelectedLink').value = id;
+		}
+		
+		function hideshowprofileimge()
+		{
+			$('#profileimg').toggle();
+		}
+
+		(function(d, s, id) 
+			{
+			 	var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+			  	js = d.createElement(s); js.id = id;
+			  	js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ fbappid }}";
+			  	fjs.parentNode.insertBefore(js, fjs);
+			}
+			(document, 'script', 'facebook-jssdk')
+		);
+
+		FB.init({appId: "{{ fbappid }}", status: true, cookie: false, oauth  : true, xfbml  : true});
+
+
+		function postToFeed() 
+		{
+			var id = document.getElementById('templateid').value;
+			var desc = document.getElementById('temp_'+id).innerHTML;
+			var webLinkForUser = 'http://www.angelwishesnetwork.com/';
+			
+			if(document.getElementById('listLink1').checked == true)
+			{
+				webLinkForUser = 'http://www.angelwishesnetwork.com/search_request?zip={{user.zip}}';
+			}
+			else if(document.getElementById('listLink2').checked == true)
+			{
+				webLinkForUser = 'http://www.angelwishesnetwork.com/#divHowItWorks';
+			}
+
+			   
+			FB.ui(
+				{
+		  			method: 'feed',
+			  		link: webLinkForUser,
+			  		picture: 'http://www.angelwishesnetwork.com/AngelWishes.jpg',
+			  		name: 'Angelwishes',
+			  		caption: '',
+			  		description: desc,
+				}, 
+				function(response)
+				{
+					if(response.post_id)
+					{
+						window.location.href="http://www.angelwishesnetwork.com/user/dashboard/preview";
+						//$('#openreminder').click();
+					}
+				}
+			);
+		 }
+
+		
+		function postToFeedbh() 
+		{
+			//alert(document.getElementById('hidSelectedLink').value);
+			FB.api('/me', {fields: "id,first_name,last_name,email,picture"}, function(response) {
+
+				FB.api(
+				    {
+				        method: 'fql.query',
+				        query: 'SELECT pid, src_big, src_big_height, src_big_width FROM photo WHERE aid IN ( SELECT aid FROM album WHERE owner="' + response.id + '" AND name = "Profile Pictures")'
+				    },
+				    function(data1) 
+					{
+				        console.log(data1);
+				    }
+				);
+				var facebookid = response.id;
+
+				if(response.first_name)
+				{
+					document.getElementById('socialPage1').style.display="none";
+					document.getElementById('socialPage2').style.display="block";
+
+					//alert(document.getElementById('hidSelectedLink').value);
+					
+					if(document.getElementById('hidSelectedLink').value == 1)
+					{
+						document.getElementById('listLink1').checked=true;
+					}
+					else if(document.getElementById('hidSelectedLink').value == 2)
+					{
+						document.getElementById('listLink2').checked=true;
+					}
+					else if(document.getElementById('hidSelectedLink').value == 3)
+					{
+						document.getElementById('listLink3').checked=true;
+					}
+					else
+					{
+						document.getElementById('listLink1').checked=true;
+					}
+					
+				}
+	
+				$('#user_form_first_name').val(response.first_name);
+				$('#user_form_last_name').val(response.last_name);
+				$('#user_form_facebookid').val(facebookid);
+				if(response.email)
+				{
+					$('#user_form_email').val(response.email);
+					$('#facebook_email').html(response.email);
+				}
+				var userpass = response.first_name+response.last_name;
+				var imgurl = response.picture.data.url;
+				$('#user_form_plainPassword_password').val(userpass);
+				$('#user_form_plainPassword_conf_password').val(userpass);
+				$('#user_form_avatar').val(imgurl);
+
+				$('#facebook_name').html(response.first_name+' '+response.last_name);
+
+				$('#facebook_img').html('<img style="margin:0px" id="avatar_img" src="'+imgurl+'">');
+				$('#facebook_img_section').show();  
+				checkfacebookuser(facebookid);
+			});
+		}
+
+		function checkfacebookuser(facebookid)
+		{
+			var rootpath = '{{ path('verifyfbaccount') }}';
+			$.post(rootpath,{'facebookid':facebookid},
+				function(data)
+				{
+				   	if(data)
+					{
+				    	alert(data);
+				  	}
+					else
+					{
+					}
+				}
+			);
+
+		}
+		function fblogin() 
+		{
+			FB.login(function(response) 
+				{
+					postToFeedbh();
+				}, 
+				{scope:'read_stream,publish_stream,offline_access'});
+		}
+	</script>
+
+	<input type="hidden" name="hidSelectedLink" id="hidSelectedLink">
+
+	<div id="socialPage1" class="content-block" style="border: 1px solid; height: 600px; padding: 20px 20px 20px 90px;">
+		<h3 style="margin-left: -40px;">Step 4 - Get the word out to facebook</h3>
+		<h6 style="float: right; top: 0px; margin-top: -120px;">{{ user.email }}</h6>
+		<p>Raising funds is all about reaching out to those who might be able to help.Choose a template and let all of<br/>
+		your friends know about the site.Choose whether to link them back to</p>
+		<br/>
+		<p>
+			<ul>
+				<li style="line-height: 35px;"><input type="radio" name="listLink" onclick="updateSelectedLinkId(1)" checked="checked" label="false">&nbsp;A list of recipients which includes you</li>
+				<li style="line-height: 35px;"><input type="radio" name="listLink" onclick="updateSelectedLinkId(2)">&nbsp;Your listing</li>
+				<li style="line-height: 35px;"><input type="radio" name="listLink" onclick="updateSelectedLinkId(3)">&nbsp;The starting page of Angel Wishes</li>
+			</ul>
+		</p>	
+		<br/>
+		<p>Remember every member who joins the network connects their friends so you are just as likely to receive<br/>
+		help from a total stranger as you are from one of your friends</p>
+		<br/><br/>
+		<p><a href="#" onclick="fblogin();return false;"><img src="/bundles/yawapp/images/icons/conn_with_facebook.gif"></a></p>
+	</div>
+
+	<div id="socialPage2" class="content-block" style="border: 1px solid; height: 700px; padding: 20px 20px 20px 90px; display:none;">
+		<h3>Market to your social network</h3>
+		<h6 style="float: right; top: 0px; margin-top: -120px;">{{ user.email }}</h6>
+		<p>Angel Wishes is continually marketing to Angels tovisit the site and give.Now play your part by marketing either your request or the site in general to your friends.</p>
+		<br/>
+		<p>1. Please choose a template below</p>
+		<!--		
+		<p>
+			Choose a template to post on your facebook feed 
+			&nbsp; 
+			<select name="" id="">
+				<option value="All">All Appeals</option>
+				<option value="General">General Appeals</option>
+				<option value="Anonymous">Anonymous Appeals</option>
+				<option value="Personal">Personal Appeals</option>
+			</select>
+		</p>
+		-->
+		
+		<p id="temp_1" style="border: 1px solid; float: left; padding: 10px; margin-top: 10px; border-radius: 10px 10px 10px 10px; font-size: 11px; margin-right: 20px; height: 130px; width: 25%;">
+			<!-- <img src="/bundles/yawapp/images/AngelWishes_Logo_Angel_144x144.png" style="width: 40px; height: 40px;" width=="40" height=="40" alt="Angel Wishes" align="right">-->	
+			<strong>Angel Wishes</strong><input checked="checked" label="false" type="radio" name="template" style="float:right;" onclick="updatetemplateid(1)">
+			<br/>
+			I just supported Angel Wishes please join me in donating a small amount of money to people just like us
+			<br/>
+			<u style="vertical-align: sub;">www.angelwishesnetwork.com</u>
+					
+		</p>
+
+		<p id="temp_2" style="border: 1px solid; float: left; padding: 10px; margin-top: 10px; border-radius: 10px 10px 10px 10px; font-size: 11px; margin-right: 20px; height: 130px; width: 25%;">
+			<!-- <img src="/bundles/yawapp/images/AngelWishes_Logo_Angel_144x144.png" style="width: 40px; height: 40px;" width=="40" height=="40" alt="Angel Wishes" align="right">-->	
+			<strong>Angel Wishes</strong><input type="radio" name="template" style="float:right;" onclick="updatetemplateid(2)">
+			<br/>
+			If you buy a coffee most days of the week you'll spend $20,000 over your lifetime. Do something great with those spare dollars
+			<br/>
+			<u style="vertical-align: sub;">www.angelwishesnetwork.com</u>
+					
+		</p>
+
+		<p id="temp_3" style="border: 1px solid; float: left; padding: 10px; margin-top: 10px; border-radius: 10px 10px 10px 10px; font-size: 11px; margin-right: 20px; height: 130px; width: 25%;">
+			<!-- <img src="/bundles/yawapp/images/AngelWishes_Logo_Angel_144x144.png" style="width: 40px; height: 40px;" width=="40" height=="40" alt="Angel Wishes" align="right">-->	
+			<strong>Angel Wishes</strong><input type="radio" name="template" style="float:right;" onclick="updatetemplateid(3)">
+			<br/>
+			Did you know that if half of my friends donated $3 a week, we could help support 3 American families! join me today
+			<br/>
+			<u style="vertical-align: sub;">www.angelwishesnetwork.com</u>
+					
+		</p>
+
+		<p id="temp_4" style="border: 1px solid; float: left; padding: 10px; margin-top: 10px; border-radius: 10px 10px 10px 10px; font-size: 11px; margin-right: 20px; height: 130px; width: 25%;">
+			<!-- <img src="/bundles/yawapp/images/AngelWishes_Logo_Angel_144x144.png" style="width: 40px; height: 40px;" width=="40" height=="40" alt="Angel Wishes" align="right">-->	
+			<strong>Angel Wishes</strong><input type="radio" name="template" style="float:right;" onclick="updatetemplateid(4)">
+			<br/>
+			I had a choice, help another American with spare change that I'll never miss or turn my back. I've decided we're all in this together :)
+			<br/>
+			<u style="vertical-align: sub;">www.angelwishesnetwork.com</u>
+					
+		</p>
+
+		<p id="temp_5" style="border: 1px solid; float: left; padding: 10px; margin-top: 10px; border-radius: 10px 10px 10px 10px; font-size: 11px; margin-right: 20px; height: 130px; width: 25%;">
+			<!-- <img src="/bundles/yawapp/images/AngelWishes_Logo_Angel_144x144.png" style="width: 40px; height: 40px;" width=="40" height=="40" alt="Angel Wishes" align="right">-->	
+			<strong>Angel Wishes</strong><input type="radio" name="template" style="float:right;" onclick="updatetemplateid(5)">
+			<br/>
+			Hey guys, today I gave a tiny amount to a complete stranger, I won't miss what I gave but if enough of us do the same we can impact peoples lives. Go do it!
+			<br/>
+			<u style="vertical-align: sub;">www.angelwishesnetwork.com</u>
+					
+		</p>
+
+		<p id="temp_6" style="border: 1px solid; float: left; padding: 10px; margin-top: 10px; border-radius: 10px 10px 10px 10px; font-size: 11px; margin-right: 20px; height: 130px; width: 25%;">
+			<!-- <img src="/bundles/yawapp/images/AngelWishes_Logo_Angel_144x144.png" style="width: 40px; height: 40px;" width=="40" height=="40" alt="Angel Wishes" align="right">-->	
+			<strong>Angel Wishes</strong><input type="radio" name="template" style="float:right;" onclick="updatetemplateid(6)">
+			<br/>
+			I saw a request today which touched my heart, find one that speaks to you today.
+			<br/>
+			<u style="vertical-align: sub;">www.angelwishesnetwork.com</u>
+					
+		</p>
+
+		<input type="hidden" id="templateid" value="1">
+
+		<div style="margin-top:375px;">
+			<p>2. Now choose where the Angel Wishes link will bring visitors back to</p>
+			
+			<input type="radio" name="listLink" id="listLink1">&nbsp; A list of requests that will include my request<br/>
+			<input type="radio" name="listLink" id="listLink2">&nbsp; My request only<br/>
+			<input type="radio" name="listLink" id="listLink3">&nbsp; The Angel Wishes home page<br/>	
+			<br/>
+			<div>
+				<div id='fb-root'></div>
+				<a onclick='postToFeed(); return false;' style="text-decoration:none" href="javascript:void(0)">
+					<img src="/bundles/yawapp/images/icons/post_to_facebook.png" style="height: 25px; float: left;" alt="Post to facebook">
+				</a>
+			</div>
+		</div>
+		
+	</div>
+	
+</div>
+

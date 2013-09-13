@@ -1,0 +1,380 @@
+<div id="user_dashboard_content" class="col-main-content">
+	<h2>To Finalize</h2>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	
+	<script type="text/javascript">
+
+	</script>
+
+	<div class="content-block" style="border:1px solid;">
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				document.getElementById("preview__user_dashboard_menu").style.display="block";
+				document.getElementById("label_preview__user_dashboard_menu").style.display="none";
+
+				document.getElementById("settings__user_dashboard_menu").style.display="block";
+				document.getElementById("label_settings__user_dashboard_menu").style.display="none";
+
+				document.getElementById("details__user_dashboard_menu").style.display="none";
+				document.getElementById("label_details__user_dashboard_menu").style.display="block";
+
+				document.getElementById("socialFeed__user_dashboard_menu").style.display="none";
+				document.getElementById("label_socialFeed__user_dashboard_menu").style.display="block";
+
+			});
+
+			function closeWePay()
+			{
+				document.getElementById("check").style.display="none";
+				document.getElementById("upgradeAccount").disabled=false;
+				document.getElementById("editDetails").disabled=false;
+				document.getElementById("close").style.display="none";
+				document.getElementById("ccTitle").style.display="none";
+				document.getElementById("check").style.display="none";
+				document.frmListing.submit();
+				//5585536406458369
+			}
+			
+			
+		</script>
+		
+		
+		<ul class="nav-menu f-right ajax-menu h-menu" id="menu_user_head" style="margin-right: 0;margin-top: -112px;z-index: 1002;">
+			<li>
+    			<font color="white">Logged in as</font> &nbsp; <a id="account__menu_user_head" data-_block="true" data-action="__user.showSection" data-target="/user/dashboard/preview" href="/user/dashboard" class=" first"><font color="white">{{user.firstName}} {{user.lastName}}</font></a>
+			</li>
+			<li>
+    			<a id="logout__menu_user_head" href="/logout" class=" last"><font color="white">Logout</font></a>
+			</li>
+		</ul>
+
+
+
+		<div id="check" style="width:600px; position: absolute; z-index: 2000; margin-top: 48px; margin-left: 10%;/* margin: auto; */border: 1px solid;border-radius: 10px 10px 10px 10px;padding: 15px;background-color: white;display:none;">
+			<p id="ccTitle" style="display: none; float: left; font-size:20px; margin-left: 116px; margin-bottom: -5px;">
+				Please enter your credit card details<br/><br/>
+			</p>
+			<img id="close" style="display: none; float: right; margin-left: 590px; margin-top: -14px; position: absolute;" src="/bundles/yawapp/images/icons/close_cross.png" alt="close" onclick="javascript:closeWePay();">
+			<div style="float:left;">
+			<!--<input type="button" name="close" id="close" value="Close" style="display: block; margin-top: -34px; float: right;" onclick="javascript:closeWePay();">-->
+			
+		</div>
+		</div>
+		<div id="create_wepay_account" style="margin-left:20px !important;margin-bottom: 320px !important;">
+			<h3>Step 2 - Preview and edit your request</h3>
+			
+			<h6 style="float: right; top: 0px; margin-top: -100px;">{{ user.email }}</h6>
+
+			<div class="request-item" style="border: 1px solid !important;margin-right: 20px !important;background-color:#3F648E">
+				<div style="float:left; margin-right:20px;margin-top: 15px;">
+					<!--<p style="color:white;font-family:BerlinSans, Lucida Sans, Arial, sans-serif;">-->
+					<p style="color:white;font-family:BerlinSans, Lucida Sans, Arial, sans-serif;font-size: 18px;line-height: 25px;">
+						<b>Preview your Angel<br/> Wishes request<br/> before going live</b>
+					</p>
+				</div>
+				<div style="float: right; background-color: white; width: 75%;position: relative;">
+					<div style="padding: 10px 0 10px 10px;">
+						<div class="avatar-block">
+						    <img height="100"  style="margin-right: -20px !important;" src="{{ user.avatar }}" alt="avatar"/>
+						</div>
+						<div class="avatar-block" style="margin-right: 20px !important;">
+							<script type="text/javascript">
+								function showStatement(id)
+								{
+									document.getElementById(id).style.display="block";
+								}
+								function hideStatement(id)
+								{
+									document.getElementById(id).style.display="none";
+								}
+							</script>
+							<img height="25" style="valign:top;" src="/bundles/yawapp/images/icons/speech_icon_sml.gif" alt="speech"/ onmouseover="javascript:showStatement('div{{ user.id }}');" onmouseout="javascript:hideStatement('div{{ user.id }}');">
+							
+						</div>
+						<div id="div{{ user.id }}" style="display:none;">
+							<span style="background-color: #FFFDCE;
+									border: 1px solid #FFD971;
+									float: right;
+									font-size: 0.75em;
+									left: 114px;
+									padding: 11px;
+									position: absolute;
+									top: 12px;
+									width: 250px;
+									z-index: 1000;
+									border-radius: 10px 10px 10px 10px;">
+								{{loan.statement}}
+							</span>
+						</div>
+						<div class="request-details" style="width: 510px; margin-top: -1px; margin-left: 140px;">
+							<div class="user-details" style="color:#64829c;font-family:BerlinSans, Lucida Sans, Arial, sans-serif;font-size: 20px;">
+								{% if displayName != NULL %} {{ displayName }} {% else %} {{ user.firstName }} {{ user.lastName }}{% endif %}, {{ user.city }}
+								<br/>
+							
+								<div class="static-progress f-left ui-progressbar ui-widget ui-widget-content ui-corner-all" style="margin-top:10px;" data-value="0" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+									<div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;">
+									</div>
+								</div>
+							</div>
+							<div style="margin-top: 30px;">
+								<font style="font-family:Lucida Grande, Lucida Sans, Arial, sans-serif">	
+								<strong>Reason</strong> &nbsp;&nbsp; 
+									{% for key,item in allReasons %}
+										{% if allReasons[key].id==loan.reason_id %} 
+											{{ allReasons[key].value }} 
+										{% endif %}
+									{% endfor %}
+								<br/>
+								<strong>Interests</strong> &nbsp;
+									{% for key,item in allInterests %}
+										{% if allInterests[key].id in interests|keys %} 
+											{{ allInterests[key].value }} {% if loop.first %} {% else %}, {% endif %} 
+										{% endif %}
+									{% endfor %}
+							</font>
+							</div>
+					</div>
+						
+							<img height="70" style="position: absolute;right: 0;top: 0;vertical-align: top;z-index: 1000;" src="/bundles/yawapp/images/NotVerified.png" alt="Not Verified">
+						
+					</div>
+				</div>
+			</div>
+			<div>
+			&nbsp;<br/>
+			</div>
+			<div style="float:right;">
+				<script type="text/javascript">
+					function showDetails()
+					{
+						document.getElementById("editDetails").style.display="none";
+						document.getElementById("closeDetails").style.display="block";
+						document.getElementById("saveDetails").style.display="block";
+						document.getElementById("listingDetails").style.display="block";			
+					}
+					function closeDetails()
+					{
+						document.getElementById("closeDetails").style.display="none";
+						document.getElementById("saveDetails").style.display="none";
+						document.getElementById("listingDetails").style.display="none";	
+						document.getElementById("editDetails").style.display="block";
+					}
+					function updateListing()
+					{
+						document.getElementById("hidOperation").value='UPDATE';
+						document.frmListing.submit();
+					}
+				</script>
+				<script type="text/javascript" src="https://www.wepay.com/js/iframe.wepay.js">
+				</script>
+
+				<script type="text/javascript">
+					function checkOut()
+					{
+						document.getElementById("upgradeAccount").disabled=true;
+						document.getElementById("editDetails").disabled=true;
+						document.getElementById("close").style.display="block";
+						document.getElementById("ccTitle").style.display="block";
+						document.getElementById("check").style.display="block";
+						
+						WePay.iframe_checkout("check", "{{checkout_uri}}");
+						
+					}
+					function idVerification()
+					{
+						window.location.href='http://www.angelwishesnetwork.com/user/dashboard/verification';
+						//5585536406458369
+					}
+				</script>
+				<!--<input type="button" name="upgradeAccount" id="upgradeAccount" value="Upgrade" style="float:right; margin-right:20px;" onclick="window.open('{{checkout_uri}}');">-->
+				{% if freeUser =='Yes' %}
+					<input type="button" name="upgradeAccount" id="upgradeAccount" value="Upgrade" style="float:right; margin-right:20px;" onclick="javascript:checkOut();">
+				{% else %}
+					<input type="button" name="verifyId" id="verifyId" value="Next : ID Verification" style="float:right; margin-right:20px;" onclick="javascript:idVerification();">
+				{% endif %}
+				<input type="button" name="saveDetails" id="saveDetails" value="Save" style="float:right; margin-right:20px;margin-top:0px;display:none;" onclick="updateListing();">
+				<input type="button" name="closeDetails" id="closeDetails" value="Close" style="float:right; margin-right:20px;display:none;" onclick="javascript:closeDetails();">
+				<input type="button" name="editDetails" id="editDetails" value="Edit" style="float:right; margin-right:20px;" onclick="javascript:showDetails();">
+			</div>
+			
+		
+			<div>
+			&nbsp;<br/><br/><br/><br/>
+			</div>
+			
+			<div id="listingDetails" style="margin-left:20px !important;margin-bottom: 20px !important;height:150px;display:none;">
+				
+				<form name="frmListing" id="frmListing" method="POST" action="{{path('user_preview')}}">
+					<input type="hidden" name="hidOperation" id="hidOperation">
+					<style>
+						h1, h2, h3, h4, h5, h6, li, td, p, a, span, div {
+							font-family: BerlinSans,Lucida Sans,Arial,sans-serif;;
+							font-weight:lighter;
+						}
+					</style>
+					
+					<tbody style="font-family: BerlinSans,Lucida Sans,Arial,sans-serif;">
+						<h5 style="font-size: 25px; margin-left: 259px;font-family: BerlinSans,Lucida Sans,Arial,sans-serif;">
+							Edit your request
+						</h5>
+						
+						
+						<tr>
+							<td>
+								<div style="border-right: 1px solid; width: 300px; display: block; border-top: 1px solid; float: left; padding-right: 57px;">
+								<h6>Personal Statement</h6>
+								<!--<textarea style="height: 100px; width: 310px; text-align: start;background-color: #FBF3E1;color: #64829C;" id="loanStatement" name="loanStatement" required="required" class="msg-counter" maxlength="160" placeholder="Enter a personal statement *">
+									{{loan.statement}}
+								</textarea>-->
+
+								<textarea id="loanStatement" name="loanStatement" required="required" class="msg-counter" maxlength="140" placeholder="Enter a personal statement *" style="background-color: #FBF3E1;width: 300px; height: 100px;"  onkeyup="textCounter(this,'counter_loan_form_statement',140);">{{loan.statement}}</textarea>
+							<!--<span class="helper" id="counter_loan_form_statement"></span>-->
+							<input style="background-color: white; border: medium none;" disabled  maxlength="3" size="3" value="" id="counter_loan_form_statement">
+							<script>
+								function textCounter(field,field2,maxlimit)
+								{
+								 var countfield = document.getElementById(field2);
+								 if ( field.value.length > maxlimit ) {
+								  field.value = field.value.substring( 0, maxlimit );
+								  return false;
+								 } else {
+								  countfield.value = maxlimit - field.value.length;
+									countfield.value = countfield.value + "remaining";
+								 }
+								}
+							</script>
+								<div style="margin-right: 30px; display: block; clear: both; width: 300px;">
+									<h6>Reason</h6>
+									<select id="reason" name="reason"  data-placeholder="My reason for borrowing" tabindex="-1" style="background-color: #FBF3E1;color: #64829C;">
+											
+										{% for key,item in allReasons %}
+											<option value="{{ allReasons[key].id }}" {% if allReasons[key].id==loan.reason_id %}selected="selected"{% endif %} >{{ allReasons[key].value }}</option> 
+										{% endfor %}
+										
+									</select>
+								</div>
+
+								<div style="margin-right: 30px;">
+									<h6>Interests</h6>
+									<select id="interest" name="interest[]"  data-placeholder="Select Reasons" tabindex="-1" style="height: 120px;background-color: #FBF3E1;color: #64829C;" multiple="true">
+										
+										{% for key,item in allInterests %}
+											<option value="{{ allInterests[key].id }}" {% if allInterests[key].id in interests|keys %} selected {% endif %} >{{ allInterests[key].value }}</option> 
+										{% endfor %}
+									
+									</select>
+								</div>
+								</div>
+							</td>
+							<td>
+								<div style="border-top: 1px solid; float: left; padding-left: 40px; width: 299px;">
+
+								<div>
+									<h6 style="">Choose how your name will appear</h6>
+										<input type="radio" name="displayName" id="name1" {% if displayName == name1 %} checked {% else %}{% if displayName == '' %} checked {% endif %} {% endif %} value="{{ name1 }}" style="margin-left: 20px;">
+											<font style="font-size:13px;">{{ name1 }}</font><br/>
+										<input type="radio" name="displayName" id="name2" {% if displayName == name2 %} checked {% endif %} value="{{ name2 }}" style="margin-left: 20px;">
+											<font style="font-size:13px;">{{ name2 }}</font><br/>
+										<input type="radio" name="displayName" id="name3" {% if displayName == name3 %} checked {% endif %} value="{{ name3 }}" style="margin-left: 20px;">
+											<font style="font-size:13px;">{{ name3 }}</font><br/>
+										<input type="radio" name="displayName" id="name4" {% if displayName == name4 %} checked {% endif %} value="{{ name4 }}" style="margin-left: 20px;">
+											<font style="font-size:13px;">{{ name4 }}</font><br/>
+								</div>
+								<h6 style="">Amount Requested</h6>
+								 <script>
+									$(function() 
+									{
+										$( "#slider" ).slider({
+										value:{{loan.amount}},
+										min: 50,
+										max: 3000,
+										step: 50,
+										slide: function( event, ui ) {
+										$( "#amount" ).val( "$" + ui.value );
+										}
+										});
+										$( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
+									});
+								</script>
+								<label>I want to borrow</label><input type="textbox" style="background-color: white; border: medium none; font-weight: bold; font-size: 16px; color: rgb(232, 177, 70);" name="amount" id="amount" value="{{loan.amount}}" readonly>
+								<div id="slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false" style="margin-top: 15px;width:210px;">
+									<div class="ui-slider-range ui-widget-header ui-slider-range-min">
+									</div>
+
+									<a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left:4%;z-index:0;"></a>
+								</div>
+								<div style="">
+									<input type="radio" name="onceMonthly" id="once" {% if loan.frequency=='once' %} checked {% endif %} value="once"><font style="font-size: 14px; line-height: 50px;">&nbsp;&nbsp;Once</font> 
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="onceMonthly" id="monthly" {% if loan.frequency=='monthly' %} checked {% endif %} value="monthly"><font style="font-size: 14px; line-height: 50px;">&nbsp;&nbsp;Monthly</font> 
+								</div>
+								<div>
+									<h6 style="font-size: 14px;">I want it by :</h6>
+									
+									
+									<script>
+									$(function() {
+									$( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+									});
+									</script>
+									<p><input type="text" id="datepicker" name="dateReq" placeholder="{{loan.date}}" value="{{loan.date}}" style="background-color: #FBF3E1;color: #64829C;width:100px;"/></p>
+								</div>
+
+								<!--<div class="input-container">
+									<label for="loan_form_amount" class="required">I want to borrow</label>
+									<input type="text" id="loan_form_amount" name="loan_form[amount]" required="required" readonly="readonly" data-min="50" data-max="250" data-maxmonth="0" data-step="25" size="3">
+									<div class="clearfix marge"></div>
+									<div id="loan_slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-slider-range-min" style="width: 50%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 50%;"></a></div>
+									<div class="clearfix marge"></div>
+								</div>
+								<div class="input-container">
+									<label for="loan_form_date" class="required">I need it by</label>
+									<input type="text" id="loan_form_date" name="loan_form[date]" required="required" class="datepicker f-right hasDatepicker" data-number-of-month="2" data-min-date="+10d">
+								</div>-->
+								</div>
+							</td>
+							
+						</tr>
+						
+						<!--<tr>
+							<td>
+								<h6>Interests</h6>
+								<select id="interest" name="interest[]"  data-placeholder="Select Reasons" tabindex="-1" style="height: 120px;" multiple>
+										
+									{% for key,item in allInterests %}
+										<option value="{{ allInterests[key].id }}" {% if allInterests[key].id in interests|keys %} selected {% endif %} >{{ allInterests[key].value }}</option> 
+									{% endfor %}
+									
+								</select>
+							</td>
+							<td>
+								&nbsp;
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>
+								<script>
+									function changeListing();
+									{
+										//document.getElementById("hidOperation").value='UPDATE';
+										document.frmListing.submit();
+									}
+								</script>
+								<input type="button" name="saveListing" id="saveListing" value="Save" style="float:right; margin-right:50px;margin-top:70px;" onclick="changeListing();">
+							</td>
+						</tr>-->
+					</tbody>
+					
+					
+					
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

@@ -1,0 +1,119 @@
+<div id="user_dashboard_content" class="col-main-content">
+	<h2>To Finalize</h2>
+	<div class="content-block" style="border:1px solid;">
+		<div id="create_wepay_account" style="margin-left:20px !important;margin-bottom: 300px !important;">
+			<h3>Step 2 - Preview and edit your request</h3>
+			
+			
+			<div class="request-item" style="border: 1px solid !important;margin-right: 20px !important;background-color:#3F648E">
+				<div style="float:left; margin-right:20px;margin-top: 15px;">
+					<!--<p style="color:white;font-family:BerlinSans, Lucida Sans, Arial, sans-serif;">-->
+					<p style="color:white;font-family:Lucida Grande, Lucida Sans, Arial, sans-serif;font-size: 20px;line-height: 25px;">
+						<b>Preview your Angel<br/> Wishes request<br/> before going live</b>
+					</p>
+				</div>
+				<div style="float: right; background-color: white; width: 75%;">
+					<div style="padding: 10px 0 10px 10px;">
+						<div class="avatar-block">
+						    <img height="100"  style="margin-right: -20px !important;" src="{{ user.avatar }}" alt="avatar"/>
+						</div>
+						<div class="avatar-block" style="margin-right: 20px !important;">
+							<script type="text/javascript">
+								function showStatement(id)
+								{
+									document.getElementById(id).style.display="block";
+								}
+								function hideStatement(id)
+								{
+									document.getElementById(id).style.display="none";
+								}
+							</script>
+							<img height="25" style="valign:top;" src="/bundles/yawapp/images/icons/speech_icon_sml.gif" alt="speech"/ onmouseover="javascript:showStatement('div{{ user.id }}');" onmouseout="javascript:hideStatement('div{{ user.id }}');">
+							
+						</div>
+						<div id="div{{ user.id }}" style="display:none;">
+							<span style="background-color: #FFFDCE;
+									border: 1px solid #FFD971;
+									float: right;
+									font-size: 0.75em;
+									left: 114px;
+									padding: 11px;
+									position: absolute;
+									top: 12px;
+									width: 250px;
+									z-index: 1000;
+									border-radius: 10px 10px 10px 10px;">
+								Test Statement
+							</span>
+						</div>
+						<div class="request-details" style="float: left;">
+							<div class="user-details" style="color:#64829c;font-family:Lucida Grande, Lucida Sans, Arial, sans-serif;font-size: 20px;">
+								{{ user.firstName }}, {{ user.city }}
+								<br/>
+								<div class="static-progress f-left ui-progressbar ui-widget ui-widget-content ui-corner-all" style="margin-top:10px;" data-value="0" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div></div>
+							</div>
+						</div>
+						<img height="25" style="valign:top; float:right;" src="/bundles/yawapp/images/NotVerified.png" alt="speech"/ onmouseover="javascript:showStatement('div{{ user.id }}');" onmouseout="javascript:hideStatement('div{{ user.id }}');">
+					</div>
+				</div>
+			</div>
+			<div>
+			&nbsp;<br/>
+			</div>
+			<div style="float:right;">
+				<script type="text/javascript">
+					function showDetails()
+					{
+						document.getElementById("listingDetails").style.display="block";
+					}
+				</script>
+				<input type="button" name="upgradeAccount" id="upgradeAccount" value="Upgrade" style="float:right; margin-right:20px;" onclick="javascript:showUpgradeSteps();">
+				<input type="button" name="editDetails" id="editDetails" value="Edit" style="float:right; margin-right:20px;" onclick="javascript:showDetails();">
+			</div>
+			
+		
+			<div>
+			&nbsp;<br/><br/><br/><br/>
+			</div>
+			<div id="listingDetails" style="margin-left:20px !important;margin-bottom: 20px !important;height:150px;display:none;">
+				<form name="frmListing" id="frmListing">
+					
+					
+					
+					    <div class="input-container">
+						{{ form_label(form.amount) }}
+						{{ form_widget(form.amount) }}
+						<div class="clearfix marge"></div>
+						<div id="loan_slider"></div>
+						<div class="clearfix marge"></div>
+					    </div>
+					    {% if option == 3 %}
+						<div class="input-container f-right">
+						    {{ form_widget(form.frequency.1) }}
+						    {{ form_label(form.frequency.1) }}
+						    {{ form_widget(form.frequency.0) }}
+						    {{ form_label(form.frequency.0) }}
+						    {{ form_errors(form.frequency) }}
+						</div>
+					    {% endif %}
+					    <div class="input-container">
+						{{ form_label(form.date) }}
+						{{ form_widget(form.date) }}
+					    </div>
+					
+					    {{ form_row(form.statement) }}
+
+					    {{ form_row(form.reason) }}<div class="input-container-help" ><a href="javascript:void(0)" alt="" title="">?</a><span class="hovertext">Please select a reason for your need</span></div>
+					    {{ form_row(form.interests) }}<div class="input-container-help"><a href="javascript:void(0)" alt="" title="">?</a><span class="hovertext2">Please select up to 5 of your interests so donors can search for likeminded people to donate to</span></div>
+					
+					
+					
+					
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
