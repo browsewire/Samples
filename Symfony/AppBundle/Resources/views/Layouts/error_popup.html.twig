@@ -1,0 +1,14 @@
+<div class="error-popup {% if form_hidden is defined %}hidden{% endif %}" style="overflow: hidden;">
+    <h1 class="heading">{% block header %}An error has occured{% endblock %}</h1>
+    <div class="clearfix marge"></div>
+        <table class="error-container single-box"><tr>
+            <td class="container">
+                {{ message | raw }}
+            </td>
+        </tr></table>
+        <div class="signup-footer">
+            {% block footer %}
+                <input type="button" class="f-right" value="Close" onclick="$('.error-popup').dialog('close')"/>
+            {% endblock %}
+        </div>
+</div>
