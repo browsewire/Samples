@@ -1,0 +1,234 @@
+{% extends 'YawAppBundle:Security:reg_form_2_box.html.twig' %}
+
+{% block header %}Enter your details{% endblock %}
+{% block left_container %}
+{% if profile_type == 1 %}
+<p> With a free account your facbook profile photo is used to identify you.</p>
+
+<p>
+Click to use your facebook profile. 
+<a href="#" onclick="fblogin();return false;"><img src="/bundles/yawapp/images/icons/conn_with_facebook.gif"></a>
+<span class="input-container-fbhelp" ><a href="javascript:void(0)" alt="" title=""><img src="/bundles/yawapp/images/icons/help_icon.png"></a><span class="hovertextfbhelp">To have the choice of using your facebook profile photo and an anonymous icon, please go back to the previous step and sign up for a paid account.</span></span>
+</p>
+<p class="input-container"><label class="error fbaccounterror" style="display:none" >This account is already registered</label></div>
+{% else %}
+
+    {{ form_row(form.first_name) }}
+    {{ form_row(form.last_name) }}
+    {{ form_row(form.email, {"attr": {"placeholder": "entity.User.email_short" | trans} }) }}
+    {{ form_row(form.plainPassword) }}
+    {#{{ form_row(form.zip) }}#}
+    <p style="text-align:center;margin-top:10px;">OR</p>
+<p style="text-align:center"><a href="#" onclick="fblogin();return false;"><img src="/bundles/yawapp/images/icons/conn_with_facebook.gif"></a></p>
+<p class="input-container"><label class="error fbaccounterror" style="display:none" >This account is already registered</label></div>
+{% endif %}
+{% endblock %}
+
+
+{% block right_container %}
+{% if profile_type == 1 %}
+<div id="facebookinfo" style="display:none">
+
+    {{ form_row(form.first_name) }}
+    {{ form_row(form.last_name) }}
+    {{ form_row(form.email, {"attr": {"placeholder": "entity.User.email_short" | trans} }) }}
+    {{ form_row(form.facebookid) }}
+    {{ form_row(form.fb_friends) }}
+   
+<input type="text" name="user_form[avatar]" id="user_form_avatar">
+</div>
+
+<div id="facebookprofile" style="display:none">
+
+<!--<script src="/crop/jquery.Jcrop.js"></script>
+<link rel="stylesheet" href="/crop/jquery.Jcrop.css" type="text/css" />
+-->
+<p style="width:100%;float:left" id="facebook_img">
+
+</p>
+
+<p style="width:100%;float:left" id="facebook_name"> </p>
+<p style="width:100%;float:left"> Now choose a password for your account</p>
+{{ form_row(form.plainPassword) }}
+      
+
+<div style="display:none">
+    <label>X1 <input type="text" name="x" id="x" size="4"/></label>
+    <label>Y1 <input type="text" name="y" id="y" size="4"/></label>
+    <label>X2 <input type="text" name="x2" id="x2" size="4"/></label>
+    <label>Y2 <input type="text" name="y2" id="y2" size="4"/></label>
+    <label>W <input type="text" name="w" id="w" size="4"/></label>
+    <label>H <input type="text" name="h" id="h" size="4"/></label>
+    <div style="margin:5px;">
+    <input type="button" class="submit-signup" value="Crop Image" onClick="cropimg()" />
+</div>
+</div>
+
+
+      
+
+</div>
+<div id="profileimg" style="display:none">
+<h4>Select a profile icon <br><span class="helper">(you can change it later)</span></h4>
+    <table id="icons_list">
+        {% set counter = 1 %}
+        {% for ava in ava_list %}
+            {% if counter%3 == 1 %}<tr>{% endif %}
+            <td><img src="{{ ava | imagine_filter('avatar') }}" width="50px"/></td>
+            {% if counter%3 == 0 %}</tr>{% endif %}
+            {% set counter = counter + 1 %}
+        {% endfor %}
+    </table>
+    
+    
+</div>
+
+ 
+
+{% else %}
+
+    <h4>Select a profile icon <br><span class="helper">(you can change it later)</span></h4>
+    <table id="icons_list">
+        {% set counter = 1 %}
+        {% for ava in ava_list %}
+            {% if counter%3 == 1 %}<tr>{% endif %}
+            <td><img src="{{ ava | imagine_filter('avatar') }}" width="50px"/></td>
+            {% if counter%3 == 0 %}</tr>{% endif %}
+            {% set counter = counter + 1 %}
+        {% endfor %}
+    </table>
+    <p id="facebook_img">
+    <img id="avatar_img" src="{{ form.avatar.vars.value | default(ava_list.0 | imagine_filter('avatar')) }}">
+    </p>
+    {{ form_row(form.avatar) }}
+{% endif %}
+<div id='fb-root'></div>
+      
+
+
+<script> 
+
+/*
+function cropimg()
+{
+var x = $('#x').val();
+var y = $('#y').val();
+var w = $('#w').val();
+var h = $('#h').val();
+var imgurl = $('#user_form_avatar').val();
+var fbid = $('#user_form_facebookid').val();
+var rootpath = '{{ path('cropfbimg') }}';
+$.post(rootpath,{'x':x,'y':y,'w':w,'h':h,'imgurl':imgurl,'fbid':fbid},
+           function(data){
+           if(data){
+              $('#facebook_img').html('<img style="margin-top:0px" id="cropbox1" src="'+data+'">');
+          }else{
+          
+          }
+          });
+          
+}
+$(function(){
+
+    // for sample 1
+    $('#cropbox1').Jcrop({ // we linking Jcrop to our image with id=cropbox1
+        aspectRatio: 0,
+        onChange: updateCoords,
+        onSelect: updateCoords
+    });
+
+    
+});
+    
+    
+function updateCoords(c) {
+    $('#x').val(c.x);
+    $('#y').val(c.y);
+    $('#w').val(c.w);
+    $('#h').val(c.h);
+    $('#x2').val(c.x2);
+    $('#y2').val(c.y2);
+    var rx = 200 / c.w; // 200 - preview box size
+    var ry = 200 / c.h;
+
+   
+};
+*/
+
+function hideshowprofileimge(){
+
+$('#profileimg').toggle();
+
+}
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ fbappid }}";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+FB.init({appId: "{{ fbappid }}", status: true, cookie: false, oauth  : true, xfbml  : true});
+function postToFeedbh() {
+       
+FB.api('/me', {fields: "id,first_name,last_name,email,picture"}, function(response) {
+FB.api('/me/friends', function(response) {
+$('#user_form_fb_friends').val(response.data.length);
+
+});
+var facebookid = response.id;
+$('#user_form_first_name').val(response.first_name);
+$('#user_form_last_name').val(response.last_name);
+$('#user_form_facebookid').val(facebookid);
+if(response.email){
+$('#user_form_email').val(response.email);
+}
+
+var imgurl = "https://graph.facebook.com/"+facebookid+"/picture?width=130&height=130";// "https://graph.facebook.com/"+facebookid+"/picture?type=large"; //response.picture.data.url;
+$('#user_form_avatar').val(imgurl);
+
+$('#facebook_name').html(response.first_name+' '+response.last_name);
+
+$('#facebook_img').html('<img style="margin-top:0px;margin-left:5px;" id="avatar_img" src="'+imgurl+'">');
+
+$('#facebookprofile').show();    
+checkfacebookuser(facebookid);
+});
+
+  }
+
+function checkfacebookuser(facebookid)
+{
+var rootpath = '{{ path('verifyfbaccount') }}';
+var imgurl = $('#user_form_avatar').val();
+
+
+$.post(rootpath,{'facebookid':facebookid,'imgurl':imgurl},
+           function(data){
+           if(data){
+           $('.fbaccounterror').hide();
+           $('#user_form_avatar').val(data);  
+           $("#user_form_plainPassword_password").removeAttr("disabled"); 
+           /* $('#cropbox1').Jcrop({ // we linking Jcrop to our image with id=cropbox1
+        aspectRatio: 0,
+        onChange: updateCoords,
+        onSelect: updateCoords
+    });*/  
+          }else{
+          $("#user_form_plainPassword_password").attr("disabled",true);
+          $('#user_form_facebookid').val('');
+          $('.fbaccounterror').show();
+          
+          }
+          });
+
+}
+function fblogin() {
+            FB.login(function(response) {
+            postToFeedbh();
+               }, {scope:'read_stream,publish_stream,offline_access'});
+            
+          }
+</script>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+{% block subject %}{% autoescape false %}
+    Welcome to Angel Wishes!
+{% endautoescape %}{% endblock %}
+
+{% block body_html %}
+<div style="width:100%;background-color:rgba(46, 83, 125, 0.69)">
+<div  style="width:96%;padding:2% 2% 3%;background-color:rgba(46, 83, 125, 0.69)">
+<img height="65px" src="http://dev.yourangelwishes.com/bundles/yawapp/images/AngelWishes_Logo.png?v1">
+</div>
+<div  style="float:left;width:96%;background-color:#ffffff;padding:2%;">
+    <p style="width:50%;float:left;"><b>Hello {{ user.firstName }}!</b></p>
+    <p style="width:50%;float:right;text-align:right;">
+<a href="{{ confirmationUrl }}"><input type="button" value="Confirm" style="font-weight:bold;background-color: #FFC85D;border: medium none; border-radius: 6px 6px 6px 6px; color: #FFFFFF;font-family: BerlinSans,Lucida Sans,Arial,sans-serif;padding: 10px 20px;font-size:1em;" ></a>
+     </p>
+</div>
+<div  style="float:left;width:96%;background-color:#ffffff;padding:2%;">
+     <p>                   
+    To finish activating your account please click the confirmation button. You will then be redirected to the website for the final steps. 
+    </p>
+    
+    {% if app.session.get('givecartuserpass') %}
+    <p>By login to your account you can modify or cancel your monthly pledges.</p>
+     <p>
+     You can login using your registered email and password: {{ app.session.get('givecartuserpass') }} 
+    </p>
+    {% endif %}
+    <p>&nbsp;</p>
+    <p>
+    Best regards,
+    <br />
+    <b>Angel Wishes Team</b>
+    </p>
+</div>
+</div>
+{% endblock %}

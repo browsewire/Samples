@@ -1,0 +1,13 @@
+{% extends 'YawAppBundle:Security:reg_form_main.html.twig' %}
+
+{% block form_container %}
+    <table class="form-container double-box"><tr>
+        <td class="container">
+            {% block left_container %}{% endblock %}
+        </td>
+        <td class="container">
+            {% block right_container %}{% endblock %}
+        </td>
+    </tr></table>
+
+{% endblock %}

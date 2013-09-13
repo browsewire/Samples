@@ -1,0 +1,25 @@
+{% extends 'YawAppBundle:Security:reg_form_2_box.html.twig' %}
+
+{% block header %}Sign up and create your account{% endblock %}
+{% block left_container %}
+    <h2>OPTION 1:</h2>
+    <h4>Sign up here to create your account.</h4>
+    <span class="description">Just follow our simple step-by-step process.</span>
+    {{ form_row(form.email) }}
+    <div class="input-container">
+        <input type="checkbox" id="register_form_terms" name="terms" required="required" value="1">
+        <label for="register_form_terms" class="required">I agree to the </label>
+        <a class="ajax terms-link" data-target="security/register/terms" data-action="__popup.show({width: 800, height: 500});" href="/">
+            terms &amp; conditions
+        </a>
+    </div>
+{% endblock %}
+
+{% block right_container %}
+    <h2>OPTION 2:</h2>
+    <h4>Are you on Facebook?</h4>
+    <span class="description">Post requests easily using you Facebook profile.</span><br />
+    <a class="sn-button fb-login" href="#">
+        <input type="button" value="Sign in via Facebook">
+    </a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'YawAppBundle:FrontOffice:home.html.twig' %}
+
+
+
+{% block body %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function(){
+            __ajax.request('security/register/step_1', {}, "Yaw.SecurityRegister.showStep_1")
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'YawAppBundle:Security:reg_form_1_box.html.twig' %}
+
+{% block header %}Enter credit card details{% endblock %}
+
+{% block container %}
+
+    <div id="wepay" data-target="{{ checkout_uri | default('') }}"></div>
+    <!--<span class="error">5585536406458369</span>-->
+{% endblock %}
+{% block footer %}
+    <div class="signup-progress">
+        <span class="helper">Your progress:</span>
+        <div class="clearfix"></div>
+        <div class="static-progress" data-value="{{ ((step * 100) / 7) | default(0) }}"></div>
+    </div>
+    <div class="signup-submit">
+        <a
+                class="ajax"
+                data-target="security/register/step_{{ step - 2 }}"
+                data-action="Yaw.SecurityRegister.showStep_{{ step - 2 }}"
+                href="/"
+                >Previous step</a>
+    </div>
+{% endblock %}

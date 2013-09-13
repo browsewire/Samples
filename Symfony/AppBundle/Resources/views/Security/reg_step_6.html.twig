@@ -1,0 +1,84 @@
+{% extends (type == 3)? 'YawAppBundle:Security:reg_form_2_box.html.twig' : 'YawAppBundle:Security:reg_form_1_box.html.twig' %}
+
+{% block header %}
+    {% if type == 2 %}
+      <!--  ID Verification -->
+    {% else %}
+       <!-- ID Verification & Finantial evaluations -->
+    {% endif %}
+{% endblock %}
+
+{% block container %}
+
+    {{ dump(type) }}
+
+ <span></span>
+  <!--  <div class="clearfix marge" style="visibility:hidden !important;"></div>
+    {{ form_row(user_form.ssn) }}
+-->
+  <table class="summary" style="visibility:hidden !important;"><tbody><tr>
+            <td>
+                {{ form_row(verify_form.fin_evals.11, checkboxRequired()) }}
+            </td>
+            <td class="value" data-value="{{ evals.id_verify }}">{{ evals.id_verify | price }}</td>
+    </tr></tbody></table>
+
+{% endblock %}
+
+
+{% block left_container %}
+  <!--  <span>Amount you have to pay : $10.69 + Service Fee</span>
+	<br/><br/><br/>
+	<span>Click on the button below if you wish to pay this amount and get registered.</span>
+<br/><br/><br/><br/>-->
+
+<input
+                            class="submit-signup"
+							style="visibility:hidden !important;"
+                            id="submit_step1"
+                            data-step="{{ step }}"
+                            type="button"
+                            value="{% block submit %}{% if step==6 %} Proceed to Pay {% else %}Continue{% endif %}{% endblock %}">
+
+<img src="http://dev.yourangelwishes.com/loading.gif" style="margin-left:147px;height:321px;margin-top:-49px;margin-bottom:-10px;z-index:1000"/>
+<!-- 
+	 <span>Please enter your Social Security Number to verify your ID and perform a financial evaluation.</span>
+   <div class="clearfix marge" style="visibility:hidden !important;"></div>
+    {{ form_row(user_form.ssn) }}
+ -->
+{% endblock %}
+
+{% block right_container %}
+
+     <table class="summary" style="visibility:hidden !important;"><tbody>
+        <tr>
+            <td>{{ form_row(verify_form.fin_evals.11, checkboxRequired()) }}</td>
+            <td class="value" data-value="{{ evals.id_verify }}">{{ evals.id_verify | price }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_row(verify_form.fin_evals.12, checkboxRequired()) }}</td>
+            <td class="value" data-value="{{ evals.fico_score }}">{{ evals.fico_score | price }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_row(verify_form.fin_evals.13) }}</td>
+            <td class="value" data-value="{{ evals.credit_lines }}">{{ evals.credit_lines | price }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_row(verify_form.fin_evals.14) }}</td>
+            <td class="value" data-value="{{ evals.banking_status }}">{{ evals.banking_status | price }}</td>
+        </tr>
+        <tr class="last-row">
+            <td>{{ form_row(verify_form.fin_evals.15) }}</td>
+            <td class="value" data-value="{{ evals.public_report }}">{{ evals.public_report | price }}</td>
+        </tr>
+        <tr class="first-row">
+            <td>Subtotal</td>
+            <td class="subtotal value"></td>
+        </tr>
+        <tr>
+            <td>{{ form_row(verify_form.fin_evals.16) }}</td>
+            <td class="value" data-value="{{ evals.all_evals }}">{{ evals.all_evals | price }}</td>
+        </tr>
+    </tbody></table>
+
+{% endblock %}

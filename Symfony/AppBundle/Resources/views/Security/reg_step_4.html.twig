@@ -1,0 +1,111 @@
+{% extends 'YawAppBundle:Security:reg_form_2_box.html.twig' %}
+
+{% block header %}Enter your address.{% endblock %}
+
+{% block left_container %}
+    <span>Please enter your address.</span>
+    <div class="clearfix marge"></div>
+    {{ form_row(form.address_1) }}
+    {{ form_row(form.address_2) }}
+    {{ form_row(form.zip) }}
+    {{ form_row(form.cell_phone) }}
+{% endblock %}
+
+{% block right_container %}
+    <div class="gmap-canvas" id="user_adderss_map" style="width: 340px; height: 340px;"></div>
+    <script type="text/javascript">
+        var geocoder;
+        var map;
+
+        $(function(){
+            geocoder = new google.maps.Geocoder();
+            var latlng = new google.maps.LatLng(-34.397, 150.644);
+            var mapOptions = {
+                zoom: 8,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map($('#user_adderss_map')[0], mapOptions);
+
+            geocoder.geocode( { 'address': 'USA'}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                    map.fitBounds(results[0].geometry.viewport);
+                }
+            });
+
+            var inputs = $('#user_form_address_2, #user_form_zip');
+            inputs.change(function(){
+                var address = getAddress(inputs);
+                codeAddress(address);
+            });
+
+            __form.onInitZipCodes = function() {
+                var address = getAddress(inputs);
+                
+                codeAddress(address);
+            };
+
+        });
+
+        function getAddress(inputs) {
+            var is_filled = true;
+            var address = '';
+            inputs.each(function(){
+                var value = $(this).val();
+                if ($(this).attr('id') == 'user_form_zip')
+                {
+                    value = $('.select2-choice').not('.select2-default').find('span').html();
+                }
+                if ((value !== undefined && value !== '') || $(this).attr('id') == 'user_form_address_1') {
+                    address += ' ' + value;
+                }
+                if ((value !== undefined && value !== '') || $(this).attr('id') == 'user_form_address_2') {
+                    address += ' ' + value;
+                } else {
+                    is_filled = false;
+                }
+            });
+            if (is_filled) {
+           
+                return address;
+            } else {
+                return null;
+            }
+        }
+
+        function codeAddress(address) {
+         
+            geocoder.geocode( { 'address': address}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                    map.fitBounds(results[0].geometry.viewport);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        icon:"http://chart.googleapis.com/chart?chst=d_map_pin_icon_withshadow&chld=1|FF776B|000000",
+                        position: results[0].geometry.location
+                    });
+                    circle = new google.maps.Circle({
+                  map: map,
+                  radius:200,
+                  strokeColor:"#F75850",
+                  strokeOpacity:0.8,
+                  strokeWeight:0,
+                  fillColor:"#F75850",
+                  fillOpacity:0.3
+                });
+                circle.bindTo('center', marker, 'position');
+                
+                    $('#signup_step_4_form').removeClass('error');
+                    $('span.full-address-error.error').remove();
+                } else {
+                    $('#signup_step_4_form').addClass('error');
+                    $('#user_form_zip').closest('.input-container').after('<span class="full-address-error error">Unable to find this address. You have to enter a valid address. Please try again.</span>');
+                }
+            });
+        }
+    </script>
+    {#
+    <div id="user_address_map" data-lat="{{ user.zip.latitude }}" data-long="{{ user.zip.longitude }}" class="gmap-canvass" style="width: 342px; height: 252px;"></div>
+    #}
+{% endblock %}
