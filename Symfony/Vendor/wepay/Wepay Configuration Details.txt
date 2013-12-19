@@ -1,0 +1,10 @@
+Client ID: 47791
+
+Client Secret 9b5d33d682
+
+Access Token: PRODUCTION_e0358a2d5b6e2a3b4177faca5ee7e59e62ebeb7396572c69c87fec24a04980f9
+
+Account ID: 1600718996
+
+OAuth2 URL:
+https://www.wepay.com/v2/oauth2/authorize?client_id=47791&redirect_uri=http://www.angelwishesnetwork.com&scope=manage_accounts,view_balance,collect_payments,view_user,send_money,preapprove_payments
