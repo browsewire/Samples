@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Ocodewire_Dailydeal Product widget
+ *
+ * @category    Catalog
+ * @package     Ocodewire_Dailydeal
+ * @author      Ocodewire <magento@browsewire.net>
+ */
+-->
+<widgets>
+    <dailydeal_ddproduct type="dailydeal/ddproduct" translate="name description" module="dailydeal">
+        <name>Ocodewire Daily Deal: Product</name>
+        <description type="desc">Adds a Daily Deal Product Box</description>
+        
+         <parameters>
+            <template translate="label">
+                <label>Select Frontend Template</label>
+                <visible>1</visible>
+                <required>1</required>
+                <type>select</type>
+                <values>
+                    <single translate="label">
+                        <value>dailydeal/single.phtml</value>
+                        <label>Single Product Template</label>
+                    </single>
+                    <multiple translate="label">
+                        <value>dailydeal/multiple.phtml</value>
+                        <label>Multiple Products Template</label>
+                    </multiple> 
+                    <today translate="label">
+                        <value>dailydeal/today.phtml</value>
+                        <label>Today's Deals Template</label>
+                    </today>                  
+                    <expired translate="label">
+                        <value>dailydeal/expired.phtml</value>
+                        <label>Expired Deals Template</label>
+                    </expired>
+                     <upcoming translate="label">
+                        <value>dailydeal/upcoming.phtml</value>
+                        <label>Upcoming Deals Template</label>
+                    </upcoming>
+                </values>
+            </template>
+        </parameters>
+    </dailydeal_ddproduct>
+    
+</widgets>

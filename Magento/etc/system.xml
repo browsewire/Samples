@@ -1,0 +1,203 @@
+<?xml version="1.0" ?>
+<config>
+    <tabs>
+        <mynew_tab module="dailydeal" translate="label">
+            <label>Ocodewire Daily Deals</label>
+            <sort_order>100</sort_order>
+        </mynew_tab>
+    </tabs>
+    <sections>
+        <customconfig module="dailydeal" translate="label">
+            <label>Configuration</label>
+            <sort_order>200</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <tab>mynew_tab</tab>
+            <groups>
+                <custom_group translate="label">
+                    <label>Ocodewire Daily Deals Configuration</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>Manage Daily Deal Featured Product box display on the Left/Right Sidebars</comment>
+                    <fields>
+                       <!-- <custom_enable translate="label tooltip comment">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Enable/Disable Ocodewire Daily Deals module</comment>
+                        </custom_enable> -->
+                        
+                        <custom_enable_on_left translate="label tooltip comment">
+                            <label>Enable On Left Sidebar</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Enable/Disable Ocodewire Daily Deals box on the left sidebar for Featured Product.</comment>
+                        </custom_enable_on_left>
+                        
+                        <custom_enable_on_right translate="label tooltip comment">
+                            <label>Enable On Right Sidebar</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Enable/Disable Ocodewire Daily Deals box on the right sidebar for Featured Product.</comment>
+                        </custom_enable_on_right>
+                    </fields>
+                </custom_group>
+                
+                <custom_group_one translate="label">
+                    <label>Manage Front end Labels</label>
+                    <sort_order>11</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>Manage the text shown in Daily deals box on pages, widgets and single product page</comment>
+                    <fields>
+                        <custom_single_widget_title translate="label tooltip comment">
+                            <label>Single Product Widget template Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Set Title for Single Product widget Template for DailyDeal Box.</comment>
+                        </custom_single_widget_title>
+                        
+                        <custom_multiple_widget_title translate="label tooltip comment">
+                           <label>Multiple Product Widget template Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Set Title for Multiple Product widget Template for DailyDeal Box.</comment>
+                        </custom_multiple_widget_title>
+                        
+                        <custom_today_widget_title translate="label tooltip comment">
+                           <label>Today's Deals Widget template Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Set Title for Today's Deals widget Template for DailyDeal Box.</comment>
+                        </custom_today_widget_title>
+                        
+                        <custom_upcoming_widget_title translate="label tooltip comment">
+                           <label>Upcoming Deals Widget template Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Set Title for Upcoming Deals widget Template for DailyDeal Box.</comment>
+                        </custom_upcoming_widget_title>
+                        
+                        <custom_expired_widget_title translate="label tooltip comment">
+                           <label>Expired Deals Widget template Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Set Title for Expired Deals widget Template for DailyDeal Box.</comment>
+                        </custom_expired_widget_title>
+                        
+                        <custom_featured_title translate="label tooltip comment">
+                            <label>Featured Heading</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Set Featured product heading for DailyDeal Box in left/right sidebars.</comment>
+                        </custom_featured_title>
+                        
+                        <custom_stocklevel_text translate="label tooltip comment">
+                            <label>Stock Level text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Set Stock Level text for DailyDeal Box.</comment>
+                        </custom_stocklevel_text>
+                        
+                        <custom_regular_price_text translate="label tooltip comment">
+                            <label>Regular Price text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Set Regular Price text for DailyDeal Box.</comment>
+                        </custom_regular_price_text>
+                        
+                        <custom_deal_price_text>
+							<label>Deal Price text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Set Deal Price text for DailyDeal Box.</comment>
+                        </custom_deal_price_text>
+                        
+                        <custom_you_save_text>
+							<label>You Save text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Set You Save text for DailyDeal Box.</comment>
+                        </custom_you_save_text>
+                        
+                        <custom_deal_ends_in translate="label tooltip comment">
+                            <label>Deal ends in text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Set Deal ends in text for DailyDeal Box.</comment>
+                        </custom_deal_ends_in>
+                        
+                         <custom_deal_comin_in translate="label tooltip comment">
+                            <label>Deal Coming in text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Set Deal Coming in text for Upcoming DailyDeal Box.</comment>
+                        </custom_deal_comin_in>
+                        
+                        <custom_deal_expired translate="label tooltip comment">
+                            <label>Deal expired text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>SetDeal expired text for DailyDeal Box.</comment>
+                        </custom_deal_expired>
+                    </fields>
+                </custom_group_one>
+            </groups>
+        </customconfig>
+    </sections>
+</config>

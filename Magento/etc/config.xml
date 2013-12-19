@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Ocodewire_Dailydeal Product widget
+ *
+ * @category    Catalog
+ * @package     Ocodewire_Dailydeal
+ * @author      Ocodewire <magento@browsewire.net>
+ */
+-->
+<config>
+    <modules>
+        <Ocodewire_Dailydeal>
+            <version>0.0.1</version>
+        </Ocodewire_Dailydeal>
+    </modules>
+    <global>
+		
+		<models>
+			<ocodewire_dailydeal>
+				<class>Ocodewire_Dailydeal_Model</class>
+			</ocodewire_dailydeal>
+		</models>
+        <helpers>
+            <dailydeal>
+                <class>Ocodewire_Dailydeal_Helper</class>
+            </dailydeal>
+        </helpers>
+        <blocks>
+             <dailydeal>
+                <class>Ocodewire_Dailydeal_Block</class>
+             </dailydeal>
+        </blocks>
+        <events>
+			<catalog_product_new_action>
+				<observers>
+					<ocodewire_dailydeal>
+						<class>Ocodewire_Dailydeal_Helper_Data</class>
+						<method>logUpdate</method>
+						<type>singleton</type>
+					</ocodewire_dailydeal >
+				</observers>
+			</catalog_product_new_action>
+			
+			<catalog_product_edit_action>
+				<observers>
+					<ocodewire_dailydeal>
+						<class>Ocodewire_Dailydeal_Helper_Data</class>
+						<method>logUpdate</method>
+						<type>singleton</type>
+					</ocodewire_dailydeal >
+				</observers>
+			</catalog_product_edit_action>
+			
+			<catalog_product_prepare_save>
+				<observers>
+					<ocodewire_dailydeal_price_observer>
+						<class>Ocodewire_Dailydeal_Model_Price_Observer</class>
+						<method>setCustomPrice</method>
+						<type>singleton</type>
+					</ocodewire_dailydeal_price_observer >
+				</observers>
+			</catalog_product_prepare_save>
+			
+		</events>
+    </global>
+    
+    <frontend>
+		<layout>
+            <updates>
+                <dailydeal>
+                    <file>dailydeal.xml</file>
+                </dailydeal>
+            </updates>
+        </layout>
+    </frontend>
+    
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <customconfig>
+                                            <title>Ocodewire Dailydeals Section</title>
+                                        </customconfig>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    
+    <default>	
+	<!-- Default configuration params for module -->
+	 <customconfig>
+		  <custom_group>
+			  <custom_enable>1</custom_enable> <!-- enabled by default-->
+			  <custom_enable_on_left>0</custom_enable_on_left>
+			  <custom_enable_on_right>0</custom_enable_on_right>
+		  </custom_group>
+		  <custom_group_one>
+			  <custom_single_widget_title>Single Deal</custom_single_widget_title>
+			  <custom_multiple_widget_title>All Deals</custom_multiple_widget_title>
+			  <custom_today_widget_title>Today's Deals</custom_today_widget_title>
+			  <custom_upcoming_widget_title>Upcoming Deals</custom_upcoming_widget_title>
+			  <custom_expired_widget_title>Expired Deals</custom_expired_widget_title>
+			  <custom_featured_title>Featured Product</custom_featured_title>
+			  <custom_stocklevel_text>Items left in Stock:</custom_stocklevel_text>
+			  <custom_regular_price_text>Regular Price:</custom_regular_price_text>
+			  <custom_deal_price_text>Deal Price:</custom_deal_price_text>
+			  <custom_you_save_text>YOU SAVE - </custom_you_save_text>
+			  <custom_deal_ends_in>Deal Ends in:</custom_deal_ends_in>
+			  <custom_deal_comin_in>Deal Coming in:</custom_deal_comin_in>
+			  <custom_deal_expired>Product Deal Expired</custom_deal_expired>
+		  </custom_group_one>
+	  </customconfig>
+	</default>
+	
+</config>
