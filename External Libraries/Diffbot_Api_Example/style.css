@@ -1,0 +1,47 @@
+body
+{
+	margin-left: 25%; 
+	margin-right: 25%;
+	margin-top: 5%;
+}
+#title
+{
+	margin-left: 15%; 
+	border-radius: 10px; 
+	background-color: green; 
+	color: white; 
+	padding: 5px; 
+	margin-right: 15%;
+	text-align: center;
+}
+.innerDiv{
+	margin-top: 20px;
+	border: 1px solid gray;
+	border-radius: 10px 10px 10px 10px;
+	padding: 10px;
+}
+.urlBox
+{
+	margin-top: 50px; 
+	margin-left: 15%; 
+	width: 60%;
+	height: 25px;
+	border-radius: 10px;
+}
+.btnSmall
+{
+	color: white; 
+	height: 30px; 
+	border-radius: 10px 10px 10px 10px; 
+	width: 40px; 
+	background-color: green; 
+	border: 1px solid black;
+	cursor: pointer;
+}
+.wrapper
+{
+	border-radius: 20px 20px 20px 20px; 
+	background-color: lightblue; 
+	border: 1px solid gray; 
+	padding: 10%;
+}

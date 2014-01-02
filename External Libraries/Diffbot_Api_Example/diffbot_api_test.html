@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Diffbot Article API Call</title>
+		
+		<!-- Begin - External CSS Section -->
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen, projection" />
+		<!-- End - External CSS Section -->
+		
+		<!-- Begin - Custom CSS Section -->
+		<style>
+			#loading
+			{
+				color: gray;
+			}
+		</style>
+		<!-- End - Custom CSS Section -->
+		
+		<!-- Begin - External Javascript Section -->
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+		<!-- End - External Javascript Section -->
+		
+		<!-- Begin - Custom Javascript Section -->
+		<script>
+			function makeApiCall()
+			{
+				var webUrl = document.getElementById('webUrl').value;
+				
+				if(webUrl == '')
+				{
+					alert("Please enter a url first");
+					return false;
+				}
+				else
+				{
+					//url validation section goes here
+				}
+				
+				$("#loading").html("The result is being loaded..........");
+				/* Begin - Ajax Request to update the page */
+				$.ajax
+				({  
+					url: "http://api.diffbot.com/v2/article?token=065cd710aa509217dfea9ab08b31ab6b&url="+webUrl,  //url to call the diffbot article api
+					cache: false, //browser will not cache the requested page 
+					success: function(response)
+					{ 
+						if(response.text && response.text != '') //Check if the article text returned in reponse
+						{
+							document.getElementById("loading").style.display = 'none'; //Hide the loading indication text
+							document.getElementById("testData").style.display = 'block'; //Show the complete section where html will be embedded
+							$("#pageTitle").html("<B>Title : </B>"+response.title); //Embed the title returned from reponse into the pageTitle div
+							$("#pageText").html("<B>Article : </B>"+response.text); //Embed the text returned from reponse into the pageText div
+						}
+						else
+						{
+							$("#loading").html("No article found.");
+						}
+					},
+					failure: function()
+					{
+						$("#loading").html("There was some error while processing your request! <br/> Please try again.");
+					}
+				}); 
+				/* End - Ajax Request to update the page */
+			}
+		</script>
+		<!-- End - Custom Javascript Section -->
+	</head>
+	<!-- Begin - Page Body -->
+	<body>
+		<div class="wrapper">
+			<div id="title">
+				Diffbot Article API Call
+			</div>
+			<div>
+				<input class="urlBox" type="text" name="webUrl" id="webUrl" placeholder="Enter the article url here">
+				<input class="btnSmall" type="button" name="callApi" id="callApi" value="Go" onclick="makeApiCall();return false;">
+			</div>
+			<div class="innerDiv" id="loading">API call result will be loaded here.</div>
+			<div class="innerDiv" id="testData" style="display:none;">
+				<div id="pageTitle"></div>
+				</br/>
+				<div id="pageText"></div>
+			</div>
+		</div>
+	</body>
+	<!-- End - Page Body -->
+</html>
