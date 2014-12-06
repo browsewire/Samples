@@ -1,0 +1,32 @@
+<div class="scrollable">
+  <div class="scrollable-content">
+    <div class="twitter">
+     <div class="row top_bar">
+        <div class="tweets">
+         <img ng-src="{{tweets[0].user.profile_image_url}}" width="50" height="50" alt="Twitter" />
+         <div class="txt_tweets">
+           <h2 ng-bind-html="tweets[0].user.name"></h2> 
+           <span class="twitter_likes"> {{tweets[0].user.statuses_count}} TWEETS      {{tweets[0].user.followers_count}} FOLLOWERS  </span>
+           <!--<span>HUAWEI CC</span>-->
+           <a href="https://twitter.com/gandgpro" alt="twitter follow" class="twitter_follow"><img ng-src="images/twitter_follow.png" alt="twitter-follow"></a>       
+          </div>
+        </div>
+        </div>
+     <div class="row at-repeat-wave-in at-repeat-wave-out" ng-repeat="tweet in tweets">
+        <div class="tweets">
+          <img ng-src="{{tweet.user.profile_image_url}}" width="126" height="129" alt="Twitter" />
+          <div class="txt_tweets">
+            <h6 ng-bind-html="tweet.user.name"></h6> 
+            <!--<span>HUAWEI CC</span>-->
+            <p class="date"><span am-time-ago="tweet.created_at"><i class="fa fa-twitter"></i></p>
+            <p ng-bind-html="tweet.text">
+              </p><p ng-repeat="url in tweet.entities.urls"><a href="{{url.expanded_url}}" target="_blank">{{url.expanded_url}}</a></p>
+          </div>
+        </div>
+        </div>
+       
+      </div>
+</div>
+</div>
+
+

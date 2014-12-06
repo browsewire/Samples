@@ -1,0 +1,28 @@
+<div class="scrollable">
+  <div class="scrollable-content">
+<div class="you_tube">
+
+	<div class="row top_bar">
+    <div class="tweets">
+     <img ng-src="images/twitter_img.png" width="50" height="50" alt="Twitter" />
+     <div class="txt_tweets">
+       <h2 ng-bind-html="channelname"></h2> 
+       <span class="fb_likes">{{counts}} Subscribers </span>  <a href="https://www.youtube.com/channel/UCtorFvZ14JtpTu6nYuZk10A" alt="youtube_image" class="fb_like_page"><img ng-src="images/sub_you.png" alt="youtube-follow"></a>  
+       <!--<span>HUAWEI CC</span>-->
+       </div>
+    </div>
+    </div>
+	<div class="row at-repeat-wave-in
+         at-repeat-wave-out" ng-repeat="feed in feeds">
+		<div>
+	      <div my-youtube code="feed.id"></div>	
+          <div class="video_inner" style="background:#fff;padding:5px;">
+            <h4 style="font-size:12px;">{{feed.title}}</h4> 
+          	<span ng-bind-html="feed.view"></span> Views ,  <span am-time-ago="feed.publish"> </div>
+	    </div> 	
+	</div>
+  </div>
+</div>
+</div>
+
+

@@ -1,0 +1,28 @@
+<div class="scrollable">
+  <div class="scrollable-content">
+<div class="events_page">
+<div class="row at-repeat-wave-in at-repeat-wave-out" ng-repeat="event in eventsall">
+<div class="events">
+  <img ng-src="{{event.flyer_thumbnail}}" width="909" height="479" alt="Events" /></div>
+  <div class="content_events">
+   <div class="div">
+    <div class="left_align"><h2 ng-bind-html="event.name"></h2></div>
+    <div class="right_align"><h2 ng-bind-html="event.date | date:'MMM d'"></h2></div>
+   </div>
+  <p>
+  {{event.write_up}}
+<h6>NORMAL PRICE R{{event.original_price}} - DISCOUNTED PRICE R{{event.discounted_price}}</h6></p>
+
+<div class="div">
+ <div class="left_align"><h2>40% OFF</h2></div>
+  <div class="right_align"><h6 class="red_txt">ONLY 10 OF 500 LEFT</h6></div>
+ </div>
+</div>
+<a href="{{event.ticketing_link}}" class="button red">Buy Ticket</a>
+</div>
+
+  </div>
+</div>
+</div>
+
+

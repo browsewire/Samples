@@ -1,0 +1,53 @@
+<ion-view title="Confirm & Print">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header has-footer" id="printtext">
+    <div class="panel panel-primary">
+        <div class="row customalign">
+           <div class="custom button-block button-positive col-xs-12 container_head"> Confirm Violations</div>
+         </div>
+  
+      <div class="panel-body">
+      <ion-list>
+          <ion-item ng-repeat="item in dataforfine.fines">
+            {{item.name.name}} 
+          </ion-item>
+      </ion-list>
+
+      </div>
+      </div>
+        
+        <div class="row customalign">
+           <div class="custom button-block button-positive col-xs-12 container_head" ng-click="takesignature()"> Signature</div>
+         </div>
+       
+         <img ng-src="{{ imageData }}" />
+         <div class="row customalign">
+          <!-- <a class="issue_btn blue  customfine" ng-hide="isReplyFormOpen" ng-click="isReplyFormOpen = !isReplyFormOpen" ng-click="ok()" > Accept </a>
+           <a class="issue_btn blue  customfine" ng-click="isReplyFormOpen = !isReplyFormOpen" ng-show="isReplyFormOpen" ><i  class="icon ion-checkmark-circled"></i>
+             Accept </a>-->
+        
+         
+         </div>
+       
+        <div class="row customalign">
+           <a class="button  button-block button-positive" ng-click="issueandPrintfine()"  ng-hide="succesonIssue">Accept and Issue Fine</a>
+         </div>
+        <div class="row customalign">
+           <a class="button  button-block button-positive" ng-show="succesonIssue">Print Fine </a>
+         </div>
+
+
+
+  </ion-content>
+   <div class="tabs tabs-positive tabs-icon-only" >
+            <a class="tab-item"  href="#/app/search/vehicle">
+              <i class="icon ion-model-s"></i>
+            </a>
+           
+            <a class="tab-item" href="#/app/fines">
+              <i class="icon ion-clipboard"></i>
+            </a>
+     </div>
+</ion-view>

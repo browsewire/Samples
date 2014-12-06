@@ -1,0 +1,47 @@
+ <ion-view title="Dashboard">
+   <ion-nav-buttons side="left">
+     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+   </ion-nav-buttons>
+  <ion-content class="has-header has-footer">
+  <div class="card outer">
+
+    <div class="container_all"> 
+      <div class="row customalign">
+           <div class="custom button-block button-positive col-xs-12 container_head"> Messages</div>
+         </div>
+
+      <div class="panel-body">
+      
+        <blockquote ng-repeat="message in messages | limitTo:'2'">
+         {{message.alert_message}}
+          <footer>
+            By {{message.username.first_name}} {{message.username.last_name}}  {{message.created_at}} 
+          </footer>
+        </blockquote>
+       <div class="message" >
+        <div class="name name_owners" >{{message.username.first_name}} {{message.username.last_name}}</div>
+         <p> {{message.alert_message}}</p> 
+        </div>  
+      </div>
+    </div>     
+    <a class="button button-block button-positive" on-touch="go('/app/search/vehicle')">
+      Vehicle and Driver Search
+    </a>
+    <a class="button button-block button-positive" on-touch="go('/app/fines')">
+      Fine Search
+    </a>     
+
+  </div>
+  
+  </ion-content>
+   <div class="tabs tabs-positive tabs-icon-only">
+            <a class="tab-item"  href="#/app/search/vehicle">
+              <i class="icon ion-model-s"></i>
+            </a>
+           
+            <a class="tab-item" href="#/app/fines">
+              <i class="icon ion-clipboard"></i>
+            </a>
+     </div>
+</ion-view>
+    

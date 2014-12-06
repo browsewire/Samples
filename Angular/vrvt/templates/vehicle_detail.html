@@ -1,0 +1,231 @@
+<ion-view title="Vehicle/Driver Detail">
+
+   <ion-nav-buttons side="left">
+    <ion-nav-bar animation="nav-title-slide-ios7" 
+             type="bar-positive" 
+             back-button-type="button-icon" 
+             back-button-icon="ion-arrow-left-c"></ion-nav-bar>
+     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+   </ion-nav-buttons>
+  <ion-content class="has-header has-footer">           
+               <div class="row customalign">
+				 <div class="col-xs-12 strip custom name_owners " ng-class="{Current:vehicledetail.vehicle.vehicles_status_name=='Current',Expired:vehicledetail.vehicle.vehicles_status_name=='Expired',Cancelled:vehicledetail.vehicle.vehicles_status_name=='Cancelled',Suspended:vehicledetail.vehicle.vehicles_status_name=='Suspended',Accident:vehicledetail.vehicle.vehicles_status_name=='Accident',Stolen:vehicledetail.vehicle.vehicles_status_name=='Stolen'}"><i class="big_icon ion-model-s"></i> Vehicle Status </div>
+		   <div class="charges"  ng-if="vehicledetail.fines.length > '0'">
+              <div class ="col-xs-12 alignCenter">
+				<div ng-repeat="fine in vehicledetail.fines | limitTo:'2'"> {{fine.code}} - {{fine.created_at |asYear|  date:'MMM d, y' }} </div>
+			  </div>
+			</div>
+				   <!--   <div class="strip" ng-if="vehicledetail.fines.length == '0'"> No fine issued till now</div> -->
+			</div>
+				
+		
+		       <div class="row  customalign"  ng-repeat="owner in vehicledetail.owners">
+				 <div class="col-xs-12 custom strip name_owners" ng-class="{Current:owner.status=='Current',Warning:owner.status=='Warning',Suspended:owner.status=='Suspended',Revoked:owner.status=='Revoked'}"><i class="big_icon ion-person-stalker"></i> {{owner.drivers_fname}} {{owner.drivers_lname}}</div>
+				 <div class="charges" ng-if="owner.fines.length" >
+				   <div ng-repeat="fine in owner.fines | limitTo:'2'"  class="name_owners alignCenter col-xs-12">
+				   	{{fine.code}} - {{fine.created_at | asYear |date:'MMM d, y'}} 
+				   </div>
+				  <!-- <div ng-if="!owner.fines.length" class="strip"> No fine issued till now</div>-->
+				  </div>
+				</div>
+				 <div class="row customalign" ng-repeat="owner in vehicledetail.authorizedDr">
+		         <div class="col-xs-12 custom strip name_owners"  ng-class="{Current:owner.status=='Current',Warning:owner.status=='Warning',Suspended:owner.status=='Suspended',Revoked:owner.status=='Revoked'}"><i class="big_icon ion-ribbon-b"></i> {{owner.drivers_fname}} {{owner.drivers_lname}}</div>
+				 <div class="charges" ng-if="owner.fines.length">
+				 <div class="alignCenter col-xs-12" ng-repeat="fine in owner.fines" >{{fine.code}} -  {{fine.created_at | asYear |date:'MMM d, y'}}</div>
+				 </div>
+				<!--   <div ng-if="!owner.fines.length" class="strip"> No fine issued till now</div>-->
+				  
+				</div>
+		   <div class="row customalign">
+		       <a class="button  button-block button-positive" href="#/app/driver/add/{{vehicledetail.vehicle.id}}"> Add  Driver</a>
+         </div>
+ 
+   <div class="container_all"> 
+   	<!--  <div class="row customalign">
+		       <div class="custom button-block button-stable col-xs-12 container_head"> Registration Summary</div>
+         </div>
+  -->
+   <div class="section container-fluid tabsb">
+      <div class="btn-group justified nav-tabs">
+        <a class="btn  btn-default customback" href="#Tab1" toggle="on" active-class="customactive">Reg. Details
+        </a>
+        <a class="btn  btn-default customback" href="#Tab2" toggle="on" active-class="customactive">Vehicle Info
+        </a>
+        <a class="btn  btn-default customback" href="#Tab3" toggle="on" active-class="customactive">Driver Info
+        </a>
+        
+      </div>
+
+      <div class="tab-content">
+        <div class="tab-pane" toggleable="" active-class="active" default="active" id="Tab1" exclusion-group="myTabs">
+  <!-- Default panel contents -->
+		 
+		  <div class="panel-body" ng-if="registeration.id" >
+		  	           <div class="row customalign" ng-if="key == 'registrations_no'" ng-repeat="(key, value) in registeration">
+								<div class="col-head"><strong>Reg# :</strong></div>
+							    <div class="col-value">{{value}}</div>
+		                </div>
+					
+		                <div class="row customalign" ng-if="key == 'registrations_licence_plate_no'" ng-repeat="(key, value) in registeration">
+								<div class="col-head"><strong>Lic Plate :</strong></div>
+							    <div class="col-value">{{value}}</div>
+		                </div>
+		            	                
+		                <div class="row customalign" ng-if="key == 'registrations_sticker_serial_no'" ng-repeat="(key, value) in registeration">
+								<div class="col-head"><strong>Sticker#:</strong> </div>
+							    <div class="col-value">{{value}}</div>
+		                </div>
+		                 <div class="row customalign" ng-if="key == 'vehicles_usetype_name'" ng-repeat="(key, value) in vehicledetail.vehicle">
+								<div class="col-head"> <strong>Use type:</strong></div>
+							    <div class="col-value">{{value}}</div>
+		                </div>
+		                <div class="row customalign" ng-if="key == 'vehicles_class_name'" ng-repeat="(key, value) in vehicledetail.vehicle">
+								<div class="col-head"> <strong>Class:</strong></div>
+							    <div class="col-value">{{value}}</div>
+		                </div>
+		                 <div class="row customalign" ng-if="key == 'vehicles_status_name'" ng-repeat="(key, value) in vehicledetail.vehicle">
+								<div class="col-head"> <strong>Status:</strong></div>
+							    <div class="col-value">{{value}}</div>
+		                </div>
+		  </div>
+
+        </div>
+
+        <div class="tab-pane" toggleable="" active-class="active" id="Tab2" exclusion-group="myTabs">
+        
+		
+		  <div class="panel-body">
+						
+		                <div class="row customalign" ng-if="key == 'vehicles_year'"ng-repeat="(key, value) in vehicledetail.vehicle">
+								<div class="col-head-vel"><strong> Year:</strong></div>
+							    <div class="col-value-vel">{{value}}</div>
+		                </div>
+		                <div class="row customalign" ng-if="key == 'vehicles_make_id'" ng-repeat="(key, value) in vehicledetail.vehicle">
+								<div class="col-head-vel"> <strong>Make:</strong> </div>
+							    <div class="col-value-vel">{{value}}</div>
+		                </div>
+		               
+		                <div class="row customalign" ng-if="key == 'vehicles_name_trim'" ng-repeat="(key, value) in vehicledetail.vehicle">
+								<div class="col-head-vel"><strong>Model:</strong> </div>
+							    <div class="col-value-vel">{{value}}</div>
+		                </div>
+		              
+		                <div class="row customalign" ng-if="key == 'vehicles_color_name'" ng-repeat="(key, value) in vehicledetail.vehicle">
+								<div class="col-head-vel"> <strong>Color:</strong></div>
+							    <div class="col-value-vel">{{value}}</div>
+		                </div>
+		  </div>
+
+	
+        </div>
+        
+        <div class="tab-pane" toggleable="" active-class="active" id="Tab3" exclusion-group="myTabs" >
+      
+        	<select class="form-control margincustom" ng-model="item" 
+             ng-options="driver.name for driver in drivers" ng-change="update(item)">
+             
+        	</select>
+
+        	 
+          
+		     <div class="panel-body"  ng-if="selecteddriver == owner.id" ng-repeat="owner in vehicledetail.owners">
+		             
+						
+		                <div class="row customalign">
+								<div class="col-head"> <strong>License:</strong> </div>
+							    <div class="col-value">{{owner.drivers_license_no}}</div>
+		                </div>
+		               
+		                <div class="row customalign">
+								<div class="col-head"><strong>Address:</strong> </div>
+							    <div class="col-value">{{owner.drivers_street}}</div>
+		                </div>
+		                 <div class="row customalign">
+								<div class="col-head"></div>
+							    <div class="col-value">{{owner.drivers_city}}</div>
+		                </div>
+		                 
+		                 <div class="row customalign">
+								<div class="col-head"><strong>Cell 1:</strong> </div>
+							    <div class="col-value">{{owner.drivers_cell1}}</div>
+		                </div>
+		            
+		                 <div class="row customalign">
+								<div class="col-head"><strong>Status:</strong> </div>
+							    <div class="col-value">{{owner.status}}</div>
+		                </div>
+		 
+	</div>
+   
+	    <div class="panel-body"  ng-if="selecteddriver == owner.id"  ng-repeat="owner in vehicledetail.authorizedDr"  ng-if="vehicledetail.authorizedDr.length">
+		              
+		                <div class="row customalign">
+								<div class="col-head"> <strong>License:</strong> </div>
+							    <div class="col-value">{{owner.drivers_license_no}}</div>
+		                </div>
+		               
+		                <div class="row customalign">
+								<div class="col-head"><strong>Address:</strong> </div>
+							    <div class="col-value">{{owner.drivers_street}}</div>
+		                </div>
+		                <div class="row customalign">
+								<div class="col-head"></div>
+							    <div class="col-value">{{owner.drivers_city}}</div>
+		                </div>
+		                 
+		                 <div class="row customalign">
+								<div class="col-head"><strong>Cell 1:</strong> </div>
+							    <div class="col-value">{{owner.drivers_cell1}}</div>
+		                </div>
+		           
+		                 <div class="row customalign">
+								<div class="col-head"><strong>Status:</strong> </div>
+							    <div class="col-value">{{owner.status}}</div>
+		                </div>
+		                
+		     </div>
+
+          
+        </div>
+      </div>
+    </div>  
+</div> 
+
+<script type="text/ng-template" id="choose-driver-template.html">
+
+<div class="list" ng-repeat="driver in alldrivers" on-touch="updatedriver(driver)">
+
+  <label class="item item-radio">
+    <input type="radio" name="group">
+    <div class="item-content">
+     {{driver.name}}
+    </div>
+    <i class="radio-icon ion-checkmark"></i>
+  </label>
+</div>
+  
+</script>
+
+  </div>
+ <div class="row customalign">
+		 
+		   <div class="col-xs-12 full">
+		      <button class="button button-block button-assertive" on-touch="showpopup()">
+		        Issue Fine
+		     </button>
+		   </div>
+		  
+		 </div>
+
+	
+  </ion-content>
+   <div class="tabs tabs-positive tabs-icon-only" >
+            <a class="tab-item"  href="#/app/search/vehicle">
+              <i class="icon ion-model-s"></i>
+            </a>
+           
+            <a class="tab-item" href="#/app/fines">
+              <i class="icon ion-clipboard"></i>
+            </a>
+     </div>
+</ion-view>

@@ -1,0 +1,36 @@
+<div class="modal">
+  <ion-header-bar>
+    <h1 class="title">Security Set Up</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLoginOnce()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+  <div class="item">
+    <h2> Welcome {{usernames.first_name}} {{usernames.middle_name}} {{usernames.last_name}}</h2> 
+  </div>
+  <div class="card" ng-show="errormessage">
+      <div class="item item-text-wrap error">
+        {{errormessage}}
+      </div>
+  </div>
+   <div class="card">
+      <div class="item item-text-wrap error">
+       <h2>Set 4 Digit Security Pin : </h2>
+      </div>
+ 
+    <form name="userpin" method="post" ng-submit="setpin()" novalidate>
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" name="pin" ng-model="user.pin" placeholder="Enter 4 digit number ..." maxlength="4" required>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit" ng-disabled="userpin.pin.$invalid">SET PIN</button>
+        </label>
+      </div>
+    </div>
+    </form>
+  </ion-content>
+
+</div>
+

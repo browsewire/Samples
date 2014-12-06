@@ -1,0 +1,81 @@
+<ion-view title="Add Authorized Driver">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+
+  <ion-content class="has-header has-footer">
+
+         <div class="list">
+           <form name="addauthorized" method="post" ng-submit="registerdriver()" novalidate>
+
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label">First Name</span>
+                  <input type="text" ng-model="driver.fname"  placeholder="Enter First Name" required>
+                </label>
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label">Middle Name</span>
+                  <input type="text" ng-model="driver.mname"  placeholder="Enter Middle Name" >
+                </label>
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label">Last Name</span>
+                  <input type="text" ng-model="driver.lname"  placeholder="Last Name" required>
+                </label>
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label">NIN</span>
+                  <input type="text" ng-model="driver.nin"  placeholder="Your NIN " required>
+                </label>
+                 <label class="item item-input item-stacked-label">
+                  <span class="input-label">Driver License Number</span>
+                  <input type="text" ng-model="driver.dlic"  placeholder="license number" required>
+                </label>
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label">Street</span>
+                  <input type="text" ng-model="driver.street"  placeholder="Street Name... " required>
+                </label>
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label">City</span>
+                  <input type="text" ng-model="driver.city"  placeholder="City Name.. " required>
+                </label>
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label">PO Box</span>
+                  <input type="text" ng-model="driver.po"  placeholder="Po box.. ">
+                </label>
+                 <label class="item item-input item-stacked-label">
+                  <span class="input-label">Country</span>
+                  <select class="form-control margincustom" ng-model="driver.country" 
+                          ng-options="country for country in countries">             
+                  </select>
+                </label>
+                 <label class="item item-input item-stacked-label">
+                  <span class="input-label">Driver Cell 1</span>
+                  <input type="number" ng-model="driver.cell1"  placeholder="Cell 1.. " required>
+                </label>
+                 <label class="item item-input item-stacked-label">
+                  <span class="input-label">Driver Cell 2</span>
+                  <input type="number" ng-model="driver.cell2"  placeholder="Cell 2.. ">
+                </label>
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label">Email</span>
+                  <input type="email" ng-model="driver.email"  placeholder="Enter Email.." required>
+                </label>
+                 <label class="item item-input item-stacked-label">
+                  <span class="input-label">Status</span>
+                  <select class="form-control margincustom" ng-model="driver.status" 
+                           ng-options="driver_status for driver_status in status">             
+                 </select>
+                </label>
+                 <button class="button button-block button-positive" type="submit" ng-disabled="addauthorized.$invalid"> Add Driver</button>
+                 </form>  
+         </div>
+				
+  </ion-content>
+   <div class="tabs tabs-positive tabs-icon-only"  >
+            <a class="tab-item"  href="#/app/search/vehicle">
+              <i class="icon ion-model-s"></i>
+            </a>
+           
+            <a class="tab-item" href="#/app/fines">
+              <i class="icon ion-clipboard"></i>
+            </a>
+     </div>
+</ion-view>

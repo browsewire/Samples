@@ -1,0 +1,79 @@
+ <ion-view title="Fine Search">
+   <ion-nav-buttons side="left">
+     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+   </ion-nav-buttons>
+  <ion-content class="has-header has-footer">
+     <div class="card outer">
+       <div class="panel panel-primary">
+  	   <div class="panel-heading">
+          <h3 class="panel-title">Search Fine</h3>
+      </div>
+
+      <form method="post" name="finesearch" ng-submit="searchfine()" novalidate>
+		  <label class="item item-input">
+			    <i class="icon ion-search placeholder-icon"></i>
+          <select class="form-control margincustom" ng-model="item" ng-change="updatetype(item)"
+             ng-options="fine.name for fine in finestype">
+          </select>
+		  </label>
+		   <label class="item item-input ">
+			   <i class="icon ion-search placeholder-icon"></i>
+			   <input type="search"  ng-model="fines.id" placeholder="Fine id" required>
+		  </label>
+      <div class="row customalign">
+       <div class="col-xs-12 full">
+          <button type="submit" ng-disabled="finesearch.$invalid" class="button button-block button-positive">
+            Search Fine
+         </button>
+       </div>
+     </div>
+		 </form>
+    </div>
+      
+  </div>
+  <div class="row customalign"  ng-if="errormessage">
+       <div class="col-lg-12">
+            <div class="alert alert-info ">                            
+                <i class="big_icon ion-ios7-information"></i>  {{errormessage}}
+             </div>
+        </div>
+   </div>
+
+   <div class="container_all" ng-if="finesresult"> 
+         <div class="row customalign">
+           <div class="custom button-block button-positive col-xs-12 container_head"> Fine Summary</div>
+         </div>
+        <div class="row customalign">
+                <div class="col-head"><strong>Issued By :</strong></div>
+                  <div class="col-value">{{finesresult.officer.first_name}} {{finesresult.officer.last_name}}</div>
+         </div>
+         <div class="row customalign">
+                <div class="col-head"><strong>Driver:</strong></div>
+                  <div class="col-value">{{finesresult.driver.drivers_fname}} {{finesresult.driver.drivers_lname}}</div>
+         </div>
+           <div class="row customalign">
+                 <div class="col-head"><strong>Reg No:</strong></div>
+                  <div class="col-value">{{finesresult.registration}}</div>
+         </div>
+ 
+        <div class="row customalign">
+         <div class="col-xs-12 strip custom name_owners " ng-class="{Current:finesresult.status=='Paid',Expired:finesresult.status=='Pending',Cancelled:finesresult.status=='Cancelled',Suspended:finesresult=='Suspended'}"><i class="big_icon ion-clipboard"></i> {{finesresult.issued_at.date |asYear|  date:'MMM d, y' }} </div>
+        <div class="charges">
+            <div class ="col-xs-12 alignCenter">
+                  <div ng-repeat="fine in finesresult.fines.fine_name">{{fine }} </div>
+             </div>
+        </div>
+      </div>
+       </div>
+  </ion-content>
+   <div class="tabs tabs-positive tabs-icon-only">
+            <a class="tab-item"  href="#/app/search/vehicle">
+              <i class="icon ion-model-s"></i>
+            </a>
+           
+            <a class="tab-item" href="#/app/fines">
+              <i class="icon ion-clipboard"></i>
+            </a>
+     </div>
+</ion-view>
+    

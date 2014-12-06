@@ -1,0 +1,62 @@
+<ion-view title="Messages">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header has-footer"> 
+        <blockquote ng-repeat="message in messages" ng-if= "message.id == params">
+         {{message.alert_message}}
+          <footer>
+            By {{message.username.first_name}} {{message.username.last_name}}  {{message.created_at}} 
+          </footer>
+        </blockquote>
+  
+            <ul class="chats">
+                <li class="in"  ng-repeat="message in messagestrail">
+                      <div class="message">
+                      <span class="arrow"></span>
+                      <span class="name"> {{message.username.first_name}} {{message.username.last_name}}</span>
+                     <!-- <span class="datetime"> at {{message.created_at}} </span>-->
+                      <span class="body">{{message.alerts_messages_message}} </span>
+                    </div>
+                  </li>
+                            
+            </ul>
+   <div class="list">
+
+    <a class="item" ng-repeat="message in messagesdetail" href="#/app/messages/{{message.id}}">    
+      <h2>{{message.username.first_name}} {{message.username.last_name}}</h2>
+      <p>{{message.alert_message | truncate : 100}}.</p>
+    </a>
+  
+  </div>
+  <div>
+    <form name="messageReply" method="post" ng-submit="replymessage()" novalidate>
+        <div class="row customalign">
+          <div class="col-xs-9"> 
+           <label class="item item-input">
+             <input type="text" ng-model="replymessagetext.text" placeholder="Reply to message Here..." required>
+          </label>
+          </div>
+          <div class="col-xs-3">
+           <button class="button button-positive" type="submit" ng-disabled="messageReply.$invalid">
+            <i class="big_icon ion-reply"></i>
+          </button>
+        </div>
+         </div>
+        </form>
+        
+ </div>
+     
+
+  </ion-content>
+   
+   <div class="tabs tabs-positive tabs-icon-only">
+            <a class="tab-item"  href="#/app/search/vehicle">
+              <i class="icon ion-model-s"></i>
+            </a>
+           
+            <a class="tab-item" href="#/app/fines">
+              <i class="icon ion-clipboard"></i>
+            </a>
+     </div>
+</ion-view>

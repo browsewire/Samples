@@ -1,0 +1,79 @@
+<div class="scrollable">  
+  <div class="scrollable-content section" >
+  <div class=" dashboard">
+    <form role="form" name="hcclogin" ng-submit='signup()'>
+    <fieldset>
+      <legend>Signup</legend>
+        <div class="form-group has-success has-feedback">
+          <label>First Name</label>
+          <input type="text"
+                 ng-model="user.first_name"
+                 class="form-control"
+                 placeholder="Enter First Name"
+                 required >
+        </div>
+         <div class="form-group has-success has-feedback">
+                  <label>Last Name</label>
+                  <input type="text"
+                         ng-model="user.last_name"
+                         class="form-control"
+                         placeholder="Enter Last Name"
+                         required >
+        </div>
+        <div class="form-group has-success has-feedback">
+                  <label>Gender</label>
+                    <select  class="form-control" ng-model="user.gender" ng-options="gender for gender in genders"></select>
+                 
+        </div>
+        
+        <div class="form-group has-success has-feedback">
+                  <label>Email</label>
+                  <input type="email"
+                         ng-model="user.email_address"
+                         class="form-control"
+                         placeholder="Enter Email"
+                         required >
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" 
+                 ng-model="user.password"
+                 class="form-control"
+                 placeholder="Password"
+                 required>
+        </div>
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input type="password" 
+                 ng-model="user.conf_password"
+                 class="form-control"
+                 placeholder="Password"
+                 required>
+        </div>
+        <div class="form-group has-success has-feedback">
+                  <label>Nearest City</label>
+                    <select  class="form-control" ng-model="user.nearest_city" ng-options="city for city in cities"></select>
+                 
+        </div>
+        <div class="form-group has-success has-feedback">
+                  <label>Contact Number</label>
+                  <input type="number"
+                         ng-model="user.contact_number"
+                         class="form-control"
+                         placeholder="Enter First Name"
+                         required >
+        </div>
+    </fieldset>
+  
+    <button class="btn btn-primary btn-block">
+      Let's Get In
+    </button>
+
+     </form>
+    
+   
+    </div>
+  </div>
+
+</div>
+

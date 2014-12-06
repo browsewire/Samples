@@ -1,0 +1,30 @@
+<ion-view title="Messages">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header has-footer">
+      <div class="row customalign">
+   <a class="button button-block button-positive" href="#/app/messages/create">
+    Create New Message
+    </a>
+      
+   </div>
+  <div class="row customalign">
+    <div class="list">
+    <a class="item" ng-repeat="message in messages"  href="#/app/messages/{{message.id}}">    
+      <h2>{{message.username.first_name}} {{message.username.last_name}}</h2>
+      <p>{{message.alert_message | truncate : 100}}.</p>
+    </a>  
+ </div>
+ </div>  
+  </ion-content>
+   <div class="tabs tabs-positive tabs-icon-only"  >
+            <a class="tab-item"  href="#/app/search/vehicle">
+              <i class="icon ion-model-s"></i>
+            </a>
+           
+            <a class="tab-item" href="#/app/fines">
+              <i class="icon ion-clipboard"></i>
+            </a>
+     </div>
+</ion-view>

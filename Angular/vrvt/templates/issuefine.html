@@ -1,0 +1,94 @@
+<ion-view title="Issue Fine">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header has-footer">
+    <div class="row customalign" ng-repeat="fines in finelists">    
+           <a class="button  button-outline  button-positive col-xs-12" style="font-size:22px;" ng-click="getfinelist(fines)"> {{fines}}</a>
+           
+    </div>
+
+    <script type="text/ng-template" id="choose-fine-template.html">
+    <ul class="list">
+      <li class="item item-toggle" ng-repeat="lists in finedscp" ng-click="finename(lists)">
+       
+         <label class="toggle toggle-positive">
+           <input type="checkbox">
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label>
+          {{lists.name}}
+      </li>
+   </ul>
+
+       
+    </script>
+
+   <script type="text/ng-template" id="choose-driver-template.html">
+
+    <div class="list" ng-repeat="driver in alldrivers track by $index" ng-click="updatedriver(driver)">
+
+      <label class="item item-radio">
+        <input type="radio" name="group">
+        <div class="item-content">
+         {{driver.name}}
+        </div>
+        <i class="radio-icon ion-checkmark"></i>
+      </label>
+    </div>
+  
+  </script>
+    <div class="panel panel-primary" ng-if="selectedfines.length">
+        <div class="row customalign">
+           <div class="custom button-block button-positive col-xs-12 container_head"> Selected Fines</div>
+         </div>
+  
+      <div class="panel-body">
+         <ion-list show-delete="data.showDelete">
+          <ion-item ng-repeat="item in selectedfines">
+            {{item.name.name}} 
+            <ion-delete-button class="ion-minus-circled" 
+                               ng-click="onItemDelete($index)">
+            </ion-delete-button>           
+           </ion-item>
+        </ion-list>
+      </div>
+      </div>
+
+      <div ng-if="driverid.length && driverid != 'v'">
+        <div class="row customalign">
+           <div class="button button-block button-stable col-xs-12">-- Selected Driver --</div>
+         </div>
+  
+     
+         <div class="row customalign">
+          <div class="custom button-block button-stable col-xs-12 container_head" ng-if="driver.id == driverid" ng-repeat="driver in alldrivers">
+            {{driver.name}}              
+          </div>
+      </div>
+
+   
+      </div>
+      <div>
+     
+      </div>
+      
+
+         <div class="row customalign">
+         
+          <!-- <a class="issue_btn blue" ng-click="takePicture()"><span data-tags="photo" data-pack="default" class="ion-camera"></span></a> -->
+           <a class="issue_btn green" ng-click="togglefine()">Issue {{alternative}} fine</a>
+           <a class="issue_btn green" ng-click="ConfirmFine()">Complete fine citation</a>
+         </div>
+  </ion-content>
+   <div class="tabs tabs-positive tabs-icon-only" >
+            <a class="tab-item"  href="#/app/search/vehicle">
+              <i class="icon ion-model-s"></i>
+            </a>
+           
+            <a class="tab-item" href="#/app/fines">
+              <i class="icon ion-clipboard"></i>
+            </a>
+     </div>
+</ion-view>

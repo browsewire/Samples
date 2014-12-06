@@ -1,0 +1,54 @@
+<div class="scrollable">  
+  <div class="scrollable-content section" >
+  <div class=" dashboard">
+    <form role="form" name="hcclogin" ng-submit='login()'>
+    <fieldset>
+      <legend>Login</legend>
+        <div class="form-group has-success has-feedback">
+          <label>Email</label>
+          <input type="email"
+                 ng-model="user.email"
+                 class="form-control"
+                 placeholder="me@example.com"
+                 required >
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" 
+                 ng-model="user.password"
+                 class="form-control"
+                 placeholder="Password"
+                 required>
+        </div>
+
+    </fieldset>
+  
+    <button ng-disabled="hcclogin.$invalid"   ng-invalid="hcclogin.$invalid" class="btn btn-primary btn-block">
+      Login
+    </button>
+
+     </form>
+
+     <div class="facebooklogin">
+       <button class="btn btn-primary btn-block" ng-click="loginfacebook()">
+        Login With facebook
+      </button>
+    </div>
+      <hr>
+     <button ng-click="signup()" class="btn sign_up btn-primary btn-block">
+     Sign up
+    </button>
+    
+    
+    <div ui-content-for="navbarAction">
+      <a class='btn' ng-click='login()'>Login</a>
+    </div>
+
+   
+    
+    
+   
+    </div>
+  </div>
+</div>
