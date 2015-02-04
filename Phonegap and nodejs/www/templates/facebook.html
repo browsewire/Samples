@@ -1,0 +1,40 @@
+<div class="scrollable">
+ <div class="scrollable-content">
+  <div class="twitter">
+
+  <div class="row top_bar">
+    <div class="tweets">
+     <img ng-src="images/twitter_img.png" width="50" height="50" alt="Twitter" />
+     <div class="txt_tweets">
+       <h2 ng-bind-html="pageinfo.name"></h2> 
+       <span class="fb_likes">{{pageinfo.likes}} Likes </span>  <a href="https://www.facebook.com/GandGSA" alt="fb_image" class="fb_like_page"><img ng-src="images/fb_like.png" alt="twitter-follow"></a>  
+       <!--<span>HUAWEI CC</span>-->
+       </div>
+    </div>
+    </div>
+   
+  
+    <div class="row at-repeat-wave-in
+         at-repeat-wave-out" ng-repeat="info in fbdata">
+      <div class="tweets fbdata">
+        <img src="images/twitter_img.png" width="126" height="129" alt="Twitter" />
+        <div class="txt_tweets">
+          <h6 ng-bind-html="info.author | to_trusted "></h6> 
+          <!--<span>HUAWEI CC</span>-->
+          <p class="date"><span am-time-ago="info.publish"></p>          
+          <p ng-bind-html="info.content | to_trusted">
+          </p>
+       
+           <!--<p class="date blue_txt">{{info.likes}} likes   {{info.comments}} comments</p>
+             <div class="fb_buttons">
+            <a class="button fb_blue" href="#"><i class="fa fa-thumbs-o-up"></i>Like</a>
+             <a class="button fb_blue" href="#"><i class="fa fa-comment-o"></i>Comment</a>
+            </div>-->
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
