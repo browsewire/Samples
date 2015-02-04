@@ -1,0 +1,28 @@
+<div class="scrollable">
+  <div class="scrollable-content">
+    <div ng-repeat="dj in djlist" class="at-repeat-wave-in
+         at-repeat-wave-out">
+      <div class="row">
+          <div class="djs">        
+              <div class="profile_pic">
+                 <div class="pic">
+                  <img ng-src="{{dj.dj_image}}" width="287" height="287" alt="profile" />
+                 </div>
+               </div>
+              <div class="content">
+                <h3 ng-bind-html="dj.dj_name"></h3>
+                <p ng-bind-html="dj.dj_bio"></p>          
+              </div>
+          </div>
+        </div>
+       <div class="row">
+          <a href="" ng-click="getgig(dj.id)" class="button dark_gray"><i class="fa fa-calendar-o"></i>Gig Guide</a>
+        </div>
+        <div class="row">
+          <a href="{{dj.mixcloud_link}}" class="button red"><i class="fa fa-cloud"></i>Mix Cloud</a>
+        </div>
+      </div>
+  </div>
+</div>
+
+

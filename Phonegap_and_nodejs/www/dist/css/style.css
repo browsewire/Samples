@@ -1,0 +1,433 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	background: #262626;
+	font-size:12px;
+	font-size:100%;
+}
+.navbar-app {
+  background: #262626;
+}
+.navbar.navbar-app.navbar-absolute-top {
+    background: none repeat scroll 0 0 #000;
+}
+.navbar {
+height: 70px;
+}
+.has-navbar-top .app-body {
+padding-top:78px;
+}
+.sidebar-toggle .fa.fa-bars {
+color: #fff;
+font: normal normal normal 27px/2.8 FontAwesome !important;
+}
+.navbar-brand {
+height: 90px;
+}
+
+.navbar-absolute-top {
+    border-bottom-width: 0;
+}
+.app {
+    background: none repeat scroll 0 0 #262626;}
+/**************************************************
+                  Nanigations
+***************************************************/
+	.scrollable-header, .scrollable-footer {
+    background: none repeat scroll 0 0 #000;
+	}
+	.list-group-item, a.list-group-item {
+		border-bottom:1px solid #000;
+	}
+	.list-group-item {
+    background-color: #232323
+	}
+	a.list-group-item {
+		color: #fff;
+		font-size: 14px;
+		}
+a.list-group-item:hover {
+    background-color: #000;
+    color: #efefef;
+}
+.sidebar-header, .app-name {
+    text-align: center;
+}
+/**************************************************
+                  Splash Screen
+***************************************************/
+.logo_splash{
+	width:70%;
+	display:inline-block;
+	text-align:center;
+	margin-top:50%;
+}
+.splash {
+    text-align: center;
+}	
+/**************************************************
+                  DashBoard
+***************************************************/	
+.social{
+	float:left;
+	width:100%;
+}
+.social img, .image > img {
+    height: auto;
+    width: 100%;
+}
+.image img {
+    height: auto;
+    width: 100%;
+}
+a.social img{
+	float:left;
+	width:100%;}
+.caption {
+	background: rgba(14, 14, 14, 0.7);
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: -37px;
+	padding: 8px 4%;
+	position: relative;
+	z-index: 99999;
+	text-transform: uppercase;
+	box-shadow: 1px 6px 10px black;
+}
+.caption .fa{
+	position:relative;
+	top:3px;
+	float:right;
+}
+.dashboard .left {
+    padding-left: 0;
+	padding-right:5px;
+}
+a.social img, .image > img {
+	box-shadow:0 2px 2px #222;
+}
+.dashboard .col-xs-4 {
+    width: 33.8%;
+    box-shadow: 1px 6px 10px black;
+}
+.dashboard .col-xs-8 {
+    width:65.8%;
+}
+.dashboard .right {
+    padding-right: 0;
+	 padding-left:5px;
+}
+.row {
+margin:0 10px  10px 10px; 
+}
+.margin_b{
+	margin-bottom:	10px;
+}
+/**************************************************
+                  Gallery
+***************************************************/
+.gallery{
+}
+.gallery ul {
+	margin:0;
+	padding:0;
+}
+.gallery ul li{
+	list-style:none;
+	float:left;
+	width:26.9%;
+	margin-left:10px;
+	text-align: center;
+}
+.gallery ul li:first-child{
+	/*margin-left:0;*/
+}
+/**************************************************
+                  DJS
+***************************************************/
+.profile_pic{
+	text-align:center;
+	float:left;
+	width:100%;
+	 padding: 10px 0;
+	background:url(../../images/dj_bg.png) left top no-repeat;
+	background-size:100%;	
+}
+.pic {
+  
+    display: inline-block;
+    height: auto;
+	
+    text-align: center;
+    width: 36%;
+	
+	
+}
+.events img, .fb_img img{
+	width:100%;
+	height:auto;
+}
+.pic img{
+	width:100%;
+	height:auto;
+	background:rgba(250, 250, 250, 0.19);
+	border-radius: 50%;
+	box-shadow: 0 0 1px #eee;
+    padding: 6px;
+}
+.content{
+	background:#fff;
+	padding:40px 20px;
+	float:left;
+	border-radius: 0 0 3px 3px;
+	width:100%;
+	text-align:center;
+}
+.content h3 {
+    font-size:17px;
+	margin-bottom:20px;
+	text-transform:uppercase;
+}
+a.button{
+	float:left;
+	width:100%;
+	text-align:center;
+	padding:20px 0;
+	font-size:20px;
+	text-transform:uppercase;
+	border-radius:3px;
+	color:#fff;
+	box-shadow:0 2px 6px #000;
+	text-decoration:none;
+}
+a.button.red{
+	background:#ff0028;
+}
+a.button.dark_gray{
+	background:#484848;
+}
+a.button .fa {
+    margin-right: 10px;
+}
+/**************************************************
+                  DJS
+***************************************************/
+.events{
+	float:left;
+	width:100%;
+}
+.events_page .content_events{
+	background:#fff;
+	padding:10px;
+	float:left;
+	width:100%;
+	text-align:left;
+}
+.events_page  a.button{	
+border-radius:0 0 3px 3px ;
+}
+.div{
+	float:left;
+	width:100%;
+}
+.div .left_align{
+	float:left;
+}
+.div .right_align{
+	float:right;
+}
+h2 {
+    font-size:18px;
+	font-weight:bold;
+	color:#484848;
+	margin-bottom:5px;
+	text-transform:uppercase;
+}
+h6 {
+	font-size: 11px;
+	font-weight: bold;
+	color: #484848;
+	margin-bottom: 5px;
+	text-transform: uppercase;
+}
+.red_txt{
+	color:#ff0028;
+	line-height:20px;
+}
+
+.events_page .row{
+	box-shadow: 1px 6px 10px black;
+}
+
+.twitter p {
+  font-size: 11px;
+  margin: 7px 2px 7px;
+}
+
+/*
+.fbdata img{
+	width:631px;
+	height:150px; 
+}
+*/
+/**************************************************
+                  You Tube
+***************************************************/
+.you_tube img. twitter img{
+	width:100%;
+	height:auto;
+	box-shadow:0 2px 6px #000;
+}
+/**************************************************
+                  Twitter
+***************************************************/
+.tweets{
+	float:left;
+	width:100%;
+	background:#fff;
+	padding:15px;
+	border-radius:3px;
+    box-shadow:1px 6px 10px #000;
+}
+.tweets > span {
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 5px;color:#2f2f2f;
+}
+.tweets h6 {
+    float: left;color:#2f2f2f;
+    line-height: 20px;
+	   margin-bottom: 0px;
+}
+p.date .fa {
+    margin-left:6px;
+}
+p.date{
+	font-size:10px;
+	color:#2f2f2f;
+	font-weight:bold;
+	float:left;
+	width:100%;
+	text-align:left;
+}
+.tweets p a {
+	color:#1bc6d5;
+	float:left;
+	width:100%;
+}
+.tweets > img {
+	float:left;
+    height: auto;
+    margin-right: 10px;
+    width: 20%;
+}
+.txt_tweets{
+	float:left;
+	padding-top:5px;
+	width:76%;
+	word-wrap: break-word;
+
+}
+.txt_tweets span {
+  font-size: 8px;
+}
+
+.top_bar .tweets > img {
+	float: left;
+	height: auto;
+	margin-right: 10px;
+	width: 16%;
+}
+
+.gallery ul li {
+box-shadow: 1px 6px 10px #000;
+margin: 0 10px 10px 10px;
+}
+
+
+.you_tube .row {
+   box-shadow: 1px 6px 10px #000;
+}
+/**************************************************
+                  Twitter
+***************************************************/
+.blue_txt{
+	color:#275ec2;
+}
+.fb_img{
+	float:left;
+	margin-bottom:10px;
+	width:100%;
+}
+.fb_buttons{
+	float:left;
+	width:100%;
+
+}
+.fb_buttons a.button{
+	width:47%;
+	font-size:11px;
+	font-weight:bold;
+	box-shadow:none;
+	   padding: 10px 0;
+}
+.fb_buttons a.button:first-child{
+	margin-right:10px;
+}
+
+.fb_blue{
+	background:#275ec2;
+}
+a.button.fb_blue .fa {
+    margin-right:5px;
+}
+.section{
+
+	background: #444 !important;
+}
+.section legend{
+	color:#fff!important;
+}
+
+
+.section label{
+	color:#fff;
+}
+
+.modal-content{
+  top: 68px;
+
+}
+
+.twitter_likes{
+
+	font-size: 9px;
+	font-weight: bold;
+	top: 7px;
+	position: relative;
+}
+
+.twitter_follow img{
+	width: 35%;
+    float: right;
+}
+
+.fb_like_page img{
+	width: 30%;
+    float: right;
+}
+.fb_likes{
+	position: relative;
+	font-size: 12px;
+	font-weight: bold;
+	top: 5px;
+}
+
+.modal_close{
+
+	float: right;
+	margin-bottom: 10px;
+}
+
