@@ -1,0 +1,68 @@
+{% extends 'RAAAdminBundle::layout.html.twig' %}
+{% block body %}
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+		<script src="{{  asset('themes/web/js/menu_jquery.js') }}"></script>
+ 	<script src="{{  asset('themes/web/js/jquery-1.10.1.min.js') }}"></script>
+ 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+		<script type="text/javascript">
+
+		function showimagepreview(input) 
+		{
+			if (input.files && input.files[0]) 
+			{
+				var filerdr = new FileReader();
+				filerdr.onload = function(e) 
+				{
+					$('#imgprvw').attr('src', e.target.result);
+				}
+				filerdr.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>	
+	
+	
+	
+<script>
+function showLargeImage(src)
+{
+//alert(src);
+$("#divLargeImage").css('display','block')
+$("#imgLargeImage").prop('src',src)   
+}
+
+</script>
+<section id="content">			
+		<div class="g12">			
+			
+				<fieldset>	
+			<label> Airline Images</label>
+				</fieldset>
+				<section>
+				<label>Add New Image</label>
+				<div  style="width:185px;"><input type="file" name="file" onchange="showimagepreview(this)"></div>
+				<div><button class="submit" type="submit">Submit</button></div> 
+				</section>
+				<div class="main_admin"><img id="imgprvw" src="{{ asset('no_photo.jpg') }}"></div>
+				
+				<div id="divLargeImage" style="display:none;">
+				<div><img id="imgLargeImage" src="" class="mainImage" style="height:100px; width:190px;"></div>
+				</div>
+				<section>
+				<div class="property_imagess">
+
+				
+				        <div class="delete_outer">
+				 <img src="{{ asset(['images/Airline/', image.image_url]|join) }}" onclick="showLargeImage(this.src);" />
+				
+				 </div>
+				
+				
+				</div>
+		
+				</section>	
+			</form>
+		</div>
+
+
+{% endblock %}

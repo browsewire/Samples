@@ -1,0 +1,213 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>{% block title %} Review An Airline | Admin{% endblock %}</title>
+{% block stylesheets %}
+
+            <!--<link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
+            <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
+            <link href="{{ asset('css/screen.css') }}" type="text/css" rel="stylesheet" />--> 
+     
+            <!-- Google Font and style definitions -->
+						<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:regular,bold">
+						<link rel="stylesheet" href="{{  asset('themes/backend/css/style.css') }}">
+												<link rel="stylesheet" href="{{  asset('themes/backend/css/style1.css') }}">
+				
+      <link href="{{asset('bundles/loginlogin/css/bootstrap-responsive.css')}}" rel="stylesheet">
+       <link rel="stylesheet" href="{{  asset('themes/frontend/css/parsley.css') }}">
+	
+						<!-- include the skins (change to dark if you like) -->
+						<link rel="stylesheet" href="{{  asset('themes/backend/css/light/theme.css') }}" id="themestyle">
+						<!-- <link rel="stylesheet" href="css/dark/theme.css" id="themestyle"> -->
+	
+						<!--[if lt IE 9]>
+						<script src="http://html5shim.googlecode.com/svn/trunk/html5.js') }}"></script>
+						<link rel="stylesheet" href="css/ie.css">
+						<![endif]-->
+	
+						<!-- Apple iOS and Android stuff -->
+						<meta name="apple-mobile-web-app-capable" content="no">
+						<meta name="apple-mobile-web-app-status-bar-style" content="black">
+						<link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+							<meta name="apple-mobile-web-app-capable" content="yes">
+						<meta name="apple-mobile-web-app-status-bar-style" content="black">
+						<link rel="apple-touch-icon-precomposed" href="img/icon.png">
+						<link rel="apple-touch-startup-image" href="img/startup.png">
+						<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1">
+			
+						<!-- Apple iOS and Android stuff - don't remove! -->
+						<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1">
+	
+						<!-- Use Google CDN for jQuery and jQuery UI -->
+										<!--	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+						<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>-->
+	
+						<!-- Loading JS Files this way is not recommended! Merge them but keep their order -->
+	
+						<!-- some basic functions -->
+						     
+        {% endblock %}
+						 {% block javascripts %}
+	<script src="{{  asset('themes/backend/js/functions.js') }}"></script>
+			<script src="{{  asset('themes/backend/js/functions.js') }}"></script>
+
+
+      						<script src="{{asset('themes/frontend/js/parsley/parsley-standalone.min.js')}}"></script>
+						<script src="{{  asset('themes/backend/js/plugins.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/editor.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/calendar.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/flot.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/elfinder.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/datatables.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Alert.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Autocomplete.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Breadcrumb.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Calendar.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Chart.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Color.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Date.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Editor.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_File.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Dialog.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Fileexplorer.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Form.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Gallery.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Multiselect.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Number.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Password.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Slider.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Store.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Time.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Valid.js') }}"></script>
+						<script src="{{  asset('themes/backend/js/wl_Widget.js') }}"></script>
+	          <!--<script src="{{asset('bundles/loginlogin/js/parsley/parsley-standalone.min.js')}}"></script>-->
+						<!-- configuration to overwrite settings -->
+						<script src="{{  asset('themes/backend/js/config.js') }}"></script>
+		
+						<!-- the script which handles all the access to plugins etc... -->
+						<script src="{{  asset('themes/backend/js/script.js') }}"></script>
+           <!-- <script src="{{  asset('themes/admin/js/login.js') }}"></script>-->
+         
+    {% endblock %}
+</head>
+<body>
+<div id="pageoptions">
+			<ul>
+				<li><a href="{{ path('RAAAdminBundle_logout') }}">Logout</a></li>
+				<!--<li><a href="" id="wl_config">My Profile</a></li>
+				<li><a href="" class="login-window"">Change Password</a></li>-->
+			</ul>
+			</div>
+<header style="height:91px;">
+		<div id="logo" style="margin-left: 8px; height:30px;margin-top:10px;">
+			<a href="test.html">Logo Here</a>
+		</div>
+	</header>	
+
+<nav>
+<script>
+          	$(document).ready(function()
+          	{
+          		window.history.forward();
+          	});
+          	$('.back').click(function(){
+            parent.history.back();
+            return false;
+        });
+          </script>
+          
+	<script>
+$(document).ready(function(){
+
+updateCities('AK');
+		
+		$("#state").change(function(){	
+               var id=$(this).val();
+             updateCities(id);  
+
+        });	
+});
+
+function updateCities(id)
+{
+ 
+                //alert(id);              	
+               	
+               	$.ajax({
+               	url : '{{ path("RAAAdminBundle_getCities",{ "stateCode": '+id+' }) }}',
+                type:'POST',
+                data:'stateCode='+id,
+                dataType:'html',   
+                success:function(data){
+                    //var category_product = $(data).find('.city').html();
+                    $('#city').html(data);
+
+                }
+            });
+
+
+}
+		
+</script>	
+			 <script>
+         		$(document).ready(function()
+         		{
+         				$(".active").removeClass("active");
+         				var url = window.location.href;
+         				if( url.indexOf('/dashboard') > -1 )
+ 									$("#Dashboard").addClass("active");
+ 								if( url.indexOf('/airlines') > -1 )
+ 									$("#Realtors").addClass("active");
+ 								if( url.indexOf('/category') > -1 )
+ 									$("#Categories").addClass("active");
+ 								if( url.indexOf('/plan') > -1 )
+ 									$("#Plans").addClass("active");
+ 											if( url.indexOf('/claim') > -1 )
+ 									$("#request").addClass("active");
+ 											if( url.indexOf('/propertyListing') > -1 )
+ 									$("#property").addClass("active");
+ 															if( url.indexOf('/cms') > -1 )
+ 									$("#cms").addClass("active");
+ 									if( url.indexOf('/advertiesment') > -1 )
+ 									$("#adv").addClass("active");
+ 										if( url.indexOf('/reviewer') > -1 )
+ 									$("#rev").addClass("active");
+ 									if( url.indexOf('/manageReviews') > -1 )
+ 									$("#manRev").addClass("active");
+ 								/*if( url.indexOf('dashboard') > -1 )
+ 									$("#Dashboard").addClass("active");
+ 								if( url.indexOf('dashboard') > -1 )
+ 									$("#Dashboard").addClass("active");
+ 								if( url.indexOf('dashboard') > -1 )
+ 									$("#Dashboard").addClass("active");
+ 								if( url.indexOf('dashboard') > -1 )
+ 									$("#Dashboard").addClass("active");*/
+ 						});
+ </script>
+			<ul id="nav">
+				<li class="i_house"><a id="Dashboard" href="{{ path('RAAAdminBundle_dashboard') }}"><span>Dashboard</span></a></li>
+        <li class="i_book"><a  id="Realtors" href="{{ path('RAAAdminBundle_airline') }}"><span>Airlines</span></a></li>
+        <li class="i_user_comment"><a id="rev" href="{{ path('RAAAdminBundle_reviewer') }}"><span>Reviewers</span></a></li>               
+        <li class="i_dropbox"><a id="manRev" href="{{ path('RAAAdminBundle_manageReviews') }}"><span>Reviews</span></a></li>
+       <!-- <li class="i_graph"><a id="Plans" href="{{ path('RAAAdminBundle_plan') }}"><span>Plans</span></a></li>-->
+        <!--<li class="i_graph2"><a id="Reviews" href="{{ path('RAAAdminBundle_plan') }}"><span>Reviews</span></a></li>
+      	<li class="i_graph1"><a id="Reports" href="{{ path('RAAAdminBundle_plan') }}"><span>Reports</span></a></li>
+       	<li class="i_graph3"><a id="Advertiesments" href="{{ path('RAAAdminBundle_plan') }}"><span>Advertiesments</span></a></li>
+        <li class="i_graph4"><a id="CMS" href="{{ path('RAAAdminBundle_plan') }}"><span>CMS</span></a></li>
+        <li class="i_image"><a id="request" href="{{ path('RAAAdminBundle_request') }}"><span>Requests</span></a></li> -->
+    <!-- <li class="i_image"><a id="request" href="{{ path('RAAAdminBundle_claim') }}"><span>Claims</span></a></li>-->
+       <!-- <li class="i_frames"><a id="property" href="{{ path('RAAAdminBundle_property') }}"><span>Airline Flights</span></a></li>-->
+        <li class="i_image_2"><a id="adv" href="{{ path('RAAAdminBundle_advertiesment') }}"><span>Advertiesments</span></a></li>   
+              <li class="i_wordpress"><a id="cms" href="{{ path('RAAAdminBundle_manageCms') }}"><span>CMS</span></a></li>                 
+       </ul> 
+       
+</nav>
+		
+{% block body %}
+
+{% endblock %}
+
+
+
+</body>
+</html>

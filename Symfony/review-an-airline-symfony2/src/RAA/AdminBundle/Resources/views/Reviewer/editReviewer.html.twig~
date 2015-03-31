@@ -1,0 +1,74 @@
+{% extends 'RAAAdminBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %}Update Reviewer | Admin{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+<script>
+	function importUsers()
+	{
+		window.location.href = '{{ path('RAAAdminBundle_reviewer') }}';
+	}
+	</script>
+	<section id="content">			
+		<div class="g12">			
+			<form id="form" action="{{ path('RAAAdminBundle_editReviewer',{id:airline.id}) }}" method="post" autocomplete="off" data-validate="parsley" enctype="multipart/form-data">
+				<fieldset>
+					<label>Update Airline Details</label>
+					
+					<section class="chrome"><label for="required_field"> First Name <font class=change>*</font></label>
+						<div><input id="required_field" class="txtBoxBig" type="text" name="firstname" data-required="true"   data-error-message="Please enter firstname." value={{airline.first_name}}></div>
+						<label for="required_field_msg">Last Name<font class=change>*</font></label>
+						<div><input id="required_field" class="txtBoxBig" type="text"  name=lastname data-required="true"  data-error-message="Please enter lastname." value={{airline.last_name}} ></div>									
+					</section>	
+					<section class="chrome"><label for="required_field_msg">Email<font class=change>*</font></label>
+						<div><input id="required_field" class="txtBoxBig" type="text" data-type="email" name=email data-required="true" value={{airline.email}} ></div>
+						<label for="required_field_msg">Password <font class=change>*</font></label>
+						<div><input id="required_field" class="txtBoxBig" type="password"  name="password" data-required="true"  data-error-message="Please enter password." value={{airline.password}} ></div>						
+						</section>
+					<section class="chrome"><label for="required_field_msg">Phone</label>
+						<div><input id="required_field" class="txtBoxBig" type="text" name="phone" value={{airline.phone}}></div>
+					</section>										
+					<section class="chrome">	
+						<div class="center"><button class="submit" name="submitbuttonname" value="submitbuttonvalue">Update</button>
+										<button class="center1" name="submitbuttonname" value="submitbuttonvalue" onclick="importUsers()">Cancel</button>
+						</div>
+					</section>
+							
+					<section class="chrome"><label style="font-size:23px;">Reviews:</label>
+			
+					</section>				
+					
+					
+
+					
+					{% for reviewsDetail in reviewes %}
+					<div style="float:left;margin:24 0 38;width:100%;">
+						<div style="float: left;width: 29%;"> <img alt="Client" src="{{ asset(['Airline/', reviewsDetail.logo]|join) }} "/></div>
+					<section>
+					
+					<p style="font-size:18px;margin:0 0 0 0;">{{reviewsDetail.business_name}}</p>
+					
+					<div ><p for="required_field_msg">{{reviewsDetail.headline}}</p></div>
+					<div style="margin-left:29%;">
+				
+					
+			{{reviewsDetail.description}}
+			<div>
+			Posted on: {{ reviewsDetail.creation_timestamp|date('F j, Y') }}
+					</div>
+					</div>
+		
+						
+				
+						
+					</section>
+					</div>
+						{% endfor %}
+					
+				</fieldset>
+			</form>	
+		
+		</div>
+{% endblock %}

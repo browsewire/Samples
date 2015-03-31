@@ -1,0 +1,459 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Login Modal Dialog Window with CSS and jQuery</title>
+<style type="text/css">
+{% block stylesheets %}
+
+
+a { 
+	text-decoration:none; 
+	color:#00c6ff;
+}
+
+h1 {
+	font: 4em normal Arial, Helvetica, sans-serif;
+	padding: 20px;	margin: 0;
+	text-align:center;
+}
+
+h1 small{
+	font: 0.2em normal  Arial, Helvetica, sans-serif;
+	text-transform:uppercase; letter-spacing: 0.2em; line-height: 5em;
+	display: block;
+}
+
+h2 {
+    color:#bbb;
+    font-size:3em;
+	text-align:center;
+
+}
+
+.container {width: 960px; margin: 0 auto; overflow: hidden;}
+
+#content {	float: left; width: 100%;}
+
+.post { margin: 0 auto; padding-bottom: 50px; float: left; width: 960px; }
+
+.btn-sign {
+	width:460px;
+	margin-bottom:20px;
+	margin:0 auto;
+	padding:20px;
+	border-radius:5px;
+	background: -moz-linear-gradient(center top, #00c6ff, #018eb6);
+    background: -webkit-gradient(linear, left top, left bottom, from(#00c6ff), to(#018eb6));
+	background:  -o-linear-gradient(top, #00c6ff, #018eb6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#00c6ff', EndColorStr='#018eb6');
+	text-align:center;
+	font-size:36px;
+	color:#fff;
+	text-transform:uppercase;
+}
+
+.btn-sign a { color:#fff; text-shadow:0 1px 2px #161616; }
+
+#mask {
+	display: none;
+	background: #000; 
+	position: fixed; left: 0; top: 0; 
+	z-index: 10;
+	width: 100%; height: 100%;
+	opacity: 0.8;
+	z-index: 999;
+}
+
+.login-popup{
+	display:none;
+	background: white;
+	padding: 10px; 	
+	border: 2px solid #ddd;
+	float: left;
+	font-size: 1.2em;
+	position: fixed;
+	top: 50%; left: 50%;
+	z-index: 99999;
+	box-shadow: 0px 0px 20px #999;
+	-moz-box-shadow: 0px 0px 20px #999; /* Firefox */
+    -webkit-box-shadow: 0px 0px 20px #999; /* Safari, Chrome */
+	border-radius:3px 3px 3px 3px;
+    -moz-border-radius: 3px; /* Firefox */
+    -webkit-border-radius: 3px; /* Safari, Chrome */
+}
+
+img.btn_close {
+	float: right; 
+	margin: -28px -28px 0 0;
+}
+
+fieldset { 
+	border:none; 
+	margin-left:5px;
+	margin-top:5px;
+}
+
+form.signin .textbox label { 
+	display:block; 
+	padding-bottom:7px; 
+}
+
+form.signin .textbox span { 
+	display:block;
+}
+
+form.signin p, form.signin span { 
+	color:black;
+	font-size:11px; 
+	line-height:18px;
+} 
+.facebook
+{
+float: right;
+margin-top:-25%;
+}
+form.signin .textbox input { 
+	background:#666666; 
+	border-bottom:1px solid #333;
+	border-left:1px solid #000;
+	border-right:1px solid #333;
+	border-top:1px solid #000;
+	color:#fff; 
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+	font:13px Arial, Helvetica, sans-serif;
+	padding:6px 6px 4px;
+	width:200px;
+}
+
+form.signin input:-moz-placeholder { color:#bbb;  }
+form.signin input::-webkit-input-placeholder { color:#bbb;  }
+
+.button { 
+	background: -moz-linear-gradient(center top, #f3f3f3, #dddddd);
+	background: -webkit-gradient(linear, left top, left bottom, from(#f3f3f3), to(#dddddd));
+	background:  -o-linear-gradient(top, #f3f3f3, #dddddd);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f3f3f3', EndColorStr='#dddddd');
+	border-color:#000; 
+	border-width:1px;
+	border-radius:4px 4px 4px 4px;
+	-moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+	color:#333;
+	cursor:pointer;
+	display:inline-block;
+	padding:6px 6px 4px;
+	margin-top:10px;
+	font:12px; 
+	width:100px;
+}
+
+.button:hover { background:#ddd; }
+
+</style>
+
+        {% endblock %}
+        {%block javascripts %}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+
+    <script type="text/javascript">
+    $(document).ready(function()
+    {
+        (function(d, s, id)
+            {
+                 var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                  js = d.createElement(s); js.id = id;
+                  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ fbAppId }}";
+                  fjs.parentNode.insertBefore(js, fjs);
+            }
+            (document, 'script', 'facebook-jssdk')
+            );
+
+            FB.init({appId: "{{ fbAppId }}", status: true, cookie: false, oauth  : true, xfbml  : true});
+
+       
+ 
+      });
+ 
+        function postToFeedbh()  
+        {
+            //alert(document.getElementById('hidSelectedLink').value);
+            FB.api('/me', {fields: "id,first_name,last_name,email,picture"}, function(response)  
+            {
+
+                console.log(response);
+                var facebookid = response.id;
+  //alert("5645");
+                if(response.first_name)
+                {
+                 //alert("kjskd");
+                    /*document.getElementById('user_form_first_name').value=response.first_name;
+                    document.getElementById('user_form_last_name').value=response.last_name;*/
+                    
+                    /*document.getElementsByTagName("input")[0].removeAttribute("required");  
+                    document.getElementsByTagName("input")[1].removeAttribute("required");  
+                    document.getElementsByTagName("label")[0].removeAttribute("required");  
+                    document.getElementsByTagName("label")[1].removeAttribute("required");  
+                    
+                    document.getElementById("user_form_email").removeAttribute("required");
+                    document.getElementById("register_form_terms").removeAttribute("required");*/
+                    /*alert("hello");
+                    document.getElementById('user_form_email').style.display="none";
+                    document.getElementById('auto_user_form_email').style.display="block";
+                    
+                    document.getElementById('register_form_terms').style.display="none";
+                    document.getElementById('auto_register_form_terms').style.display="block";*/
+                    
+                    /*document.getElementById('lbl1').style.display="none";
+                    document.getElementById('lbl2').style.display="block";*/
+                    
+                    /*document.getElementById('div1').style.display="none";
+                    document.getElementById('div2').style.display="block";
+                    
+                    
+                    document.getElementById('submit_step').style.display="none";
+                    document.getElementById('submit_step_fb').style.display="inline";
+                    document.getElementById('head').style.display="block";
+                    
+                    if(response.email)
+                    {
+                        document.getElementById('fbEmail').value=response.email;
+                        document.getElementById('user_form_email').value=response.email;
+                        document.getElementById('register_form_terms').checked=true;
+                    }
+                    else
+                    {
+                        document.getElementById('fbEmail').value=response.id+'@facebook.com';
+                        document.getElementById('user_form_email').value=response.id+'@facebook.com';
+                        document.getElementById('register_form_terms').checked=true;
+                    }*/
+                    document.getElementById('divFacebooklogin').style.display="none";
+                   //document.getElementById('divFacebooklogin').style.display="none";
+                    document.getElementById('fbFirstName').value=response.first_name;
+                    document.getElementById('fbLastName').value=response.last_name;
+ 		    document.getElementById('fbpimage').value=response.picture.data.url;
+                    document.getElementById('fbUserFullName').value=response.first_name+' '+response.last_name;
+                    document.getElementById('fbEmail').value=response.email;
+			document.getElementById('user_form_email').value=response.id;
+           // alert("hello");
+										document.frmReview.submit();
+                    
+                }
+    
+                
+           var userpass = response.first_name+response.last_name;
+                var imgurl = response.picture.data.url;
+                $('#user_form_plainPassword_password').val(userpass);
+                $('#user_form_plainPassword_conf_password').val(userpass);
+                $('#user_form_avatar').val(imgurl);
+ 
+                $('#facebook_name').html(response.first_name+' '+response.last_name);
+ 
+                $('#facebook_img').html('<img style="margin:0px" id="avatar_img" src="'+imgurl+'">');
+                $('#facebook_img_section').show(); 
+                checkfacebookuser(facebookid);
+            });
+        }
+ 
+        function checkfacebookuser(facebookid)
+        {
+            var rootpath = '{{ path('verifyfbaccount') }}';
+            $.post(rootpath,{'facebookid':facebookid},
+                function(data)
+                {
+                       if(data)
+                    {
+                        alert(data);
+                      }
+                    else
+                    {
+                    }
+                }
+            );
+ 
+        }
+        function fblogin()  
+        {
+        
+            FB.login(function(response)  
+                {
+                    postToFeedbh();
+                },  
+                {scope:'email,read_stream,publish_stream,offline_access'});
+        }
+    </script>
+
+
+ <script src='https://connect.facebook.net/en_US/all.js'></script>
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$('a.login-window').click(function() {
+		
+		// Getting the variable's value from a link 
+		var loginBox = $(this).attr('href');
+
+		//Fade in the Popup and add close button
+		$(loginBox).fadeIn(300);
+		
+		//Set the center alignment padding + border
+		var popMargTop = ($(loginBox).height() + 24) / 2; 
+		var popMargLeft = ($(loginBox).width() + 24) / 2; 
+		
+		$(loginBox).css({ 
+			'margin-top' : -popMargTop,
+			'margin-left' : -popMargLeft
+		});
+		
+		// Add the mask to body
+		$('body').append('<div id="mask"></div>');
+		$('#mask').fadeIn(300);
+		
+		return false;
+	});
+	
+	// When clicking on the button close or the mask layer the popup closed
+	$('a.close, #mask').live('click', function() { 
+	  $('#mask , .login-popup').fadeOut(300 , function() {
+		$('#mask').remove();  
+	}); 
+	return false;
+	});
+});
+</script>
+
+
+        {% endblock %}
+        {% block body %}
+        <script>
+
+		function submitReview()
+    {
+    		if( document.frmReview.firstname.value == "")
+        {
+            document.getElementById('nameRequierd').innerHTML='Please enter';
+            document.getElementById('nameRequierd').style.color = 'red';
+            document.frmReview.firstname.focus() ;
+            //alert('j');
+        }
+        if( document.frmReview.lastname.value == "")
+        {
+            document.getElementById('lastNameRequierd').innerHTML='Please enter';
+            document.getElementById('lastNameRequierd').style.color = 'red';
+            document.frmReview.lastname.focus() ;
+            //alert('j');
+        }
+        var x = document.frmReview.email.value;
+        var atpos = x.indexOf("@");
+        var dotpos = x.lastIndexOf(".");
+        if (atpos< 1 || dotpos<atpos+2 || dotpos+2>=x.length) 
+        {
+		      document.getElementById('emailRequierd').innerHTML='Please enter Valid Email';
+		      document.getElementById('emailRequierd').style.color = 'red';
+		      document.frmReview.email.focus() ;
+		      return false;
+    		}
+    		
+    		var email =  $("#email").val();
+    	
+   		 	$.ajax({
+                url : '{{ path("raa_web_checkEmailExistance") }}',
+              type:'POST',
+              data: 'email='+email,
+              success:function(data)
+              {
+		            if(data == 'SUCCESS')
+		            {
+		            	document.frmReview.submit();
+		            }
+		            else
+		            {
+		            	$('#error').html(data);
+		            	document.getElementById('error').style.color = 'red';
+								}
+							}
+        });
+   }
+</script>
+
+        
+        
+<link rel="canonical" href="http://www.alessioatzeni.com/wp-content/tutorials/jquery/login-box-modal-dialog-window/index.html" />
+</head>
+<body>
+
+
+        <div id="login-box" class="login-popup" style="display: none; width: 20%; height: auto; text-align: center; margin-top: -310.5px; margin-left: -178px;">
+        <a href="#" class="close"><img src="{{ asset('themes/web/images/close.png') }}"class="btn_close" title="Close Window" alt="Close" /></a>
+   <!--  <div>-->
+                <fieldset class="textbox">
+            	<label class="username">
+            	<span>First Name</span>
+                <input id="firstname" name="firstname"  type="text" autocomplete="on" placeholder="First Name"  data-required="true">
+                <span id="nameRequierd"></span>
+                </label>
+              <label class="username">
+            	<span>Last Name</span>
+                <input id="lastname" name="lastname"  type="text" autocomplete="on" placeholder="Last Name">
+                <span id="lastNameRequierd"></span>
+                </label>
+                	<span>Email</span>
+                <input id="email" name="email"  type="text" autocomplete="on" placeholder="Email">
+                    <span id="emailRequierd"></span>
+                    <div id="error">
+                     </div>
+                    <span>Phone</span>
+                <input id="phone" name="phone"  type="text" autocomplete="on" placeholder="Phone">
+
+                     
+                    
+                </label>
+               <label style="margin-top:11px;"> One Last Step…</label>
+
+<span style="margin-top:15px;">“To ensure the integrity of the reviews on Review An Airline, once you submit your review, we send a confirmation email to you. Look for the email in your inbox and simply click on the link. Your review will then go live on the site”
+
+Thanks once again for contributing to Review An Airline!”</span>
+                <label>
+                <button class="button" type="button" onclick="javascript:submitReview();">Submit</button></label>
+                <label>
+                 <span>Already Register? <a href="{{ path('raa_web_login') }}">Login</a></span>
+                </label>
+                
+                </fieldset>
+           
+<!--</div>-->
+   </label><br>
+ 
+		<div id="divFacebooklogin" class="facebook" style="width:98%;margin-top:5px;">
+			<h4>Are you on Facebook?</h4>
+<p>Use your facebook details to quickly log in to your account.</p><br />
+
+		  <div class="fb">
+		  <a class="sn-button fb-login" href="#" onclick="fblogin();return false;">
+		       <input type="image" style="width:122;height: 23;" src="{{ asset('themes/frontend/images/facebook.png') }}">
+		  </a>
+		  </div>
+		  </div>
+    <br/>
+    <b id="head" style="display:none;">You are signing up as :</b>
+    
+    <input type="hidden" name="fbUserFullName" id="fbUserFullName" style="border:none;background:white; color:#64829c;" readonly>
+    <input type="hidden" name="fbEmail" id="fbEmail" style="display:none;border:none;background:white; color:#64829c;" readonly>
+    <input type="hidden" name="fbFirstName" id="fbFirstName">
+    <input type="hidden" name="fbLastName" id="fbLastName"> 
+<input type="hidden" name="fbpimage" id="fbpimage">
+<input type="hidden" name="user_form_email" id="user_form_email">
+		</div>
+   
+ </div>
+
+</body>
+</html>
+        {% endblock %}

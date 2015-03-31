@@ -1,0 +1,280 @@
+{% extends 'RAAWebBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %} The World's Leading Airline Flights & Cheap Tickets Review Website Online {% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+   <meta name="keywords" content="Airline reviews, cheap tickets, airline tickets, flights, cheap airline tickets, plane tickets, flight, cheaptickets">
+{% endblock %}
+
+<script>
+function searchArilineByName(a)
+{
+	if(a!="")
+	{
+		$("#divAjaxResults").show();
+
+		$.ajax({
+               		url : '{{ path("raa_web_getAirlineName",{ "id": '+a+' }) }}',
+                	type:'POST',
+                	data:'id='+a,
+                	dataType:'html',   
+                	success:function(data){
+                   	$('.ajx_div').html(data);
+                }
+            });
+
+
+	}
+	else
+	{
+
+		$('.ajx_div').html('');
+		$("#divAjaxResults").hide();
+	}
+
+
+}
+function updateSearchValue(value)
+{
+	$("#search").val(value);
+	$("#divAjaxResults").hide();
+}
+
+
+
+</script>
+
+<script>
+
+function alphabetSearch(id)
+{
+	
+	window.location.href = '{{ path("raa_web_searchAirlines") }}';
+	$("#hidAlphabet").val(id);
+	document.frmSearchByAlphabet.submit();
+	
+}
+
+	$('#usersSearch').keypress(function(e){
+        if(e.which == 13){//Enter key pressed
+            alert('Enter pressed: Submitting the form....');
+        }
+    });
+	$(document).ready(function(){
+  $("#usersSearch").click(function(){
+ var a = $("#search").val();
+  var b = $("#address").val();
+  
+  if(a == "" )
+  {
+  	document.getElementById('searchs').innerHTML='Please enter search keyword';
+  	document.getElementById('searchs').style.color = 'red';
+  }
+  else
+  {
+  	document.frmSearch.submit();
+  }
+  });
+});
+</script>
+<script>
+
+function submitenter(myfield,e)
+{
+var keycode;
+if (window.event) keycode = window.event.keyCode;
+else if (e) keycode = e.which;
+else return true;
+
+if (keycode == 13)
+   {
+   myfield.form.submit();a
+   return false;
+   }
+else
+   return true;
+}
+</script>
+<script>
+
+function detailReview(id)
+{
+var a = $("#detailId").val(id);
+ 	
+ 	
+ 	$.ajax({
+               	url : '{{ path("RAAAdminBundle_ratingCompleteDetail",{ "id": '+a+' }) }}',
+                type:'POST',
+                data:'id='+id,
+                dataType:'html',   
+                success:function(data){
+                  
+                    $('#city').html(data);
+document.getElementById("cross").innerHTML=data;
+                }
+            });
+
+
+}
+</script>
+<div class="shell video_b">
+  <div class="video_outer">
+    <div class="category video_bg">
+      <video id="video_background" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{ asset('themes/homepage/images/1.jpg') }}">
+	<source src="{{ asset('themes/homepage/videos/airline_video_1.webm') }}" type="video/webm">
+      </video>
+      <div class="map_container map_top">
+        <div class="cont">
+          <div class="search_outer bew_f">
+           <form action="{{ path('raa_web_searchAirlines') }}" method="POST" name="frmSearch" >
+            <div class="blue top"><a class="blue" itemprop="url" id="_url16">Find an Airline:</a></div>
+            <input type="text" placeholder="Search by: Airline Name, Address, City, Zip" name="search" id="search" onKeyPress="return submitenter(this,event)"onkeyup="searchArilineByName(this.value);" autocomplete="off">
+                  <div id="divAjaxResults" class="ajx_div" style="display:none;" onclick="javascript:hideAjaxResults();">
+                 <ul>
+                 
+                 
+                 </ul>
+                  
+                  
+                  </div>
+                  
+            <div class="maor_in more_state go">
+            
+<input class="s browse_button more state_top goto" id="usersSearch" type="button" value=SEARCH style="margin-top:0px; color:white;">
+<div><span id="searchs" class="error_msg"></span></div>
+  </form>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cl"></div>
+<div class="wrapper top_header">
+  <div class="shell">
+    <div class="main"> 
+      <!-- search by state -->	
+      
+      <div itemscope itemtype="http://schema.org/Product" itemref="_url16" class="title orange">
+        <h2 itemprop="name">Browse <span>Airlines</span> By Name</h2>
+      </div>
+</div>
+</div>
+</div>
+<div class="pagination">
+ <form action="{{ path('raa_web_searchAirlines') }}" method="POST" name="frmSearchByAlphabet">
+      <div class="s">
+      <ul id="index">       
+<li><a href="#" id="a" onclick="alphabetSearch(this.id);"class="active">A</a></li>
+
+        <li><a href="#" id="b" onclick="alphabetSearch(this.id);">B</a></li>
+        <li><a href="#" id="c" onclick="alphabetSearch(this.id);">C</a></li>
+        <li><a href="#" id="d" onclick="alphabetSearch(this.id);">D</a></li>
+        <li><a href="#" id="e" onclick="alphabetSearch(this.id);">E</a></li>
+        <li><a href="#" id="f" onclick="alphabetSearch(this.id);">F</a></li>
+        <li><a href="#" id="g" onclick="alphabetSearch(this.id);">G</a></li>
+        <li><a href="#" id="h" onclick="alphabetSearch(this.id);">H</a></li>
+        <li><a href="#" id="i" onclick="alphabetSearch(this.id);">I</a></li>
+        <li><a href="#" id="j" onclick="alphabetSearch(this.id);">J</a></li>
+        <li><a href="#" id="k" onclick="alphabetSearch(this.id);">K</a></li>
+        <li><a href="#" id="l" onclick="alphabetSearch(this.id);">L</a></li>
+        <li><a href="#" id="m" onclick="alphabetSearch(this.id);">M</a></li>
+        <li><a href="#" id="n" onclick="alphabetSearch(this.id);">N</a></li>
+        <li><a href="#" id="o" onclick="alphabetSearch(this.id);">O</a></li>
+        <li><a href="#" id="p" onclick="alphabetSearch(this.id);">P</a></li>
+        <li><a href="#" id="q" onclick="alphabetSearch(this.id);">Q</a></li>
+        <li><a href="#" id="r" onclick="alphabetSearch(this.id);">R</a></li>
+        <li><a href="#" id="s" onclick="alphabetSearch(this.id);">S</a></li>
+        <li><a href="#" id="t" onclick="alphabetSearch(this.id);">T</a></li>
+        <li><a href="#" id="u" onclick="alphabetSearch(this.id);">U</a></li>
+        <li><a href="#" id="v" onclick="alphabetSearch(this.id);">V</a></li>
+        <li><a href="#"  id="w" onclick="alphabetSearch(this.id);">W</a></li>
+        <li><a href="#" id="x" onclick="alphabetSearch(this.id);">X</a></li>
+        <li><a href="#" id="y" onclick="alphabetSearch(this.id);">Y</a></li>
+        <li><a href="#" id="z" onclick="alphabetSearch(this.id);">Z</a></li>
+      </ul>
+	       <input type="hidden" name="hidAlphabet" id="hidAlphabet" />
+     </form>
+</div></div>
+
+
+
+<div class="wrapper">
+  <div class="title orange">
+    <h2>Latest <span>Reviews</span></h2>
+  </div>
+  <div class="review">
+    <div class="cols"> </div>
+    
+   
+    
+    <div class="cols right_col">
+      {%for latestReview in latestReviewer%}
+     
+<div class="people">
+      
+<div class="lineB">
+<!-- 01-07-2015  moved the reviewer name  div start--> 
+	    <div class="name"><img src="{{latestReview.reviewer_image}}" class="home_reviewe_image" alt="Client"/>
+
+<B style="float: left;
+  /*  margin: -12px 0 0 -115px;  */ color: #0070bf;
+    cursor: pointer;"><a href="{{ path('raa_web_airlinesReviews',{id:latestReview.id}) }}"">{{latestReview.airline_name|default('N.A')}}  ({{latestReview.totalReviewes}})</a></B> 
+
+	
+		</div>
+	
+<p style="font-size:16px;"><a href="{{ path('raa_web_airlinesReviews',{id:latestReview.id}) }}">{{latestReview.airline_name|default('N.A')}}</a> <b style="color: #5f6060;">Reviewed</b>  <a href="{{ path('raa_web_profile',{ 'id': latestReview.filteredAirlineName }) }}">{{latestReview.business_name}}</a></p>
+<p class="creat_timestamp">on {{latestReview.creation_timestamp|date('F j, Y')}}</p>
+<p  class="home_headline"><a href="{{ path('raa_web_detailReviews',{id:latestReview.filteredHeadline}) }}">"{{latestReview.headline}}"</a></p>
+
+        <div class="rating" style="margin-top:-26px;">
+        <div id="agent-overall-rating-wrapper" style="margin: 0 0 0 -29">
+              <div class="review-star-line" id="agent-overall-rating" style="margin-left:-25px;">
+                <div class="star-group-left"> <span class="rating">
+                 <form id="ratingsForm">
+								<div class="stars1" style="margin-top:5px;">
+				
+					
+							<input type="radio" class="star-{{latestReview.rating|number_format(0)}}" id="star-{{latestReview.rating|number_format(0)}}" value={{latestReview.rating}} checked/>
+								
+								<span></span>
+								</div>
+									
+									</form>
+
+
+	</div>
+              </div>
+</div>
+
+          <p  class="review_description">{% if latestReview.description|length>(100) %}{{latestReview.description[:100] ~  '......'}}<a data-toggle="modal" role="button" href="{{ path('raa_web_detailReviews',{id:latestReview.filteredHeadline}) }}" id="{{latestReview.id}}"> Read More</a>{% else %}<p>{{latestReview.description}}{% endif %}</p>
+<!-- 01-05-2015 updated readmore link to review page by gracecruz end-->
+       
+	   <h6 style="text-transform: capitalize;"></h6>
+	<a href="{{ path('raa_web_detailReviews',{id:latestReview.filteredHeadline}) }}" class="see_full">See Full Review</a>	
+
+        </div>
+</div>
+      </div>
+
+       {% endfor %}
+   
+    </div>
+    
+    </div>
+   
+
+</div></div>
+
+
+{% include "RAAWebBundle:Page:ratingDetail.html.twig"%}
+
+  
+{% endblock %}
+
+
+
+
+

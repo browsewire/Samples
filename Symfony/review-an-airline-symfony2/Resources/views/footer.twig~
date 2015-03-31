@@ -1,0 +1,279 @@
+<html>
+<head>
+<title>{% block title %}Welcome | reviewarealtor.com{% endblock %}</title>
+{% block stylesheets %}
+						<!--<link rel="stylesheet" href="{{  asset('themes/login/css/style.css') }}">-->
+	   <link href="{{asset('bundles/loginlogin/css/parsley/parsley.css')}}" rel="stylesheet">
+						<!-- include the skins (change to dark if you like) -->
+						<link rel="stylesheet" href="{{  asset('themes/login/css/mediaqueries.css') }}">
+						<link rel="stylesheet" href="{{  asset('themes/login/css/normalize.css') }}">
+						<!--<link rel="stylesheet" href="{{  asset('themes/login/css/nav.css') }}">-->
+												<link rel="stylesheet" href="{{  asset('themes/web/css/style1.css') }}">
+					<link rel="stylesheet" href="{{  asset('themes/web/css/style2.css') }}">
+										<link rel="stylesheet" href="{{  asset('themes/web/css/form.css') }}">
+					<!--<link rel="stylesheet" href="{{  asset('themes/web/css/style.css') }}">-->
+	
+						<!-- include the skins (change to dark if you like) -->
+						<link rel="stylesheet" href="{{  asset('themes/web/css/mediaqueries.css') }}">
+						<link rel="stylesheet" href="{{  asset('themes/web/css/normalize.css') }}">
+						<link rel="stylesheet" href="{{  asset('themes/web/css/nav.css') }}">
+									<!--<link rel="stylesheet" href="{{  asset('themes/homepage/css/nav_new.css') }}">-->
+											<!--<link rel="stylesheet" href="{{  asset('themes/homepage/css/css/layout.css') }}">-->
+												<link rel="stylesheet" href="{{  asset('themes/homepage/css/style.css') }}">
+   {% endblock %}
+	        {% block javascripts %}
+	        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+						<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+						<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	      <script src="{{asset('bundles/loginlogin/js/parsley/parsley-standalone.min.js')}}"></script>
+	      <script src="{{  asset('themes/web/js/jquery.js') }}"></script>
+						<!-- Loading JS Files this way is not recommended! Merge them but keep their order -->
+	
+						<!-- some basic functions -->
+						<!--<script src="{{  asset('themes/admin/js/functions.js') }}"></script>-->
+		
+						<!-- all Third Party Plugins and Whitelabel Plugins -->
+						<script src="{{  asset('themes/web/js/menu_jquery.js') }}"></script>
+							<script src="{{  asset('themes/web/js/jquery-1.10.1.min.js') }}"></script>
+							
+         <script>
+          	function getBanner()
+          	{
+          		
+          		
+  			$.ajax({
+			      url : '{{ path("raa_web_getBanner") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divBanner').html(data);
+					   	setInterval(swapImages, 5000);
+						}
+			});
+		
+			$.ajax({
+			      url : '{{ path("raa_web_showCms") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divBanner1').append(data);
+					   	setInterval(swapImages, 5000);
+						}
+			});
+
+		$.ajax({
+			      url : '{{ path("raa_web_showCmsFooter") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divBanner2').append(data);
+					   	setInterval(swapImages, 5000);
+						}
+			});
+		
+		}
+          	
+          </script>
+<script>
+            function swapImages() 
+            {
+           // alert("hi");
+            
+							var $current = $('#myGallery img:visible');
+							var $next = $current.next();
+    					if($next.length === 0) 
+    					{
+        				$next = $('#myGallery img:first');
+    					}
+    					$current.hide();
+    					$next.show();
+						}
+						
+		
+						
+	$(document).ready(function() 
+					{
+    			setInterval(swapImages, 5);
+				});
+							
+				
+</script>
+<script>
+function k1()
+{
+var a,b,c 
+a=document.subscribe.subscribeEmail.value
+b=a.indexOf("@")
+c=a.lastIndexOf
+if(b<1||c<b+2||c+2>=a.length)
+{
+//a=document.getElementById("x1")
+//a.innerHTML="Wrong Email address";
+//a.style.color="red"
+alert("Please enter Valid Email Address");
+return false;
+}
+document.subscribe.submit();
+
+}
+
+</script>
+	         {% endblock %}
+	        
+</head>
+
+<body onload="getBanner();">
+<div class="wrapper top_header">
+  <div class="shell" style="margin-bottom:12px";>
+    <header id="header">
+    <div id="logo"><a id="_brand2" itemprop="brand" itemscope itemtype="http://schema.org/Brand" href="{{ path('raa_web_homepage') }}"> <img src="{{ asset('themes/web/images/new_log.png') }}" style="width:177; height:76;" alt="Learn Price" title=""/>
+      <meta itemprop="name" content="[Learn Price]">
+      </a> </div>
+     <nav style="margin-left: 159;">
+      <div id="cssmenu" style="width:66%;">
+        <ul id="divBanner1">
+    <li  itemscope itemtype="http://schema.org/Product" id="linkHome"  itemref="agent-to-review-name _brand3"><a  itemprop="url" href="{{ path('raa_web_homepage') }}">HOME </a></li>
+          <li itemscope itemtype="http://schema.org/Product" itemref="agent-to-review-name _brand3" ><a itemprop="url" href="{{ path('raa_web_writeReview') }}">Write A Review</a></li>
+          <li itemscope itemtype="http://schema.org/Product" itemref="agent-to-review-name _brand3"><a itemprop="url" href="{{ path('raa_web_searchAirlines') }}">Find An Airline</a></li>
+          
+           
+          {% if app.session.get('userEmail') !="" %}
+          	<li id="linkDS" itemscope itemtype="http://schema.org/Product"><a itemprop="url" href="{{ path('raa_web_home',{id:app.session.get('userId')}) }}-{{app.session.get('userName')}}">My Dashboard</a></li>
+          {% endif %}
+                  
+          
+          
+          
+        </ul>
+      </div>
+      <div class="login">
+        <ul>
+         {% if app.session.get('userEmail') !="" %}
+						Logged in as {{app.session.get('userEmail')}}
+						&nbsp;&nbsp;&nbsp;<a href="{{ path('raa_web_logout') }}">Logout</a>
+						{% else %}
+          <li> <a href="{{ path('raa_web_login') }}" class="active">login</a></li>
+          <li> <a href="{{ path('raa_web_registration') }}">Register</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </div>
+  </header>
+  <!-- end of wrapper --> 
+</div>
+<!-- content -->
+
+<div class="cl"></div>
+
+
+ <!--  Dashboard here -->
+    
+    <div class="dashboard"> 
+    <div class="dash_left">
+    
+    <p> <a href="{{ path('raa_web_homepage') }}"><img src="{{ asset('themes/web/images/new_log.png') }}" style="width:220px;" alt=""></a> </p>
+    
+   <div class="dash_list">
+   <ul>
+      <li  id="dashboard" itemscope itemtype="http://schema.org/Product"><a href="{{ path('raa_web_home',{id:app.session.get('userId')}) }}-{{app.session.get('userName')}}"><div class="icons"> <img src="{{ asset('themes/login/images/house.png') }}"></image></div>Dashboard</a></li>
+      <!--<li  id="payment" itemscope itemtype="http://schema.org/Product"> <a href="{{ path('raa_web_managePlan',{id:app.session.get('userId')}) }}-{{app.session.get('userName')}}"><div class="icons"><img src="{{ asset('themes/login/images/bag.png') }}"></image></div>Manage Airline Profile</a></li>-->
+   <li  id="business" itemscope itemtype="http://schema.org/Product"> <a href="{{ path('raa_web_manageListing',{id:app.session.get('userId')}) }}-{{app.session.get('userName')}}"><div class="icons"><img src="{{ asset('themes/login/images/chart_2.png') }}"></image></div>My Profile</a></li>
+<!--<li id="property"  itemscope itemtype="http://schema.org/Product"> <a href="{{ path('raa_web_property') }}"><div class="icons"><img src="{{ asset('themes/login/images/house_2.png') }}"></image></div>Manage Flights</a></li>-->
+      <li  id="reviews"  itemscope itemtype="http://schema.org/Product"><a href="{{ path('raa_web_feedback',{id:app.session.get('userId')}) }}-{{app.session.get('userName')}}"><div class="icons icon_star"><img src="{{ asset('themes/login/images/star.png') }}"></image></div>Reviews</a></li>
+   <li id="writeReview"  itemscope itemtype="http://schema.org/Product"><a href="{{ path('raa_web_writeReview') }}"><div class="icons icon_star"><img src="{{ asset('themes/login/images/review3.png') }}" style="width:70%;"></image></div>Write A Review</a></li>
+
+<li></li>
+   
+   </ul>
+   </div></div>
+    
+    <div class="dash_right">
+    <div class="dash_right_top">
+  <div class="login login2">
+         
+					
+					</div>
+   
+    </div>
+    
+    
+    
+    {% block body %}
+<body>
+</body>
+{% endblock %}
+  
+
+    <div class="review_main news">
+      <div class="wrapper"> 
+      <div class="newsletter">
+      <div class="letter">
+      <form action="{{path('raa_web_subscriber')}}" name="subscribe" method="POST">
+      <label>Sign Up for our Newsletter</label>
+      <input type="text" name="subscribeEmail" placeholder="Enter Your Email Address">
+  <a class="browse_button news" style="padding:17px 30px;"> <input type=button value="Subscribe" onclick="k1();" style="color:white; text-transform:Uppercase; background: #7BBF42;
+border: medium none;
+    color: white;
+    text-transform: uppercase; font-size: 100% !important;"  > </a>
+      </form>
+      </div>
+      </div>
+      
+       </div>
+      </div>
+    
+
+   
+   
+   <!-- dashboard end -->
+    
+    
+    
+    
+  </div>
+<div class="footer"> <!-- shell -->
+  <div class="wrapper">
+    <div class="shell">
+    <div class="social_icon">
+    <ul>                                         
+          <li><a href="#"><img src="{{ asset('themes/homepage/images/twiter_icon.png') }}" alt=""></a></li>
+             <li><a href="#"><img src= "{{ asset('themes/homepage/images/in_icon.png') }}"alt=""></a></li>
+                <li><a href="#"><img src="{{ asset('themes/homepage/images/fb_icon.png') }}" alt=""></a></li>
+               </ul>
+        
+     </div>
+            <div class="links">
+        <ul style="margin-left:27%">                                         
+          <li><a href="{{ path('raa_web_homepage') }}">HOME</a></li>
+          <li><a href="{{ path('raa_web_writeReview') }}">WRITE A REVIEW </a></li>
+           <li><a href="{{ path('raa_web_searchAirlines') }}">FIND An AIRLINE </a></li>
+           <!--<li><a href="{{ path('raa_web_registration') }}">ADD YOUR PROFILE </a></li>-->
+          <li><a href="{{ path('raa_web_registration') }}">REGISTRATION </a></li>
+        </ul>
+              </div>
+      <div class="powerd-by">
+        <div class="browsw-logo">
+          <h5>Copyright © 2014 Review An Airline. All rights reserved </h5>
+         </div>
+        <div class="copyright-info">
+          <p class="copyright">
+          <ul id="divBanner2">
+           <!--<li><a href="{{ path('raa_web_contactUs') }}">Conatct Us </a></li>
+          <li><a href="{{ path('raa_web_aboutUs') }}">About Us</a></li>
+          <li><a href="{{ path('raa_web_privacyPolicy') }}">Privacy Policy</a></li>
+          <li><a href="{{ path('raa_web_terms') }}">Terms of Use</a></li>
+          <li><a href="{{ path('raa_web_faq') }}">Contact Us</a></li>
+          <li><a href="{{ path('raa_web_siteMap') }}">Site Map </a></li>-->
+          </ul></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+{% extends 'RAAAdminBundle::layout.html.twig' %}
+{% block javascripts %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+	<script src="{{  asset('themes/backend/js/functions.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/functions.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/plugins.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/editor.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/calendar.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/flot.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/elfinder.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/datatables.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Alert.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Autocomplete.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Breadcrumb.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Calendar.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Chart.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Color.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Date.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Editor.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_File.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Dialog.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Fileexplorer.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Gallery.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Multiselect.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Number.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Password.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Slider.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Store.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Time.js') }}"></script>
+
+	<script src="{{  asset('themes/backend/js/wl_Widget.js') }}"></script>
+
+	<script src="{{  asset('themes/backend/js/script.js') }}"></script>
+	<script type="text/javascript">
+		function showimagepreview(input) 
+		{
+			if (input.files && input.files[0]) 
+			{
+				var filerdr = new FileReader();
+				filerdr.onload = function(e) 
+				{
+					$('#imgprvw').attr('src', e.target.result);
+				}
+				filerdr.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>	
+ 
+
+<script>
+	function importUsers()
+	{
+		window.location.href = '{{ path('RAAAdminBundle_airline') }}';
+	}
+	</script>
+{% endblock %}
+
+
+{% block body %}
+<title>{% block title %}Update Airline | Admin{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+ 
+
+	<section id="content">			
+		<div class="g12">			
+			<form id="form" action="{{ path('RAAAdminBundle_airlineupdate',{ 'id': realtor.id }) }}" method="post" autocomplete="off" data-validate="parsley" enctype="multipart/form-data">
+				<fieldset>
+					<label>Update Airline Details<a  href=" {{ path('RAAAdminBundle_airlineImages',{ 'id': realtor.id }) }}" style="margin-left:60%;">Manage Airline Images</a>
+				
+					
+					</label>
+					
+					<section class="chrome"><label for="required_field"> Airline Name <font class=change>*</font></label>
+						<div><input id="required_field" class="txtBoxBig" style="width:250% !important;" type="text" name="Airlinename" data-required="true"   data-error-message="Please enter Airlinename." value={{realtor.business_name}}></div>
+										
+					</section>	
+					<section class="chrome"><label for="required_field_msg">Tagline<font class=change>*</font></label>
+						<div><input id="required_field" style="width:250% !important;" class="txtBoxBig" type="text"  name="tagline" data-required="true" value="{{realtor.airline_tagline}}" ></div>
+					
+						</section>
+					
+							
+							<section style="height:328px;"><label for="textarea_auto"> History<br><span></span></label>
+							{% for history in detail %}
+							<div style="width:100%;"><textarea id="textarea_wysiwyg" name="history" class="html"  rows="12">{{history.tab_html|raw}}</textarea>
+							{% endfor %}
+							</div>
+						</section>
+						
+						
+						
+						
+						
+						
+						<!--	<section class="chrome">
+						<label>State</label>
+						<div>
+							<select name="state" id="state" class="drop">
+							{% for state in states %}
+							<option value="{{state.StateCode}}">{{state.StateName}}</option>
+							{% endfor %}
+							</select>
+						</div>					
+						<label for="required_field_msg">City</label>
+							<div>							
+							<select name="city" id="city" class="drop">								
+							</select>
+						</div>
+						</section>-->
+						
+				
+			<section class="moz" style="height:280px;"><label for="file_upload" class="chrome">logo</label>
+					<div> <input type="file" name="file"  onchange="showimagepreview(this);">
+						<div>
+					 {% for image in images %}
+						<img id="imgprvw" class="uploadImage"/ <img src=" {{ asset(['Airline/', image.logo]|join) }} "style="width:98%; height:50%;margin: 16px 0 0 0;">
+						
+						 {% endfor %}
+						</div>
+					
+						
+						<input type="hidden" value={{realtor.logo}} name=profiles>
+						</div>
+						</section>
+					
+				<section class="chrome">	
+						<div class="center"><button class="submit" name="submitbuttonname" value="submitbuttonvalue">Update</button>
+										<button class="center1" name="submitbuttonname" value="submitbuttonvalue" onclick="importUsers()">Cancel</button>
+						</div>
+					</section>
+				
+				</fieldset>
+			</form>	
+		</div>
+{% endblock %}

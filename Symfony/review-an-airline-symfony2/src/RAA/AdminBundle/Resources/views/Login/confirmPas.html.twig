@@ -1,0 +1,28 @@
+{% extends 'RAAAdminBundle::layout2.html.twig' %}
+{% block body %}
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+	<body id="login">
+		<header class="head">
+			<div id="logo" style="margin-left: 45px;">
+				<a href="login.html">whitelabel</a>
+			</div>
+		</header>
+	<section id="content" class=conPass style="margin-left:-133"; >
+		<form>
+			<fieldset class="field">
+    		<div class="error1">
+    			{% if name is defined%}
+        		Your Password has been Reset Succesfully.<br><br>
+        		Your new Password is sent to <strong>{{name}}</strong>
+            	{%endif%}
+				<div class="home">
+					<a href="{{ path('RAAAdminBundle_login') }}" >Click here  </a> to login.
+				</div>
+			</div>
+	</section>						
+			</fieldset>
+		</form>	
+{% endblock %}

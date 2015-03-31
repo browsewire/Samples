@@ -1,0 +1,73 @@
+{% extends 'RAAAdminBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %}Update | Advertiesment{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+    <script>
+    $(document).ready(function () {
+        $('.box').hide();
+        $('#option1').show();
+        $('#plan').change(function () {
+            $('.box').hide();
+            $('#'+$(this).val()).show();
+        });
+    });
+    </script>
+						<script>
+			function capitalize(textboxid, str) {
+      // string with alteast one character
+      if (str && str.length >= 1)
+      {       
+          var firstChar = str.charAt(0);
+          var remainingStr = str.slice(1);
+          str = firstChar.toUpperCase() + remainingStr;
+      }
+      document.getElementById(textboxid).value = str;
+      document.getElementById(textboxid1).value = str;
+  }	
+						</script>
+						<script>
+	function importUsers()
+	{
+		window.location.href = '{{ path('RAAAdminBundle_airline') }}';
+	}
+	</script>
+	<section id="content">			
+		<div class="g12">			
+			<form id="form" action="{{ path('RAAAdminBundle_editAdvertiesment',{id:adv.id}) }}" method="POST" autocomplete="off" data-validate="parsley" enctype="multipart/form-data">
+				<fieldset>				
+					<label>Edit Advertiesment</label>
+					<section class="chrome"><label>Title<font class=change>*</font></label>
+						<div><input id="textboxid" class="txt_fullLength" type="text" name="title"  data-required="true" value={{adv.title}} onkeyup="javascript:capitalize(this.id, this.value);"  data-error-message="Please enter firstname."  ></div>
+						<label>Target_Url<font class=change>*</font></label>
+						<div><input id="textboxid" class="txt_fullLength" type="text" name="targetUrl"  data-required="true" value={{adv.target_url}}   data-error-message="Please enter firstname."  ></div>
+					</section>
+					
+
+						<section class="chromes2"><label>Description</label>
+						<div><textarea rows=5 cols=40 name=description>{{adv.description}}</textarea></div>
+						<label>Image</label>
+						<div><input type="file" name="image"value={{adv.image}}></div>
+					</section>
+									<section class="chromes2"><label>Type</label>
+						<div><select name="type"  class="optionField drop" >
+						<option value="ADV">Advertiesment</option>
+						<option value="BAN">Banner</option>
+						</select>
+						</div>
+
+					</section>
+					<section class="chrome">		
+
+						<div class="center"><button class="submit" name="submitbuttonname" value="submitbuttonvalue">Submit</button>
+											<button class="center1" name="submitbuttonname" value="submitbuttonvalue" onclick="importUsers()">Cancel</button>
+						
+						</div>
+						
+					</section>
+				</fieldset>
+			</form>
+		</div>
+{% endblock %}

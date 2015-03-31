@@ -1,0 +1,13 @@
+{% block subject %}{% autoescape false %}
+    Review-An-Airline Registration
+{% endautoescape %}{% endblock %}
+
+{% block body_text %}{% autoescape false %}
+   You have Recieved message from: {{firstname}} {{lastname}}
+   
+   {{message}}
+	
+  		
+{% endautoescape %}{% endblock %}
+
+{% block body_html %}{% endblock %}

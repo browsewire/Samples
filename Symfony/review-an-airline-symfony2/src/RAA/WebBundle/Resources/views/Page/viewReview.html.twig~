@@ -1,0 +1,153 @@
+{% extends 'RAAWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %}View Review -Review An Airline{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+						<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+						<script>
+			function capitalize(textboxid, str) {
+      // string with alteast one character
+      if (str && str.length >= 1)
+      {       
+          var firstChar = str.charAt(0);
+          var remainingStr = str.slice(1);
+          str = firstChar.toUpperCase() + remainingStr;
+      }
+      document.getElementById(textboxid).value = str;
+      document.getElementById(textboxid1).value = str;
+  }
+						
+						</script>
+						    <script>
+
+	$(document).ready(function()
+	{
+		$("#business").addClass('active_background');
+	});
+</script>
+
+						<script>
+
+	
+$(document).ready(function(){
+
+updateCities('AK');
+		
+		$("#state").change(function(){	
+               var id=$(this).val();
+             updateCities(id);  
+
+        });	
+});
+
+function updateCities(id)
+{
+ 
+                //alert(id);              	
+               	
+               	$.ajax({
+               	url : '{{ path("RAAAdminBundle_getCities",{ "stateCode": '+id+' }) }}',
+                type:'POST',
+                data:'stateCode='+id,
+                dataType:'html',   
+                success:function(data){
+                    //var category_product = $(data).find('.city').html();
+                    $('#city').html(data);
+
+                }
+            });
+
+
+}
+function passwordupdate()
+{
+$("#passwordhide").hide();
+$("#passwordshow").show();
+}
+</script>
+
+
+	 <div class="cl"></div>
+    
+    <!-- write review -->
+  <div class="titles oranges border">
+      <h2>View Review</h2>
+    </div>
+    
+    
+    	
+<div class="new_form" style="width:100%; margin-left:-14px;">
+<form action=""  method="POST" enctype="multipart/form-data" id="loginform" data-validate="parsley" >
+<fieldset>
+<div class="fild_outer">
+{% for reviews in reviewz %}
+
+ <div class="image-box">
+          <div class="image" style="height:132px; width:171px;"> <img src="{{ asset(['Airline/', reviews.logo]|join) }}" class="large" /></div>
+      </div>
+   
+
+<div class="content-box" style="float: left;
+    margin: 0 0 0 28px;
+    width: 32%">
+
+     <div itemprop="name" id="agent-to-review-name">{{reviews.business_name|default ("N.A.")}} </div>
+       <div class="review-star-line" id="agent-overall-rating">
+                <div class="star-group-left"> <span class="rating">
+                 <form id="ratingsForm">
+                 	
+								<div class="stars5">
+				
+							<input type="radio" class="star-{{reviews[0].rating|number_format(0)}}" id="star-{{reviews[0].rating|number_format(0)}}" value={{reviews[0].rating|number_format(0)}}	 checked/>
+								
+								<span></span>
+								</div>
+								
+									</form>
+									
+              </div></div>
+
+</div>
+<div style=" float: left;
+    margin: 31px 0 0 -22px; width:100%;" >
+
+
+   
+      <label><b>Title</b> </label>
+     <p> {{reviews[0].headline}} </p>
+
+       <label><b>Description</b></label>
+
+
+<p>{{reviews[0].description|default ("N.A.")}}</p>
+
+
+      
+     
+{% endfor %}
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   </div>
+
+</div>
+</fieldset>
+</div>
+  
+</div>
+
+
+
+
+
+{% endblock %}

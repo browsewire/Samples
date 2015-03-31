@@ -1,0 +1,135 @@
+<?php
+
+namespace RAR\AdminBundle\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use RAR\AdminBundle\Entity\Plan;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+class PlanController extends Controller
+{
+    public function planAction(Request $request)
+    {     
+                    $page = $request->get('page');
+                    $count_per_page = 1;
+                    $total_count = $this->getTotalPlans();
+                    $total_pages=ceil($total_count/$count_per_page);
+
+                    if(!is_numeric($page)){
+                        $page=1;
+                    }
+                    else{
+                        $page=floor($page);
+                    }
+                    if($total_count<=$count_per_page){
+                        $page=1;
+                    }
+                    if(($page*$count_per_page)>$total_count){
+                        $page=$total_pages;
+                    }
+                    $offset=0;
+                    if($page>1){
+                        $offset = $count_per_page * ($page-1);
+                    }
+                     $em = $this->getDoctrine()->getEntityManager();
+                    $plans = $em->createQueryBuilder()
+                            ->select('b')
+                    				->from('RARAdminBundle:Plan',  'b')
+                            ->setFirstResult($offset)
+                            ->setMaxResults($count_per_page)
+                    				->getQuery()
+                            ->getArrayResult();
+                             return $this->render('RARAdminBundle:Plan:plan.html.twig', array(
+            'plans' => $plans,'total_pages'=>$total_pages,'current_page'=> $page
+        ));   
+                    
+                }  
+  	/*		$em = $this->getDoctrine()
+                   ->getEntityManager();
+        $plans = $em->createQueryBuilder()
+                    ->select('b')
+                    ->from('RARAdminBundle:Plan',  'b')
+                    ->getQuery()
+                    ->getResult();
+        return $this->render('RARAdminBundle:Plan:plan.html.twig', array(
+            'plans' => $plans
+        ));   
+    }*/
+
+     public function getTotalPlans() {
+        $em = $this->getDoctrine()->getEntityManager();
+        $countQuery = $em->createQueryBuilder()
+                ->select('Count(c)')
+                ->from('RARAdminBundle:Plan', 'c');
+        $finalQuery = $countQuery->getQuery();
+        $total = $finalQuery->getSingleScalarResult();
+        return $total;
+    }
+    
+    public function deleteAction($id)
+		{
+				$em = $this->getDoctrine()->getEntityManager();
+        $plan = $em->getRepository('RARAdminBundle:Plan')->find($id);
+        if (!$plan) {
+            throw $this->createNotFoundException('No Plan found for id '.$id);
+        }
+        $em->remove($plan);
+        $em->flush();
+        return $this->redirect($this->generateUrl('RARAdminBundle_plan'));
+		}
+   
+   public function updateAction(Request $request,$id)
+   {
+   			$em = $this->getDoctrine()->getEntityManager();
+				$plan = $em->getRepository('RARAdminBundle:Plan')->find($id);
+        if (!$plan) {
+            throw $this->createNotFoundException('Unable to find Blog post.');
+        }
+				$request = $this->getRequest();
+				if (is_null($id)) {
+        $postData = $request->get('$id');
+        $user = $postData['id'];
+				}
+  			$em = $this->getDoctrine()->getEntityManager();
+  			$user = $em->getRepository('RARAdminBundle:Plan')->find($id);
+ 					if(!$user)
+					{
+					$user=new Plan();
+					throw $this->createNotFoundException(
+					'No product found for id '.$id);
+					}
+  		  	if($request->getMethod() == 'POST') {
+     				$name=$this->get('request')->request->get('name');
+     				$description=$this->get('request')->request->get('description');
+     				$charges=$this->get('request')->request->get('charges');     			
+            $user->setName($name);
+            $user->setDescription($description);
+          	$user->setPlanCharges($charges);
+            $em->persist($user);
+            $em->flush();
+            return $this->redirect($this->generateUrl('RARAdminBundle_plan'));						
+				}
+ 						return $this->render('RARAdminBundle:Plan:planupdate.html.twig', array(
+            'plan' => $plan
+        		)); 	
+        }
+ 					
+ 					public function addplanAction(Request $request)
+					{
+ 						if ($request->getMethod() == 'POST') {
+      			$name=$this->get('request')->request->get('name');
+     				$description=$this->get('request')->request->get('description');
+     				$charges=$this->get('request')->request->get('charges');
+     				$user=new Plan();     			
+            $user->setName($name);
+            $user->setDescription($description);
+          	$user->setPlanCharges($charges);
+          	$em = $this->getDoctrine()->getEntityManager();
+            $em->persist($user);
+            $em->flush();
+							
+								return $this->redirect($this->generateUrl('RARAdminBundle_plan'));		
+							}
+							
+						return $this->render('RARAdminBundle:Plan:addplan.html.twig');
+				}
+	}

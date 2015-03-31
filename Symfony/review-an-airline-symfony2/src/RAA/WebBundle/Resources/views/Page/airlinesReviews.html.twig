@@ -1,0 +1,140 @@
+
+{% extends 'RAAWebBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %}Reviews and company profile {% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets, customer reviews and flights for . Discover what other people say about their experiences with for cheap holidays to make a better choice choosing the right cheap airline tickets.">
+  <meta name="keywords" content="reviews, cheap holidays, cheap airline tickets, cheap flights">
+{% endblock %}
+
+<script>
+function alphabetSearch(id)
+{
+
+	window.location.href = '{{ path("raa_web_searchAirlines") }}';
+	$("#hidAlphabet").val(id);
+	document.frmSearchByAlphabet.submit();
+	
+
+}
+
+</script>
+<script>
+function searchAirline()
+{
+document.frmSearch.submit();
+}
+</script>
+	<div class="titles oranges border">
+      		<h2>Airline Reviews</h2>
+    	</div>
+	<div class="respon"style=" margin-bottom: -19px;margin-left: 106px;width: 88%;">
+		<form action="{{ path('raa_web_searchAirlines') }}" method="POST" name="frmSearchByAlphabet">
+      			<ul id="index" style="width:83% !important;">       
+				<li><a href="#" id="a" onclick="alphabetSearch(this.id);">A</a></li>
+				<li><a href="#" id="b" onclick="alphabetSearch(this.id);">B</a></li>
+				<li><a href="#" id="c" onclick="alphabetSearch(this.id);">C</a></li>
+				<li><a href="#" id="d" onclick="alphabetSearch(this.id);">D</a></li>
+				<li><a href="#" id="e" onclick="alphabetSearch(this.id);">E</a></li>
+				<li><a href="#" id="f" onclick="alphabetSearch(this.id);">F</a></li>
+				<li><a href="#" id="g" onclick="alphabetSearch(this.id);">G</a></li>
+				<li><a href="#" id="h" onclick="alphabetSearch(this.id);">H</a></li>
+				<li><a href="#" id="i" onclick="alphabetSearch(this.id);">I</a></li>
+				<li><a href="#" id="j" onclick="alphabetSearch(this.id);">J</a></li>
+				<li><a href="#" id="k" onclick="alphabetSearch(this.id);">K</a></li>
+				<li><a href="#" id="l" onclick="alphabetSearch(this.id);">L</a></li>
+				<li><a href="#" id="m" onclick="alphabetSearch(this.id);">M</a></li>
+				<li><a href="#" id="n" onclick="alphabetSearch(this.id);">N</a></li>
+				<li><a href="#" id="o" onclick="alphabetSearch(this.id);">O</a></li>
+				<li><a href="#" id="p" onclick="alphabetSearch(this.id);">P</a></li>
+				<li><a href="#" id="q" onclick="alphabetSearch(this.id);">Q</a></li>
+				<li><a href="#" id="r" onclick="alphabetSearch(this.id);">R</a></li>
+				<li><a href="#" id="s" onclick="alphabetSearch(this.id);">S</a></li>
+				<li><a href="#" id="t" onclick="alphabetSearch(this.id);">T</a></li>
+				<li><a href="#" id="u" onclick="alphabetSearch(this.id);">U</a></li>
+				<li><a href="#" id="v" onclick="alphabetSearch(this.id);">V</a></li>
+				<li><a href="#"  id="w" onclick="alphabetSearch(this.id);">W</a></li>
+				<li><a href="#" id="x" onclick="alphabetSearch(this.id);">X</a></li>
+				<li><a href="#" id="y" onclick="alphabetSearch(this.id);">Y</a></li>
+				<li><a href="#" id="z" onclick="alphabetSearch(this.id);">Z</a></li>
+      			</ul>
+	       		<input type="hidden" name="hidAlphabet" id="hidAlphabet" />
+    	 	</form>
+	 </div>
+	<div class="left-sec-70 ap"> 
+ 		<div class="hero-unit" style="float: left; width: 100%;">
+			<div class="image_rev">
+				{% if '://' in reviewerImage %}
+				<img src="{{imageUrl}}" style="width:60%;height:123px;border:2px solid;">
+				{% elseif reviewerImage == "" %}
+					<img src="{{ asset('themes/web/images/default_user_image.jpeg') }}" style="width:60%;height:123px;border:2px solid;">
+				{% else %}
+				<img alt="Client" src="{{ asset(['images/uploads/', reviewerImage]|join) }} " style="width:60%;height:123px;border:2px solid;">
+				{% endif %}
+			</div>
+		<div class="reviewer_details">
+			<p>{{firstName}} {{lastName}} ({{name}})</p>
+			<p>{{phone| default('N.A')}}</p>
+			<p>{{email| default('N.A')}}</p>
+
+		</div>
+		<div class="reviews_user">
+			<h2 class="recent_act">Reviews By this user</h2>
+		</div>
+		<hr class="hr_reviewer">
+		{% for reviewDetail in reviews %}
+		<div class="disc_tion" style="width:100%;">
+			<div class="col-1">
+				<b> <img alt="Client" src="{{ asset(['images/Airline/', reviewDetail.logo]|join) }}" style="width:67%;"></b> 
+			</div>
+			<div class="col-2 col_reviewer" >
+				<span class="col_description">{{reviewDetail.description}}</span>
+			</div>
+			<div class="col-3" style="width:25%;"> 
+				<form id="ratingsForm" class="ratestar1" action="{{ path('raa_web_feedback') }}" method=POST style="margin:0px;">
+    					<div class="stars5" name=star>
+        					<input type="radio"  class="star-{{reviewDetail.rating}}" id="star-{{reviewDetail.rating}}" value={{reviewDetail.rating}}     checked/>
+
+       						 <span></span>
+    					 </div>
+  				  </form>
+
+		</div>
+	</div>
+
+	<hr style="float:left;width:100%;">
+	{% endfor %}
+
+     </div>
+ </div>
+
+<!-- right section here -->
+  <div class="right-sec-30 border-left">
+    <div class="right border-left" id="content-right">
+      <div id="content-right-inner-wrapper">
+        <div class="review-percentage-wrapper start">
+          <div class="input-append">
+		  <form action="{{ path('raa_web_searchAirlines') }}" method="POST" name="frmSearch" >
+            <input type="text" name="search" placeholder="Start your search..." class="input-block-leve span9 ">
+            <button class="btn btn-airline date2 r-search sch_butt" onclick="searchAirline();">Search <i class="icon-search icon-white"></i></button>
+			</form>
+          </div>
+          <div class="bluebox_r">
+</script>
+              <div class="rating_right"> <img src="{{ asset('themes/frontend/images/fly_img.jpg') }}"alt=""> </div>
+        <div class="rating_right give"> <img src="{{ asset('themes/frontend/images/tile-comps.png') }}"alt=""> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ </div>
+</div>
+<style>
+
+</style>
+
+{% endblock %}

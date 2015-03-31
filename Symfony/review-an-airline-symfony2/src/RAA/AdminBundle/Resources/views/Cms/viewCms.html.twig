@@ -1,0 +1,53 @@
+{% extends 'RAAAdminBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %}View Cms | Admin{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+<script>
+	function goBack()
+	{
+		window.location.href = '{{ path('RAAAdminBundle_manageCms') }}';
+	}
+</script>
+
+	<section id="content">
+				
+
+				<form id="form" >
+					<fieldset>
+						<label>Cms View</label>
+							{% for viewCms in cms %}
+						<section class="chrome"><label for="text_field">Title</label>
+							<div>{{viewCms.name}}</div>
+						</section>
+						<section class="chrome"><label for="text_tooltip">Meta Title</label>
+							<div>{{viewCms.url|default("N.A.")}}</div>
+						</section>
+						<section class="chrome" style="height:auto;"><label for="text_tooltip" >Description</label>
+							<div style="width:100%;">{{viewCms.content}}</div>
+						</section>
+						{% endfor %}
+						<section class="chrome">
+
+	<div><button class="center1" onclick="goBack()">Cancel</button></div>
+						</section>
+						
+					</fieldset>
+				</form>	
+				</div>
+		</section>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

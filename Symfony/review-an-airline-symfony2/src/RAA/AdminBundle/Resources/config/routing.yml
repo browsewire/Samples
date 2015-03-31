@@ -1,0 +1,337 @@
+RAAAdminBundle_airline:
+    pattern:  /admin/airlines
+    defaults: { _controller: RAAAdminBundle:Admin:airline }
+    requirements:
+        _method:  GET
+
+
+RAAAdminBundle_viewAirline:
+    pattern:  /view/airlines/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:viewAirline }
+    requirements:
+        _method:  GET
+
+
+
+RAAAdminBundle_plan:
+    pattern:  /plan
+    defaults: { _controller: RAAAdminBundle:Admin:plan }
+    requirements:
+        _method:  GET 
+
+RAAAdminBundle_category:
+    pattern:  /category
+    defaults: { _controller: RAAAdminBundle:Category:category }
+    requirements:
+        _method:  GET 
+          
+RAAAdminBundle_airlinedelete:
+    pattern:  /airline/delete/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:deleteAirline }
+    requirements:
+        _method:  GET             
+
+RAAAdminBundle_categorydelete:
+    pattern:  /category/delete/{id}
+    defaults: { _controller: RAAAdminBundle:Category:delete }
+    requirements:
+        _method:  GET    
+        
+RAAAdminBundle_categoryupdate:
+    pattern:  /category/update/{id}
+    defaults: { _controller: RAAAdminBundle:Category:update }
+    requirements:
+        _method:  GET|POST 
+                
+RAAAdminBundle_plandelete:
+    pattern:  /plan/delete/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:deletePlan }
+    requirements:
+        _method:  GET 
+                                        
+RAAAdminBundle_airlineupdate:
+    pattern:  /airline/update/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:updateAirline }
+    requirements:
+        _method:  GET|POST     
+        
+RAAAdminBundle_planupdate:
+    pattern:  /plan/update/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:updatePlan }
+    requirements:
+        _method:  GET|POST    
+        
+RAAAdminBundle_dashboard:
+    pattern:  /admin/dashboard
+    defaults: { _controller: RAAAdminBundle:Admin:dashboard }
+    requirements:
+        _method:  GET   
+
+RAAAdminBundle_addAirline: 
+    pattern:  /admin/addairline
+    defaults: { _controller: RAAAdminBundle:Admin:addAirline }
+    requirements:
+        _method:  GET|POST
+        
+RAAAdminBundle_addcategory: 
+    pattern:  /admin/addcategory
+    defaults: { _controller: RAAAdminBundle:Category:addcategory }
+    requirements:
+        _method:  GET|POST 
+        
+RAAAdminBundle_addplan: 
+    pattern:  /admin/addplan
+    defaults: { _controller: RAAAdminBundle:Admin:addplan }
+    requirements:
+        _method:  GET|POST
+        
+RAAAdminBundle_login: 
+    pattern:  /admin
+    defaults: { _controller: RAAAdminBundle:Admin:index }
+    requirements:
+        _method:  GET|POST        
+
+RAAAdminBundle_logout: 
+    pattern:  /admin/logout
+    defaults: { _controller: RAAAdminBundle:Admin:logout }
+    requirements:
+        _method:  GET  
+        
+RAAAdminBundle_getCities:
+    pattern:  /realtor/getCities/{stateCode}
+    defaults: { _controller: RAAAdminBundle:Admin:getCities }
+    requirements:
+        _method:  GET|POST    
+        
+RAAAdminBundle_changepassword:
+    pattern:  changepassword
+    defaults: { _controller: RAAAdminBundle:Admin:change }
+    requirements:
+        _method:  GET|POST    
+        
+RAAAdminBundle_forgotpassword:
+    pattern:  forgotpassword
+    defaults: { _controller: RAAAdminBundle:Admin:forgot }
+    requirements:
+        _method:  GET|POST
+                 
+RAAAdminBundle_request:
+    pattern:  request
+    defaults: { _controller: RAAAdminBundle:Request:request }
+    requirements:
+        _method:  GET|POST 
+
+RAAAdminBundle_status:
+    pattern:  status/{id}
+    defaults: { _controller: RAAAdminBundle:Request:setStatus }
+    requirements:
+        _method:  GET|POST 
+
+
+RAAAdminBundle_property:
+    pattern:  admin/flights
+    defaults: { _controller: RAAAdminBundle:Admin:property }
+    requirements:
+        _method:  GET|POST
+
+RAAAdminBundle_addproperty:
+    pattern:  admin/add/flight
+    defaults: { _controller: RAAAdminBundle:Admin:addproperty }
+    requirements:
+        _method:  GET|POST 
+        
+RAAAdminBundle_propertydelete:
+    pattern:  deleteFlight/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:deleteproperty }
+    requirements:
+        _method:  GET|POST
+        
+        
+RAAAdminBundle_updateproperty:
+    pattern:  updateFlight/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:updateproperty }
+    requirements:
+        _method:  GET|POST
+        
+RAAAdminBundle_images:
+    pattern: images/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:images }
+    requirements:
+        _method:  GET|POST 
+
+RAAAdminBundle_claim:
+    pattern:  claim
+    defaults: { _controller: RAAAdminBundle:Admin:claim }
+    requirements:
+        _method:  GET|POST  
+
+RAAAdminBundle_accepted:
+    pattern:  accepted/claim/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:accepted }
+    requirements:
+        _method:  GET|POST
+
+RAAAdminBundle_rejected:
+    pattern:  rejected/claim/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:rejected }
+    requirements:
+        _method:  GET|POST  
+        
+RAAAdminBundle_manageCms:
+    pattern:  cms
+    defaults: { _controller: RAAAdminBundle:Admin:manageCms }
+    requirements:
+        _method:  GET|POST  
+
+        
+RAAAdminBundle_addCms:
+    pattern:  addcms
+    defaults: { _controller: RAAAdminBundle:Admin:addCms }
+    requirements:
+        _method:  GET|POST
+        
+        
+RAAAdminBundle_editCms:
+    pattern:  editcms/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:editCms }
+    requirements:
+        _method:  GET|POST  
+
+        
+RAAAdminBundle_deleteCms:
+    pattern:  delete/cms/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:deleteCms }
+    requirements:
+        _method:  GET|POST
+          
+RAAAdminBundle_importRealtors:
+    pattern:  admin/import/Airlines
+    defaults: { _controller: RAAAdminBundle:Admin:importRealtors }
+    requirements:
+        _method:  GET|POST 
+        
+RAAAdminBundle_view:
+    pattern:  view/cms/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:viewCms }
+    requirements:
+        _method:  GET|POST  
+          
+RAAAdminBundle_advertiesment:
+    pattern:  advertiesment
+    defaults: { _controller: RAAAdminBundle:Admin:manageAdvertiesment }
+    requirements:
+        _method:  GET|POST
+        
+RAAAdminBundle_addAdvertiesment:
+    pattern:  add/Advertiesment
+    defaults: { _controller: RAAAdminBundle:Admin:addAdvertiesment }
+    requirements:
+        _method:  GET|POST      
+        
+RAAAdminBundle_editAdvertiesment:
+    pattern:  edit/Advertiesment/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:editAdvertiesment }
+    requirements:
+        _method:  GET|POST   
+
+RAAAdminBundle_deleteAdvertiesment:
+    pattern:  delete/Advertiesment/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:deleteAdvertiesment }
+    requirements:
+        _method:  GET|POST   
+        
+ 
+RAAAdminBundle_getCsv:
+    pattern:  csv
+    defaults: { _controller: RAAAdminBundle:Admin:getCsv}
+    requirements:
+        _method:  GET|POST    
+
+ 
+RAAAdminBundle_getPdf:
+    pattern: Pdf
+    defaults: { _controller: RAAAdminBundle:Admin:getPdf}
+    requirements:
+        _method:  GET|POST                     
+        
+ 
+RAAAdminBundle_reviewer:
+    pattern: reviewer
+    defaults: { _controller: RAAAdminBundle:Admin:manageReviewer}
+    requirements:
+        _method:  GET|POST     
+        
+RAAAdminBundle_deleteReviewer:
+    pattern: delete/reviewer/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:deleteReviewer}
+    requirements:
+        _method:  GET|POST    
+        
+RAAAdminBundle_deletePropertyImages:
+    pattern: delete/Property/Image/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:deleteImages}
+    requirements:
+        _method:  GET|POST 
+
+RAAAdminBundle_suspenedRealtors:
+    pattern: suspened/realtor/{id}RAAAdminBundle_error:
+    pattern: error
+    defaults: { _controller: RAAAdminBundle:Admin:error}
+    requirements:
+        _method:  GET|POST       
+     
+                
+        
+RAAAdminBundle_airlineImages:
+    pattern: airlineImages/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:updateAirlineImages}
+    requirements:
+        _method:  GET|POST   
+        
+RAAAdminBundle_updateSlider:
+    pattern: updateSlider/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:updateSlider}
+    requirements:
+        _method:  GET|POST    
+
+RAAAdminBundle_deleteSliderImages:
+    pattern: delete/Slider/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:deleteSliderImages}
+    requirements:
+        _method:  GET|POST 
+
+RAAAdminBundle_editReviewer:
+    pattern: edit/Reviewer/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:editReviewer}
+    requirements:
+        _method:  GET|POST 
+        
+RAAAdminBundle_ratingCompleteDetail:
+    pattern: edit/Reviewer/
+    defaults: { _controller: RAAAdminBundle:Admin:ratingCompleteDetail}
+    requirements:
+        _method:  GET|POST  
+           
+RAAAdminBundle_showRev:
+    pattern: show/Reviewer/review/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:showTotalReviews}
+    requirements:
+        _method:  GET|POST    
+        
+RAAAdminBundle_manageReviews:
+    pattern: manageReviews
+    defaults: { _controller: RAAAdminBundle:Admin:manageReviews}
+    requirements:
+        _method:  GET|POST   
+
+RAAAdminBundle_publishReview:
+    pattern: publishReview
+    defaults: { _controller: RAAAdminBundle:Admin:publishReview}
+    requirements:
+        _method:  GET|POST    
+
+RAAAdminBundle_deleteReview:
+    pattern: delete/Review/{id}
+    defaults: { _controller: RAAAdminBundle:Admin:deleteReview}
+    requirements:
+        _method:  GET|POST                                                                                                                                                                                                                                                                                                                                                      

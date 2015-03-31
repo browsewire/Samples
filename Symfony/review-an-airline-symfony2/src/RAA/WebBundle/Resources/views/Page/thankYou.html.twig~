@@ -1,0 +1,49 @@
+{% extends 'RAAWebBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %}Thank You{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+	<div class="titles oranges border">
+
+<h2>Email Subsciption</h2>
+</div>
+
+<div class="thankyou">
+<h2 class="thanks">
+        You're almost done. Just one step left...</h2>
+
+<h5 class="subthanks">
+        Please check your email and click on the confirmation link we've just sent you. <br>Once you do, we'll send the info you requested immediately!
+        </h5>
+</div>
+</div>
+		
+		
+</div>
+
+<style>
+.thanks {
+padding-top: 35px;
+font-family: wisdom_script_airegular, gothamboldregular, sans-serif;
+font-size: 62px;
+font-weight: 400;
+line-height: 62px;
+margin-bottom: 15px;
+color: #17a4d1;
+
+
+}
+.subthanks {
+font-family: gotham, gothambookregular, sans-serif;
+font-size: 17px;
+margin-top: -10px;
+line-height: 20.5px;
+font-weight: 100;
+margin: 0 0 59 23%;
+}
+</style>
+
+
+{% endblock %}

@@ -1,0 +1,37 @@
+<?php
+namespace RAR\WebBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="rar_features")
+ */
+class Request
+{
+    
+		/**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    public $id;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+     public $user_id;    
+     
+    /**
+     * @ORM\Column(type="integer")
+     */
+     public $plan_id;    
+ 
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+     public $request_type_id;    
+ 
+
+
+}     

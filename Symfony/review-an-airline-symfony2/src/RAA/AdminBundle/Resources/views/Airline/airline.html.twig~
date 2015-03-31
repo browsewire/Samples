@@ -1,0 +1,127 @@
+{% extends 'RAAAdminBundle::layout.html.twig' %}
+{% block javascripts %}
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+	<script src="{{  asset('themes/backend/js/functions.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/functions.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/plugins.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/editor.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/calendar.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/flot.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/elfinder.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/datatables.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Alert.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Autocomplete.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Breadcrumb.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Calendar.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Chart.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Color.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Date.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Editor.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_File.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Dialog.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Fileexplorer.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Form.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Gallery.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Multiselect.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Number.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Password.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Slider.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Store.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Time.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Valid.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/wl_Widget.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/config.js') }}"></script>
+	<script src="{{  asset('themes/backend/js/script.js') }}"></script>
+	<script type="text/javascript">
+ function confirm_Delete(e) {
+    var answer = confirm("Are you sure you want to delete this record?")
+    if (!answer){
+        e.preventDefault();
+        return false;
+    }
+}
+ </script>
+	<script>
+	$(document).ready(function(){
+		$("#colAction").removeClass("sorting");
+	});
+	</script>
+	<script type="text/javascript">		
+	function addNewPlan()
+	{
+		window.location.href = '{{ path('RAAAdminBundle_addAirline') }}';
+	}
+	</script>
+	<script>
+	function importUsers()
+	{
+		window.location.href = '{{ path('RAAAdminBundle_importRealtors') }}';
+	}
+		function importUsers1()
+	{
+		window.location.href = '{{ path('RAAAdminBundle_getCsv') }}';
+	}
+			function getPdf()
+	{
+		window.location.href = '{{ path('RAAAdminBundle_getPdf') }}';
+	}
+	</script>
+{% endblock %}
+{% block body %}
+<title>{% block title %}Manage Airline | Admin{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+	<section id="content">
+	<div class="g12">
+		<h1>Manage Airlines</h1>
+		<button class="btnAddNew" onclick="javascript:addNewPlan();">Add New</button>
+		<button class="btnAddNew" onclick="javascript:importUsers();">Import Airlines</button>
+		<button class="btnAddNew" onclick="javascript:importUsers1();">Export Airlines in Csv</button>
+		<!--<button class="btnAddNew" onclick="javascript:getPdf();">Export Realtors in Pdf</button>-->
+		<div class="dataTables_wrapper">
+			<table class="datatable">
+			<thead>
+				<tr>
+					<th class="sorting col-2" style="min-width:3%;width: 58px;" rowspan="1" colspan="1"> # &nbsp;&nbsp;</th>
+					<th class="sorting col-3" style="width: 109px;" rowspan="1" colspan="1">Name &nbsp;&nbsp;</th>
+					<!--<th class="sorting col-3" style="width: 104px;" rowspan="1" colspan="1">LastName &nbsp;&nbsp;</th>-->
+					<th class="sorting col-2" rowspan="1" colspan="1">Tagline &nbsp;&nbsp;</th>
+				<!--	<th class="sorting col-2" style="width: 75px;" rowspan="1" colspan="1">History &nbsp;&nbsp;</th>-->
+					<!--<th class="sorting col-6" style="width: 240px;" rowspan="1" colspan="1">Address &nbsp;&nbsp;</th>-->
+					<!--<th class="sorting col-2" style="width: 77px;" rowspan="1" colspan="1">City &nbsp;&nbsp;</th>
+					<th class="sorting col-3" style="width: 75px;" rowspan="1" colspan="1">State &nbsp;&nbsp;</th>-->
+					<!--<th class="sorting col-2" rowspan="1" colspan="1" style="width: 180px;">Country</th>-->
+					<!--<th class="sorting col-3" style="width: 48px;" rowspan="1" colspan="1">Zip &nbsp;&nbsp;</th>-->
+					<th class="col-2" id="colAction"style="width:100px;" rowspan="1" colspan="1"><label class="lblAction">Action &nbsp;&nbsp;</label></th>
+				</tr>
+			</thead>
+			<tbody>		
+				{% for airline in airlines %}
+				<tr class="gradeA odd">
+					<td class="">{{airline.id}}</td>
+					<td class="txtleft">{{airline.business_name}}</td>
+					<td class="txtleft">{{airline.airline_tagline}}</td>
+					<!--<td class="txtleft">{{airline.phone}}</td>-->
+					<!--<td class="txtleft">{{airline.address}},{{airline.address2}}</td>-->
+					<!--<td class="txtleft">{{airline.city_name}}</td>
+					<td class="txtleft">{{airline.state_name}}</td>-->
+					<!--<td class="txtleft">{{airline.country}}</td>-->
+					<!--<td class="txtleft">{{airline.pincode}}</td>-->
+					
+					
+					
+					<td><a href="{{ path('RAAAdminBundle_airlineupdate',{ 'id': airline.id }) }}"><img src="{{ asset('bundles/images/pencil.png') }}" title="Edit"></image></a><a href="{{ path('RAAAdminBundle_airlinedelete', { 'id': airline.id }) }}"><img src="{{ asset('bundles/images/cross.png') }}" onclick="confirm_Delete(event);" title="Delete"></image>	</a>
+				
+					<a href="{{ path('RAAAdminBundle_viewAirline', { 'id': airline.id }) }}"><img src="{{ asset('bundles/images/preview.png') }}"title="View"></image>	</a>	</td>			
+
+
+
+						</tr>		
+						{% endfor %}
+				</table>
+					</tbody>
+			</div>	
+{% endblock %}

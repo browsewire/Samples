@@ -1,0 +1,372 @@
+{% extends 'RAAWebBundle::layout.html.twig' %}
+
+{% block body %}
+
+<title>{% block title %}Find An Airline {% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+
+ <script src="{{  asset('themes/frontend/js/jquery-1.10.1.min.js') }}"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+
+<script>
+
+$(document).ready(function()
+	{
+		$("#linkAR").addClass('active');
+	});
+
+
+function swapImages() {
+    var $current = $('#myGallery1 img:visible');
+    var $next = $current.next();
+    if($next.length === 0) {
+        $next = $('#myGallery1 img:first');
+    }
+    $current.hide();
+    $next.show();
+}
+
+$(document).ready(function() {
+    // Run our swapImages() function every 0.5 secs
+    setInterval(swapImages, 5000);
+});
+
+
+
+
+</script>
+
+<script>
+
+function detailReview(id)
+{
+var a = $("#detailId").val(id);
+ 	
+ 	
+ 	$.ajax({
+               	url : '{{ path("RAAAdminBundle_ratingCompleteDetail",{ "id": '+a+' }) }}',
+                type:'POST',
+                data:'id='+id,
+                dataType:'html',   
+                success:function(data){
+                  
+                    $('#city').html(data);
+document.getElementById("cross").innerHTML=data;
+      $('#lessReview').hide();           
+$("#fullReview").show();
+}
+            });
+
+
+}
+
+function showFullReview(id)
+{
+//alert(id);
+var ids="#";
+var idsc="#arr";
+ var idnumber=ids+id;
+ var idnumbers=idsc+id;
+$(idnumber).hide();
+$(idnumbers).show();
+}
+
+function showhalfReview(id)
+{
+//alert(id);
+var ids="#";
+var idsc="#arr";
+ var idnumber=ids+id;
+ var idnumbers=idsc+id;
+$(idnumbers).hide();
+$(idnumber).show();
+
+
+}
+</script>
+
+
+<script>
+
+
+function updateRatingFilter(id)
+{
+//$( "#chooseRating" ).load( "/resources/load.html #projects li" );
+
+	$(".clsRatingFilter").removeAttr('checked');
+	$("#"+id).attr('checked','checked');
+	
+	if(id == "chooseRating")
+	{
+//alert(id);
+		$("#ratingSlider").css("display","block");
+	}
+	else
+	{
+	//alert("Hello"+id);
+		$("#ratingSlider").css("display","none");
+	}
+}
+</script>
+
+
+
+<script type="text/javascript">
+
+
+function alphabetSearch(id)
+{
+	//alert("hello");
+	//window.location.href = '{{ path("raa_web_searchAirlines") }}';
+	$("#hidAlphabet").val(id);
+	document.frmSearchByAlphabet.submit();
+
+$(window).load(function(){
+
+	$("#a").addClass("active");
+});
+}
+
+</script>
+<script>
+function showLargeImage()
+{
+
+$("#divLargeImage").css('display','block');
+$("#but_link").hide();
+$("#back").css('display','block');
+}
+function showLess()
+{
+$("#divLargeImage").hide();
+$("#back").hide();
+$("#but_link").css('display','block');
+}
+</script>
+  <!-- write review -->
+    <div class="titles oranges border">
+      <h2>Find an Airline</h2>
+    </div>
+    <div class="left-sec-70">
+    <!--Airlines HTML start-->
+    <div class="pagination">
+	  <form action="{{ path('raa_web_searchAirlines') }}" method="POST" name="frmSearchByAlphabet">
+<ul id="index">       
+<li><a href="#"  class="{% if alphabet == 'a' %}active{% endif %}" id="a" onclick="alphabetSearch(this.id);" >A</a></li>
+
+        <li><a href="#" class="{% if alphabet == 'b' %}active{% endif %}" class="{% if alphabet == 'b' %}active{% endif %}" id="b" onclick="alphabetSearch(this.id);">B</a></li>
+        <li><a href="#" class="{% if alphabet == 'c' %}active{% endif %}" id="c" onclick="alphabetSearch(this.id);">C</a></li>
+        <li><a href="#" class="{% if alphabet == 'd' %}active{% endif %}" id="d" onclick="alphabetSearch(this.id);">D</a></li>
+        <li><a href="#" class="{% if alphabet == 'e' %}active{% endif %}" id="e" onclick="alphabetSearch(this.id);">E</a></li>
+        <li><a href="#" class="{% if alphabet == 'f' %}active{% endif %}" id="f" onclick="alphabetSearch(this.id);">F</a></li>
+        <li><a href="#" class="{% if alphabet == 'g' %}active{% endif %}" id="g" onclick="alphabetSearch(this.id);">G</a></li>
+        <li><a href="#" class="{% if alphabet == 'h' %}active{% endif %}" id="h" onclick="alphabetSearch(this.id);">H</a></li>
+        <li><a href="#" class="{% if alphabet == 'i' %}active{% endif %}" id="i" onclick="alphabetSearch(this.id);">I</a></li>
+        <li><a href="#" class="{% if alphabet == 'j' %}active{% endif %}" id="j" onclick="alphabetSearch(this.id);">J</a></li>
+        <li><a href="#" class="{% if alphabet == 'k' %}active{% endif %}" id="k" onclick="alphabetSearch(this.id);">K</a></li>
+        <li><a href="#" class="{% if alphabet == 'l' %}active{% endif %}" id="l" onclick="alphabetSearch(this.id);">L</a></li>
+        <li><a href="#" class="{% if alphabet == 'm' %}active{% endif %}" id="m" onclick="alphabetSearch(this.id);">M</a></li>
+        <li><a href="#" class="{% if alphabet == 'n' %}active{% endif %}" id="n" onclick="alphabetSearch(this.id);">N</a></li>
+        <li><a href="#" class="{% if alphabet == '0' %}active{% endif %}" id="o" onclick="alphabetSearch(this.id);">O</a></li>
+        <li><a href="#" class="{% if alphabet == 'p' %}active{% endif %}" id="p" onclick="alphabetSearch(this.id);">P</a></li>
+        <li><a href="#" class="{% if alphabet == 'q' %}active{% endif %}" id="q" onclick="alphabetSearch(this.id);">Q</a></li>
+        <li><a href="#" class="{% if alphabet == 'r' %}active{% endif %}" id="r" onclick="alphabetSearch(this.id);">R</a></li>
+        <li><a href="#" class="{% if alphabet == 's' %}active{% endif %}" id="s" onclick="alphabetSearch(this.id);">S</a></li>
+        <li><a href="#" class="{% if alphabet == 't' %}active{% endif %}" id="t" onclick="alphabetSearch(this.id);">T</a></li>
+        <li><a href="#" class="{% if alphabet == 'u' %}active{% endif %}" id="u" onclick="alphabetSearch(this.id);">U</a></li>
+        <li><a href="#" class="{% if alphabet == 'v' %}active{% endif %}" id="v" onclick="alphabetSearch(this.id);">V</a></li>
+        <li><a href="#" class="{% if alphabet == 'w' %}activetext-transform: uppercase;{% endif %}"  id="w" onclick="alphabetSearch(this.id);">W</a></li>
+        <li><a href="#" class="{% if alphabet == 'x' %}active{% endif %}" id="x" onclick="alphabetSearch(this.id);">X</a></li>
+        <li><a href="#" class="{% if alphabet == 'y' %}active{% endif %}" id="y" onclick="alphabetSearch(this.id);">Y</a></li>
+        <li><a href="#" class="{% if alphabet == 'z' %}active{% endif %}" id="z" onclick="alphabetSearch(this.id);">Z</a></li>
+      </ul>
+	       <input type="hidden" name="hidAlphabet" id="hidAlphabet" />
+		 
+		
+     </form>
+     </div>
+      <div class="cont_air">
+      <p>
+      Our editors airline reviews and airline ratings look at the travel experience in an airline's Economy, Business and First Class. Given our extensive experience, we are equipped to provide a well-balanced review, sharing our true opinion. Our editors are educated about the minimum standards that should be met on different airlines and in the different travel classes, enabling a true and balanced assessment. -
+      
+      <div id="divLargeImage" style="display:none;">
+
+<p>Our airline reviews may be used by airlines, media and the general public to promote their product or share their experience but please make sure you link back to us.</p>
+
+<p>If you would like us to review a specific airline or aircraft type or are from an airline, please contact us here: - </p>
+
+
+
+</div>
+      
+     <div id="but_link">  <a  onclick="showLargeImage();">Read more</a></p></div>
+	 <div id="back" style="display:none;">  <a  onclick="showLess();">Back</a></p></div>
+
+
+  </div>
+ <p style="font-size:14px; font-weight:bold; text-transform: uppercase;">
+ {% if alphabet == "" %}
+ {% else %}
+ Best Results for {{alphabet}} :
+ {% endif %}
+ {% if search == "" %}
+
+ {% else %}
+  Best Results for "{{search}}" :
+ {% endif %}
+ </p>
+  <div class="airlines">
+  
+ <ul>
+  {% for airline in airlineDetails %}
+  <li style="width:29%; min-height: 120px; margin:0 12 19 0;">
+ 
+                    <h4 style="margin-top:9px;"><a href="{{ path('raa_web_profile',{'id': airline.filteredAirlineName }) }}">{{airline.business_name|default ("Null")}}</a></h4> 
+<div class="airline_logo"> 
+<a href="{{ path('raa_web_profile',{'id': airline.filteredAirlineName }) }}">
+ <img alt="Client" src="{{ asset(['images/Airline/', airline.logo_tile]|join) }} "/>
+
+ </a>
+</div>
+  </li>
+  {% endfor %}
+  </ul>
+  {% if airlineDetails == null %}
+  <center> No Airline Found </center>
+  
+ {% endif %}
+  </div>
+  <div class="total" style="float:right;width: 13%;">
+  Total Airlines: {{countAirline}}
+  
+  </div>
+  
+  {% if countAirline < 15 %}
+  {% else %}
+  <div class="pag_nat pagination_search">
+{%if total_pages > 0%}
+            {%for i in 1..total_pages%}
+                        {%if loop.first %}
+                        
+                    <li class=prev {%if current_page==1%}  {%endif%}"><a  href="{{path('raa_web_airlinePagination',{'page':current_page-1,hidAlphabet:alphabet})}}">Previous <i class="icon-forward"></i></a></li>
+                        {%endif%}
+                     <li class="sel" {%if current_page==loop.index%} {%endif%}><a href="{{path('raa_web_airlinePagination',{'page':loop.index, hidAlphabet:alphabet} )}}">{{loop.index}}</a></li> 
+                   
+                    {%if loop.last %}
+                    <li class=next{%if current_page==total_pages%} style="display:none;"  {%endif%}"><a  href="{{path('raa_web_airlinePagination',{'page':current_page+1,hidAlphabet:alphabet})}}">Next <i class="icon-forward"></i> </a></li>
+                      {%endif%}
+                    {%endfor%}
+                     {%endif%}
+                    </div>
+                    {% endif %}
+
+    <!--Airlines HTML End-->     
+   
+	
+	  </div>
+    <div class="right-sec-30 border-left">
+      <div class="right border-left" id="content-right">
+        <div id="content-right-inner-wrapper">
+          <div class="titles blue">
+            <h2>Recent Reviews</h2>
+          </div>
+           {%for latestReview in latestReviewer%}
+          <div class="recent-reviews-wrapper">
+            <div class="recent-review">
+              <div class="cols right_col">
+                <div class=" people" style="width:100%;">
+                  <div class="name"> </div>
+                  <div class="rating" style="width:87%;">
+                       <p><a href="{{ path('raa_web_airlinesReviews',{id:latestReview.id}) }}">{{latestReview.airline_name}}</a> <b style="color: #5f6060;">Reviewed</b>  <a href="{{ path('raa_web_profile',{'id': latestReview.filteredAirlineName }) }}">{{latestReview.business_name}}</a></p>
+<p class="wr_timestamp">on {{latestReview.creation_timestamp|date('F j, Y')}}</p>
+<p class="wr_head"><a href="{{ path('raa_web_detailReviews',{id:latestReview.filteredHeadline}) }}">"{{latestReview.headline}}"</a></p>
+  				<form id="ratingsForm">
+					<div class="stars1" style=" float: left;margin: -9px 3px 7px -5px;">
+						<input type="radio" class="star-{{latestReview.rating}}" id="star-{{latestReview.rating}}" value={{latestReview.rating}}	 checked/>
+								
+								<span></span>
+								</div>
+									
+									</form>
+
+<p id="{{latestReview.id}}">{% if latestReview.description|length>(100) %}{{latestReview.description[:100] ~  '.....'}}<a style=""   id="{{latestReview.id}}"  onclick="showFullReview(this.id);" class="big-link" > Read More</a>{% endif %}
+
+<p style="display:none;" id="arr{{latestReview.id}}">{{latestReview.description}}<a  id="{{latestReview.id}}" onclick="showhalfReview(this.id);" class="big-link" >&lt;&lt; Back</a></p>
+
+                  </div>
+                </div>
+              </div>
+            
+            </div>
+         
+          </div>
+            {% endfor %}
+         
+             <div> 
+          {% if latestReviewer == null %}
+            <div class=propertyListingg>
+              <center style="margin-top:65px;">No reviews Yet</center>
+            </div>
+            {% endif %}
+            </div>
+           <div class="ad" id= myGallery1>
+              {% for advImage in adv %}
+              {% if advImage.image == "" %}
+              {% else %}
+              <a href="{{advImage.target_url}}">
+                <img  src=" {{ asset(['images/Airline/', advImage.image]|join) }}" class="active1"   alt="Ad"></a>
+                {% endif %}
+          {% endfor %}
+          </div>
+          
+ <style>
+          
+          .check_b{
+		  width:100%;
+		  float:left;
+		}
+          
+.check_b > p {
+    float: left;
+    width: 100%;
+}
+
+input[type="checkbox"], input[type="radio"] {
+box-sizing: border-box;
+padding: 0;
+width: 20;
+}
+					
+#ratingSlider > label {
+    display: none;
+}
+    #myGallery1{
+      position:relative;
+      width:300px; /* Set your image width */
+      height:500px; /* Set your image height */
+	margin:0 0 0 -43px;
+    }
+    #myGallery1 img{
+      display:none;
+      position:absolute;
+      top:0;
+      left:54;
+
+      height:500px;
+    }
+    #myGallery1 img.active1{
+      display:block;
+    }
+
+
+          </style>
+        </div>
+      </div>
+    </div>
+  </div>
+{% include "RAAWebBundle:Page:ratingDetail.html.twig"%}
+{% endblock %}

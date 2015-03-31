@@ -1,0 +1,75 @@
+
+{% extends 'RAAWebBundle::layout2.html.twig' %}
+
+{% block body %}
+<title>{% block title %}Dashboard -Review An Airline{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+
+ 
+
+<div class="titles oranges border">
+		<h2>Dashboard</h2>
+ 	</div>
+<div>
+<h2 class="recent_act">My Recent Activity</h2>
+</div>
+<hr class="hr_act">
+{% for reviews in review %}
+          {% if reviews.sender=="REVIEWER" %}
+<div class="disc_tion">
+<div class="col-1 login_business" style=""><b>{{reviews.business_name}} {{reviews.last_name}}&nbsp;</b> </div>
+<div class="col-2 login_description" style="">{{reviews.description}} &nbsp;</div>
+<div class="col-3" style="width:30%; !important;"> 
+<form id="ratingsForm" class="ratestar1" action="{{ path('raa_web_feedback') }}" method=POST style="margin:0px;">
+    <div class="stars5" name=star>
+        <input type="radio"  class="star-{{reviews.rating}}" id="star-{{reviews.rating}}" value={{reviews.rating}}     checked/>
+
+        <span></span>
+    </div>
+    </form>
+
+</div>
+<div class="status_rev">
+
+         {% if reviews.status == 1 %}
+<p>Approved</p>
+{% else %}
+<p>UnApproved</p>
+{% endif %}
+
+</div>
+
+
+ </div>
+
+{% endif %}
+
+    {% endfor %}
+    {% if review == null %}
+        <div class=propertyListingg><center style="margin-top:65px;">No Reviews Yet</center></div>
+    {% endif %}
+   
+</div>
+   <style>
+
+.login_business
+{
+padding-top:9px;width:22% !important;
+}
+.login_description
+{
+padding-top:9px; width:25%; !important; word-wrap:break-word;
+}
+.status_rev
+{
+float:left; padding:9 0 0 36;
+}
+</style>
+ 
+
+
+	
+{% endblock %}

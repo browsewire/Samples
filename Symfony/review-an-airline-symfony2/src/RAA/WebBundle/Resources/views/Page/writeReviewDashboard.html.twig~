@@ -1,0 +1,991 @@
+{# src/Blogger/BlogBundle/Resources/views/Page/index.html.twig #}
+{% extends 'RAAWebBundle::layout2.html.twig' %}
+{% block body %}
+
+{% block meta %}
+
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+<title>{% block title %}Write Review {% if airline is defined  %} {% if airline.business_name is defined  %} {{airline.business_name}} {% endif %} {% endif %} {% endblock %}</title>
+
+ 
+<script>
+
+$('.custom-upload input[type=file]').change(function()
+{
+    $(this).next().find('input').val($(this).val());
+});
+</script>
+<script>
+    $(document).ready(function()
+    {
+        $("#writeReview").addClass('active_background');
+    });
+</script>
+
+<!---New Select box End here--->
+<script>
+function submitReviewDashboard(type, inputString)
+{
+    
+}
+
+
+
+</script>
+
+ <script>
+
+ function getCities(type, inputString)
+{
+    $.ajax({
+        url : '{{ path("raa_web_searchCities") }}',
+        type:'POST',
+        data:'inputString='+inputString+'&type='+type,
+        //dataType:'html',  
+        success:function(data)
+        {
+            if( type == 'departure' )
+            {
+                $('#divDepartureCities').css('display','block');
+                $('#divDepartureCities').html(data);
+            }
+            else
+            {
+                $('#divDestinationCities').css('display','block');
+                $('#divDestinationCities').html(data);
+            }
+        }
+    });
+}
+
+function hideCities(type)
+{
+						if( type == 'departure' )
+            {
+                $('#divDepartureCities').css('display','none');
+                
+            }
+            else
+            {
+                $('#divDestinationCities').css('display','none');
+                
+            }
+}
+
+function updateCityName(type, cityName)
+{
+	if( type == 'departure' )
+  {
+      $('#departureCity').val(cityName);
+			hideCities('departure');
+  }
+  else
+  {
+      $('#destinationCity').val(cityName);
+			hideCities('destination');
+  }
+	
+}
+ 
+ </script>
+<script>
+$(document).ready(function(){
+
+
+		
+		$("#airline").change(function(){	
+               var id=$(this).val();
+             updateCities(id);  
+
+        });	
+});
+
+$('#button').click(function () {
+    $("input[type='file']").trigger('click');
+})
+
+
+
+</script>
+
+
+
+ <script type="text/javascript">
+		function showimagepreview(input) 
+		{
+		$('#revImage').val(this.value);
+			if (input.files && input.files[0]) 
+			{
+				var filerdr = new FileReader();
+				filerdr.onload = function(e) 
+				{
+					$('#imgprvw').attr('src', e.target.result);
+					$('#mag_img').css('display', 'block');
+				}
+				filerdr.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>	
+ 
+
+<script>
+
+	$(document).ready(function()
+	{
+		$("#linkRV").addClass('active');
+	});
+	function submitReview1()
+	{
+		
+ 		 if(document.frmReview.headline.value == "")
+ 		{
+ 			document.getElementById('headers').innerHTML='Please enter headline';
+			document.getElementById('headers').style.color = 'red';
+ 			document.frmReview.headlines.focus() ;
+			return false;
+ 		}
+ 			
+	 if(document.frmReview.writereview.value == "")
+ 		{
+ 		document.getElementById('headers').innerHTML='';
+ 			document.getElementById('review').innerHTML='Please enter Description';
+			document.getElementById('review').style.color = 'red';
+ 			document.frmReview.writereview.focus() ;
+			return false;
+ 		}
+			
+			 
+ 		 
+ 		{
+ 			document.getElementById('airRev').innerHTML='';
+ 			document.getElementById('dest').innerHTML='Please enter destination city';
+			document.getElementById('dest').style.color = 'red';
+ 			document.frmReview.destinationCity.focus() ;
+			return false;
+ 		}
+ 				
+ 	 if(document.frmReview.departureCity.value == "")
+ 		{
+ 			document.getElementById('dest').innerHTML='';
+ 			document.getElementById('dept').innerHTML='Please enter departure city';
+			document.getElementById('dept').style.color = 'red';
+ 			document.frmReview.departureCity.focus() ;
+			return false;
+ 		}
+ 				
+if(document.frmReview.departureCity.value == document.frmReview.destinationCity.value )
+ 		{
+ 			document.getElementById('dept').innerHTML='';
+ 			document.getElementById('deptEqu').innerHTML='Please select different city';
+			document.getElementById('deptEqu').style.color = 'red';
+ 			//document.frmReview.departureCity.focus() ;
+			return false;
+ 		}
+	  
+		$("a.login-window").click();
+		//document.frmReview.submit();
+	
+	}
+		function submitReview2()
+		{
+			var reviewHeadline = $("#agent-review-title").val();
+			//alert(yourString);
+			var pattern=/^[A-Za-z0-9 ]{0,200000}$/;
+			var matches = pattern.exec(reviewHeadline.replace(" ", ""));
+			//alert(matches);
+			if(matches==null)
+			{
+				document.getElementById('uniuqe').innerHTML='Only characters Aa-Zz and numbers 0-9 are allowed in headline';
+				document.getElementById('uniuqe').style.color = 'red';
+		 		document.getElementById('agent-review-title').focus() ;
+				return false;
+			}
+			else
+			{
+				document.getElementById('uniuqe').innerHTML='';
+			}
+			
+			$.ajax({
+			       	url : '{{ path("raa_web_checkHeadline") }}',
+				type:'POST',
+				data:'reviewHeadline='+reviewHeadline, 
+				success:function(data)
+				{
+				  	if( data=="SUCCESS")
+					{
+						document.getElementById('uniuqe').innerHTML='Please enter a different headline';
+						document.getElementById('uniuqe').style.color = 'red';
+				 		document.getElementById('agent-review-title').focus() ;
+						return false;
+					}
+					else
+					{
+						document.getElementById('uniuqe').innerHTML='';
+					}
+				}
+		    	});
+
+		
+ 	 		if(document.getElementById('agent-review-title').value == "")
+ 			{	document.getElementById('deptEqu').innerHTML='';
+				document.getElementById('headers').innerHTML='Please enter headline';
+				document.getElementById('headers').style.color = 'red';
+				document.getElementById('agent-review-title').focus() ;
+				return false;
+ 			}
+			else
+			{
+				document.getElementById('headers').innerHTML='';
+			}
+ 			
+	 		if(document.frmReview.writereview.value == "")
+ 			{
+ 				document.getElementById('headers').innerHTML='';
+ 				document.getElementById('review').innerHTML='Please enter Description';
+				document.getElementById('review').style.color = 'red';
+ 				document.frmReview.writereview.focus() ;
+				return false;
+ 			}
+			else
+			{
+				document.getElementById('review').innerHTML='';
+			}
+			
+ 		 	if(document.frmReview.destinationCity.value == "")
+ 			{
+ 				document.getElementById('airRev').innerHTML='';
+ 				document.getElementById('dest').innerHTML='Please enter destination city';
+				document.getElementById('dest').style.color = 'red';
+ 				document.frmReview.destinationCity.focus() ;
+				return false;
+ 			}
+			else
+			{
+				document.getElementById('dest').innerHTML='';
+			}
+ 				
+ 			if(document.frmReview.departureCity.value == "")
+ 			{
+ 				document.getElementById('dest').innerHTML='';
+ 				document.getElementById('dept').innerHTML='Please enter departure city';
+				document.getElementById('dept').style.color = 'red';
+ 				document.frmReview.departureCity.focus() ;
+				return false;
+ 			}
+			else
+			{
+				document.getElementById('dept').innerHTML='';
+			}
+ 				
+			if(document.frmReview.departureCity.value == document.frmReview.destinationCity.value )
+ 			{
+ 				document.getElementById('dept').innerHTML='';
+ 				document.getElementById('deptEqu').innerHTML='Please select different city';
+				document.getElementById('').style.color = 'red';
+ 				//document.frmReview.departureCity.focus() ;
+				return false;
+ 			}
+			else
+			{
+				document.getElementById('deptEqu').innerHTML='';
+			}
+
+ 			if(!this.frmReview.receiveUpdates.checked)
+			{
+				alert('You must agree to the terms first.');
+				return false;
+			}
+				
+			document.frmReview.submit();
+	
+		}
+</script>
+		
+<script>
+function showLargeImage()
+{
+
+$("#divLargeImage").css('display','block');
+$("#but_link").hide();	$.ajax({
+               	url : '{{ path("raa_web_airlineDetail") }}',
+                type:'POST',
+                data:'stateCode='+id,
+                dataType:'html',   
+                success:function(data){
+              
+                    //var category_product = $(data).find('.city').html();
+                    $('#divAirlineDetail').css('display','block');
+                    $('#divAirlineDetail').html(data);
+
+                }
+            });
+
+$("#cross").hide();
+}
+
+
+
+</script>
+<script>
+function searchArilineByName(a)
+{
+if(a!="")
+{
+$("#divAjaxResults").show();
+$.ajax({
+               	url : '{{ path("raa_web_getAirlineName",{ "id": '+a+' }) }}',
+                type:'POST',
+                data:'id='+a,
+                dataType:'html',   
+                success:function(data){
+                
+                    //var category_product = $(data).find('.city').html();
+                   $('.ajx_div').html(data);
+//alert(data);
+//document.getElementById("cross").innerHTML=data;
+                }
+            });
+
+}
+else
+{
+$('.ajx_div').html('');
+$("#divAjaxResults").hide();
+}
+
+
+}
+function updateCities(id)
+{
+ 
+            //   alert(id);              	
+               	
+               	$.ajax({
+               	url : '{{ path("raa_web_airlineDetail") }}',
+                type:'POST',
+                data:'stateCode='+id,
+                dataType:'html',   
+                success:function(data){
+                 // alert(data);
+                    //var category_product = $(data).find('.city').html();
+               		//alert(data);
+                    $('#divAirlineDetail').css('display','block');
+                    $('#divAirlineDetail').html(data);
+
+                }
+            });
+
+
+}
+
+function updateSearchValue(value)
+{
+$("#search").val(value);
+updateCities(value);
+
+$("#divAjaxResults").hide();
+}
+
+
+
+</script>
+<script>
+function showLargeImage()
+{
+
+$("#divLargeImage").css('display','block');
+$("#but_link").hide();
+$("#cross").hide();
+}
+
+</script>
+<script language = "Javascript">
+/**
+ * DHTML textbox character counter script. Courtesy of SmartWebby.com (http://www.smartwebby.com/dhtml/)
+ */
+
+maxL=1000;
+var bName = navigator.appName;
+function taLimit(taObj) {
+	if (taObj.value.length==maxL) return false;
+	return true;
+}
+
+function taCount(taObj,Cnt) { 
+	objCnt=createObject(Cnt);
+	objVal=taObj.value;
+	if (objVal.length>maxL) objVal=objVal.substring(0,maxL);
+	if (objCnt) {
+		if(bName == "Netscape"){	
+			objCnt.textContent=maxL-objVal.length;}
+		else{objCnt.innerText=maxL-objVal.length;}
+	}
+	return true;
+}
+function createObject(objId) {
+	if (document.getElementById) return document.getElementById(objId);
+	else if (document.layers) return eval("document." + objId);
+	else if (document.all) return eval("document.all." + objId);
+	else return eval("document." + objId);
+}
+</script>
+
+
+
+ 
+
+ <form method="POST" class="signin" action="{% if airline is defined  %} {{ path('raa_web_capture',{ 'id': airline.id })}} {% else %} {{ path('raa_web_submitReviewDashboard',{ 'id': 0 })}} {% endif %}" name="frmReview"  data-validate="parsley" enctype="multipart/form-data">
+  <!-- write review -->
+    
+	<div id="wrapper-content"> <!-- added by:gracecruz 12-05-2014 -->
+	<div class="titles oranges border" style="width:98%;">
+      <h2>Write Review </h2>
+    </div>
+	<div class="write_review">
+	{% if airlineId == 0 %}
+			<div class="wr_rev" style="float:left; width:70%;">
+				 <div id="recommend-box-label" class="trip_label"> Airline name you are reviewing: <font class=star_cum>*</font></div>
+		
+					   
+					 
+					
+						<!-- 12-11-2014 grace updates starts -->
+					<input class="line" type="text" placeholder="Type Airline name " autocomplete="off" name="search" id="search" onkeyup="searchArilineByName(this.value);" onclick="updateCities(this.value);" required style="max-width: 347px;width:80%; border:1px solid #E9E9E9;height:35px; border-radius: 5px 5px 5px 5px; font-size: 20px;text-indent: 10px;"/>
+					<!-- 12-11-2014 grace updates ends -->
+				<!--	  <input type=hidden value="">-->
+					<div>
+					
+					<div id="divAjaxResults" class="ajx_div" style="display:none;width:75.8%;" onblur="javascript:hideAjaxResults();">
+                 <ul>
+
+                 
+                 
+                 </ul>
+                  
+                  
+                  </div>
+                  </div>
+					
+					   </div> 	</div>	
+				
+				
+                  {% endif %}
+	<div class="left-sec-70">
+	  {%if airline is defined  %}
+    
+  
+  
+  <a onclick="showLargeImage();" id="cross"><img src="{{ asset('x.png') }}"></a>
+  
+  
+  <div id="but_link"> 
+  
+  
+  
+  
+      <div class="image-box">
+          <div class="image" style="height:132px; width:171px;"> <img src="{{ asset(['Airline/', airline.logo]|join) }}" class="large" /></div>
+      </div>
+
+      <div class="content-box">
+
+     <div itemprop="name" id="agent-to-review-name">{{airline.business_name|default ("N.A.")}} </div>
+        <div id="agent-to-review-agency">{{airline.business_name|default ("Null")}}</div>
+        <div id="agent-overall-rating-wrapper ">
+          <div class="review-star-line " id="agent-overall-rating">
+            <div class="star-group-left"> 
+            <div id="ratingsForm">
+							<div class="stars5">
+								<input type="radio" name="stars" class="star-1" id="star-0011" value=1 />
+								<label class="star-1" for="star-0011">1</label>
+								<input type="radio" name="stars" class="star-2" id="star-0012" value=2 />
+								<label class="star-2" for="star-0012">2</label>
+								<input type="radio" name="stars" class="star-3" id="star-0013" value=3 />
+								<label class="star-3" for="star-0013">3</label>
+								<input type="radio" name="stars" class="star-4" id="star-0014" value=4 />
+								<label class="star-4" for="star-0014">4</label>
+								<input type="radio" name="stars" class="star-5" id="star-0015" value=5 />
+								<label class="star-5" for="star-0015">5</label>
+								<span></span>
+								</div>
+									</div>
+			</div>
+		  </div>
+		  
+		
+		  					
+          <div id="star-rating-text" style="font-size:14px;"><b>Click the stars to rate airline!</b></div>
+        </div>
+      </div>
+      
+      
+      </div>
+      <div id="divLargeImage" style="display:none;">
+      
+    <div class="wr_rev" style="width:100%;margin-left:12px;">
+				 <div id="recommend-box-label" class="trip_label"> Airline name you are reviewing: </div>
+				
+					  <input class="line" type="text" placeholder="Type Airline name " autocomplete="off" name="search" id="search" onkeyup="searchArilineByName(this.value);" onclick="updateCities(this.value);" required style="width: 48% !important; border:1px solid #E9E9E9;height:35px; border-radius: 5px 5px 5px 5px; font-size: 20px; text-indent: 10px;"/>
+					  
+					<div>
+					
+					<div id="divAjaxResults" class="ajx_div" style="display:none;width:47.8%;" onblur="javascript:hideAjaxResults();">
+                 <ul>
+
+                 
+                 
+                 </ul>
+                  
+                  
+                  </div>
+                  </div>
+					
+					  
+					  
+					   </div> 	
+			
+				 <div class="image-box" id="divAirlineDetail" style="display:none; margin-left:2%;">
+      </div>
+      <div class="image-box" id="divImgBox" style="display:none; margin-top:16px;">
+          <div class="image" style="height:132px; width:171px;"> <img id="airlineLogo" src="" class="large" /></div>
+      </div>
+      
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      {% else %}
+      <div class="image-box" id="divAirlineDetail" style="display:none; margin-left:2%;">
+      </div>
+      <div class="image-box" id="divImgBox" style="display:none; margin-top:8px;">
+          <div class="image" style="height:132px; width:171px;"> <img id="airlineLogo" src=""  class="large" /></div>
+      </div>
+
+	<div class="content-box" id="divRatingBox" style="display:none;">
+
+     <div itemprop="name" id="airlineName"> </div>
+        <div id="airlineCategory"></div>
+        <div id="agent-overall-rating-wrapper ">
+          <div class="review-star-line " id="agent-overall-rating">
+            <div class="star-group-left"> 
+            <div id="ratingsForm">
+							<div class="stars5">
+								<input type="radio" name="stars" class="star-1" id="star-1121" value=1 />
+								<label class="star-1" for="star-1121">1</label>
+								<input type="radio" name="stars" class="star-2" id="star-1122" value=2 />
+								<label class="star-2" for="star-1122">2</label>
+								<input type="radio" name="stars" class="star-3" id="star-1123" value=3 />
+								<label class="star-3" for="star-1123">3</label>
+								<input type="radio" name="stars" class="star-4" id="star-1124" value=4 />
+								<label class="star-4" for="star-1124">4</label>
+								<input type="radio" name="stars" class="star-5" id="star-1125" value=5 />
+								<label class="star-5" for="star-1125">5</label>
+		
+								<span></span>
+								</div>
+									</div>
+			</div>
+		  </div>
+		  
+		
+          <div id="star-rating-text" style="font-size:14px;"><b>Click the stars to rate airline!</b></div>
+        </div>
+      </div>
+      
+      
+      
+      
+      
+      {% endif %}
+      
+      <div class="left" id="content-left">
+	    <h4 style="margin:18 0 0 13px;"> Submit your Airline Review <span> (all fields must be completed)</span> </h4>
+	 
+	    <div>
+	    
+	 <div>
+	 
+	<div id="recommend-box-label" class="trip_label" style="margin-bottom: 4;margin-left: 12px;margin-top: 2%;padding: 0;">Upload Image (Optional): </div> 
+	<div class="custom-upload">
+     <input type="file" name="revImage"  onchange="showimagepreview(this);" >
+    <div class="fake-file">
+        <input style="border:1px solid #E9E9E9; border-radius:5px;height:36px;" disabled="disabled" >
+    </div>
+
+	 </div>
+	 
+	 </div>
+				<div id="mag_img" style="display:none;">
+					<img id="imgprvw" style="width:53%;height:30%;margin-top:10;"></image>
+				
+				</div>
+				
+
+
+	    </div>
+	  
+        <div id="info"></div>
+        <div class="content-left-wrapper">
+          <div id="review-agent-step-2-wrapper"> <!-- <div class="form-section-header rounded_5">Complete review</div> -->
+            <div class="form-section-padding" id="review-agent-step-2"> <!-- <p class="find-agent-heading">Your first hand experience really helps other sellers. Thanks!</p> -->
+              <!--<form method="post" action="" id="review-agent-form-step-2">-->
+                <input type="hidden" value="0" id="aid" name="aid"/>
+                <input type="hidden" value="B30722E2-90CD-4233-82DB-62283DCB007C" id="akey" name="akey"/>
+                <input type="hidden" value="0" id="pid" name="pid"/>
+                <fieldset id="review-agent-form-step-2-fieldset">
+                  <div id="agent-to-review-details-wrapper">
+                    <div id="review-agent-avatar-wrapper"> </div>
+                  </div>
+                  <!-- <p class="agent-to-review-heading">Your overall rating of this agent *</p> -->
+                  <div id="agent-overall-rating-info"> </div>
+                  <div class="clear"><!-- / --></div>
+                  <div class="form-input"> <div id="recommend-box-label" class="trip_label">Title of your review: <font class=star_cum>*</font></div> 
+                    
+					
+					<input class="line" style="max-width: 350px;" type="text" placeholder="Headline or summary for your review" autocomplete="off" id="agent-review-title" name="headline"/>
+					<div>
+					
+                   <div id="recommend-box-label" class="trip_label">Departure:<font class=star_cum>*</font></div>
+                    <input type="text" name="departureCity" id="departureCity" style="max-width: 350px;"placeholder="City"><!--<div id="divDepartureCities" style="display:none; border:1px solid lightgrey;border-radius:4px;" placeholder="DepartureCity"></div>-->
+                  
+						 <div id="recommend-box-label" class="trip_label">Destination:<font class=star_cum>*</font></div>
+						<input type="text" name="destinationCity" id="destinationCity" style="max-width: 350px;"placeholder="City"><!--<div id="divDestinationCities" style="display:none; border:1px solid lightgrey;border-radius:4px;" Placehoder="DestinationCity"></div>-->
+					
+					
+					</div>
+				<!-- 01-12-2015 updated by grace start-->
+                  <div id="recommend-box-label" class="trip_label">Write Your review: <font class=star_cum>*</font></div> 
+                    <textarea style="height:30%;"placeholder="Write your review here (required)" rows="10" cols="100" id="written-review" name="writereview"  maxlength=1000 onKeyPress="return taLimit(this)" onKeyUp="return taCount(this,'myCounter')"></textarea>
+                    <div class="written-review-char-length-wrapper"><span id=myCounter>1000</span> characters</div>
+                				<!-- 01-12-2015 updated by grace end-->
+
+                  </div>
+				  
+				   <div class="form-input trip" id="recommend-box-wrapper">
+                      <div id="recommend-box-label" class="trip_label" > When did you take this trip with this airline ? </div>
+                      <div id="recommend-box_dash" style="" class="trip_radio">
+                        <label for="recommend-yes">
+                          <input type="radio" checked="checked" value="In last month" id="recommend-yes" name="trip"/>
+                          In last month </label>
+                        <label for="recommend-no">
+                          <input type="radio" value="2-3 months ago" name="trip" id="recommend-no"/>
+                          2-3 months ago </label>
+                        <label for="recommend-notsure">
+                          <input type="radio" value="More than 3 months ago" name="trip" id="recommend-notsure"/>
+                          More than 3 months ago</label>
+                      </div>
+                    </div>
+				  
+				  <div class="form-input trip" id="recommend-box-wrapper">
+                      <div id="recommend-box-label" class="trip_label" > Which Cabin of the aircraft did you travel in? </div>
+                      <div id="recommend-box_dash" class="trip_radio">
+                        <label for="recommend-yes">
+                          <input type="radio" checked="checked" value="First Class" id="recommend-y" name="recagent"/>
+                          First Class </label>
+                        <label for="recommend-no">
+                          <input type="radio" value="Business Class" name="recagent" id="recommend-n"/>
+                          Business Class </label>
+                        <label for="recommend-notsure">
+                          <input type="radio" value="Premium Economy" name="recagent" id="recommend-notsur"/>
+                          Premium Economy</label>
+                        <label for="recommend-notsure">
+                          <input type="radio" value="Economy Class" name="recagent" id="recommend-notsur"/>
+                          Economy Class</label>
+                      </div>
+                    </div>
+				  
+				  
+				  
+                
+				  
+				  
+				  
+				  
+				  
+                  <div class="clear"><!-- / --></div>
+                 <div class="agent-to-review-heading" style="margin-top:4px !important;padding:0px !important;"><h4 style="width:130%;">Please rate these areas of your Travel Experience with this Airline</h4>
+                  <div class="review-star-line">
+                    <div class="star-label">Trip Satisfaction </div>
+                    <div class="star-group"> 
+                    <div id="ratingsForm">
+								<div class="stars5">
+								<input type="radio" name="starH" class="star-1" id="star-1100" value="1"/>
+								<label class="star-1" for="star-1100">1</label>
+								<input type="radio" name="starH" class="star-2" id="star-1200" value="2"/>
+								<label class="star-2" for="star-1200">2</label>
+								<input type="radio" name="starH" class="star-3" id="star-1300" value="3"/>
+								<label class="star-3" for="star-1300">3</label>
+								<input type="radio" name="starH" class="star-4" id="star-1400" value="4"/>
+								<label class="star-4" for="star-1400">4</label>
+								<input type="radio" name="starH" class="star-5" id="star-1500" value="5"/>
+								<label class="star-5" for="star-1500">5</label>
+								<span></span>
+								</div>
+									</div>
+									</div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label"> Value for Money </div>
+                    <div class="star-group"> <div id="ratingsForm">
+								<div class="stars5">
+								<input type="radio" name="starR" class="star-1" id="star-160" value="1"/>
+								<label class="star-1" for="star-160">1</label>
+								<input type="radio" name="starR" class="star-2" id="star-170" value="2"/>
+								<label class="star-2" for="star-170">2</label>
+								<input type="radio" name="starR" class="star-3" id="star-180" value="3"/>
+								<label class="star-3" for="star-180">3</label>
+								<input type="radio" name="starR" class="star-4" id="star-190" value="4"/>
+								<label class="star-4" for="star-190">4</label>
+								<input type="radio" name="starR" class="star-5" id="star-200" value="5"/>
+								<label class="star-5" for="star-200">5</label>
+								<span></span>
+								</div>
+									</div>
+									</div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label"> Seat Comfort </div>
+                    <div class="star-group"> 
+                     <div id="ratingsForm">
+								<div class="stars5">
+								<input type="radio" name="starL" class="star-1" id="star-2111" value="1"/>
+								<label class="star-1" for="star-2111">1</label>
+								<input type="radio" name="starL" class="star-2" id="star-2211" value="2"/>
+								<label class="star-2" for="star-2211">2</label>
+								<input type="radio" name="starL" class="star-3" id="star-2311" value="3"/>
+								<label class="star-3" for="star-2311">3</label>
+								<input type="radio" name="starL" class="star-4" id="star-2411" value="4"/>
+								<label class="star-4" for="star-2411">4</label>
+								<input type="radio" name="starL" class="star-5" id="star-2511" value="5"/>
+								<label class="star-5" for="star-2511">5</label>
+								<span></span>
+								</div>
+									</div>
+									</div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label">Staff Service</div>
+                    <div class="star-group">  <div id="ratingsForm">
+								<div class="stars5">
+								<input type="radio" name="starM" class="star-1" id="star-2611" value="1"/>
+								<label class="star-1" for="star-2611">1</label>
+								<input type="radio" name="starM" class="star-2" id="star-2711" value="2"/>
+								<label class="star-2" for="star-2711">2</label>
+								<input type="radio" name="starM" class="star-3" id="star-2811" value="3"/>
+								<label class="star-3" for="star-2811">3</label>
+								<input type="radio" name="starM" class="star-4" id="star-2911" value="4"/>
+								<label class="star-4" for="star-2911">4</label>
+								<input type="radio" name="starM" class="star-5" id="star-3011" value="5"/>
+								<label class="star-5" for="star-3011">5</label>
+								<span></span>
+								</div>
+									</div>
+									</div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label">  Food and Beverages </div>
+                    <div class="star-group">  <div id="ratingsForm">
+								<div class="stars5">
+								<input type="radio" name="starG" class="star-1" id="star-3111" value="1"/>
+								<label class="star-1" for="star-3111">1</label>
+								<input type="radio" name="starG" class="star-2" id="star-3211" value="2"/>
+								<label class="star-2" for="star-3211">2</label>
+								<input type="radio" name="starG" class="star-3" id="star-3311" value="3"/>
+								<label class="star-3" for="star-3311">3</label>
+								<input type="radio" name="starG" class="star-4" id="star-3411" value="4"/>
+								<label class="star-4" for="star-3411">4</label>
+								<input type="radio" name="starG" class="star-5" id="star-3511" value="5"/>
+								<label class="star-5" for="star-3511">5</label>
+								<span></span>
+								</div>
+									</div>
+									</div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label"> Inflight Entertainment </div>
+                    <div class="star-group">  <div id="ratingsForm">
+								<div class="stars5">
+								<input type="radio" name="starQ" class="star-1" id="star-3611" value="1"/>
+								<label class="star-1" for="star-3611">1</label>
+								<input type="radio" name="starQ" class="star-2" id="star-3711" value="2"/>
+								<label class="star-2" for="star-3711">2</label>
+								<input type="radio" name="starQ" class="star-3" id="star-3811" value="3"/>
+								<label class="star-3" for="star-3811">3</label>
+								<input type="radio" name="starQ" class="star-4" id="star-3911" value="4"/>
+								<label class="star-4" for="star-3911">4</label>
+								<input type="radio" name="starQ" class="star-5" id="star-4011" value="5"/>
+								<label class="star-5" for="star-4011">5</label>
+								<span></span>
+								</div>
+									</div>
+									</div>
+                  </div>
+				  
+				  
+				  <div class="form-input trip" id="recommend-box-wrapper">
+                        <div id="recommend-box-label"  class="trip_label" > Would you Recommend this Airline to your friends & family? </div>
+                        <div id="recommend-box" style="float:none;" class="trip_radio">
+                          <label for="recommend-yes">
+                            <input type="radio" checked="checked" value="1" id="recommend-yes" name="recomend"/>
+                            Yes </label>
+                          <label for="recommend-no">
+                            <input type="radio" value="2" id="recommend-yes" name="recomend">
+                            No </label>
+                        </div>
+                      </div>
+                    <!--  <div class="initial">
+                        <input type="text" name="">
+                        <label> Enter your Name   (Family name + first name or initial) </label>
+                      </div>
+                      <div class="initial">
+                        <input type="text" name="">
+                        <label> Enter your Name   (Family name + first name or initial) </label>
+                      </div>
+                      <div class="initial">
+                        <input type="text" name="">
+                        <label> Enter your Name   (Family name + first name or initial) </label>
+                      </div>
+                    </div>-->
+					
+					
+           <div class="form-input padding_top_20">
+                    <div id="subscription-box" style="width:100%;">
+                      <input type="checkbox" id="receiveUpdates" name="receiveUpdates" style="width:4%; float:left;"/>
+<div id="checkboxx"></div>
+                      <label for="subscribe-check" style="line-height:18px;">By submitting this comment you confirm it is a genuine review, that you travelled with the airline you have reviewed and you do not work for this airline
+                    </div>
+                  </div>
+                  	{% if app.session.get('userId') !="" %}
+                  <div class="input-line confirm-buttons" style="margin-top:18px;">
+                  	<br>
+                  		 <span id="headers"></span><br>
+                  		   <span id="review"></span><br>
+                  		      <span id="airRev"></span><br>
+                  		       <span id="dest"></span><br>
+                  		       <span id="dept"></span><br>
+                  		        <span id="deptEqu"></span><br>
+								   <span id="uniuqe"></span>	
+                  		       
+                  		   <input type="button" class="review-button" style="margin:-64px 0 0 0;" id="submit-review-step-2" onclick="javascript:submitReview2();" value="Submit my review" />
+               <!-- <button class="review-button"  id="submit-review-step-2" onclick="javascript:submitReview1();">Submit my review</button>-->
+                    
+                  </div>
+                  		{% else %}
+                  		<div class="input-line confirm-buttons" style="margin-top:18px;">
+                  		<br>
+                  		 <span id="headers"></span><br>
+                  		   <span id="review"></span><br>
+                  		    <span id="airRev"></span><br>
+                  		       <span id="dest"></span><br>
+                  		           <span id="dept"></span><br>
+                  		            <span id="deptEqu"></span><br>
+									   <span id="uniuqe"></span>	
+                   <a href="#login-box" class="login-window"></a>
+                    <input type="button" class="review-button" style="margin:-64px 0 0 0;" id="submit-review-step-2" onclick="javascript:submitReview1();" value="Submit my review" />
+                  </div>
+                  					{% endif %}
+                </fieldset>
+             <!-- </form>-->
+            </div>
+          </div>
+          <div style="display:none;" id="review-agent-step-3-wrapper">
+            <div class="form-section-header rounded_5">Verify your review</div>
+            <div class="form-section-padding" id="review-agent-step-3">
+              <!--<form method="post" action="/api/AgentReview.aspx" id="review-agent-form-step-3">-->
+                <input type="hidden" value="review-agent-form-step-3" id="review-agent-step-3-id" name="form-name"/>
+                <input type="hidden" id="postcodeid" name="postcodeid"/>
+                <input type="hidden" id="state" name="state"/>
+                <input type="hidden" id="suburb" name="suburb"/>
+                <input type="hidden" id="postcode" name="postcode"/>
+                <fieldset id="review-agent-form-step-3-fieldset">
+                  <p class="verify-heading"> To prevent fake reviews, we verify everything submitted on our website. Your details will ONLY be used to verify your review. We hate spam and know you do too. </p>
+                  <p class="agent-to-review-heading">Your email (required)</p>
+                  <div class="form-input">
+                    <input type="email" placeholder="Enter your email address" id="reviewer-email" name="reviewer-email"/>
+                  </div>
+                  <p class="agent-to-review-heading">Your street address</p>
+                  <div class="form-input">
+                    <input type="text" placeholder="Enter your street address" id="reviewer-street" name="reviewer-street"/>
+                  </div>
+                  <p class="agent-to-review-heading">Your suburb</p>
+                  <div class="form-input">
+                    <input type="text" autocomplete="off" placeholder="Enter your properties suburb" name="reviewer-suburb" id="f_suburb"/>
+                    
+                    
+                  </div>
+                  <p class="agent-to-review-heading">Your first name</p>
+                  <div class="form-input">
+                    <input type="text" placeholder="Enter your first name" id="reviewer-firstname" name="reviewer-firstname"/>
+                  </div>
+                  <div class="input-line confirm-buttons">
+                        
+                    <button class="review-button"  id="submit-review-step-3">Verify my review</button>
+                  </div>
+                </fieldset>
+              <!--</form>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+   
+       
+        
+          <style>
+          .line{
+          text-shadow:none !important;
+          }
+ input 
+{
+width:inherit;#recommend-box label {
+    display: block;
+    float: left;
+    height: 10px;
+    line-height: 20px;
+    margin-right: 25px;
+    width: 131px;
+}
+}
+
+#recommend-box_dash {
+    color: #666666;
+    float: none;
+    font-size: 16px;
+    font-weight: 300;
+    padding-bottom: 20px;
+}
+#recommend-box label {
+    display: block;
+    float: left;
+    height: 10px;
+    line-height: 20px;
+    margin-right: 25px;
+    width: auto;
+}
+          </style>
+
+ 
+
+{% include "RAAWebBundle:Page:rating.html.twig"%}
+
+</form>
+
+
+
+
+{% endblock %}

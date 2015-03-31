@@ -1,0 +1,527 @@
+raa_web_homepage:
+    pattern:  /
+    defaults: { _controller: RAAWebBundle:Web:index }
+    requirements:
+        _method:  GET
+        
+        
+raa_web_writeReview:
+    pattern:  /writeReview
+    defaults: { _controller: RAAWebBundle:Web:writeReview }
+    requirements:
+        _method:  GET 
+
+raa_web_writeReviewDashboard:
+    pattern:  /writeReview/dashboard
+    defaults: { _controller: RAAWebBundle:Web:writeReviewDashboard }
+    requirements:
+        _method:  GET                
+        
+raa_web_searchAirlines:
+    pattern:  /airlines
+    defaults: { _controller: RAAWebBundle:Web:airline }
+    requirements:
+        _method:  GET|POST                     
+
+        
+raa_web_login:
+    pattern:  /login
+    defaults: { _controller: RAAWebBundle:Airline:login }
+    requirements:
+        _method:  GET|POST
+        
+       
+raa_web_registration:
+    pattern:  /registration
+    defaults: { _controller: RAAWebBundle:Web:registration }
+    requirements:
+        _method:  GET|POST  
+        
+raa_web_managePlan:
+    pattern:  /managepaymentplans
+    defaults: { _controller: RAAWebBundle:Airline:managePlan }
+    requirements:
+        _method:  GET|POST   
+
+raa_web_feedback:
+    pattern:  /feedbacks
+    defaults: { _controller: RAAWebBundle:Airline:feedback }
+    requirements:
+        _method:  GET|POST
+                  
+        
+raa_web_manageListing:
+    pattern:  /managelisting
+    defaults: { _controller: RAAWebBundle:Airline:manageListing }
+    requirements:
+        _method:  GET|POST  
+        
+raa_web_home:
+    pattern:  /dashboard
+    defaults: { _controller: RAAWebBundle:Airline:dashboard }
+    requirements:
+        _method:  GET|POST
+        
+raa_web_logout: 
+    pattern:  /logout
+    defaults: { _controller: RAAWebBundle:Airline:logout }
+    requirements:
+        _method:  GET     
+        
+raa_web_changeplan: 
+    pattern:  /changeplan
+    defaults: { _controller: RAAWebBundle:Airline:changePlan }
+    requirements:
+        _method:  GET|POST    
+       
+raa_web_forgotpassword: 
+    pattern:  /forgotPassword
+    defaults: { _controller: RAAWebBundle:Airline:forgotPassword }
+    requirements:
+        _method:  GET|POST   
+        
+        
+raa_web_getFeatures:
+    pattern:  /plan/getFeatures/{planId}
+    defaults: { _controller: RAAWebBundle:Airline:getFeatures }
+    requirements:
+        _method:  GET|POST    writeReviewDashboard
+        
+raa_web_getDescription:
+    pattern:  /plan/getDescription/{planId}
+    defaults: { _controller: RAAWebBundle:Airline:getDescription }
+    requirements:
+        _method:  GET|POST
+        
+raa_web_editListing:
+    pattern:  /editlisting
+    defaults: { _controller: RAAWebBundle:Airline:editListing }
+    requirements:
+        _method:  GET|POST     
+
+raa_web_changeImage:
+    pattern:  /changeImage
+    defaults: { _controller: RAAWebBundle:Airline:changeImage }
+    requirements:
+        _method:  GET|POST 
+                  
+raa_web_changeLogo:
+    pattern:  /changeLogo
+    defaults: { _controller: RAAWebBundle:Airline:changeLogo }
+    requirements:
+        _method:  GET|POST         
+
+raa_web_profile:
+    pattern:  /airline/{id}
+    defaults: { _controller: RAAWebBundle:Web:showProfile }
+    requirements:
+        _method:  GET|POST
+
+raa_web_review:
+    pattern:  /WriteReview/{id}
+    defaults: { _controller: RAAWebBundle:Web:showReviews }
+    requirements:
+        _method:  GET|POST
+
+raa_web_reviewDashboard:
+    pattern:  /WriteReview/dashboard/{id}
+    defaults: { _controller: RAAWebBundle:Web:showReviewDashboard }
+    requirements:
+        _method:  GET|POST
+                   
+raa_web_reply:
+    pattern:  /reply
+    defaults: { _controller: RAAWebBundle:Airline:reply }
+    requirements:
+        _method:  GET|POST 
+                
+                   
+raa_web_property:
+    pattern:  /airline/manageflights
+    defaults: { _controller: RAAWebBundle:Airline:property }
+    requirements:
+        _method:  GET|POST
+ 
+raa_web_addProperty:
+    pattern:  /airline/addflight
+    defaults: { _controller: RAAWebBundle:Airline:addProperty }
+    requirements:
+        _method:  GET|POST         
+raa_web_subscriber:
+   pattern:  /subscribe
+   defaults: { _controller: RAAWebBundle:Web:Subscriber }
+   requirements:
+        _method:  GET|POST   
+        
+                           
+ 
+raa_web_updateProperty:
+    pattern:  /airline/updateflight{id}
+    defaults: { _controller: RAAWebBundle:Airline:updateProperty }
+    requirements:
+        _method:  GET|POST    
+        
+raa_web_deleteProperty:
+    pattern:  airline/flight/delete{id}
+    defaults: { _controller: RAAWebBundle:Airline:deleteProperty }
+    requirements:
+        _method:  GET|POST
+        
+raa_web_addSliderImage:
+    pattern:  /addSliderImage
+    defaults: { _controller: RAAWebBundle:Airline:addSliderImage }
+    requirements:
+        _method:  GET|POST     
+        
+raa_web_demo:
+    pattern:  /demo
+    defaults: { _controller: RAAWebBundle:Airline:demo }
+    requirements:
+        _method:  GET|POST     
+        
+        
+raa_web_capture:
+    pattern:  /capture{id}
+    defaults: { _controller: RAAWebBundle:Web:captureEmail }
+    requirements:
+        _method:  GET|POST 
+        
+raa_web_propertyDetail:
+    pattern:  /propertyDetail{id}
+    defaults: { _controller: RAAWebBundle:Airline:propertyDetail }
+    requirements:
+        _method:  GET|POST     
+        
+          
+raa_web_transactionDetail:
+    pattern:  /transactionDetail
+    defaults: { _controller: RAAWebBundle:Airline:transactionDetail }
+    requirements:
+        _method:  GET|POST      
+
+raa_web_paypal:
+   pattern:  /paypal
+   defaults: { _controller: RAAWebBundle:Airline:payPal }
+   requirements:
+        _method:  GET|POST      
+   
+raa_web_companies:
+   pattern:  /companies
+   defaults: { _controller: RAAWebBundle:Airline:countCompanies }
+   requirements:
+        _method:  GET|POST        
+        
+raa_web_cancel:
+   pattern:  /cancel
+   defaults: { _controller: RAAWebBundle:Airline:cancel }
+   requirements:
+        _method:  GET|POST 
+               
+raa_web_success:
+   pattern:  /success
+   defaults: { _controller: RAAWebBundle:Airline:success }
+   requirements:
+        _method:  GET|POST       
+                              
+raa_web_confirmationEmail:
+   pattern:  /confirmation/{id}
+   defaults: { _controller: RAAWebBundle:Web:confirmationEmail }
+   requirements:
+        _method:  GET|POST       
+
+verifyfbaccount:
+    pattern: /verifyfbaccount
+    defaults: { _controller: RAAWebBundle:Web:verifyfbaccount } 
+
+raa_web_searchDetail:
+   pattern:  /propertyDetail/{id}
+   defaults: { _controller: RAAWebBundle:Web:propertySearchDetail }
+   requirements:
+        _method:  GET|POST       
+
+raa_web_claimLogin:
+   pattern:  /claimLogin/{id}
+   defaults: { _controller: RAAWebBundle:Web:claimLogin }
+   requirements:
+        _method:  GET|POST       
+
+raa_web_page:
+   pattern:  /page{id}
+   defaults: { _controller: RAAWebBundle:Web:page }
+   requirements:
+        _method:  GET|POST                                                                                                                                                                                                                                                                                                                                                                   
+
+raa_web_checkEmailExistance:
+   pattern:  /checkEmail
+   defaults: { _controller: RAAWebBundle:Web:checkEmailExistance }
+   requirements:
+        _method:  GET|POST  
+        
+raa_web_checkUserExistance:
+   pattern:  /checkUser/{id}
+   defaults: { _controller: RAAWebBundle:Web:checkUserExistance }
+   requirements:
+        _method:  GET|POST       
+
+raa_web_successClaim:
+   pattern:  /succesfull/claim
+   defaults: { _controller: RAAWebBundle:Web:successfulClaim }
+   requirements:
+        _method:  GET|POST       
+
+        
+raa_web_getBanner:
+   pattern:  /getBanner
+   defaults: { _controller: RAAWebBundle:Web:getBanner }
+   requirements:
+        _method:  GET|POST    
+        
+raa_web_getAdvertiesment:
+   pattern:  /getAdvertiesment
+   defaults: { _controller: RAAWebBundle:Web:getAdvertiesment }
+   requirements:
+        _method:  GET|POST         
+
+              
+raa_web_showCms:
+   pattern:  /ss
+   defaults: { _controller: RAAWebBundle:Web:showCms }
+   requirements:
+        _method:  GET|POST 
+        
+raa_web_showCmsFooter:
+   pattern:  /footer
+   defaults: { _controller: RAAWebBundle:Web:showCmsFooter }
+   requirements:
+        _method:  GET|POST         
+            
+raa_web_transactionSubmit:
+   pattern:  /transactions
+   defaults: { _controller: RAAWebBundle:Web:transactionSubmit }
+   requirements:
+        _method:  GET|POST    
+        
+raa_web_paymentSubmit:
+   pattern:  /registered
+   defaults: { _controller: RAAWebBundle:Web:successPayment }
+   requirements:
+        _method:  GET|POST       
+
+
+
+raa_web_showPropertyImages:
+   pattern:  /airline/imagess/{id}
+   defaults: { _controller: RAAWebBundle:Airline:showPropertyImages }
+   requirements:
+        _method:  GET|POST  
+
+        
+raa_web_deleteRealtorPropertyImages:
+    pattern: delete/airline/Property/Image/{id}
+    defaults: { _controller: RAAWebBundle:Airline:deleteAirlineImages}
+    requirements:
+        _method:  GET|POST    
+        
+   
+
+RAAWebBundle_updatePropertyMainImage:
+   pattern:  /property/mainImage
+   defaults: { _controller: RAAWebBundle:Airline:updatePropertyMainImage }
+   requirements:
+        _method:  GET|POST  
+
+      
+
+RAAWebBundle_searchAlphabetically:
+   pattern:  /search/alphabetically
+   defaults: { _controller: RAAWebBundle:Web:searchAlphabetically }
+   requirements:
+        _method:  GET|POST  
+        
+raa_web_flights:
+   pattern:  /airline/flights/{id}
+   defaults: { _controller: RAAWebBundle:Web:airlineFlights }
+   requirements:
+        _method:  GET|POST      
+        
+raa_web_privacyPolicy:
+   pattern:  /privacyPolicy
+   defaults: { _controller: RAAWebBundle:Web:privacyPolicy }
+   requirements:
+        _method:  GET|POST    
+        
+raa_web_aboutUs:
+   pattern:  /aboutus
+   defaults: { _controller: RAAWebBundle:Web:aboutUs }
+   requirements:
+        _method:  GET|POST    
+
+raa_web_siteMap:
+   pattern:  /siteMap
+   defaults: { _controller: RAAWebBundle:Web:siteMap }
+   requirements:
+        _method:  GET|POST
+        
+raa_web_terms:
+   pattern:  /terms
+   defaults: { _controller: RAAWebBundle:Web:terms }
+   requirements:
+        _method:  GET|POST 
+
+raa_web_faq:
+   pattern:  /faq
+   defaults: { _controller: RAAWebBundle:Web:faq }
+   requirements:
+        _method:  GET|POST      
+
+raa_web_disclaimer:
+   pattern:  /disclaimer
+   defaults: { _controller: RAAWebBundle:Web:disclaimer }
+   requirements:
+        _method:  GET|POST       
+
+raa_web_fullServices:
+   pattern:  /completedetail/{id}
+   defaults: { _controller: RAAWebBundle:Web:fullServices }
+   requirements:
+        _method:  GET|POST     
+
+        
+raa_web_subscriber:
+   pattern:  /subscribe
+   defaults: { _controller: RAAWebBundle:Web:Subscriber }
+   requirements:
+        _method:  GET|POST   
+
+raa_web_airlineDetail:
+   pattern:  /airlineDetail
+   defaults: { _controller: RAAWebBundle:Web:airlineDetail }
+   requirements:
+        _method:  GET|POST           
+
+raa_web_searchCities:
+   pattern:  /citiesAirline
+   defaults: { _controller: RAAWebBundle:Web:searchCities}
+   requirements:
+        _method:  GET|POST      
+        
+raa_web_detailReviews:
+   pattern:  /detailsReviews/{id}
+   defaults: { _controller: RAAWebBundle:Web:detailsReview}
+   requirements:
+        _method:  GET|POST
+        
+
+
+raa_web_getAirlineName:
+   pattern:  /allAirlines/name
+   defaults: { _controller: RAAWebBundle:Web:getAirlineName }
+   requirements:
+        _method:  GET|POST 
+        
+raa_web_airlinesReviews:
+   pattern:  /airline/reviewes/{id}
+   defaults: { _controller: RAAWebBundle:Web:airlinesReviews }
+   requirements:
+        _method:  GET|POST
+        
+        
+raa_web_contactUs:
+   pattern:  /contact-us
+   defaults: { _controller: RAAWebBundle:Web:contactUs }
+   requirements:
+        _method:  GET|POST      
+             
+
+raa_web_confirmedSubscribe:
+   pattern:  /confirmed/subscription/{id}
+   defaults: { _controller: RAAWebBundle:Web:confirmedSubscription }
+   requirements:
+        _method:  GET|POST        
+
+
+raa_web_confirmedRegistration:
+   pattern:  /confirmed/registration/{id}
+   defaults: { _controller: RAAWebBundle:Web:confirmedRegistration }
+   requirements:
+        _method:  GET|POST 
+        
+raa_web_submitReviewDashboard:
+   pattern:  /submitReview/s
+   defaults: { _controller: RAAWebBundle:Web:submitReviewDashboard }
+   requirements:
+        _method:  GET|POST  
+        
+raa_web_approveReview:
+   pattern:  /approve/review/{id}
+   defaults: { _controller: RAAWebBundle:Web:approveReview }
+   requirements:
+        _method:  GET|POST  
+        
+raa_web_thankYou:
+   pattern:  /thank-you-page
+   defaults: { _controller: RAAWebBundle:Web:thankYou }
+   requirements:
+        _method:  GET|POST   
+
+raa_web_deleteReviews:
+   pattern:  /delete/reviews/{id}
+   defaults: { _controller: RAAWebBundle:Airline:deleteReviews }
+   requirements:
+        _method:  GET|POST 
+
+raa_web_editReviews:
+   pattern:  /edit/reviews/{id}
+   defaults: { _controller: RAAWebBundle:Airline:editReviews }
+   requirements:
+        _method:  GET|POST     
+
+raa_web_viewReviews:
+   pattern:  /edit/view/reviews/{id}
+   defaults: { _controller: RAAWebBundle:Airline:viewReviews }
+   requirements:
+        _method:  GET|POST  
+
+
+
+rar_web_fbLogin:
+   pattern:  /facebook
+   defaults: { _controller: RAAWebBundle:Web:facebookLogin }
+   requirements:
+        _method:  GET|POST 
+
+
+rar_web_fbRegistration:
+   pattern:  /facebook/Registration
+   defaults: { _controller: RAAWebBundle:Web:facebookRegistration}
+   requirements:
+        _method:  GET|POST      
+
+
+raa_web_checkUser:
+   pattern:  /check/User
+   defaults: { _controller: RAAWebBundle:Airline:checkUser}
+   requirements:
+        _method:  GET|POST
+
+raa_web_checkHeadline:
+   pattern:  /check/Headline
+   defaults: { _controller: RAAWebBundle:Web:checkHeadline}
+   requirements:
+        _method:  GET|POST  
+
+raa_web_airlinePagination:
+   pattern:  /sdsd/pagination
+   defaults: { _controller: RAAWebBundle:Web:airlinePagination}
+   requirements:
+        _method:  GET|POST   
+        
+raa_web_pageFooter:
+   pattern:  /{id}
+   defaults: { _controller: RAAWebBundle:Web:pageFooter }
+   requirements:
+        _method:  GET|POST       
+           
+        
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    

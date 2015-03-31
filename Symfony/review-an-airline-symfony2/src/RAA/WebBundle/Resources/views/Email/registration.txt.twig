@@ -1,0 +1,24 @@
+{% block subject %}{% autoescape false %}
+    Review-An-Airline Registration
+{% endautoescape %}{% endblock %}
+
+{% block body_text %}{% autoescape false %}
+    Hello!
+	
+  		
+  		Hello {{firstname}} {{lastname}}
+  		
+  		Your account has been created with reviewanairline.com.Your Account Details are as under:
+  		
+  		 Email Id: {{email}}
+  		 Password: {{password}}
+			
+		Please click the link below to confirm your email and activate your account:
+		
+		{{confirmationLink}}
+			
+    Best regards,
+    Review-An-Airline Team.
+{% endautoescape %}{% endblock %}
+
+{% block body_html %}{% endblock %}

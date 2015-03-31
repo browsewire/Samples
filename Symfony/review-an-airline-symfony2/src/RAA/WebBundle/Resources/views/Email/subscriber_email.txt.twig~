@@ -1,0 +1,14 @@
+{% block subject %}{% autoescape false %}
+    Review-An-Airline Subscription
+{% endautoescape %}{% endblock %}
+
+{% block body_text %}{% autoescape false %}
+    Hello!
+	<br/><br/>
+    You have subscribed to reviewanairline.com using your email id <B>{{email}}</b>
+	<br/><br/>
+    Best regards,<br/>
+    Review-An-Airline Team.
+{% endautoescape %}{% endblock %}
+
+{% block body_html %}{% endblock %}

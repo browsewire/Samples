@@ -1,0 +1,73 @@
+{% extends 'RAAAdminBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %}View Review Detail | Admin{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+<script>
+	function goBack()
+	{
+		window.location.href = '{{ path('RAAAdminBundle_manageCms') }}';
+	}
+</script>
+
+	<section id="content">
+				
+
+				<form id="form" >
+					<fieldset>
+						<label>Reviews Detail</label>
+							{% for reviews in reviewsDetail %}
+							
+							<div style="width:71%;float:left;">
+							
+							<section class="chrome"><label for="text_field">Airline Name</label>
+							<div style="height: auto;margin: 5px;width: auto;">{{reviews.business_name}}</div>
+						</section>
+						<section class="chrome"><label for="text_field">Title</label>
+							<div style="height: auto;margin: 5px;width: auto;">{{reviews.headline}}</div>
+						</section>
+						<section class="chrome" style="height:auto;"><label for="text_tooltip">Description</label>
+								<div style="height: auto;margin: 5px;width: auto;">{{reviews.description|default("N.A.")}}</div>
+						</section>
+						
+						</div>
+						
+						<section style="width:0%;">
+						<div>
+						{% if reviews.logo == "" %}
+					<img src="{{ asset('themes/web/images/aeroplane.png') }}" style="margin:0 0 0 33; border: 1px solid green; height:153;width:199;"/>
+						{% else %}
+						<img alt="Client" src="{{ asset(['Airline/', reviews.logo]|join) }} " style="margin:0 0 0 33; border: 1px solid green;"/>
+						{% endif %}
+						</div>
+						</section>
+						
+						
+						
+				<hr style="border: 1px solid black;float: left;width: 100%;
+}">
+						{% endfor %}
+						<section class="chrome">
+
+	<div><button class="center1" onclick="goBack()">Cancel</button></div>
+						</section>
+						
+					</fieldset>
+				</form>	
+				</div>
+		</section>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

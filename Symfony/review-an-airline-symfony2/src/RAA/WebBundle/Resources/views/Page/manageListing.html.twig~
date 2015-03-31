@@ -1,0 +1,99 @@
+{% extends 'RAAWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %}My Profile{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+    <script src="{{  asset('themes/frontend/js/menu_jquery.js') }}"></script>
+    <script src="{{  asset('themes/frontend/js/jquery-1.10.1.min.js') }}"></script>
+    <script src="{{  asset('themes/frontend/js/menu_jquery.js') }}"></script>
+    <script>
+
+	$(document).ready(function()
+	{
+		$("#business").addClass('active_background');
+	});
+</script>
+
+
+
+
+
+    </script>
+
+  <div class="titles oranges border">
+      <h2 >My Profile</h2>
+  </div>
+  <div>
+ {% for airline in airlines %}
+<h2 class="recent_act" style="text-transform: capitalize;">{{airline.first_name }} {{airline.last_name }}</h2>
+</div>
+<hr class="hr_act" style="margin-bottom:-13px;">
+  <div class="column relators-inner" style="margin: 0 0 0 0;width: 100%;">
+    <div class="name-hd1 edittList" style="width:96%; !important">
+     
+        <h3 class="caps"></h3>
+    </div>      
+    <div class="cl"></div>
+    
+  
+     <div class="image-box edittList">
+   
+
+
+{% if '://' in airline.image %}
+<img id="imgprvw"  src="{{userProfileImageUrl}}">
+{% elseif airline.image=="" %}
+<img id="imgprvw"  src="{{ asset('themes/web/images/default_user_image.jpeg') }}">
+{% else %}
+
+
+
+    
+
+
+<img src=" {{ asset(['images/uploads/', airline.image]|join) }} ">
+
+{% endif %}
+
+      <p class="changeImage"><a href="{{ path('raa_web_changeImage',{id:app.session.get('userId')}) }}-{{app.session.get('userName')}}" >Change Profile Image</a></p>
+    </div>
+    
+  
+    <div class="content-box ">
+      <div class="left-side-realator1">
+        <div id="agent-to-review-agency" class="wid-left" style="width:125%;">
+       	<p><strong>Username:</strong> {{airline.username|default ("N.A.")}}</p>
+          <p><strong>Email:</strong> {{airline.email|default ("N.A.") }} </p>
+        
+          <p><strong>Phone:</strong> {{airline.phone|default ("N.A.")}}</p>
+	 
+       
+        </div>
+      </div>
+    
+      <!-- 12-22-2014 updates by gracecruz -starts -->
+	<style>.login{display:block;margin-bottom:3%; right: 10% !important;position: relative;} </style>
+  
+  </div>
+	  
+  </div>
+    <div class="login" style="/8margin-top:77%; */margin-right:10%;">
+    
+     <ul>
+        <li><a href="{{ path('raa_web_editListing',{id:app.session.get('userId')}) }}-{{app.session.get('userName')}}">Edit</a></li>
+      </ul>  
+
+      </div>
+     <!-- 12-22-2014 updates by gracecruz -ends -->
+
+ 
+</div>
+
+  {% endfor %}
+
+
+
+
+{% endblock %}

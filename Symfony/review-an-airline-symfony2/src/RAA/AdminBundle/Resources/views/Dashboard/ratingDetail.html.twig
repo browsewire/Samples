@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- 
+ * Markup for jQuery Reveal Plugin 1.0
+ * www.ZURB.com/playground
+ * Copyright 2010, ZURB
+ * Free to use under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ -->
+	<head>
+	{%block javascripts %}
+		
+		
+		<!-- Attach our CSS -->
+
+	  	
+		<!-- Attach necessary scripts -->
+		<!-- <script type="text/javascript" src="jquery-1.4.4.min.js"></script> -->
+							<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>-->
+		         <script src="{{asset('bundles/loginlogin/js/jquery.reveal.js')}}"></script>
+            <script src="{{asset('bundles/loginlogin/js/jssor.utils.js')}}"></script>
+		<style type="text/css">
+		
+		
+			.reveal-modal-bg { 
+		position: fixed; 
+		height: 100%;
+		width: 100%;
+		background: #000;
+		background: rgba(0,0,0,.8);
+		z-index: 100;
+		display: none;
+		top: 0;
+		left: 0; 
+		}
+	
+	.reveal-modal {
+		visibility: hidden;
+		top: 100px; 
+		left: 50%;
+		margin-left: -300px;
+		width: 520px;
+		background: #eee url(modal-gloss.png) no-repeat -200px -80px;
+		position: absolute;
+		z-index: 101;
+		padding: 30px 40px 34px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		-moz-box-shadow: 0 0 10px rgba(0,0,0,.4);
+		-webkit-box-shadow: 0 0 10px rgba(0,0,0,.4);
+		-box-shadow: 0 0 10px rgba(0,0,0,.4);
+		}
+		
+	.reveal-modal.small 		{ width: 200px; margin-left: -140px;}
+	.reveal-modal.medium 		{ width: 400px; margin-left: -240px;}
+	.reveal-modal.large 		{ width: 600px; margin-left: -340px;}
+	.reveal-modal.xlarge 		{ width: 800px; margin-left: -440px;}
+	
+	.reveal-modal .close-reveal-modal {
+		font-size: 22px;
+		line-height: .5;
+		position: absolute;
+		top: 8px;
+		right: 11px;
+		color: #aaa;
+		text-shadow: 0 -1px 1px rbga(0,0,0,.6);
+		font-weight: bold;
+		cursor: pointer;
+		} 
+		
+		</style>
+		
+	</head>
+	 {% endblock %}
+	 {% block body %}
+	<body>
+
+		<a href="#" class="big-link" data-reveal-id="myModal">
+		
+		</a>	
+		
+	
+
+		<div id="myModal" class="reveal-modal">
+			
+	
+												
+			<a class="close-reveal-modal">&#215;</a>
+			
+			<div id="cross"></div>
+		</div>
+			
+	</body>
+	{% endblock %}
+</html>

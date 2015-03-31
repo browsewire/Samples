@@ -1,0 +1,7 @@
+parameters:
+#    raa_web.example.class: RAA\WebBundle\Example
+
+services:
+#    raa_web.example:
+#        class: %raa_web.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

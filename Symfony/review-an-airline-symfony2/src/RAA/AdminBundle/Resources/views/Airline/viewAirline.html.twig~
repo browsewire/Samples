@@ -1,0 +1,108 @@
+{% extends 'RAAAdminBundle::layout.html.twig' %}
+
+
+
+
+{% block body %}
+<title>{% block title %}View Airline | Admin{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+<script>
+	function importUsers()
+	{
+		window.location.href = '{{ path('RAAAdminBundle_airline') }}';
+	}
+	</script>
+	<section id="content">
+				
+
+				<form id="form" >
+					<fieldset>
+						<label>Airline Detail</label>
+						
+						<section class="chrome"style="width:51%;"><label for="text_field" style="width: 27%;"><strong >Airline Name</strong></label>
+							<div style="float:right;">
+							{{airlineDetail.business_name|default("Not Available")}}	{{airlineDetail.last_name}}
+							
+							
+							</div>
+						</section>
+						<section class="chrome "style="width:51%; height:161px;"><label for="text_tooltip"><strong>Tagline</strong></label>
+							<div style="float:right; ">
+							
+								{{airlineDetail.airline_tagline|default("Not Available")}}
+							
+							</div>
+						</section>
+						
+<section class="detail_admins">
+						<div>
+			<img class="airline_detail_image" src="{{ asset(['images/Airline/', airlineDetail.logo]|join) }}">
+						</div>
+						</section>
+						
+						<section class="chrome" style="height:auto;">
+							<label for="text_tooltip"><strong>History</strong></label>
+							<div style="margin:0 0 0 126;">
+							{% for airdetail in detail%}
+								{{airdetail.tab_html |raw}}
+								
+								{% endfor %}
+							</div>
+						</section>
+							
+						<!--	<label style="margin:50% 0 0 0 ;">Business Detail</label>
+						<section class="chrome ">
+							<label for="text_tooltip"><strong>Business Name</strong></label>
+							<div>
+								{{airlineDetail.business_name|default("NULL")}}
+							</div>
+						</section>
+						
+						<!--<section class="chrome ">
+							<label for="text_tooltip"><strong>Business Overview</strong></label>
+							<div style="width:auto; float:none;">
+								{{airlineDetail.overview |default("NULL")}}
+							</div>
+						</section>
+						
+						
+					<!--<section class="chrome ">
+							<label for="text_tooltip"><strong>Business Url</strong></label>
+							<div>
+								{{airlineDetail.business_url |default("NULL") }}
+							</div>
+						</section>-->
+						
+						<!--<section class="detail_admins">
+						<div>
+			<img class="airline_detail_image" src="{{ asset(['Airline/', airlineDetail.logo]|join) }}">
+						</div>
+						</section>
+						
+						
+						<!--<section class="detail_admin">
+						<div>
+					<!--	<img class="airline_detail_image" src="{{ asset(['uploads/', airlineDetail.image]|join) }}">
+						</div>
+						</section>-->
+						<section>
+							<button class="center1" name="submitbuttonnames" value="submitbuttonvalues" onclick="importUsers()">Cancel</button>
+							</section>
+					</fieldset>
+				</form>	
+				</div>
+		</section>
+<style>
+.chrome ul
+{
+margin-top:10px;
+}
+
+
+</style>
+
+
+{% endblock %}

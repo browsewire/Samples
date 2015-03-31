@@ -1,0 +1,212 @@
+{% extends 'RAAAdminBundle::layout.html.twig' %}
+{% block javascripts %}
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+
+	<script>
+
+function detailReview(id)
+{
+var a = $("#detailId").val(id);
+ 	
+ 	
+ 	$.ajax({
+               	url : '{{ path("RAAAdminBundle_ratingCompleteDetail",{ "id": '+a+' }) }}',
+                type:'POST',
+                data:'id='+id,
+                dataType:'html',   
+                success:function(data){
+                    //var category_product = $(data).find('.city').html();
+                    $('#city').html(data);
+//alert(data);
+document.getElementById("cross").innerHTML=data;
+                }
+            });
+
+
+}
+</script>
+{% endblock %}
+{% block body %}
+		<section id="content">		
+			<div class="g12 nodrop">
+				<h1>Dashboard</h1>
+				<p>This is a quick overview of some features</p>
+			</div>			
+			<div class="g6 widgets" style="width:32%;">
+				<div class="widget number-widget" id="widget_number">
+					<h3 class="handle">Overview</h3>
+					<div>
+						<ul>
+							<li><a href="{{ path('RAAAdminBundle_airline') }}"><span>{{dashboardDetails.totalairlines}}</span> Airlines</a></li>
+							<li><a href="{{ path('RAAAdminBundle_reviewer') }}"><span>{{dashboardDetails.totalReviewers}}</span> Reviewers</a></li>
+						
+						</ul>
+					</div>
+				</div>
+				
+
+			</div>
+			
+				<div class="g6 widgets" style="width:64%;">		
+			<div class="widget" id="widget_ajax" data-load="widget-content.php" data-reload="10" data-remove-content="false">
+					<h3 class="handle">Latest Users</h3>
+					<div>
+					
+					
+					
+					
+					<table class="datatable">
+			<thead>
+				<tr>
+					
+					<th class=" col-2" style="width: 75px;" rowspan="1" colspan="1">Name &nbsp;&nbsp;</th>
+					<th class=" col-2" style="width: 75px;" rowspan="1" colspan="1">Email &nbsp;&nbsp;</th>
+			
+					<th class=" col-2" style="width: 77px;" rowspan="1" colspan="1">Phone &nbsp;&nbsp;</th>
+					<th class=" col-3" style="width: 75px; min-width:3%;" rowspan="1" colspan="1">Reviews &nbsp;&nbsp;</th>
+					
+		
+				</tr>
+			</thead>
+				
+				
+				<tbody>		
+			{% for latestUser in latestUsers %}
+				<tr class="gradeA odd">
+				
+				<td class="txtleft">{{latestUser.first_name}}</td>
+						<td class="txtleft">{{latestUser.email}}</td>
+						
+								<td class="txtleft">{{ latestUser.phone}}</td>
+						<td class="txtleft"><a href="{{ path('RAAAdminBundle_showRev',{id:latestUser.reviewer_id ?:0}) }}">{{ latestUser.totalReviews}}</a></td>
+
+
+						</tr>		
+							{% endfor %}
+				</table>
+					</tbody>
+			</div>	
+				</div>
+			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+				<div class="g6 widgets" style="width:97%;">
+			<div class="widget" id="widget_charts" data-icon="graph">
+				<h3 class="handle">Latest Reviewes</h3>
+				<div>
+				
+				<table class="datatable">
+			<thead>
+				<tr>
+					
+					<th class="col-3" style="width: 109px;min-width:5%;" rowspan="1" colspan="1">User &nbsp;&nbsp;</th>
+					<!--<th class="sorting col-3" style="width: 104px;" rowspan="1" colspan="1">LastName &nbsp;&nbsp;</th>-->
+					<th class=" col-2" rowspan="1" colspan="1">Airline &nbsp;&nbsp;</th>
+					<th class=" col-2" style="width: 75px;" rowspan="1" colspan="1">Title &nbsp;&nbsp;</th>
+					<!--<th class="sorting col-6" style="width: 240px;" rowspan="1" colspan="1">Address &nbsp;&nbsp;</th>-->
+					<th class=" col-2" style="width: 77px;min-width:20%;" rowspan="1" colspan="1">Review &nbsp;&nbsp;</th>
+					<th class=" col-3" style="width: 75px;" rowspan="1" colspan="1">Date &nbsp;&nbsp;</th>
+					<!--<th class="sorting col-2" rowspan="1" colspan="1" style="width: 180px;">Country</th>-->
+					<!--<th class="sorting col-3" style="width: 48px;" rowspan="1" colspan="1">Zip &nbsp;&nbsp;</th>-->
+		
+				</tr>
+			</thead>
+				
+				
+				<tbody>		
+			{% for latestReviews in latestReview %}
+				<tr class="gradeA odd">
+				
+				<td class="txtleft">{{latestReviews.first_name}}</td>
+				<td class="txtleft">{{latestReviews.business_name}}</td>
+						<td class="txtleft">{{latestReviews.headline}}</td>
+						
+							<td class="txtleft">{% if latestReviews.description|length>(40) %} {{ latestReviews.description[:40] ~ '...' }}<a data-toggle="modal" role="button" href="#" id="{{latestReviews.id}}" onclick="detailReview(this.id);" class="big-link" data-reveal-id="myModal">Readmore</a>{% else %}{{latestReviews.description}}{% endif %}</td>
+								<td class="txtleft">{{ latestReviews.creation_timestamp|date('F j, Y') }}</td>
+					
+
+
+						</tr>		
+							{% endfor %}
+				</table>
+					</tbody>
+			</div>	
+				</div>
+				
+				<!--<div class="widget" id="widget_ajax" data-load="widget-content.php" data-reload="10" data-remove-content="false">
+					<h3 class="handle">Latest Users</h3>
+					<div>
+					
+					
+					
+					
+					<table class="datatable">
+			<thead>
+				<tr>
+					
+			
+					<th class="sorting col-2" style="width: 75px;" rowspan="1" colspan="1">Email &nbsp;&nbsp;</th>
+			
+					<th class="sorting col-2" style="width: 77px;" rowspan="1" colspan="1">Phone &nbsp;&nbsp;</th>
+					<th class="sorting col-3" style="width: 75px;" rowspan="1" colspan="1">Reviewes &nbsp;&nbsp;</th>
+					
+		
+				</tr>
+			</thead>
+				
+				
+				<tbody>		
+			{% for latestUser in latestUsers %}
+				<tr class="gradeA odd">
+				
+				<td class="txtleft">{{latestUser.first_name}}</td>
+						<td class="txtleft">{{latestUser.email}}</td>
+						
+								<td class="txtleft">{{ latestUser.phone}}</td>
+						<td class="txtleft">{{ latestUser.totalReviews}}</td>
+
+
+						</tr>		
+							{% endfor %}
+				</table>
+					</tbody>
+			</div>	
+				</div>-->
+				
+				
+				
+				
+
+				</div>
+			
+			 {% include "RAAAdminBundle:Dashboard:ratingDetail.html.twig"%}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+{% endblock %}

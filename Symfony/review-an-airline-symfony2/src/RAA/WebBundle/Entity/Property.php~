@@ -1,0 +1,360 @@
+<?php
+namespace RAA\WebBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="raa_property")
+ */
+class Property
+{
+    
+		/**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    public $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $description;
+                /**
+     * @ORM\Column(type="string")
+     */
+    public $name;
+    
+        /**
+     * @ORM\Column(type="string")
+     */
+    public $address;
+    
+            /**
+     * @ORM\Column(type="string")
+     */
+    public $state;
+        
+            /**
+     * @ORM\Column(type="string")
+     */
+    public $city;
+            /**
+     * @ORM\Column(type="string")
+     */
+    public $additional_information;
+            /**
+     * @ORM\Column(type="string")
+     */
+    public $video_url;
+            /**
+     * @ORM\Column(type="string")
+     */
+    public $price;
+                /**
+     * @ORM\Column(type="integer")
+     */
+    public $fair;
+            /**
+     * @ORM\Column(type="string")
+     */
+    public $phone;
+                /**
+     * @ORM\Column(type="string")
+     */
+    public $user_id;
+            /**
+     * @ORM\Column(type="string")
+     */
+    public $zip;
+    
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Property
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Property
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return Property
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     * @return Property
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+    
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string 
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * Set additional_information
+     *
+     * @param string $additionalInformation
+     * @return Property
+     */
+    public function setAdditionalInformation($additionalInformation)
+    {
+        $this->additional_information = $additionalInformation;
+    
+        return $this;
+    }
+
+    /**
+     * Get additional_information
+     *
+     * @return string 
+     */
+    public function getAdditionalInformation()
+    {
+        return $this->additional_information;
+    }
+
+    /**
+     * Set video_url
+     *
+     * @param string $videoUrl
+     * @return Property
+     */
+    public function setVideoUrl($videoUrl)
+    {
+        $this->video_url = $videoUrl;
+    
+        return $this;
+    }
+
+    /**
+     * Get video_url
+     *
+     * @return string 
+     */
+    public function getVideoUrl()
+    {
+        return $this->video_url;
+    }
+
+    /**
+     * Set price
+     *
+     * @param string $price
+     * @return Property
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return string 
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return Property
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set zip
+     *
+     * @param string $zip
+     * @return Property
+     */
+    public function setZip($zip)
+    {
+        $this->zip = $zip;
+    
+        return $this;
+    }
+
+    /**
+     * Get zip
+     *
+     * @return string 
+     */
+    public function getZip()
+    {
+        return $this->zip;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return Property
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set user_id
+     *
+     * @param string $userId
+     * @return Property
+     */
+    public function setUserId($userId)
+    {
+        $this->user_id = $userId;
+    
+        return $this;
+    }
+
+    /**
+     * Get user_id
+     *
+     * @return string 
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+ 
+
+    /**
+     * Set fair
+     *
+     * @param integer $fair
+     * @return Property
+     */
+    public function setFair($fair)
+    {
+        $this->fair = $fair;
+    
+        return $this;
+    }
+
+    /**
+     * Get fair
+     *
+     * @return integer 
+     */
+    public function getFair()
+    {
+        return $this->fair;
+    }
+}

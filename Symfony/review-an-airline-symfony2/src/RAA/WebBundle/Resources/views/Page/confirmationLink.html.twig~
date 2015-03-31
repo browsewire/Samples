@@ -1,0 +1,29 @@
+{% extends 'RAAWebBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %}Confirmation |Email {% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+
+		<div class="titles oranges border">
+			<h2>Reviewer Password Reset</h2>
+		</div>   
+<div class="sub_email" style="margin-top:91px;margin-bottom:31px;color:green; font-size:14px;">
+	<p>
+		<center style="font-family: sans-serif;">
+			<B>Thank you for submitting your review !</B>
+			<br><br>
+ 			Your review will be published once approved by the Administrator.
+		</center>
+	</p>
+</div>
+</div>
+
+
+
+
+
+
+
+  {% endblock %}

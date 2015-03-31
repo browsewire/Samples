@@ -1,0 +1,164 @@
+{% extends 'RAAWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %}Edit Listing -Review An Airline{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+						<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+<script src="{{  asset('themes/frontend/js/menu_jquery.js') }}"></script>
+						<script>
+			function capitalize(textboxid, str) {
+      // string with alteast one character
+      if (str && str.length >= 1)
+      {       
+          var firstChar = str.charAt(0);
+          var remainingStr = str.slice(1);
+          str = firstChar.toUpperCase() + remainingStr;
+      }
+      document.getElementById(textboxid).value = str;
+      document.getElementById(textboxid1).value = str;
+  }
+						
+						</script>
+						    <script>
+
+	$(document).ready(function()
+	{
+		$("#business").addClass('active_background');
+	});
+
+
+function passwordupdate()
+{
+	$("#changePassword").hide();
+	$("#dontWish").show();
+	$("#divPassword").show();
+	$("#divConfirmPassword").show();
+	document.getElementById("passwordshow1").disabled = false;
+	document.getElementById("passwordshow2").disabled = false;
+}
+function passwordshow()
+{
+	$("#changePassword").show();
+	$("#dontWish").hide();
+	$("#divPassword").hide();
+	$("#divConfirmPassword").hide();
+	document.getElementById("passwordshow1").disabled = true;
+	document.getElementById("passwordshow2").disabled = true;
+
+}
+function checkUser()
+{
+var username=$('#username').val();
+//alert(email);
+
+	$.ajax({
+               	url : '{{ path("raa_web_checkUser") }}',
+                type:'POST',
+                data:'username='+username, 
+                success:function(data){
+                  
+                 //alert(data);
+			if( data=="SUCCESS")
+			{
+				$("#b1").attr("disabled",true);
+				document.getElementById('userExists').innerHTML='Username already Exists';
+			document.getElementById('userExists').style.color = 'red';
+			}
+			else
+			{
+				$("#b1").attr("disabled",false);
+			}
+                }
+            });
+
+
+}
+</script>
+
+
+
+
+	 <div class="cl"></div>
+    
+    <!-- write review -->
+  <div class="titles oranges border">
+      <h2>Edit Information</h2>
+    </div>
+    
+    
+    	
+<div class="new_form" style="width:100%; margin-left:-14px;">
+<form action="{{ path('raa_web_editListing') }}"  method="POST" enctype="multipart/form-data" id="loginform" data-validate="parsley" >
+<fieldset>
+<div class="fild_outer">
+    <p>
+    {% for airline in airlineDetails %}
+      <label>First Name <font class=star_cum>*</font></label>
+      <input type="text" id="mytextbox" onkeyup="javascript:capitalize(this.id, this.value);" name="firstname" value="{{airline.first_name}}" autofocus  data-required="true" autofocus data-error-message="Please enter your firstname ">
+      </select>
+    </p>
+<p >
+       <label>Last Name <font class=star_cum>*</font></label>
+      <input type="text" id="mytextbox" onkeyup="javascript:capitalize(this.id, this.value);" name="lastname" value="{{airline.last_name}}" autofocus  data-required="true" autofocus data-error-message="Please enter your lastname ">
+      </select>
+
+ <p class="form_right">
+      <label> Email<font class=star_cum>*</font></label>
+      <input type="text" name="email" autofocus data-required="true" value="{{airline.email}}" autofocus data-error-message="Please enter your valid email ">
+    </p>
+<p class="form_right">
+    <label>Username <font class=star_cum>*</font></label>
+      <input type="text" id="username" name="username" value="{{airline.username}}" autofocus  data-required="true" autofocus data-error-message="Please enter your username " onblur="checkUser();">
+<span id="userExists" style="margin:0 0 0 18px;"></span>
+      </select>
+ </p>
+<p style="margin-bottom:0;">
+      <label>Phone <font class=star_cum>*</font></label>
+      <input type="text" name="phone"  data-type="number" maxlength=7  data-required="true"  data-error-message="Please enter your valid number " value={{airline.phone}}>
+    </p>
+   
+    <p style="margin-bottom: -50px; padding-top: 50px;">
+ 	{% if app.session.get('fbId') %}
+	{% else %}
+	 <a  onclick="passwordupdate();" id="changePassword" style="margin:0 0 0 18px;">Change Password</a>
+
+	 <a  onclick="passwordshow();" style="display:none;" id="dontWish" style="margin:0 0 0 18px;">Dont wish to change Password</a>     
+	{% endif %}
+
+	<p id="divPassword" style="display:none;"class="none">
+     		<label>Password <font class=star_cum>*</font></label>
+		<input id="passwordshow1" type="password"  name="password"  data-error-message="Please enter your password " data-required="true" value="000000">
+	</p>
+
+	<p id="divConfirmPassword" style="display:none;"class="none">
+	 	<label> Confirm Password <font class=star_cum>*</font></label>
+		<input  id="passwordshow2" type="password" name="cpassword" data-equalto="#passwordshow1" data-required="true" class="required" data-error-message="password not match" value="000000">
+	</p>
+ 
+ <p style="margin-bottom:0;"></p>
+
+
+   </p>
+  
+   
+   
+   
+   
+   
+   
+   
+   
+   	{% endfor %}
+</div>
+</fieldset>
+</div>
+  <div class="buttonClass">
+     <input  id="b1" class="edit_but" type="submit" value="Submit" style="">     
+</div>
+</div>
+ </form>
+
+{% endblock %}

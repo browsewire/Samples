@@ -1,0 +1,30 @@
+{% extends 'RAAAdminBundle::layout.html.twig' %}
+
+{% block body %}
+<title>{% block title %}Import Airlines | Admin{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+<section id="content">			
+		<div class="g12">			
+			<form method="POST" action="{{ path('RAAAdminBundle_importRealtors') }}" enctype="multipart/form-data">
+				<fieldset>	
+			<label> Import Airlines</label>
+				</fieldset>
+				<section>
+				<label>Import</label>
+				<div class="file_length"><input type="file" name="file">
+					{% if error is defined %}
+          <div class="file_error">{{error}}</div>
+          {%endif%}
+</div>
+				<div><button class="submit" type="submit">Submit</button></div> 
+				</section>
+				</fieldset>
+			</form>
+		</div>
+{% endblock %}
+
+
+

@@ -1,0 +1,32 @@
+{% extends 'RAAWebBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %}Confirmation |Email {% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+	<div itemscope itemtype="http://schema.org/Product" itemref="_url2 _brand3" class="main"> 
+	
+		<div class="titles oranges border">
+			<h2>Reviewer Password Reset</h2>
+		</div>
+		
+		<div class="sub_email" style="margin-top:98px; margin-bottom:34px;">
+{% if name is defined%}
+
+<p>	Your password has been reset succesfully.<br><br>
+	Your new password is sent to <strong>{{name}}</strong>
+
+	{%endif%}
+
+</div>
+</div>
+		
+		
+		
+</div>
+
+
+
+
+{% endblock %}

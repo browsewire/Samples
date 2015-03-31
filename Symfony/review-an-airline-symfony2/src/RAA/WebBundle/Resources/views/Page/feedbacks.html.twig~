@@ -1,0 +1,98 @@
+{% extends 'RAAWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %}Manage Airline Reviews{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+     <script src="{{  asset('themes/frontend/js/menu_jquery.js') }}"></script>
+     <script src="{{  asset('themes/frontend/js/jquery-1.10.1.min.js') }}"></script>
+
+
+<script type="text/javascript">
+ function confirm_Delete(e) {
+    var answer = confirm("Are you sure you want to delete this record?")
+    if (!answer){
+        e.preventDefault();
+        return false;
+    }
+}
+ </script>
+
+
+    <div class="titles oranges border">
+        <h2>Reviews</h2>
+     </div>
+
+<div>
+
+<h2 class="recent_act">My Reviews</h2>
+</div>
+<hr class="hr_act">
+    
+{% for reviews in review %}
+          {% if reviews.sender=="REVIEWER" %}
+<div class="disc_tion">
+<div class="col-1 airl_business" ><b>{{reviews.business_name}} {{reviews.last_name}}&nbsp;</b> </div>
+<div class="col-2 airl_desc">{{reviews.description|default ("N.A.")}} &nbsp;</div>
+<div class="col-3" style="width:30%; !important;"> 
+<form id="ratingsForm" class="ratestar1" action="{{ path('raa_web_feedback') }}" method=POST style="margin:0px;">
+    <div class="stars5" name=star>
+        <input type="radio"  class="star-{{reviews.rating}}" id="star-{{reviews.rating}}" value={{reviews.rating}}     checked/>
+
+        <span></span>
+    </div>
+    </form>
+
+</div>
+<div>
+
+<div style="float:left; padding:9 0 0 30;">
+
+         {% if reviews.status == 1 %}
+<img src="{{ asset('themes/frontend/images/verified.png') }}" style="width:64px; float:left; margin-top:-10px;height:55px;"/>
+{% else %}
+<img src="{{ asset('themes/frontend/images/unverified.jpg') }}" style="width:64px; float:left; margin-top:-10px;height:55px;"/>
+{% endif %}
+
+</div>
+
+<div style="float:right; margin:5 12 0 0;">
+<a href="{{ path('raa_web_deleteReviews',{'id':reviews.id}) }}" onclick="confirm_Delete(event);">Delete</a> |  <a id="reviews" href="{{ path('raa_web_editReviews',{'id':reviews.id}) }}">Edit</a> | <a href="{{ path('raa_web_profile', { 'id': reviews.filteredAirlineName}) }}">View</a>
+
+
+
+
+</div>
+</div>
+
+<div class="reply1">
+
+         
+    </div>
+ </div>
+
+{% endif %}
+
+
+         
+    {% endfor %}
+    {% if review == null %}
+        <div class=propertyListingg><center style="margin-top:65px;">No Reviews Yet</center></div>
+    {% endif %}
+   
+</div>
+<style>
+.airl_business
+{
+padding-top:9px;width:22% !important;
+}
+
+.airl_desc
+{
+padding-top:9px; width:25%; !important; word-wrap:break-word;
+}
+</style>
+ 
+
+{% endblock %}

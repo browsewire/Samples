@@ -1,0 +1,26 @@
+{% extends 'RAAWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %}Confirmation | Registration {% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+
+<div class="sub_email">
+
+
+<p>
+	<B>Thank you for registering with us !<B/>
+	<br><br> 
+	A confirmation link has been sent to your email.
+	<br>
+	Please confirm your email by clicking on the link to complete your registration process.  
+</p>.
+
+
+
+</div>
+
+</div>
+
+{% endblock %}

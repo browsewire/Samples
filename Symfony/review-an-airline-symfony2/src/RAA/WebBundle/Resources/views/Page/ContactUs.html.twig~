@@ -1,0 +1,72 @@
+{% extends 'RAAWebBundle::layout.html.twig' %}
+
+
+{% block body %}
+
+<title>{% block title %}Contact us{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+
+
+<div itemscope itemtype="http://schema.org/Product" itemref="_url2 _brand3" class="main"> <!-- search by state -->
+    
+
+    
+    <!-- write review -->
+    <div class="titles oranges border">
+     <h2>Contact Us</h2>
+    </div>
+<div class="new_form">
+	<form action="{{ path('raa_web_contactUs') }}"  method="POST" enctype="multipart/form-data"  data-validate="parsley" >
+ <fieldset style="/*margin: 0 0 27 178;*/width: 65%;position: relative;margin:0 auto;">  <!-- 12-23-2014 updates by grace -->
+ 	<style>.new_form fieldset p{width: 100%;max-width: 332px;}</style>     <!--12-23-2014 added by grace -->
+
+    <p>
+      <label>First Name <font class=star_cum>*</font></label>
+      <input type="text" id="mytextbox"  name="firstname" autofocus  data-required="true"  data-error-message="Please enter your firstname " >
+      </select>
+    </p>
+    
+     <p class="form_right">
+      <label>Last Name <font class=star_cum>*</font></label>
+      <input type="text"  id="mytextbox1" name="lastname" autofocus data-required="true" data-error-message="Please enter your lastname " >
+    </p>
+
+ <p>
+      <label>Email <font class=star_cum>*</font></label>
+      <input type="text" id="email" name="email" autofocus   data-type="email" data-required="true" data-error-message="Please enter your email ">
+     
+    </p>
+     <p>
+      <label>Phone </label>
+      <input type="text" id="email" name="phone">
+     
+    </p>
+ <p style="margin-bottom:0;">
+      <label> Message <font class=star_cum>*</font></label>
+     <textarea rows="5" cols="50" name="message" style="left: 7%;position: relative;border: 1px solid #C7D0D2;" data-required="true" data-error-message="Please enter your message " ></textarea> <!-- 12-23-2014 updates by grace -->
+    </p>
+   
+  
+    <div class="registration_button box1" id="1">
+	 <input id="save" type="submit" value="Send" style="margin-top:133px; width:89px; margin-right:-181px;">     
+		</div>
+ </p>  
+    </form>
+  </fieldset>
+    
+    
+<div class="cl"></div>
+</div>
+
+
+</div>
+</div>
+
+
+
+
+
+  {% endblock %}

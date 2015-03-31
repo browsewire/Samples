@@ -1,0 +1,263 @@
+<html>
+<head>
+<title>{% block title %}Review An Airline{% endblock %}</title>
+{% block stylesheets %}
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:regular,bold">
+				
+
+<link rel="stylesheet" href="{{  asset('themes/frontend/css/style.css') }}">
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="no">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">						
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1">
+<!--ontraport-->
+<link rel="stylesheet" href="//app.ontraport.com/js/formeditor/moonrayform/paymentplandisplay/production.css" type="text/css" /><link rel="stylesheet" href="//forms.ontraport.com/formeditor/formeditor/css/form.default.css" type="text/css" /><link rel="stylesheet" href="//forms.ontraport.com/formeditor/formeditor/css/form.publish.css" type="text/css" /><link rel="stylesheet" href="//forms.ontraport.com/v2.4/include/minify/?g=moonrayCSS" type="text/css" /><link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.min.css" type="text/css" /><link rel="stylesheet" href="//forms.ontraport.com/v2.4/include/formEditor/gencss.php?uid=p2c22582f11" type="text/css" />
+<link rel="stylesheet" href="{{  asset('themes/frontend/css/mediaqueries.css') }}">
+<!--ontraport-->
+{% endblock %}
+{% block javascripts %}
+						
+	<!--ontraport-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+	
+<script src="{{  asset('themes/frontend/js/all.js') }}"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>	
+ <script src='https://connect.facebook.net/en_US/all.js'></script>-->
+
+ <script type="text/javascript">
+    $(document).ready(function()
+    {
+        (function(d, s, id)
+            {
+                 var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                  js = d.createElement(s); js.id = id;
+                 js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ fbAppId }}";
+                  fjs.parentNode.insertBefore(js, fjs);
+            }
+            (document, 'script', 'facebook-jssdk')
+            );
+
+          FB.init({appId: "{{ fbAppId }}", status: true, cookie: false, oauth  : true, xfbml  : true});
+
+       
+ 
+      });
+ 
+        function postToFeedbh()  
+        {
+            //alert(document.getElementById('hidSelectedLink').value);
+            FB.api('/me', {fields: "id,first_name,last_name,email,picture"}, function(response)  
+            {
+
+                console.log(response);
+                var facebookid = response.id;
+
+                if(response.first_name)
+                {
+                 //alert("kjskd");
+                   
+                  //  document.getElementById('divFacebooklogin').style.display="none";
+                   //document.getElementById('divFacebooklogin').style.display="none";
+                    document.getElementById('fbFirstName').value=response.first_name;
+                    document.getElementById('fbLastName').value=response.last_name;
+ 		    document.getElementById('fbpimage').value=response.picture.data.url;
+                    document.getElementById('fbUserFullName').value=response.first_name+' '+response.last_name;
+                    document.getElementById('fbEmail').value=response.email;
+
+			document.getElementById('user_form_email').value=response.id;
+         
+										document.newform.submit();
+                    
+                }
+    
+                
+           var userpass = response.first_name+response.last_name;
+              var facebookid = response.id;
+var imgurl = "https://graph.facebook.com/"+facebookid+"/picture?width=230&height=230";// "https://graph.facebook.com/"+facebookid+"/picture?type=large"; //response.picture.data.url;
+                $('#user_form_plainPassword_password').val(userpass);
+                $('#user_form_plainPassword_conf_password').val(userpass);
+                $('#user_form_avatar').val(imgurl);
+ 
+                $('#facebook_name').html(response.first_name+' '+response.last_name);
+ 
+                $('#facebook_img').html('<img style="margin:0px" id="avatar_img" src="'+imgurl+'">');
+                $('#facebook_img_section').show(); 
+                checkfacebookuser(facebookid);
+            });
+        }
+ 
+        function checkfacebookuser(facebookid)
+        {
+            var rootpath = '{{ path('verifyfbaccount') }}';
+            $.post(rootpath,{'facebookid':facebookid},
+                function(data)
+                {
+                       if(data)
+                    {
+                        alert(data);
+                      }
+                    else
+                    {
+                    }
+                }
+            );
+ 
+        }
+        function fblogin()  
+        {
+       
+            FB.login(function(response)  
+                {
+                    postToFeedbh();
+                },  
+                {scope:'email,read_stream,publish_stream,offline_access'});
+      
+}
+</script>
+         <script>
+          	function getBanner()
+          	{
+          		
+          		
+			$.ajax({
+			      url : '{{ path("raa_web_showCms") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divBanner1').append(data);
+					   	
+						}
+			});
+
+		$.ajax({
+			      url : '{{ path("raa_web_showCmsFooter") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divBanner2').append(data);
+					   	
+						}
+			});
+		
+		}
+          	
+          </script>
+
+<script>
+function fblogout()
+{
+
+FB.getLoginStatus(function(response) {
+        if (response && response.status === 'connected') {
+            FB.logout(function(response) {
+                document.location.reload();
+            });
+        }
+    });
+  
+}
+</script>
+<!-- Start - Google Analytics Script given by Matt on Dec-11-2014 -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-57557317-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End - Google Analytics Script given by Matt on Dec-11-2014 -->
+
+        {% endblock %}
+</head>
+
+
+<body  onload="getBanner();" >  
+<div class="wrapper top_header">
+  <div class="shell" style="margin-bottom:12px";>
+    <header id="header">
+    <div id="logo"><a id="linkHome" itemprop="brand" itemscope itemtype="http://schema.org/Brand" href="{{ path('raa_web_homepage') }}"> <img src="{{ asset('themes/frontend/images/new_log.png') }}" style="width:177; height:76;" alt="Learn Price" title=""/>
+      <meta itemprop="name" content="[Learn Price]">
+      </a> </div>
+    <nav style="margin-left: 218px;">
+      <div id="cssmenu" style="width: 70%; margin-top: 17px; margin-left: -20px;">
+        <ul id="divBanner1">
+          <li itemscope itemtype="http://schema.org/Product" id="linkHome"  itemref="agent-to-review-name _brand3"><a  itemprop="url" href="{{ path('raa_web_homepage') }}">HOME </a></li>
+          <li itemscope itemtype="http://schema.org/Product" id=linkRV  itemref="agent-to-review-name _brand3" ><a itemprop="url" href="{{ path('raa_web_review',{'id':0}) }}">Write A Review</a></li>
+          <li itemscope itemtype="http://schema.org/Product" id="linkAR" itemref="agent-to-review-name _brand3"><a itemprop="url" href="{{ path('raa_web_searchAirlines') }}">Find An Airline</a></li>
+            {% if app.session.get('userEmail') !="" %}
+          	<li id="linkDS" itemscope itemtype="http://schema.org/Product"><a itemprop="url" href="{{ path('raa_web_home',{id:app.session.get('userId')}) }}-{{app.session.get('userName')}}">My Dashboard</a></li>
+          {% endif %}
+                 
+          
+          {% if app.session.get('userEmail') !="" %}
+				<!--<li class="log_3">		Logged in as {{app.session.get('userEmail')}}</li>-->
+					<li class=""><a  href="{{ path('raa_web_logout') }}" onclick="fblogout();">Logout</a></li>
+						{% else %}
+          <li> <a class="log_3" href="{{ path('raa_web_login') }}" >login</a></li>
+          <li> <a class="log_3" href="{{ path('raa_web_registration') }}">Register</a></li>
+          {% endif %}
+          
+            
+        
+        
+          
+          
+        </ul>
+      </div>
+      <div class="login" style="margin-top:8px;">
+        <ul>
+         	{% if app.session.get('userEmail') !="" %}
+			<li>	<!--Logged in as {{app.session.get('userEmail')}} &nbsp;&nbsp;&nbsp;-->
+				<!--<a href="{{ path('raa_web_logout') }}">Logout</a>--> 
+			</li>
+		{% else %}
+		  	<li> <a href="{{ path('raa_web_login') }}" class="active">login</a></li>
+		  	<li> <a href="{{ path('raa_web_registration') }}">Register</a></li>
+	  	{% endif %}
+        </ul>
+      </div>
+    </nav>
+  </div>
+  </header>
+  <!-- end of wrapper --> 
+</div>
+<!-- content -->
+
+<div class="cl"></div>
+
+
+<div class="wrapper top_header">
+	<div class="shell">
+
+{% block body %}
+<body>
+</body>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+</div>
+<div>
+
+{% include "footer.html.twig"%}
+
+  
+</body>
+</html>

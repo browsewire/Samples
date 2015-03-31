@@ -1,0 +1,343 @@
+<html>
+<head>
+<title>{% block title %}Welcome | reviewanairline.com{% endblock %}</title>
+{% block stylesheets %}
+						
+	  
+						
+	
+	<link rel="stylesheet" href="{{  asset('themes/frontend/css/style.css') }}">
+	<link rel="stylesheet" href="{{  asset('themes/frontend/css/mediaqueries.css') }}">
+	
+   {% endblock %}
+	        {% block javascripts %}
+	        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+<script src="{{  asset('themes/frontend/js/all.js') }}"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script type="text/javascript">
+    $(document).ready(function()
+    {
+        (function(d, s, id)
+            {
+                 var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                  js = d.createElement(s); js.id = id;
+                  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ fbAppId }}";
+                  fjs.parentNode.insertBefore(js, fjs);
+            }
+            (document, 'script', 'facebook-jssdk')
+            );
+
+            FB.init({appId: "{{ fbAppId }}", status: true, cookie: false, oauth  : true, xfbml  : true});
+
+       
+ 
+      });
+ 
+        function postToFeedbh()  
+        {
+            //alert(document.getElementById('hidSelectedLink').value);
+            FB.api('/me', {fields: "id,first_name,last_name,email,picture"}, function(response)  
+            {
+
+                console.log(response);
+                var facebookid = response.id;
+
+                if(response.first_name)
+                {
+                 //alert("kjskd");
+                   
+                  //  document.getElementById('divFacebooklogin').style.display="none";
+                   //document.getElementById('divFacebooklogin').style.display="none";
+                    document.getElementById('fbFirstName').value=response.first_name;
+                    document.getElementById('fbLastName').value=response.last_name;
+ 		    document.getElementById('fbpimage').value=response.picture.data.url;
+                    document.getElementById('fbUserFullName').value=response.first_name+' '+response.last_name;
+                    document.getElementById('fbEmail').value=response.email;
+
+			document.getElementById('user_form_email').value=response.id;
+         
+										document.newform.submit();
+                    
+                }
+    
+                
+           var userpass = response.first_name+response.last_name;
+              var facebookid = response.id;
+var imgurl = "https://graph.facebook.com/"+facebookid+"/picture?width=230&height=230";// "https://graph.facebook.com/"+facebookid+"/picture?type=large"; //response.picture.data.url;
+                $('#user_form_plainPassword_password').val(userpass);
+                $('#user_form_plainPassword_conf_password').val(userpass);
+                $('#user_form_avatar').val(imgurl);
+ 
+                $('#facebook_name').html(response.first_name+' '+response.last_name);
+ 
+                $('#facebook_img').html('<img style="margin:0px" id="avatar_img" src="'+imgurl+'">');
+                $('#facebook_img_section').show(); 
+                checkfacebookuser(facebookid);
+          });
+        }
+ 
+        function checkfacebookuser(facebookid)
+        {
+            var rootpath = '{{ path('verifyfbaccount') }}';
+            $.post(rootpath,{'facebookid':facebookid},
+                function(data)
+                {
+                       if(data)
+                    {
+                        alert(data);
+                      }
+                    else
+                    {
+                    }
+                }
+            );
+ 
+        }
+        function fblogin()  
+        {
+       
+            FB.login(function(response)  
+                {
+                    postToFeedbh();
+                },  
+                {scope:'email,read_stream,publish_stream,offline_access'});
+      
+}
+</script>						
+         <script>
+          	function getBanner()
+          	{
+          		
+          		
+  			$.ajax({
+			      url : '{{ path("raa_web_getBanner") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divBanner').html(data);
+					   	setInterval(swapImages, 5000);
+						}
+			});
+			
+			$.ajax({
+			      url : '{{ path("raa_web_getAdvertiesment") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divAdvertiesment').html(data);
+					   	setInterval(swapImages, 5000);
+						}
+			});
+			
+		
+			$.ajax({
+			      url : '{{ path("raa_web_showCms") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divBanner1').append(data);
+					   	setInterval(swapImages, 5000);
+						}
+			});
+
+		$.ajax({
+			      url : '{{ path("raa_web_showCmsFooter") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divBanner2').append(data);
+					   	setInterval(swapImages, 5000);
+						}
+			});
+		
+		}
+          	
+          </script>
+<script>
+            function swapImages() 
+            {
+           // alert("hi");
+            
+							var $current = $('#myGallery img:visible');
+							var $next = $current.next();
+    					if($next.length === 0) 
+    					{
+        				$next = $('#myGallery img:first');
+    					}
+    					$current.hide();
+    					$next.show();
+						}
+						
+		
+						
+	$(document).ready(function() 
+					{
+    			setInterval(swapImages, 5);
+				});
+							
+				
+</script>
+
+	         {% endblock %}
+	        
+</head>
+<script>
+function fblogout()
+{
+
+FB.getLoginStatus(function(response) {
+        if (response && response.status === 'connected') {
+            FB.logout(function(response) {
+                document.location.reload();
+            });
+        }
+    });
+  
+}
+</script>
+<body onload="getBanner();">
+<div class="wrapper top_header">
+  <div class="shell" style="margin-bottom:12px";>
+    <header id="header">
+    <div id="logo"><a id="_brand2" itemprop="brand" itemscope itemtype="http://schema.org/Brand" href="{{ path('raa_web_homepage') }}"> <img src="{{ asset('themes/frontend/images/new_log.png') }}" style="width:177; height:76;" alt="Learn Price" title=""/>
+      <meta itemprop="name" content="[Learn Price]">
+      </a> </div>
+     <nav style="margin-left: 218px;">
+     
+     
+     
+     
+     
+      <div id="cssmenu" style="width: 70%; margin-top: 17px; margin-left: -20px;">
+        <ul id="divBanner1">
+    <li  itemscope itemtype="http://schema.org/Product" id="linkHome"  itemref="agent-to-review-name _brand3"><a  itemprop="url" href="{{ path('raa_web_homepage') }}">HOME </a></li>
+          <li itemscope itemtype="http://schema.org/Product" itemref="agent-to-review-name _brand3" ><a itemprop="url" href="{{ path('raa_web_writeReview') }}">Write A Review</a></li>
+          <li itemscope itemtype="http://schema.org/Product" itemref="agent-to-review-name _brand3"><a itemprop="url" href="{{ path('raa_web_searchAirlines') }}">Find An Airline</a></li>
+          
+           
+          {% if app.session.get('userEmail') !="" %}
+          	<li id="linkDS" itemscope itemtype="http://schema.org/Product"><a itemprop="url" href="{{ path('raa_web_home',{id:app.session.get('userId')}) }}-{{app.session.get('userName')}}">My Dashboard</a></li>
+          {% endif %}
+                  
+          {% if app.session.get('userEmail') !="" %}
+			<li>	<!--Logged in as {{app.session.get('userEmail')}} &nbsp;&nbsp;&nbsp;-->
+				<a href="{{ path('raa_web_logout') }}" onclick="fblogout();">Logout</a> 
+			</li>
+		{% else %}
+		  	<li> <a href="{{ path('raa_web_login') }}" class="active">login</a></li>
+		  	<li> <a href="{{ path('raa_web_registration') }}">Register</a></li>
+          	{% endif %}
+          
+          
+        </ul>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+    
+    </nav>
+  </div>
+  </header>
+  <!-- end of wrapper --> 
+</div>
+<!-- content -->
+
+<div class="cl"></div>
+
+
+ <!--  Dashboard here -->
+      <!--12-22-2014 inline style added starts-->
+	<style>
+	#wrapper-content{padding:2%;max-width:1170px !important;width:100% !important; overflow:hidden !important;position:relative;float:none !important;margin:0 auto;}
+	.dash_left{max-width: 196px;width: 100%;margin: auto;padding-right: 2%; padding-left:2%;} .dash_right{width: 100%;max-width: 563px;margin: auto;margin-right: 2%;} .dash_list{margin-top:0px !important;} .dash_list ul li{width:100% !important;}.dash_list ul li a{width:100% !important; }
+	.col-2{width:70%;} .col-3{width:50%;}
+	@media screen and (max-width: 768px){ #divBanner{display:none;} }
+	</style>
+	 <!--12-22-2014 inline style added ends-->
+    <div class="dashboard">
+<!--New div added by Pankaj on Dec-20-2014 -->
+<div id="wrapper-content"> <!-- 12-22-2014 id added by gracecruz -->
+    <div class="dash_left"> 
+    
+ 
+    
+   <div class="dash_list">
+   <ul>
+      <li  id="dashboard" itemscope itemtype="http://schema.org/Product"><a href="{{ path('raa_web_home',{id:app.session.get('userId')}) }}-{{app.session.get('userName')}}"><div class="icons"> <img src="{{ asset('themes/frontend/images/house.png') }}"></image></div>Dashboard</a></li>
+      
+   <li  id="business" itemscope itemtype="http://schema.org/Product"> <a href="{{ path('raa_web_manageListing',{id:app.session.get('userId')}) }}-{{app.session.get('userName')}}"><div class="icons"><img src="{{ asset('themes/frontend/images/chart_2.png') }}"></image></div>My Profile</a></li>
+
+      <li  id="reviews"  itemscope itemtype="http://schema.org/Product"><a href="{{ path('raa_web_feedback',{id:app.session.get('userId')}) }}-{{app.session.get('userName')}}"><div class="icons icon_star"><img src="{{ asset('themes/frontend/images/star.png') }}"></image></div>Reviews</a></li>
+   <li id="writeReview"  itemscope itemtype="http://schema.org/Product"><a href="{{ path('raa_web_writeReviewDashboard') }}"><div class="icons icon_star"><img src="{{ asset('themes/frontend/images/user.png') }}" style=""></image></div>Write A Review</a></li>
+
+<li></li>
+   
+   </ul>
+   </div></div>
+    
+    <div class="dash_right">
+    <div class="dash_right_top">
+  <div class="login login2">
+         
+					
+					</div>
+   
+    </div>
+    
+    
+    
+    {% block body %}
+<body>
+</body>
+{% endblock %}
+   <div id="divAdvertiesment" class="ads" style="
+    float: left;
+    width: 300px; height:250px;"></div> 
+<div id="divBanner" style="float: left;height: 60;margin: 42 0 38px 22%;width: 468;">
+
+
+</div>
+
+</div>
+
+    {% include "footer.html.twig"%}
+<style>
+	.browse_button.news {padding:11px 29px;}
+	.letter label {margin-top:15px;}
+	
+	
+      #myGallery{
+      position:relative;
+      width:300px; /* Set your image width */
+      
+    }
+    #myGallery img{
+      display:none;
+      position:absolute;
+      top:0;
+   
+
+    }
+    #myGallery img.active1{
+      display:block;
+    }
+
+	
+	
+	
+	
+	
+</style>
+</body>
+</html>
