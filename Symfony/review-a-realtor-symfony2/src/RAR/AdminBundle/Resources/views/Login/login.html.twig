@@ -1,0 +1,36 @@
+{% extends 'RARAdminBundle::layout2.html.twig' %}
+{% block javascripts %}
+	  {% endblock %}
+{% block body %}
+<title>{% block title %}Login - Admin{% endblock %}</title>
+<body id="login">
+	<header>
+			<div id="logo" style="margin-left: 45px;">
+				<a href="login.html">whitelabel</a>
+			</div>
+		</header>
+		<section id="content" >
+		<form action="{{ path('RARAdminBundle_login') }}" id="loginform" method="post">
+			<fieldset>
+				<section class="chrome"><label for="username">Email</label>
+					<div><input type="text" id="email" name="email" autofocus></div>
+				</section>
+				<section class="chrome"><label for="password">Password <a href="{{ path('RARAdminBundle_forgotpassword') }}" class="login-window">Forgot password?</a></label>
+					<div><input type="password"  name="password"></div>
+					<div  class="rem"><label><input type="checkbox" id="remember" name="remember"><label  for="remember" class="checkbox ">remember me</label></div>
+				</section>
+				<section class="chrome4">
+					<div><button class="fr submit">Login</button></div>
+					{% if name is defined%}
+    <div class="error">
+        {{name}}
+    </div>
+				</section>
+				
+			</fieldset>
+		</form>
+		</section>
+		</body>
+
+    {%endif%}
+{% endblock %}

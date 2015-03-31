@@ -1,0 +1,21 @@
+{% block subject %}{% autoescape false %}
+    Review-An-Airline Review
+{% endautoescape %}{% endblock %}
+
+{% block body_text %}{% autoescape false %}
+    Hello!
+    
+    I have just reviewed the profile of a Realtor.My review details are as under:-
+
+    Please aprove my review by clicking on the link below:
+	
+    {{confirmationLink}}
+
+    Best regards,
+					
+    {{firstname}} {{lastname}} 
+	
+
+{% endautoescape %}{% endblock %}
+
+{% block body_html %}{% endblock %}

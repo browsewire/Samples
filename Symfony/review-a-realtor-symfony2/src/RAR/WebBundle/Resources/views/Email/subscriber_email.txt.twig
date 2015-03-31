@@ -1,0 +1,18 @@
+{% block subject %}{% autoescape false %}
+    Review-An-Airline Subscription
+{% endautoescape %}{% endblock %}
+
+{% block body_text %}{% autoescape false %}
+    Hello!
+	
+    You have successfully subscribed to reviewanairline.com using your email id {{subscribe}}
+    
+    Please Click on link to Confirm your Email:
+    {{confirmationLink}}
+    
+    	
+    Best regards,
+    Review-An-Airline Team.
+{% endautoescape %}{% endblock %}
+
+{% block body_html %}{% endblock %}

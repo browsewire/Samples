@@ -1,0 +1,22 @@
+{% block subject %}{% autoescape false %}
+    Review-An-Airline Premium Plan
+{% endautoescape %}{% endblock %}
+
+{% block body_text %}{% autoescape false %}
+  	Hello! 		
+ 	
+	{{firstname}} {{lastname}}
+			 
+	You have selected the premium plan on reviewarealtor.com on {{datefields}}
+	Your transaction details are as under:		
+
+	Amount: {{payment_amount}}
+	Transaction-id: txn_id
+	
+	{{password}}
+			
+    Best regards,
+     Review-a-realtor Team.
+{% endautoescape %}{% endblock %}
+
+{% block body_html %}{% endblock %}

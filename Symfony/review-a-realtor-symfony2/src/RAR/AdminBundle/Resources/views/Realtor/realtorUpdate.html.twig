@@ -1,0 +1,94 @@
+{% extends 'RARAdminBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %}Update Realtors | Admin{% endblock %}</title>
+<script>
+	function importUsers()
+	{
+		window.location.href = '{{ path('RARAdminBundle_realtor') }}';
+	}
+	</script>
+	<section id="content">			
+		<div class="g12">			
+			<form id="form" action="{{ path('RARAdminBundle_realtorupdate',{ 'id': realtor.id }) }}" method="post" autocomplete="off" data-validate="parsley" enctype="multipart/form-data">
+				<fieldset>
+					<label>Update Realtor Details</label>
+					<section class="chrome"><label for="required_field"> First Name <font class=change>*</font></label>
+						<div><input id="required_field" class="txtBoxBig" type="text" name="firstname" value={{realtor.firstname}} data-required="true"  data-error-message="Please enter firstname." ></div>
+						<label for="required_field_msg">Last Name<font class=change>*</font></label>
+						<div><input id="required_field" class="txtBoxBig" type="text"  name=lastname data-required="true" value={{realtor.lastname}}  data-error-message="Please enter lastname." ></div>									
+					</section>	
+					<section class="chrome"><label for="required_field_msg">Email<font class=change>*</font></label>
+						<div><input id="required_field" class="txtBoxBig" type="text" data-type="email" name=email data-required="true" value={{realtor.email}} ></div>
+						<label for="required_field_msg">Password <font class=change>*</font></label>
+						<div><input id="required_field" class="txtBoxBig" type="password"  name=phone value={{realtor.password}} disabled></div>						
+						</section>
+					<section class="chrome"><label for="required_field_msg">Address1</label>
+						<div><input id="required_field" class="txtBoxBig" type="text" name=address value={{realtor.address}}></div>
+						<label for="required_field_msg">Address2</label>
+						<div><input id="required_field" class="txtBoxBig" type="text"  name=address value={{realtor.address2}}></div>
+					</section>				
+					<section class="chrome">
+						<label>State</label>
+						<div>
+							<select name="state" id="state" class="drop">
+							{% for state in states %}
+							<option value="{{state.StateCode}}">{{state.StateName}}</option>
+							{% endfor %}
+							</select>
+						</div>					
+						<label for="required_field_msg">City</label>
+							<div>							
+							<select name="city" id="city" class="drop">								
+							</select>
+						</div>
+						</section>
+					<!--<section><label for="required_field_msg">Country</label>
+					<div><input id="required_field" class="txtBoxBig" type="text"  name=country value={{realtor.country}}></div>
+					</section>-->				
+					<section class="chrome"><label for="required_field_msg">ZipCode</label>
+						<div><input id="required_field" class="txtBoxBig" type="text"  name=pincode value={{realtor.pincode}}></div>
+						<label for="required_field_msg">Phone</label>
+						<div><input id="required_field" class="txtBoxBig" type="text"  name=phone value={{realtor.phone}}></div>
+					</section>
+					<section class="moz"><label for="required_field_msg">Company</label>
+						<div><input id="required_field" class="txtBoxBig" type="text"  name=business value={{realtor.business_name}}></div>
+						<label for="required_field_msg">Business Overview</label>
+						<div><textarea  rows=5 cols=40 name=overview value={{realtor.overview}}></textarea></div>
+					</section>
+					<section class="chrome"><label for="file_upload" class="chrome">Profile Image</label>
+						<div> <input type="file" name="file"></div>
+					<label>Business Logo</label>
+						<div><input type="file" name="logo"></div>
+					</section>
+					<section class="chrome"><label for="required_field_msg">Fax</label>
+						<div><input id="required_field" class="txtBoxBig" type="text"  name=fax value={{realtor.fax}}></div>
+						<label>Twitter</label>
+						<div><input type="text" name=twitter class="txtBoxBig" value={{realtor.twitter}}></div>
+					</section>
+					<section class="chrome">
+					<label>Google+</label>
+						<div><input type="text" name=google class="txtBoxBig"  value={{realtor.google}}></div>
+						<label>Facebook</label>
+						<div><input type="text" name=facebook class="txtBoxBig"  value={{realtor.facebook}}></div>
+					</section>
+						<section class="chrome"> 
+						<label>Video Url</label>
+						<div><input type="text" name=video class="txtBoxBig"  value={{realtor.video}}></div>
+						<label>Linkedin</label>
+						<div><input type="text" name=linkedin class="txtBoxBig"  value={{realtor.linkedin}}></div>
+					</section>
+						<section class="chrome"> 
+						<label>Plan</label>
+						{% for plan in realtorsPlan %}
+						<div><input type="text" name=video class="txtBoxBig"  value={{plan.name}} disabled></div>
+					{% endfor %}
+					</section>
+					<section class="chrome">	
+						<div class="center"><button class="submit" name="submitbuttonname" value="submitbuttonvalue">Update</button>
+										<button class="center1" name="submitbuttonname" value="submitbuttonvalue" onclick="importUsers()">Cancel</button
+						</div>
+					</section>
+				</fieldset>
+			</form>	
+		</div>
+{% endblock %}

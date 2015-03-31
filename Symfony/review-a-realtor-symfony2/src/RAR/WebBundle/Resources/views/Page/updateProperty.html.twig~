@@ -1,0 +1,136 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+
+{% block body %}
+<title>{% block title %} Update Property | {{properties.name}} {% endblock %}</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+						<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+						<script>
+			function capitalize(textboxid, str) {
+      // string with alteast one character
+      if (str && str.length >= 1)
+      {       
+          var firstChar = str.charAt(0);
+          var remainingStr = str.slice(1);
+          str = firstChar.toUpperCase() + remainingStr;
+      }
+      document.getElementById(textboxid).value = str;
+      document.getElementById(textboxid1).value = str;
+  }
+						
+						
+						
+						</script>
+						  <script>
+	$(document).ready(function()
+	{
+		$("#property").addClass('active_background');
+	});
+</script>
+
+<script>
+
+	
+$(document).ready(function(){
+
+updateCities('AK');
+		
+		$("#state").change(function(){	
+               var id=$(this).val();
+             updateCities(id);  
+
+        });	
+});
+
+function updateCities(id)
+{
+ 
+                //alert(id);              	
+               	
+               	$.ajax({
+               	url : '{{ path("RARAdminBundle_getCities",{ "stateCode": '+id+' }) }}',
+                type:'POST',
+                data:'stateCode='+id,
+                dataType:'html',   
+                success:function(data){
+                    //var category_product = $(data).find('.city').html();
+                    $('#city').html(data);
+
+                }
+            });
+
+
+}
+</script>
+
+	<div class="titles oranges border">
+		<h2>Edit PROPERTY</h2>
+ 	</div>
+<div class="new_form" style="width:136%; margin-left:-14px;">
+<form action="{{ path('rar_web_updateProperty',{ 'id': properties.id ,'name':properties.name}) }}" method="POST" >
+<fieldset>
+<div class="view_images"><a href="{{ path('rar_web_showPropertyImages',{ 'id': properties.id }) }}-{{properties.name}}-{{app.session.get('realtorName')}}">Add/View Images</a></div>
+    <p>
+      <label> Name </label>
+      <input type="text" id="mytextbox" onkeyup="javascript:capitalize(this.id, this.value);" name="name"" autofocus value="{{properties.name}}">
+      </select>
+    </p>
+<p style="height: 120px;">
+      <label>Description
+ </label>
+     <textarea style="border: 1px solid #cccccc;" name="description" cols="40" rows="5" >{{properties.description}}</textarea>
+    </p>
+
+ <p class="form_right">
+      <label> Address</label>
+      <input type="text" name="address" autofocus value="{{properties.address}}">
+    </p>
+ <p class="sel-1">
+      <label> State </label>
+    <select  name="state" id="state" class="selectbox">
+   {% for state in states %}
+							<option value="{{state.StateCode}}">{{state.StateName}}</option>
+								 {% endfor %}
+    </select>
+    </p>
+    <p class="sel-1">
+      <label> city </label>
+    	<select name="city" id="city" class="selectbox">								
+								</select>
+    </p>
+<p style="margin-bottom:0;">
+      <label>Phone </label>
+      <input type="text" name="phone"  data-type="number" maxlength=7  data-required="true" value="{{properties.phone}}">
+    </p>
+    
+    <p style="margin-bottom:0;">
+      <label>ZipCode </label>
+      <input type="text" name="zip" data-type="number" maxlength=5  data-required="true" value="{{properties.zip}}">
+    </p>
+<p style="margin-bottom:0;">
+      <label> Video Url </label>
+    <input type="text" name="videourl" value="{{properties.video_url}}">
+     </p>
+     
+          <p style="margin-bottom:0;">
+      <label> Price </label>
+    <input type="text" name="price" class="dollar_charges" value="{{properties.price}}">
+     </p>
+     <p style="height: 120px;">
+      <label>Additional Information
+ </label>
+     <textarea style="border: 1px solid #cccccc;" name="additional" cols="40" rows="5">{{properties.additionalinformation}}</textarea>
+    </p>
+     
+</div>
+
+
+<div class="buttonClass" style="margin-left:46px; float:left;">
+     <input  id="b1" type="submit" value="Submit">     
+</div>
+
+
+
+
+
+
+{% endblock %}

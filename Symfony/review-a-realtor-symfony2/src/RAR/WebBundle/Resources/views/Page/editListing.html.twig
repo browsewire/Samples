@@ -1,0 +1,151 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %} Edit Information {% endblock %}</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+						<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+						<script>
+			function capitalize(textboxid, str) {
+      // string with alteast one character
+      if (str && str.length >= 1)
+      {       
+          var firstChar = str.charAt(0);
+          var remainingStr = str.slice(1);
+          str = firstChar.toUpperCase() + remainingStr;
+      }
+      document.getElementById(textboxid).value = str;
+      document.getElementById(textboxid1).value = str;
+  }
+						
+						</script>
+						    <script>
+
+	$(document).ready(function()
+	{
+		$("#business").addClass('active_background');
+	});
+</script>
+
+						<script>
+
+	
+$(document).ready(function(){
+
+updateCities('AK');
+		
+		$("#state").change(function(){	
+               var id=$(this).val();
+             updateCities(id);  
+
+        });	
+});
+
+function updateCities(id)
+{
+ 
+                //alert(id);              	
+               	
+               	$.ajax({
+               	url : '{{ path("RARAdminBundle_getCities",{ "stateCode": '+id+' }) }}',
+                type:'POST',
+                data:'stateCode='+id,
+                dataType:'html',   
+                success:function(data){
+                    //var category_product = $(data).find('.city').html();
+                    $('#city').html(data);
+
+                }
+            });
+
+
+}
+</script>
+
+
+	 <div class="cl"></div>
+    
+    <!-- write review -->
+  <div class="titles oranges border">
+      <h2>Edit Information</h2>
+    </div>
+    
+    
+    	
+<div class="new_form" style="width:136%; margin-left:-14px;">
+<form action="{{ path('rar_web_editListing') }}"  method="POST" enctype="multipart/form-data" id="loginform" data-validate="parsley" >
+<fieldset>
+    <p>
+    {% for realtor in realtors%}
+      <label>First Name </label>
+      <input type="text" id="mytextbox" onkeyup="javascript:capitalize(this.id, this.value);" name="firstname" value={{realtor.first_name}} autofocus  data-required="true" autofocus data-error-message="Please enter your firstname ">
+      </select>
+    </p>
+<p >
+       <label>Last Name </label>
+      <input type="text" id="mytextbox" onkeyup="javascript:capitalize(this.id, this.value);" name="lastname" value={{realtor.last_name}} autofocus  data-required="true" autofocus data-error-message="Please enter your lastname ">
+      </select>
+
+ <p class="form_right">
+      <label> Email</label>
+      <input type="text" name="email" autofocus data-required="true" value={{realtor.email}} autofocus data-error-message="Please enter your valid email ">
+    </p>
+    
+ <p class="sel-1">
+      <label> State </label>
+    <select  name="state" id="state" class="selectbox">
+   {% for state in states %}
+							<option value="{{state.StateCode}}">{{state.StateName}}</option>
+								 {% endfor %}
+    </select>
+    </p>
+    <p class="sel-1">
+      <label> city </label>
+    	<select name="city" id="city" class="selectbox">								
+								</select>
+    </p>
+<p style="margin-bottom:0;">
+      <label>Phone </label>
+      <input type="text" name="phone"  data-type="number" maxlength=7  data-required="true"  data-error-message="Please enter your valid number " value={{realtor.phone}}>
+    </p>
+    
+    <p style="margin-bottom:0;">
+      <label>ZipCode </label>
+      <input type="text" name="pin" data-type="number" data-error-message="Please enter your valid zipcode " data-required="true"   value={{realtor.pincode}}>
+    </p>
+    
+    <p style="margin-bottom:0;">
+      <label>Fax </label>
+      <input type="text" name="fax" data-type="number"  data-error-message="Please enter your valid fax "data-required="true" value={{realtor.fax}} >
+    </p>
+     
+ <p style="margin-bottom:0;">
+      <label>Company </label>
+      <input type="text" name="company" data-required="true"  data-required="true"   data-error-message="Please enter your company name " value={{realtor.business_name}}>
+    </p>
+        
+<p style="margin-bottom:0;">
+      <label> Address1 </label>
+    <input type="text" name="address"  value={{realtor.address}}>
+     </p>
+     
+          <p style="margin-bottom:0;">
+      <label> Address2 </label>
+    <input type="text" name="address2" value={{realtor.address2}}>
+     </p>
+     <p style="height: 120px;">
+      <label>Overview
+ </label>
+     <textarea name="overview" cols="40" rows="5">{{realtor.overview}}</textarea>
+    </p>
+   	{% endfor %}
+</div>
+
+  <div class="buttonClass">
+     <input  id="b1" type="submit" value="Submit">     
+</div>
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %}change Logo{% endblock %}</title>
+
+ 	<script src="{{  asset('themes/web/js/menu_jquery.js') }}"></script>
+ 	<script src="{{  asset('themes/web/js/jquery-1.10.1.min.js') }}"></script>
+ 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+	<script type="text/javascript">
+		function showimagepreviews(input) 
+		{
+			if (input.files && input.files[0]) 
+			{
+				var filerdr = new FileReader();
+				filerdr.onload = function(e) 
+				{
+					$('#imgprvw').attr('src', e.target.result);
+				}
+				filerdr.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>	
+	    <script>
+
+	$(document).ready(function()
+	{
+		$("#business").addClass('active_background');
+	});
+</script>
+
+
+	<div class="cl">
+	</div>
+	<div class="titles oranges border">
+		<h2>Realtor Change Logo</h2>
+	</div>
+	 <div> 
+		<form action="{{ path('rar_web_changeLogo') }}" method="POST" enctype="multipart/form-data" >
+ 		<input type="file" name="logo" id="filUpload"  onchange="showimagepreviews(this)" class="changeImagess"/>
+ 	</div>
+ 	{% if fileError is defined %}
+          <div class="logo_error">{{fileError}}</div>
+          {%endif%}
+ 	<div>
+ 	  {% for image in images %}
+		<img id="imgprvw" class="uploadImage"/    <img src=" {{ asset(['logo/', image.logo]|join) }} ">
+		<input type="hidden" value={{image.logo}} name="hidLogo">
+	   {% endfor %}
+	</div>
+ 	<div class="cust_submit uploadButton">
+		<input id="save" type="submit" value="submit">
+	</div>
+ 	</form>
+
+{% endblock %}

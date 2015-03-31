@@ -1,0 +1,410 @@
+{% extends 'RARWebBundle::layout.html.twig' %}
+{% block body %}
+
+<script src="{{  asset('themes/web/js/jquery-1.10.1.min.js') }}"></script>
+<script>
+	$(document).ready(function()
+	{
+		$("#linkHome").addClass('active');
+	
+	$(".demo").click(function()
+	{
+	var a = $(this).attr('id');
+//	$("#chooseP").val(a);
+	});
+
+	
+	
+	});
+	
+	$('#usersSearch').keypress(function(e){
+        if(e.which == 13){//Enter key pressed
+            alert('Enter pressed: Submitting the form....');
+        }
+    });
+	
+</script>
+<script>
+function searchRealtorByName(a)
+{
+	if(a!="")
+	{
+		$("#divAjaxResults").show();
+
+		$.ajax({
+               		url : '{{ path("rar_web_searchRealtor",{ "id": '+a+' }) }}',
+                	type:'POST',
+                	data:'id='+a,
+                	dataType:'html',   
+                	success:function(data){
+                   	$('.ajx_div').html(data);
+                }
+            });
+
+
+	}
+	else
+	{
+
+		$('.ajx_div').html('');
+		$("#divAjaxResults").hide();
+	}
+
+
+}
+
+
+
+</script>
+<script>
+
+$(document).ready(function(){
+  $("#btn").click(function(){
+ var a = $("#search").val();
+  var b = $("#address").val();
+  
+  if(a == "")
+  {
+  	document.getElementById('searchs').innerHTML='Please enter search keyword';
+  	document.getElementById('searchs').style.color = 'red';
+  }
+  else
+  {
+  	document.frmSearch.submit();
+  }
+  });
+});
+$(document).ready(function()
+	{
+		$("#linkHome").addClass('active');
+	});
+	
+function submitenter(myfield,e)
+{
+var keycode;
+if (window.event) keycode = window.event.keyCode;
+else if (e) keycode = e.which;
+else return true;
+
+if (keycode == 13)
+   {
+   myfield.form.submit();
+   return false;
+   }
+else
+   return true;
+}
+</script>
+ <script>
+
+$(document).ready(function(){
+  $("#usersSearch").click(function(){
+ var a = $("#search").val();
+  var b = $("#address").val();
+  
+  if(a == "" )
+  {
+  	document.getElementById('searchs').innerHTML='Please enter search keyword';
+  	document.getElementById('searchs').style.color = 'red';
+  }
+  else
+  {
+  	document.frmSearch.submit();
+  }
+  });
+});
+
+function k1()
+{
+var a,b,c 
+a=document.subscribe.subscribeEmail.value
+b=a.indexOf("@")
+c=a.lastIndexOf
+if(b<1||c<b+2||c+2>=a.length)
+{
+//a=document.getElementById("x1")
+//a.innerHTML="Wrong Email address";
+//a.style.color="red"
+alert("Please enter Valid Email Address");
+return false;
+}
+document.subscribe.submit();
+
+}
+function showLargeImage()
+{
+
+$("#divLargeImage").css('display','block');
+$("#but_link").hide();
+
+}
+
+</script>
+
+<script>
+function updateSearchValue(value)
+{
+	$("#search").val(value);
+	$("#divAjaxResults").hide();
+}
+
+
+
+</script>
+<!--<a href="{{ path('rar_web_pagination') }}">Pagination</a>-->
+
+<div class="shell video_b">
+  <div class="video_outer">
+    <div class="category video_bg">
+      <video id="video_background" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{ asset('themes/homepage/images/1.jpg') }}">
+        <source src="{{ asset('themes/homepage/videos/video.webm') }}" type="video/webm">
+        <source src="{{ asset('themes/homepage/videos/video.mp4') }}" type="video/mp4">
+        <source src="{{ asset('themes/homepage/videos/video.ogg') }}" type="video/ogg">
+      </video>
+      <div class="map_container map_top">
+        <div class="cont">
+          <div class="search_outer bew_f">
+           <form action="{{ path('rar_web_realtors') }}" method="POST" name="frmSearch" >
+            <div class="blue top"><a class="blue" itemprop="url" id="_url16">Find a Realtor:</a></div>
+            <input type="text" placeholder="Search by: Realtor Name, Address, City, Zip" name="search" id="search" onKeyPress="return submitenter(this,event)" onkeyup="searchRealtorByName(this.value);" autocomplete="off">
+                    <div id="divAjaxResults" class="ajx_div" style="display:none;" onclick="javascript:hideAjaxResults();">
+                 <ul>
+                 
+                 
+                 </ul>
+                  
+                  
+                  </div>
+            <div class="maor_in more_state go">
+            
+<!--<a class="browse_button more state_top goto"> Search </a>-->
+<input class="s browse_button more state_top goto" id="usersSearch" type="button" value=SEARCH style="margin-top:-14px; color:white;">
+<div><span id="searchs" style= "float:left; width: 142; margin: 14 13 2 -312%;"></span></div>
+  </form>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cl"></div>
+<div class="wrapper top_header">
+  <div class="shell">
+    <div class="main"> 
+      <!-- search by state -->
+      
+      <div itemscope itemtype="http://schema.org/Product" itemref="_url16" class="title orange">
+        <h2 itemprop="name">Browse <span>Realtors</span> in Your State</h2>
+      </div>
+      <div class="category state" style="margin: 0 0 0 43px;">
+        <ul>
+         {%for state in states|slice(0,36)%}
+     				
+     				<li class="module"><a class="demo" href="{{ path('rar_web_realtors',{state:state.state_code}) }}" id="state-{{state.state_code}}">{{state.state_name}}, {{state.state_code}}</a></li>
+                {%endfor%}   
+        <div class="cl"></div>
+        <div id="divLargeImage" style="display:none;">
+				<ul>
+         {%for state in states|slice(36,100)%}
+     				
+     				<li class="module"><a class="demo" href="{{ path('rar_web_realtors',{state:state.state_code}) }}" id="state-{{state.state_code}}">{{state.state_name}}, {{state.state_code}}</a></li>
+                {%endfor%}   
+				</div>
+        <div class="maor brouse" id="but_link"> <div class="maor_in more_state" style="margin-left:31%;"><a class="browse_button more state_top"   onclick="showLargeImage();"> Browse More states </a> </div></div></div>
+
+    </section>
+  </div>
+</div>
+</div>
+
+<!--- review find here -->
+
+<div class="review_main">
+  <div class="wrapper">
+  <div class="title orange">
+    <h2> What will you find on <span>Review a Realtor?</span> </h2></div>
+    <div class="realtor_in">
+      <div class="smet">
+        <h2> 100.000+ </h2>
+        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat tortor ac malesuada hendrerit. Curabitur a malesuada augue phasellus</h4> </div>
+      <div class="smet">
+        <h2> 100.000+ </h2>
+        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat tortor ac malesuada hendrerit. Curabitur a malesuada augue phasellus</h4> </div>
+      <div class="smet">
+        <h2> 100.000+ </h2>
+       <h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat tortor ac malesuada hendrerit. Curabitur a malesuada augue phasellus </h4></div>
+      <div class="smet">
+        <h2> 100.000+ </h2>
+        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat tortor ac malesuada hendrerit. Curabitur a malesuada augue phasellus </h4> </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!--- review find end here -->
+
+<div class="cl"></div>
+
+<!-- write review -->
+
+<div class="wrapper">
+  <div class="title orange">
+    <h2>Latest <span>Reviews</span></h2>
+  </div>
+  <div class="review">
+    <div class="cols"> </div>
+    
+   
+    
+    <div class="cols right_col">
+      {%for latestReview in latestReviewer%}
+      <div class="people">
+        <div class="name">  <img src="{{ asset('themes/web/images/review.gif') }}" style="width:88px;" alt="Client"/></div>
+        <!--<div class="rating"> <img src="{{ asset('themes/homepage/images/star_img.png') }}" alt="">-->
+
+	<p style="font-size:18px;"><a href="{{ path('rar_web_reviewerProfile',{ 'id': latestReview.reviewer_id }) }}">{{latestReview.realtor_name|default('N.A')}}</a> <b style="color: #5f6060;">Reviewed</b>  <a href="{{ path('rar_web_profile',{ 'id': latestReview.realtor_id }) }}-{{latestReview.realtor_name}}-profile">{{latestReview.business_name}}</a></p>
+<p class="creat_timestamp">on {{latestReview.creation_timestamp|date('F j, Y')}}</p>
+<p  class="home_headline"><a href="{{ path('rar_web_reviewDetail',{ 'headline': latestReview.headline }) }}">"{{latestReview.headline}}"</a></p>
+        <div class="rating" style="margin: -24px -2px 0 -26px;">
+        <div id="agent-overall-rating-wrapper">
+              <div class="review-star-line" id="agent-overall-rating">
+                <div class="star-group-left"> <span class="rating">
+                 <form id="ratingsForm">
+								<div class="stars1" style="margin-top:5px;">
+				
+					
+							<input type="radio" class="star-{{latestReview.rating|number_format(0)}}" id="star-{{latestReview.rating|number_format(0)}}" value={{latestReview.rating}} checked/>
+								
+								<span></span>
+								</div>
+									
+									</form>
+									</div>
+              </div>
+</div>
+          
+<p  class="review_description" style="margin:0 0 0 30">{% if latestReview.description|length>(100) %}{{latestReview.description[:100] ~  '......'}}<a data-toggle="modal" role="button" href="{{ path('rar_web_reviewDetail',{ 'headline': latestReview.headline }) }}"> Read More</a>{% else %}<p style="margin:0 0 0 30">{{latestReview.description}}{% endif %}</p>
+
+        </div>
+
+      </div>
+     <!---->
+       {% endfor %}
+     
+    </div>
+    
+
+   
+
+ 
+
+   
+    <div>
+      <div class="reviw_submit">
+        <ul>
+         {% if current_page < total_pages %}
+          <li> <a class="active {%if current_page==total_pages%} disabled {%endif%}" href="{{path('rar_web_homepage',{'page':current_page+1})}}" >Browse more reviews</a></li>
+          {% endif %}
+          <li> <a href="{{ path('rar_web_realtors') }}">+ Add your review</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="clear"></div>
+    
+    <!-- Top Realtors -->
+    <div class="wrapper">
+      <div class="title orange">
+        <h2>Top <span>Realtors</span></h2>
+        </div>
+        <div class="top_name">
+         {%for bestRealtor in topRealtors%}
+          <div class="col-md-4 feature">
+         
+            <div class="fancyDemo"> <a href="{{ path('rar_web_profile',{'id': bestRealtor.id }) }}-{{bestRealtor.first_name}}"><img style="width:244px; height:225px; margin-left:15px;" src=" {{ asset(['uploads/', bestRealtor.image]|join) }} " alt="" class="img-responsive"></a> 
+            <div class="del_button"> <a>{{bestRealtor.state_name}}</a> </div>
+            </div>
+            <h5><a>{{bestRealtor.first_name}}</a></h5>
+            <p>{{bestRealtor.category1}}</p>
+            <div class="add">
+              <div class="add_left">
+                <h5><a href="{{ path('rar_web_profile',{ 'id': bestRealtor.id }) }}-{{bestRealtor.first_name}}-profile">Contact Realtor</a></h5>
+              </div>
+              <div class="add_right">
+                <h5><a href="{{ path('rar_web_review', { 'id': bestRealtor.id }) }}-{{bestRealtor.first_name}}-reviews">Add a Review</a></h5>
+              </div>
+            </div>
+            </div>
+            {% endfor %}
+          </div>
+          
+         
+  </div>
+</div>
+</div>
+
+
+<div class="review_main news">
+      <div class="wrapper"> 
+      <div class="newsletter">
+      <div class="letter">
+      <form action="{{path('rar_web_subscriber')}}" name="subscribe" method="POST">
+      <label>Sign Up for our Newsletter</label>
+      <input type="text" name="subscribeEmail" placeholder="Enter Your Email Address">
+  <a class="browse_button news" > <input style="color:white; text-transform:Uppercase;width:100%;margin:0 0 0 0;" type=button value="Subscribe" onclick="k1();" > </a>
+      </form>
+      </div>
+      </div>
+      
+       </div>
+      </div>
+<style>
+.ajx_div
+{
+     background-color: white !important;
+    border: 1px solid black;
+    border-radius: 2px 2px 2px 2px;
+    color: grey;
+    float: left;
+    max-height: 150px;
+    overflow-y: scroll;
+    width: 70.1%;
+}
+
+.ajx_li
+{
+    float: left !important;
+        text-align: left !important;
+        text-indent: 15px !important;
+        width: 100% !important;
+        margin-bottom:0px !important;
+        line-height: 18px !important;
+     font-size: 18px !important;
+}
+.ajx_li:hover
+{
+    cursor:pointer;
+	color: #000000;
+    background-color: #7BBF42 !important;
+    
+}
+.review_description
+{
+margin:0 0 0 -21px;
+word-wrap: break-word; 
+font-size:14px;
+
+}
+.creat_timestamp {
+    font-size: 16px;
+    margin-bottom: 6px;
+    margin-top: 8px;
+}
+.home_headline {
+    font-size: 16px;
+    margin: 11px 0 0;
+}
+</style>
+  
+{% endblock %}

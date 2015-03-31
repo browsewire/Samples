@@ -1,0 +1,109 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %}Manage Business Listing{% endblock %}</title>
+
+    <script>
+
+	$(document).ready(function()
+	{
+		$("#business").addClass('active_background');
+	});
+</script>
+
+
+
+
+
+    </script>
+
+  <div class="titles oranges border">
+      <h2 >Manage Business Listing</h2>
+  </div>
+  <div class="column relators-inner" style="margin-left:0px;">
+    <div class="name-hd1 edittList" style="width:109.4%;margin:2 16 12 2;">
+      {% for realtor in realtors %}
+        <h3 class="caps">{{realtor.first_name }} {{realtor.last_name }}</h3>
+    </div>      
+    <div class="cl"></div>
+    
+    	{% if realtor.plan_id == 1 %}   
+    		<div class="image-box edittList" >
+	
+      			<img src=" {{ asset(['uploads/', realtor.image]|join) }} "  alt= image not found" />
+      			<p class="changeImage"><a href="{{ path('rar_web_changeImage',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}"   class="disableClick">Change Profile Image</a></p>
+  		  </div>
+    
+   	 {% else %}     
+     		<div class="image-box edittList" >
+     		 <img src=" {{ asset(['uploads/', realtor.image]|join) }} "  alt= image not found" />
+      		<p class="changeImage"><a href="{{ path('rar_web_changeImage',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}"  >Change Profile Image</a></p>
+    		</div>
+    
+    	{% endif %}
+    <div class="content-box ">
+      <div class="left-side-realator1">
+        <div id="agent-to-review-agency" class="wid-left" style="width:125%;">
+          <p><strong>Business Name:</strong> {{realtor.business_name|default ("N.A.") }} </p>
+          <p><strong>Email:</strong> {{realtor.email|default ("N.A.") }} </p>
+          <p><strong>Address:</strong> {{realtor.address|default ("N.A.")}},{{realtor.address2|default ("N.A.")}}</p>
+          <p><strong>State:</strong> {{realtor.state_name|default ("N.A.") }}</p>
+          <p><strong>City:</strong> {{realtor.city_name|default ("N.A.") }}</p>
+          <p><strong>Phone:</strong> {{realtor.phone|default ("N.A.")}}</p>
+          <p><strong>ZipCode:</strong> {{realtor.pincode|default ("N.A.")}}</p>
+           <p><strong>Fax:</strong> {{realtor.fax|default ("N.A.")}}</p>
+        </div>
+      </div>
+    
+      <div class="login">
+{% if realtor.plan_id == 1 %}   
+
+
+      <ul>
+        <li><a href="{{ path('rar_web_editListing',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}"  class="disableClick">Edit</a></li>
+      </ul>
+      
+ {% else %}     
+     <ul>
+        <li><a href="{{ path('rar_web_editListing',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}" >Edit</a></li>
+      </ul>  
+{% endif %}
+      </div>
+  </div>
+  
+  </div>
+  
+  <div class="overview edittList">
+    <div class="overviews">
+<p id="pheader">Business Overview</p>
+    </div>
+ 
+ <div class="over_img">
+  <div class="image-box1" style="width:100%;"> 
+    <img src="{{ asset(['logo/', realtor.logo]|join) }}"  image not found" class="large"  />
+    
+    <div>
+      <p class="manageText">{{realtor.overview}}</p>
+      {% if realtor.overview == null %}          
+        <p class="manageText">Overview not set</p>
+      {% endif %}
+    </div>
+    
+  </div>
+ 
+</div>
+{% if realtor.plan_id == 1 %}   
+ <div class="imageA">
+      <a href="{{ path('rar_web_changeLogo',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}"  class="disableClick">Change Logo</a>
+    </div>
+     {% else %}  
+      <div class="imageA">
+      <a href="{{ path('rar_web_changeLogo',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}" >Change Logo</a>
+    </div>
+     {% endif %}
+</div>
+
+  {% endfor %}
+
+
+
+{% endblock %}

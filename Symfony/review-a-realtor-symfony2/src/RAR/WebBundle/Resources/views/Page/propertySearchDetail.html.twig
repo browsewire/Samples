@@ -1,0 +1,128 @@
+{% extends 'RARWebBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %}{{property.name}} | property{% endblock %}</title>
+<!--  Dashboard here -->
+    
+    <div class="dashboard" style=" width:95%;"> 
+    <div class="dash_right information">
+ 
+    <div class="perty"> 
+    <div class="perty_top">
+     <h4><b class="bolds"> {{property.name}}</b></h4>
+ 
+    </div>
+      <!-- <div class="reply">
+       <a class="reply_button">Reply to this ad</a>
+    <h4>{{property.price}}</h4>
+    <h5> or Contact:<span>{{property.phone}}</span> </h5>
+      </div>-->
+      <div class="perty_left topss">
+	{% if defaultPropertyImage == '' %}
+      		{% include "RARWebBundle:Page:images.html.twig"%}
+	{% else %}
+		{{defaultPropertyImage|raw}}
+	{% endif %}
+      </div>
+      
+      
+     
+      <div  style="float: left !important;
+    margin: 25px 0 0 0;
+    width: 100%;">
+       {% for realtor in realtorInfo %}
+		    <div class="image-box1">
+		    <img src="{{ asset(['logo/', realtor.logo]|join) }}"  image not found" class="large"  />
+		 		</div>
+		 
+		 		<div class="overview_new ">
+		     <b>Name:</b>
+		    {{realtor.first_name }}{{realtor.last_name }}
+		    <br><br>
+		     <b>Business:</b>
+		    {{realtor.business_name }}
+		    <br><br>
+		     <b>Overview:</b>
+		    {{realtor.overview }}
+		    </div>
+		      {% endfor %}
+      </div>
+    
+      
+      <div style="margin-top:35px;">
+        	 <p class=textP> <b>Description:</b></p><br>
+      	<p class=textP> {{property.description|default ("Null")}}</p><br>
+ 			 <p class=textP><b> Additional Information:</b></p> <br>
+    	<p class=textP> {{property.additionalinformation|default ("Null")}}</p><br>
+       <p class=textP><b> Price:</b> {{property.price}}</p><br>
+   
+      <p class=textP> <b>Phone:</b> {{property.phone}}
+      </div>
+      <div class="social">
+      <ul>
+       {% for realtor in realtorInfo %}
+        <!--<li><a href=""><img alt="" src="{{ asset('themes/login/images/yahoo_icon.png') }}"   /></a> </li>-->
+         <li><a href="{{realtor.twitter}}"><img alt="" src="{{ asset('themes/login/images/p_icon.png') }}"   /></a> </li>
+          <li><a href="{{realtor.facebook}}"><img alt="" src="{{ asset('themes/login/images/f_icon.png') }}"   /></a> </li>
+           <li><a href="{{realtor.google}}"><img alt="" src="{{ asset('themes/login/images/g_icon.png') }}"   /></a> </li>
+          <li><a href="{{realtor.linkedin}}"><img alt="" src="{{ asset('themes/login/images/you_icon.png') }}"   /></a> </li>
+          {% endfor %} 
+      </ul>
+      </div>
+      <!--<div class="tool">
+      <h2> Tool</h2>
+      <ul>
+      <li><a href="#"> Favorite </a></li>
+       <li><a href="#"> Favorite </a></li>
+        <li><a href="#"> Favorite </a></li>
+         <li><a href="#"> Favorite </a></li>    
+      </ul>
+      
+       </div>-->
+  
+       <div class="video" style="width:41%; height:auto;">
+       <h4> YouTube video </h4>
+ <iframe class="youtub" style="height:100%; width:100%;"
+src="{{property.video_url| default('Not found')}}">
+</iframe> 
+        </div>
+        <div class="map">
+        <h4> Map</h4>
+ <iframe class="youtub" width={{iframe_width}} style="height:350px ; frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q= {{address}}&aq=0&ie=UTF8&hq=&hnear={{address}}&t=m&ll={{longitude}},{{latitude}}&z=12&iwloc=&output=embed"> 
+        </iframe>
+        </div>
+        
+    </div>
+    </div>
+    </div> 
+    
+    <!--  Dashboard end here -->
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+

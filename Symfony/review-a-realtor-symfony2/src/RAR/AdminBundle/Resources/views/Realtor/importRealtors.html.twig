@@ -1,0 +1,26 @@
+{% extends 'RARAdminBundle::layout.html.twig' %}
+
+{% block body %}
+<title>{% block title %}Import Realtors | Admin{% endblock %}</title>
+<section id="content">			
+		<div class="g12">			
+			<form method="POST" action="{{ path('RARAdminBundle_importRealtors') }}" enctype="multipart/form-data">
+				<fieldset>	
+			<label> Import Realtors</label>
+				</fieldset>
+				<section>
+				<label>Import</label>
+				<div class="file_length"><input type="file" name="file">
+					{% if error is defined %}
+          <div class="file_error">{{error}}</div>
+          {%endif%}
+</div>
+				<div><button class="submit" type="submit">Submit</button></div> 
+				</section>
+				</fieldset>
+			</form>
+		</div>
+{% endblock %}
+
+
+

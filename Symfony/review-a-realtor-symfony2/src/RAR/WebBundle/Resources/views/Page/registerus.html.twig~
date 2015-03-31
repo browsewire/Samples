@@ -1,0 +1,26 @@
+{% extends 'RARWebBundle::layout.html.twig' %}
+{% block body %}
+    
+   <div class="titles oranges border">
+      <h2 style="">Confirmation Registration</h2>
+    </div>
+
+<div class="sub_email" style="margin-bottom:31px;color:green; font-size:14px;margin-left:9%; width:77%;float:left;">
+	<p>
+		<center style="font-family: sans-serif;">
+			<B>Thank you for registering with us !<B/>
+			<br><br>
+ 			Your review will be published once approved by the Administrator.
+		</center>
+	</p>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

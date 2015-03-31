@@ -1,0 +1,50 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %}Change Image | Realtor{% endblock %}</title>
+
+ 	
+	<script type="text/javascript">
+		function showimagepreview(input) 
+		{
+			if (input.files && input.files[0]) 
+			{
+				var filerdr = new FileReader();
+				filerdr.onload = function(e) 
+				{
+					$('#imgprvw').attr('src', e.target.result);
+				}
+				filerdr.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>	
+	    <script>
+
+	$(document).ready(function()
+	{
+		$("#business").addClass('active_background');
+	});
+</script>
+
+
+	<div class="cl">
+	</div>
+	<div class="titles oranges border">
+		<h2>Realtor Change Image</h2>
+	</div>
+	 <div> 
+		<form action="{{ path('rar_web_changeImage') }}"  method="POST" enctype="multipart/form-data" >
+ 		<input type="file" name="file" id="filUpload"  onchange="showimagepreview(this)" class="changeImagess"/>
+ 	</div>
+ 		
+ 	<div>
+ 	  {% for image in images %}
+		<img id="imgprvw" class="uploadImage"/    <img src=" {{ asset(['uploads/', image.image]|join) }} ">
+		<input type="hidden" value={{image.image}} name="hidImage">
+	   {% endfor %}
+	</div>
+ 	<div class="cust_submit uploadButton">
+		<input id="save" type="submit" value="submit">
+	</div>
+ 	</form>
+
+{% endblock %}

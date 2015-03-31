@@ -1,0 +1,84 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %}Manage Property{% endblock %}</title>
+<script>
+
+function confirm_Delete(e) {
+    var answer = confirm("Are you sure you want to delete this record?")
+    if (!answer){
+        e.preventDefault();
+        return false;
+    }
+}				
+	$(document).ready(function()
+	{
+		$("#property").addClass('active_background');
+	});
+</script>
+
+
+
+
+	<div class="titles oranges border">
+		<h2>Property Listing</h2>
+ 	</div>
+<div class="login">
+<ul>
+<li style="margin:-11 12 0 0;">
+<a href="{{ path('rar_web_addProperty',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}-addProperty">Add Property</a>
+
+
+
+</li>
+</ul>
+
+</div>
+<br><br><br><br><br><br><hr>
+<div class="showProperty">
+{% for properties in property%}
+{% if properties.image_url is null %}
+<div class="image-box1"> <img src="{{ asset('bundles/images/property_default.jpeg') }}"  image not found" class="prop_img" /></div>
+
+{% else %}
+ <div class="image-box1"> <img src="{{ asset(['Property/', properties.image_url]|join) }}"  image not found" class="prop_img" /></div>
+ {% endif %}
+<div style=" margin-bottom: 42px;">
+  <p><a href="{{ path('rar_web_propertyDetail', {'id': properties.id }) }}-{{properties.name}}"> {{properties.name|default ("N.A.")}}</a> </p>
+
+   <p> {{properties.address|default ("N.A.") }} </p>
+      
+          <p>{{properties.city_name|default ("N.A.") }},
+						 {{properties.state_name|default ("N.A.") }}
+						 ({{properties.zip|default ("N.A.")}})</p>
+          <p><strong>Price: </strong>{{properties.price|default ("N.A.")}}</p>
+          <div class="login">
+<a href="{{ path('rar_web_deleteProperty',{ 'id': properties.id }) }}-{{properties.name}}-{{app.session.get('realtorName')}}" onclick="confirm_Delete(event);">Delete</a>|<a href="{{ path('rar_web_updateProperty',{ 'id': properties.id }) }}-{{properties.name}}-{{app.session.get('realtorName')}}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+				
+</div>
+</div>
+
+
+
+
+
+
+
+{% endfor %}
+
+{% if property == null %}
+          
+    <div class=propertyListingg><center style="height:30%;
+    margin-top: 8%;
+    width: 100%;">No property listed</center></div>
+
+{% endif %}
+				
+
+
+</div>
+
+
+
+
+{% endblock %}

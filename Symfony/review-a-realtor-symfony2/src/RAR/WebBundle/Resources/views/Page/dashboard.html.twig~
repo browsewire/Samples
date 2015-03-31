@@ -1,0 +1,65 @@
+
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %} Dashboard {% endblock %}</title>
+<script>
+	$(document).ready(function()
+	{
+		$("#dashboard").addClass('active_background');
+	
+	$(".dash_property").mouseover(function(){
+	$(".divs").css("display","block");
+	
+	});
+	$(".dash_property").mouseout(function(){
+	$(".divs").css("display","none");
+	});
+	
+$(".dash_reviews").mouseover(function(){
+	$(".divss").css("display","block");
+	
+	});
+	$(".dash_reviews").mouseout(function(){
+	$(".divss").css("display","none");
+	});
+	
+	
+	});
+$(document).ready(function()
+	{
+	
+		$("#linkDS").addClass('active');
+	});
+	
+</script>
+
+
+
+<div class="titles oranges border">
+		<h2>Dashboard</h2>
+ 	</div>
+		
+	<div class="mainDash">
+	<a href=""><div class=dash_property>
+        </a><div class="divs" style="display: block; background-color: lightgrey; font-size: 20px; font-weight: bold; padding: 5px; height: 20px; margin-bottom: -20px; position: relative;"><a href=""></a><a style="" href="{{ path('rar_web_property',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}">Properties</a>
+		{{dashboardDetails.totalProperties}}
+
+		</div>
+	<img src="{{ asset('bundles/images/property.gif') }}">
+
+	</div>
+	
+	
+	
+	<a href=""><div class=dash_reviews>
+        </a><div class="divss" style="display: block; background-color: lightgrey; font-size: 20px; font-weight: bold; padding: 5px; height: 20px; margin-bottom: -20px; position: relative;"><a href=""></a><a style="" href="{{ path('rar_web_feedback',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}">Reviews</a>
+		{{dashboardDetails.totalreview}}
+		</div>
+		<img src="{{ asset('bundles/images/rates.jpg') }}">
+	
+					
+	
+	</div></a>
+	</div>
+
+{% endblock %}

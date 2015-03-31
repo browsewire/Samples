@@ -1,0 +1,153 @@
+<?php
+
+namespace RAR\AdminBundle\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use RAR\AdminBundle\Entity\Realtor;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+class RealtorController extends Controller
+{
+    public function realtorAction( Request $request)
+    {
+        $page = $request->get('page');
+                    $count_per_page = 1;
+                    $total_count = $this->getTotalRealtors();
+                    $total_pages=ceil($total_count/$count_per_page);
+
+                    if(!is_numeric($page)){
+                        $page=1;
+                    }
+                    else{
+                        $page=floor($page);
+                    }
+                    if($total_count<=$count_per_page){
+                        $page=1;
+                    }
+                    if(($page*$count_per_page)>$total_count){
+                        $page=$total_pages;
+                    }
+                    $offset=0;
+                    if($page>1){
+                        $offset = $count_per_page * ($page-1);
+                    }
+                     $em = $this->getDoctrine()->getEntityManager();
+                    $realtors = $em->createQueryBuilder()
+                            ->select('b')
+                    				->from('RARAdminBundle:User',  'b')
+                            ->setFirstResult($offset)
+                            ->setMaxResults($count_per_page)
+                    				->getQuery()
+                            ->getArrayResult();
+                             return $this->render('RARAdminBundle:Realtor:realtor.html.twig', array(
+            'realtors' => $realtors,'total_pages'=>$total_pages,'current_page'=> $page
+        ));   
+    }
+    
+     public function getTotalRealtors() {
+        $em = $this->getDoctrine()->getEntityManager();
+        $countQuery = $em->createQueryBuilder()
+                ->select('Count(c)')
+                ->from('RARAdminBundle:User', 'c');
+        $finalQuery = $countQuery->getQuery();
+        $total = $finalQuery->getSingleScalarResult();
+        return $total;
+    }
+   
+public function deleteAction($id)
+{
+		    $em = $this->getDoctrine()
+		               ->getEntityManager();
+        $realtor = $em->getRepository('RARAdminBundle:User')->find($id);
+        if (!$realtor) {
+            throw $this->createNotFoundException('No realtor found for id '.$id);
+        }
+        $em->remove($realtor);
+        $em->flush();
+        return $this->redirect($this->generateUrl('RARAdminBundle_realtor'));
+}
+public function updateAction(Request $request,$id)
+{		
+				$em = $this->getDoctrine()
+				           ->getEntityManager();
+				$realtor = $em->getRepository('RARAdminBundle:User')->find($id);
+        if (!$realtor) {
+            throw $this->createNotFoundException('Unable to find Blog post.');
+        }
+				if (is_null($id)) {
+        $postData = $request->get('$id');
+        $realtor = $postData['id'];
+				}
+  			$em = $this->getDoctrine()->getEntityManager();
+  			$realtor = $em->getRepository('RARAdminBundle:User')->find($id);
+ 					if(!$realtor)
+					{
+					$realtor=new Realtor();
+					throw $this->createNotFoundException(
+					'No product found for idss '.$id);
+					}
+  		  	if($request->getMethod() == 'POST') {
+     				$firstname=$this->get('request')->request->get('firstname');
+     			  $lastname=$this->get('request')->request->get('lastname');
+     				$email=$this->get('request')->request->get('email');
+     				$phone=$this->get('request')->request->get('phone');
+     				$state=$this->get('request')->request->get('state');
+     				$address=$this->get('request')->request->get('address');
+     				$city=$this->get('request')->request->get('city');
+     				$country=$this->get('request')->request->get('country');
+     				$pincode=$this->get('request')->request->get('pincode');
+            $realtor->setFirstName($firstname);
+            $realtor->setLastName($lastname);
+          	$realtor->setEmail($email);
+          	$realtor->setPhone($phone);
+          	$realtor->setState($state);
+          	$realtor->setAddress($address);
+          	$realtor->setCity($city);
+          	$realtor->setCountry($country);
+          	$realtor->setPinCode($pincode);
+            $em->persist($realtor);
+            $em->flush();
+           return $this->redirect($this->generateUrl('RARAdminBundle_realtor'));
+					
+	}
+   return $this->render('RARAdminBundle:Realtor:realtorUpdate.html.twig', array(
+            'realtor' => $realtor
+        		));    
+ }
+
+
+public function addrealtorAction(Request $request)
+{
+        if ($request->getMethod() == 'POST') {
+           $firstname=$this->get('request')->request->get('firstname');
+     			  $lastname=$this->get('request')->request->get('lastname');
+     			  $password=$this->get('request')->request->get('password');
+     				$email=$this->get('request')->request->get('email');
+     				$phone=$this->get('request')->request->get('phone');
+     				$state=$this->get('request')->request->get('state');
+     				$address=$this->get('request')->request->get('address');
+     				$city=$this->get('request')->request->get('city');
+     				$country=$this->get('request')->request->get('country');
+     				$pincode=$this->get('request')->request->get('pincode');
+     				$realtor=new Realtor();
+            $realtor->setFirstName($firstname);
+            $realtor->setLastName($lastname);
+            $realtor->setPassword(md5($password));
+          	$realtor->setEmail($email);
+          	$realtor->setPhone($phone);
+          	$realtor->setState($state);
+          	$realtor->setAddress($address);
+          	$realtor->setCity($city);
+          	$realtor->setCountry($country);
+          	$realtor->setPinCode($pincode);
+          	$em = $this->getDoctrine()->getEntityManager();
+            $em->persist($realtor);
+            $em->flush();
+            return $this->redirect($this->generateUrl('RARAdminBundle_realtor'));		
+        }
+        	return $this->render('RARAdminBundle:Realtor:addRealtor.html.twig');
+      
+							}
+
+           
+
+ }

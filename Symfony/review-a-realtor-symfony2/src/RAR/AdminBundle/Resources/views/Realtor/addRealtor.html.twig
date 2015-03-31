@@ -1,0 +1,126 @@
+{% extends 'RARAdminBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %}Add Realtor | Admin{% endblock %}</title>
+    <script>
+    $(document).ready(function () {
+        $('.box').hide();
+        $('#option1').show();
+        $('#plan').change(function () {
+            $('.box').hide();
+            $('#'+$(this).val()).show();
+        });
+    });
+    </script>
+						<script>
+			function capitalize(textboxid, str) {
+      // string with alteast one character
+      if (str && str.length >= 1)
+      {       
+          var firstChar = str.charAt(0);
+          var remainingStr = str.slice(1);
+          str = firstChar.toUpperCase() + remainingStr;
+      }
+      document.getElementById(textboxid).value = str;
+      document.getElementById(textboxid1).value = str;
+  }	
+						</script>
+						<script>
+	function importUsers()
+	{
+		window.location.href = '{{ path('RARAdminBundle_realtor') }}';
+	}
+	</script>
+	<section id="content">			
+		<div class="g12">			
+			<form id="form" action="{{ path('RARAdminBundle_addrealtor') }}" method="POST" autocomplete="off" data-validate="parsley" enctype="multipart/form-data">
+				<fieldset>				
+					<label>Create New Realtor</label>
+					<section class="chrome"><label>First<font class=change>*</font></label>
+						<div><input id="textboxid" class="txt_fullLength" type="text" name="firstname"  data-required="true"  onkeyup="javascript:capitalize(this.id, this.value);"  data-error-message="Please enter firstname."  ></div>
+						<label class="chrome">Last Name <font class=change>*</font></label>					
+						<div><input id="textboxid1" class="txt_fullLength" type="text"  name="lastname"  data-required="true"  onkeyup="javascript:capitalize(this.id, this.value);"  data-error-message="Please enter  lastname."></div>
+					</section>
+					<section class="chrome"><label>Email<font class=change>*</font></label>
+						<div><input id="email" class="txt_fullLength" type="text"  name="email" data-type="email"  data-required="true" ></div>		
+						<label class="chrome">Password<font class=change>*</font> </label>
+						<div><input  class="txt_fullLength" type="password" name="password"  data-required="true" data-minlength="8" data-error-message="Please enter password."  ></div>
+					</section>
+					<section class="chrome">
+						<label class="chrome">Address1</label>
+						<div><input id="required_field" class="txt_fullLength" type="text"  name="address"></div>	
+						<label class="chrome">Address2</label>
+						<div><input id="required_field" class="txt_fullLength" type="text"  name="address2"></div>						
+					</section>	
+					<section class="chrome">
+						<label>State</label>
+						<div>
+							<select name="state" id="state" class="drop" >
+							{% for state in states %}
+							<option value="{{state.StateCode}}">{{state.StateName}}</option>
+							{% endfor %}
+							</select>
+						</div>
+						<label class="chrome">City</label>
+						<div>							
+							<select name="city" id="city" class="drop">								
+							</select>
+						</div>
+				  	</section>								
+					<section class="chrome"><label>Phone</label>
+						<div><input id="required_field" class="txt_fullLength" type="text"  name=phone  ></div>
+						<label>ZipCode</label>
+						<div><input id="required_field" class="txt_fullLength" type="text"  name=pincode ></div>	
+					</section>
+					<section class="chromes"><label for="file_upload" class="chrome">Profile Image</label>
+						<div> <input type="file" name="file"></div>
+					<label>Plan</label>
+						<div>
+						<select name="planName" id="plan" class="optionField drop" >
+						{% for plan in plans %}
+						<option value="{{plan.id}}">{{plan.name}}</option>
+						{% endfor %}
+						</select>
+						 <div id="2" class="box boxx" name="plan">
+						<input type="radio" name="plan" value="1" checked> Monthly ($19.95)
+						<input type="radio" name="plan" value="2"> Half yearly ($99)
+					<input type="radio" name="plan" value="3">	 Yearly ($147)
+						  </div>
+						</div>
+						</section>
+				<section class="chrome"><label>Company</label>
+						<div><input id="required_field" class="txt_fullLength" type="text"  name="business" ></div>
+						<label>Fax</label>
+						<div><input id="required_field" class="txt_fullLength" type="text"  name="fax" ></div>
+					</section>
+						<section class="chromes2"><label> Business Overview</label>
+						<div><textarea rows=5 cols=40 name=overview></textarea></div>
+						<label>Business Logo</label>
+						<div><input type="file" name="logo"></div>
+					</section>
+					<section class="chrome">
+					<label>Twitter</label>
+						<div><input type="text" name=twitter class="txt_fullLength"></div>
+						<label>Facebook</label>
+						<div><input type="text" name=facebook class="txt_fullLength"></div>
+					</section>
+						<section class="chrome"><label>Google+</label>
+						<div><input type="text" name=google class="txt_fullLength"></div>
+						<label>Linkedin</label>
+						<div><input type="text" name=linkedin class="txt_fullLength"></div>
+					</section>
+							<section class="chrome"><label>Video</label>
+						<div><input type="text" name=video class="txt_fullLength"></div>
+					
+					</section>
+					<section class="chrome">		
+
+						<div class="center"><button class="submit" name="submitbuttonname" value="submitbuttonvalue">Submit</button>
+											<button class="center1" name="submitbuttonname" value="submitbuttonvalue" onclick="importUsers()">Cancel</button>
+						
+						</div>
+						
+					</section>
+				</fieldset>
+			</form>
+		</div>
+{% endblock %}

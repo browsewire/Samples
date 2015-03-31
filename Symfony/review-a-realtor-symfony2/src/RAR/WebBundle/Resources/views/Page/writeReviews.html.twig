@@ -1,0 +1,733 @@
+{# src/Blogger/BlogBundle/Resources/views/Page/index.html.twig #}
+{% extends 'RARWebBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %}Write Review{% endblock %}</title>
+ <script src="{{  asset('themes/web/js/menu_jquery.js') }}"></script>
+ <script src="{{  asset('themes/web/js/jquery-1.10.1.min.js') }}"></script>
+<script>
+
+	$(document).ready(function()
+	{
+		$("#linkWAR").addClass('active');
+	});
+	function submitReview1()
+	{
+
+		
+		var reviewHeadline = $("#agent-review-title").val();
+		var pattern=/^[A-Za-z0-9 ]{0,200000}$/;
+		var matches = pattern.exec(reviewHeadline.replace(" ", ""));
+		//alert(matches);
+		if(matches==null)
+		{
+			document.getElementById('uniuqe').innerHTML='Only characters Aa-Zz and numbers 0-9 are allowed in headline';
+			document.getElementById('uniuqe').style.color = 'red';
+	 		document.getElementById('agent-review-title').focus() ;
+			return false;
+		}
+		else
+		{
+			document.getElementById('uniuqe').innerHTML='';
+		}
+
+		$.ajax({
+		       	url : '{{ path("rar_web_checkHeadline") }}',
+			type:'POST',
+			data:'reviewHeadline='+reviewHeadline, 
+			success:function(data)
+			{
+			  	if( data=="SUCCESS")
+				{
+					document.getElementById('uniuqe').innerHTML='Please enter a different headline';
+					document.getElementById('uniuqe').style.color = 'red';
+			 		document.getElementById('agent-review-title').focus() ;
+					return false;
+				}
+				else
+				{
+					//document.getElementById('uniuqe').innerHTML='';
+				}
+			}
+	    	});
+
+
+
+		if( document.frmReview.agent.value == "")
+		{
+			document.getElementById('selectField').innerHTML='Please Select';
+			document.getElementById('selectField').style.color = 'red';
+ 			document.frmReview.agent.focus() ;
+			return false;
+ 		}
+ 		else if(document.frmReview.headline.value == "")
+ 		{
+ 			document.getElementById('headers').innerHTML='Please enter headline';
+			document.getElementById('headers').style.color = 'red';
+ 			document.frmReview.headlines.focus() ;
+			return false;
+ 		}
+		else if(document.frmReview.writereview.value == "")
+ 		{
+ 			document.getElementById('review').innerHTML='Please enter Description';
+			document.getElementById('review').style.color = 'red';
+ 			document.frmReview.writereview.focus() ;
+			return false;
+ 		}
+		if(!this.frmReview.receiveUpdates.checked)
+			{
+				alert('You must agree to the terms first.');
+				return false;
+			}
+		$("a.login-window").click();
+		//document.frmReview.submit();
+	
+	}
+		function submitReview2()
+		{
+			var reviewHeadline = $("#agent-review-title").val();
+		var pattern=/^[A-Za-z0-9 ]{0,200000}$/;
+		var matches = pattern.exec(reviewHeadline.replace(" ", ""));
+		//alert(matches);
+		if(matches==null)
+		{
+			document.getElementById('uniuqe').innerHTML='Only characters Aa-Zz and numbers 0-9 are allowed in headline';
+			document.getElementById('uniuqe').style.color = 'red';
+	 		document.getElementById('agent-review-title').focus() ;
+			return false;
+		}
+		else
+		{
+			document.getElementById('uniuqe').innerHTML='';
+		}
+
+		$.ajax({
+		       	url : '{{ path("rar_web_checkHeadline") }}',
+			type:'POST',
+			data:'reviewHeadline='+reviewHeadline, 
+			success:function(data)
+			{
+			  	if( data=="SUCCESS")
+				{
+					document.getElementById('uniuqe').innerHTML='Please enter a different headline';
+					document.getElementById('uniuqe').style.color = 'red';
+			 		document.getElementById('agent-review-title').focus() ;
+					return false;
+				}
+				else
+				{
+					//document.getElementById('uniuqe').innerHTML='';
+				}
+			}
+	    	});
+
+		if( document.frmReview.agent.value == "")
+		{
+			document.getElementById('selectField').innerHTML='Please Select';
+			document.getElementById('selectField').style.color = 'red';
+ 			document.frmReview.agent.focus() ;
+			return false;
+ 		}
+ 		else if(document.frmReview.headline.value == "")
+ 		{
+ 			document.getElementById('headers').innerHTML='Please enter headline';
+			document.getElementById('headers').style.color = 'red';
+ 			document.frmReview.headlines.focus() ;
+			return false;
+ 		}
+		else if(document.frmReview.writereview.value == "")
+ 		{
+ 			document.getElementById('review').innerHTML='Please enter Description';
+			document.getElementById('review').style.color = 'red';
+ 			document.frmReview.writereview.focus() ;
+			return false;
+ 		}
+	
+		if(!this.frmReview.receiveUpdates.checked)
+			{
+				alert('You must agree to the terms first.');
+				return false;
+			}
+		document.frmReview.submit();
+	
+	}
+	
+	$(document).ready(function()
+	{
+	
+		$("#linkRV").addClass('active');
+	});
+	
+</script>
+		
+<!-------------New Script------------------->
+<script>
+function showLargeImage()
+{
+
+$("#divLargeImage").css('display','block');
+$("#but_link").hide();	$.ajax({
+               	url : '{{ path("rar_web_airlineDetail") }}',
+                type:'POST',
+                data:'stateCode='+id,
+                dataType:'html',   
+                success:function(data){
+              
+                  
+                    $('#divAirlineDetail').css('display','block');
+                    $('#divAirlineDetail').html(data);
+
+                }
+            });
+
+$("#cross").hide();
+}
+
+
+</script>
+<script>
+function searchArilineByName(a)
+{
+if(a!="")
+{
+
+$("#divAjaxResults").show();
+$.ajax({
+               	url : '{{ path("rar_web_getRealtorName") }}',
+                type:'POST',
+                data:'id='+a,
+                dataType:'html',   
+                success:function(data){
+                   $('.ajx_div').html(data);
+
+                }
+            });
+
+}
+else
+{
+$('.ajx_div').html('');
+$("#divAjaxResults").hide();
+}
+
+}
+function updateCities(id)
+{
+ 
+               	$.ajax({
+               	url : '{{ path("rar_web_airlineDetail") }}',
+                type:'POST',
+                data:'stateCode='+id,
+                dataType:'html',   
+                success:function(data){
+   
+                    $('#divAirlineDetail').css('display','block');
+                    $('#divAirlineDetail').html(data);
+
+                }
+            });
+
+
+}
+
+function updateSearchValue(value)
+{
+$("#search").val(value);
+updateCities(value);
+
+$("#divAjaxResults").hide();
+}
+function showFullReview(id)
+{
+
+var ids="#";
+var idsc="#arr";
+ var idnumber=ids+id;
+ var idnumbers=idsc+id;
+$(idnumber).hide();
+$(idnumbers).show();
+}
+
+function showhalfReview(id)
+{
+
+var ids="#";
+var idsc="#arr";
+ var idnumber=ids+id;
+ var idnumbers=idsc+id;
+$(idnumbers).hide();
+$(idnumber).show();
+
+
+}
+</script>
+<!--------------New Script-------------->
+
+
+
+ <form method="POST" class="signin" action="{% if realtors is defined  %} {{ path('rar_web_capture',{ 'id': realtors.id })}} {% else %} {{ path('rar_web_capture',{ 'id': 0 })}} {% endif %}" name="frmReview"  data-validate="parsley" enctype="multipart/form-data">
+<div itemscope itemtype="http://schema.org/Product" itemref="_url2 _brand3" class="main"> <!-- search by state -->
+  
+      <div class="cl"></div>
+   
+    <!-- write review -->
+    <div class="titles oranges border">
+      <h2>Review A Realtor</h2>
+    </div>
+
+	{% if realtorId == 0 %}
+			<div class="wr_rev" style="  float: left;
+    margin: 0 0 0 104px;
+    width: 48.5%;">
+				 <div id="recommend-box-label" class="trip_label"> Realtor name you are reviewing: <font class=star_cum>*</font></div>
+		
+					<input class="line_wr airline_name_review realtor_review" type="text" placeholder="Type Realtor name " autocomplete="off" name="search" id="search" onkeyup="searchArilineByName(this.value);" onclick="updateCities(this.value);" required />
+					
+					<div>
+					
+
+
+					<div id="divAjaxResults" class="ajx_div" style="display:none;width:100%;" onblur="javascript:hideAjaxResults();">
+                 <ul>
+                 </ul>
+
+                  </div>
+                  </div>
+
+					   </div> 	
+
+</div>	
+				
+			
+                  {% endif %}
+
+<div class="image-box wrReview" id="divAirlineDetail">
+      </div>
+
+<div>
+
+
+    <div class="left-sec-70">
+	  {%if realtors is defined  %}
+      <div class="image-box">
+          <div class="image"> <img style="width:137px;" src="{{ asset(['uploads/', realtors.image]|join) }}"  image not found" class="large" /></div>
+      </div>
+      <div class="content-box">
+     <div itemprop="name" id="agent-to-review-name">
+	 {% if realtors.first_name==""%}
+	 {{realtors.business_name|default ("")}}
+	 {% else %}
+	 {{realtors.first_name|default ("N.A.")}}
+	 {% endif %}
+	 </div>
+        <div id="agent-to-review-agency">{{realtors.category1|default ("N.A.")}}</div><br>
+        
+        <div id="agent-overall-rating-wrapper ">
+          <div class="review-star-line " id="agent-overall-rating">
+            <div class="star-group-left"> 
+            <div id="ratingsForm">
+							<div class="stars">
+								<input type="radio" name="stars" class="star-1" id="star-1" value=1 />
+								<label class="star-1" for="star-1">1</label>
+								<input type="radio" name="stars" class="star-2" id="star-2" value=2 />
+								<label class="star-2" for="star-2">2</label>
+								<input type="radio" name="stars" class="star-3" id="star-3" value=3 />
+								<label class="star-3" for="star-3">3</label>
+								<input type="radio" name="stars" class="star-4" id="star-4" value=4 />
+								<label class="star-4" for="star-4">4</label>
+								<input type="radio" name="stars" class="star-5" id="star-5" value=5 />
+								<label class="star-5" for="star-5">5</label>
+								<span></span>
+								</div>
+						
+									</div>
+ 					</div>
+          </div>
+          <div id="star-rating-text">Click the stars to rate agent!</div>
+        </div>
+      </div>
+
+{% endif %}
+
+      <div class="left" id="content-left">
+        <div id="info"></div>
+        <div class="content-left-wrapper">
+          <div id="review-agent-step-2-wrapper"> <!-- <div class="form-section-header rounded_5">Complete review</div> -->
+            <div class="form-section-padding" id="review-agent-step-2"> <!-- <p class="find-agent-heading">Your first hand experience really helps other sellers. Thanks!</p> -->
+              <!--<form method="post" action="" id="review-agent-form-step-2">-->
+                <input type="hidden" value="0" id="aid" name="aid"/>
+                <input type="hidden" value="B30722E2-90CD-4233-82DB-62283DCB007C" id="akey" name="akey"/>
+                <input type="hidden" value="0" id="pid" name="pid"/>
+                <fieldset id="review-agent-form-step-2-fieldset">
+                  <div id="agent-to-review-details-wrapper">
+                    <div id="review-agent-avatar-wrapper"> </div>
+                  </div>
+                  <!-- <p class="agent-to-review-heading">Your overall rating of this agent *</p> -->
+                  <div id="agent-overall-rating-info"> </div>
+                  <div class="clear"><!-- / --></div>
+                  <div class="form-input"> <!-- <p class="agent-to-review-heading">Title of your review *</p> -->
+                    <input class="line" type="text" placeholder="Headline or summary for your review (required)" autocomplete="off" id="agent-review-title" name="headline"/>
+                   
+                  </div>
+                  <div id="written-review-wrapper" class="form-input"> <!-- <p class="agent-to-review-heading">Your review *</p> -->
+                    <textarea placeholder="Write your review here (required)" rows="10" cols="100" id="written-review" name="writereview"  maxlength=1000></textarea>
+                    <div class="written-review-char-length-wrapper"><span id="written-review-char-length">0/1000</span> characters</div>
+                  
+                  </div>
+                  <p class="agent-to-review-heading">How did you use this agent?</p>
+                  <div class="form-input" id="agent-task-wrapper">
+                    <select id="agent-task" name="agent">
+                     <!-- <option disabled="disabled" value="" selected="selected">Please select...</option>-->
+                      <option value="2">Sold property with this agent</option>
+                      <option value="3">Considered selling a property with this agent</option>
+                      <option value="4">Bought a property with this agent</option>
+                      <option value="5">Considered buying a property with this agent</option>
+                    </select>
+                    <span id="selectField"></span>
+                  </div>
+                  <div class="form-input" id="recommend-box-wrapper">
+                    <div id="recommend-box-label" >Would you recommend this agent?</div>
+                    <div id="recommend-box">
+                      <label for="recommend-yes">
+                        <input type="radio" checked="checked" value="1" id="recommend-yes" name="recommend"/>
+                        Yes </label>
+                      <label for="recommend-no">
+                        <input type="radio" value="2" name="recommend" id="recommend-no"/>
+                        No </label>
+                      <label for="recommend-notsure">
+                        <input type="radio" value="3" name="recommend" id="recommend-notsure"/>
+                        Not sure</label>
+                    </div>
+                  </div>
+                  <div class="clear"><!-- / --></div>
+                  <p class="agent-to-review-heading">Can you tell us a little more about this agent? (optional)</p>
+                  <div class="review-star-line">
+                    <div class="star-label"> Honesty, integrity, professionalism </div>
+                    <div class="star-group"> 
+                    <div id="ratingsForm">
+								<div class="stars">
+								<input type="radio" name="starH" class="star-1" id="star-11" value="1"/>
+								<label class="star-1" for="star-11">1</label>
+								<input type="radio" name="starH" class="star-2" id="star-12" value="2"/>
+								<label class="star-2" for="star-12">2</label>
+								<input type="radio" name="starH" class="star-3" id="star-13" value="3"/>
+								<label class="star-3" for="star-13">3</label>
+								<input type="radio" name="starH" class="star-4" id="star-14" value="4"/>
+								<label class="star-4" for="star-14">4</label>
+								<input type="radio" name="starH" class="star-5" id="star-15" value="5"/>
+								<label class="star-5" for="star-15">5</label>
+								<span></span>
+								</div>
+									</div>
+									</div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label"> Responsiveness </div>
+                    <div class="star-group"> <div id="ratingsForm">
+								<div class="stars">
+								<input type="radio" name="starR" class="star-1" id="star-16" value="1"/>
+								<label class="star-1" for="star-16">1</label>
+								<input type="radio" name="starR" class="star-2" id="star-17" value="2"/>
+								<label class="star-2" for="star-17">2</label>
+								<input type="radio" name="starR" class="star-3" id="star-18" value="3"/>
+								<label class="star-3" for="star-18">3</label>
+								<input type="radio" name="starR" class="star-4" id="star-19" value="4"/>
+								<label class="star-4" for="star-19">4</label>
+								<input type="radio" name="starR" class="star-5" id="star-20" value="5"/>
+								<label class="star-5" for="star-20">5</label>
+								<span></span>
+								</div>
+									</div>
+									</div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label"> Local market knowledge </div>
+                    <div class="star-group"> 
+                     <div id="ratingsForm">
+								<div class="stars">
+								<input type="radio" name="starL" class="star-1" id="star-21" value="1"/>
+								<label class="star-1" for="star-21">1</label>
+								<input type="radio" name="starL" class="star-2" id="star-22" value="2"/>
+								<label class="star-2" for="star-22">2</label>
+								<input type="radio" name="starL" class="star-3" id="star-23" value="3"/>
+								<label class="star-3" for="star-23">3</label>
+								<input type="radio" name="starL" class="star-4" id="star-24" value="4"/>
+								<label class="star-4" for="star-24">4</label>
+								<input type="radio" name="starL" class="star-5" id="star-25" value="5"/>
+								<label class="star-5" for="star-25">5</label>
+								<span></span>
+								</div>
+									</div>
+									</div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label"> Service was value for money </div>
+                    <div class="star-group">  <div id="ratingsForm">
+								<div class="stars">
+								<input type="radio" name="starM" class="star-1" id="star-26" value="1"/>
+								<label class="star-1" for="star-26">1</label>
+								<input type="radio" name="starM" class="star-2" id="star-27" value="2"/>
+								<label class="star-2" for="star-27">2</label>
+								<input type="radio" name="starM" class="star-3" id="star-28" value="3"/>
+								<label class="star-3" for="star-28">3</label>
+								<input type="radio" name="starM" class="star-4" id="star-29" value="4"/>
+								<label class="star-4" for="star-29">4</label>
+								<input type="radio" name="starM" class="star-5" id="star-30" value="5"/>
+								<label class="star-5" for="star-30">5</label>
+								<span></span>
+								</div>
+									</div>
+									</div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label"> Sold for a good price </div>
+                    <div class="star-group">  <div id="ratingsForm">
+								<div class="stars">
+								<input type="radio" name="starG" class="star-1" id="star-31" value="1"/>
+								<label class="star-1" for="star-31">1</label>
+								<input type="radio" name="starG" class="star-2" id="star-32" value="2"/>
+								<label class="star-2" for="star-32">2</label>
+								<input type="radio" name="starG" class="star-3" id="star-33" value="3"/>
+								<label class="star-3" for="star-33">3</label>
+								<input type="radio" name="starG" class="star-4" id="star-34" value="4"/>
+								<label class="star-4" for="star-34">4</label>
+								<input type="radio" name="starG" class="star-5" id="star-35" value="5"/>
+								<label class="star-5" for="star-35">5</label>
+								<span></span>
+								</div>
+									</div>
+									</div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label"> Sold quickly </div>
+                    <div class="star-group">  <div id="ratingsForm">
+								<div class="stars">
+								<input type="radio" name="starQ" class="star-1" id="star-36" value="1"/>
+								<label class="star-1" for="star-36">1</label>
+								<input type="radio" name="starQ" class="star-2" id="star-37" value="2"/>
+								<label class="star-2" for="star-37">2</label>
+								<input type="radio" name="starQ" class="star-3" id="star-38" value="3"/>
+								<label class="star-3" for="star-38">3</label>
+								<input type="radio" name="starQ" class="star-4" id="star-39" value="4"/>
+								<label class="star-4" for="star-39">4</label>
+								<input type="radio" name="starQ" class="star-5" id="star-40" value="5"/>
+								<label class="star-5" for="star-40">5</label>
+								<span></span>
+								</div>
+									</div>
+									</div>
+                  </div>
+                  <div class="form-input padding_top_20">
+                    <div id="subscription-box">
+                      <input type="checkbox" id="receiveUpdates" name="receiveUpdates"/>
+                      <label for="subscribe-check">I would like to receive property market information and updates from OpenAgent.com.au.</label>
+                    </div>
+                  </div>
+                  	{% if app.session.get('userId') !="" %}
+                  <div class="input-line confirm-buttons">
+                  	<br>
+                  		 <span id="headers"></span><br>
+                  		   <span id="review"></span><br>
+				 <span id="uniuqe"></span>	
+                  		   <input type="button" class="review-button"  id="submit-review-step-2" onclick="javascript:submitReview2();" value="Submit my review" />
+               <!-- <button class="review-button"  id="submit-review-step-2" onclick="javascript:submitReview1();">Submit my review</button>-->
+                    
+                  </div>
+                  		{% else %}
+                  		<div class="input-line confirm-buttons">
+                  		<br>
+                  		 <span id="headers"></span><br>
+                  		   <span id="review"></span><br>
+					 <span id="uniuqe"></span>	
+                   <a href="#login-box" class="login-window"></a>
+                    <input type="button" class="review-button"  id="submit-review-step-2" onclick="javascript:submitReview1();" value="Submit my review" />
+                  </div>
+                  					{% endif %}
+                </fieldset>
+             <!-- </form>-->
+            </div>
+          </div>
+          <div style="display:none;" id="review-agent-step-3-wrapper">
+            <div class="form-section-header rounded_5">Verify your review</div>
+            <div class="form-section-padding" id="review-agent-step-3">
+              <!--<form method="post" action="/api/AgentReview.aspx" id="review-agent-form-step-3">-->
+                <input type="hidden" value="review-agent-form-step-3" id="review-agent-step-3-id" name="form-name"/>
+                <input type="hidden" id="postcodeid" name="postcodeid"/>
+                <input type="hidden" id="state" name="state"/>
+                <input type="hidden" id="suburb" name="suburb"/>
+                <input type="hidden" id="postcode" name="postcode"/>
+                <fieldset id="review-agent-form-step-3-fieldset">
+                  <p class="verify-heading"> To prevent fake reviews, we verify everything submitted on our website. Your details will ONLY be used to verify your review. We hate spam and know you do too. </p>
+                  <p class="agent-to-review-heading">Your email (required)</p>
+                  <div class="form-input">
+                    <input type="email" placeholder="Enter your email address" id="reviewer-email" name="reviewer-email"/>
+                  </div>
+                  <p class="agent-to-review-heading">Your street address</p>
+                  <div class="form-input">
+                    <input type="text" placeholder="Enter your street address" id="reviewer-street" name="reviewer-street"/>
+                  </div>
+                  <p class="agent-to-review-heading">Your suburb</p>
+                  <div class="form-input">
+                    <input type="text" autocomplete="off" placeholder="Enter your properties suburb" name="reviewer-suburb" id="f_suburb"/>
+                    
+                    
+                  </div>
+                  <p class="agent-to-review-heading">Your first name</p>
+                  <div class="form-input">
+                    <input type="text" placeholder="Enter your first name" id="reviewer-firstname" name="reviewer-firstname"/>
+                  </div>
+                  <div class="input-line confirm-buttons">
+                        
+                    <button class="review-button"  id="submit-review-step-3">Verify my review</button>
+                  </div>
+                </fieldset>
+              <!--</form>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right-sec-30 border-left">
+      <div class="right border-left" id="content-right">
+        <div id="content-right-inner-wrapper">
+         <!-- <div class="review-percentage-wrapper">
+            <div class="review-percentage">94<span class="review-percentage-symbol">%</span></div>
+            <div class="review-text">of people say that OpenAgent agent reviews factor into their decision</div>
+          </div>-->
+          <div class="titles blue">
+            <h2>Recent Reviews</h2>
+          </div>
+	
+          {%for reviewer in reviews %}
+          <div class="recent-reviews-wrapper">
+            <div class="recent-review">
+              <div class="cols right_col">
+                <div class=" people" style="width:100%;">
+                  <div class="name"> </div>
+                  <div class="rating" style="width:88%;">
+                     
+		 <p><a href="{{ path('rar_web_reviewerProfile',{ 'id': reviewer.reviewer_id }) }}">{{reviewer.realtor_name}}</a> <b style="color: #5f6060;">Reviewed</b>  <a href="{{ path('rar_web_profile',{ 'id': reviewer.realtor_id }) }}-{{reviewer.first_name}}-profile">{{reviewer.business_name}}</a></p>
+		<p  class="wr_timestamp">on {{reviewer.creation_timestamp|date('F j, Y')}}</p>
+<p class="wr_head"><a href="{{ path('rar_web_reviewDetail',{ 'headline': reviewer.headline }) }}">"{{reviewer.headline}}"</a></p>
+
+                   
+                   
+                   <form id="ratingsForm">
+					<div class="stars1"style="float:left;">
+						<input type="radio" class="star-{{reviewer.rating}}" id="star-{{reviewer.rating}}" value={{reviewer.rating}}	 checked/>
+								
+								<span></span>
+								</div>
+									
+									</form>	
+                 
+
+
+									
+<p id="{{reviewer.id}}">{% if reviewer.description|length>(100) %}{{reviewer.description[:100] ~  '.....'}}<a style=""   id="{{reviewer.id}}"  onclick="showFullReview(this.id);" class="big-link" > Read More</a>{% else %}
+<p>{{reviewer.description}}</p>{% endif %}
+
+<p style="display:none;" id="arr{{reviewer.id}}">{{reviewer.description}}<a  id="{{reviewer.id}}" onclick="showhalfReview(this.id);" class="big-link" >&lt;&lt;Back</a></p>
+
+
+ </div>
+                </div>
+              </div>
+            </div>
+          
+   
+              </div>
+            {% endfor %}
+		
+            <div> 
+          {% if reviews == null %}
+            <div class=propertyListingg>
+              <center style="margin-top:65px;">No reviews Yet</center>
+            </div>
+            {% endif %}
+            </div>
+            </div>
+             
+          </div>
+          </div>
+          </div>
+          
+          <style>
+          .line{
+          text-shadow:none !important;
+          }
+         .wrReview
+	{
+		display: block;
+    		float: left;
+    		margin-left: 8%;
+    		margin-top: 1%;
+   		 width: 80%;
+
+	}
+.realtor_review
+{
+background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid #e9e9e9;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05) inset;
+    box-sizing: border-box;
+    color: #000000;
+    font-family: "Open Sans",sans-serif !important;
+    font-size: 16px;
+    font-weight: 300;
+    padding: 8px;
+    transition: all 0.2s ease-in-out 0s;
+    width: 100%;
+
+}
+
+.ajx_div
+{
+     background-color: white !important;
+    border: 1px solid black;
+    border-radius: 2px 2px 2px 2px;
+    color: grey;
+    float: left;
+    max-height: 150px;
+    overflow-y: scroll;
+    width: 70.1%;
+}
+
+.ajx_li
+{
+    float: left !important;
+        text-align: left !important;
+        text-indent: 15px !important;
+        width: 100% !important;
+        margin-bottom:0px !important;
+        line-height: 18px !important;
+     font-size: 18px !important;
+}
+.ajx_li:hover
+{
+    cursor:pointer;
+	color: #000000;
+    background-color: #7BBF42 !important;
+    
+}
+input {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+    font: 13px/22px "Open Sans",sans-serif;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 3%;
+}
+</style>  
+  
+
+ 
+
+
+
+</form>
+
+ {% include "RARWebBundle:Page:rating.html.twig"%}
+
+{% endblock %}

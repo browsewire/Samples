@@ -1,0 +1,86 @@
+{% extends 'RARAdminBundle::layout.html.twig' %}
+{% block javascripts %}
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+	<script src="{{  asset('themes/admin/js/functions.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/functions.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/plugins.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/editor.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/calendar.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/flot.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/elfinder.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/datatables.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Alert.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Autocomplete.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Breadcrumb.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Calendar.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Chart.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Color.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Date.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Editor.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_File.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Dialog.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Fileexplorer.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Form.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Gallery.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Multiselect.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Number.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Password.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Slider.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Store.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Time.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Valid.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Widget.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/config.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/script.js') }}"></script>
+	<script>	 
+	$(document).ready(function(){
+		$("#colAction").removeClass("sorting");
+	});
+	</script>
+	<script type="text/javascript">
+	function addNewPlan()
+	{
+		window.location.href = '{{ path('RARAdminBundle_addplan') }}';
+	}
+	</script>
+	<script>
+	
+
+	</script>
+{% endblock %}
+{% block body %}	
+<title>{% block title %} Manage Claims | Admin{% endblock %}</title>	
+	<section id="content">
+		<div class="g12">
+			<h1>Manage Claims</h1>
+			<div class="dataTables_wrapper">
+				<table class="datatable">
+					<thead>
+						<tr>
+							<th class="sorting col-2" rowspan="1" colspan="1"># &nbsp;&nbsp;</th>
+							<th class="sorting col-2" rowspan="1" colspan="1">Claimed By &nbsp;&nbsp;</th>
+							<th class="sorting col-3" rowspan="1" colspan="1">Current Owner&nbsp;&nbsp;</th>
+							<th class="sorting  col-5" rowspan="1" colspan="1">Type &nbsp;&nbsp;</th>
+							<th class="sorting  col-5" rowspan="1" colspan="1">Business/Property Name &nbsp;&nbsp;</th>
+						
+							<th class="col-2" id="colAction" rowspan="1" colspan="1"><label class="lblAction">Action &nbsp;&nbsp;&nbsp;</label></th>
+						</tr>
+					</thead>
+					<tbody>
+									{% for claims in claim %}
+						<tr class="gradeA odd">
+							<td class="">{{claims.id}}</td>		
+							<td class="txtleft">{{claims.first_name}}</td>
+									<td class="txtleft">{{claims.realtor_name}}</td>
+							<td>{{claims.type}}</td>
+							<td>{{claims.name}}</td>
+
+						<td><a href="{{ path('RARAdminBundle_accepted',{ 'id': claims.id }) }}" >Accept</a>|<a href="{{ path('RARAdminBundle_rejected',{ 'id': claims.id }) }}">Reject</a></td>						
+						</tr>		
+		{% endfor %}
+			<input type="hidden" id="hidPropertyId" name="hidPropertyId">
+				</table>
+					</tbody>
+			</div>	
+{% endblock %}

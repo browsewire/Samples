@@ -1,0 +1,261 @@
+<html>
+<head>
+<title>{% block title %}Welcome | reviewarealtor.com{% endblock %}</title>
+{% block stylesheets %}
+					
+	   				<link href="{{asset('bundles/loginlogin/css/parsley/parsley.css')}}" rel="stylesheet">
+					<!--<link rel="stylesheet" href="{{  asset('themes/login/css/mediaqueries.css') }}">
+					<link rel="stylesheet" href="{{  asset('themes/login/css/normalize.css') }}">
+					<!--<link rel="stylesheet" href="{{  asset('themes/web/css/style1.css') }}">
+					<link rel="stylesheet" href="{{  asset('themes/web/css/style2.css') }}">
+					<link rel="stylesheet" href="{{  asset('themes/web/css/form.css') }}">
+					<link rel="stylesheet" href="{{  asset('themes/web/css/mediaqueries.css') }}">
+					<link rel="stylesheet" href="{{  asset('themes/web/css/normalize.css') }}">
+					<link rel="stylesheet" href="{{  asset('themes/web/css/nav.css') }}">-->				<link rel="stylesheet" href="{{  asset('themes/homepage/css//mediaqueries.css') }}">
+				<link rel="stylesheet" href="{{  asset('themes/homepage/css//media.css') }}">	
+					<link rel="stylesheet" href="{{  asset('themes/homepage/css/style.css') }}">
+   {% endblock %}
+	        {% block javascripts %}
+	        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+						<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+						<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	      <script src="{{asset('bundles/loginlogin/js/parsley/parsley-standalone.min.js')}}"></script>
+	      <script src="{{  asset('themes/web/js/jquery.js') }}"></script>
+						<!-- Loading JS Files this way is not recommended! Merge them but keep their order -->
+	
+						<!-- some basic functions -->
+						<!--<script src="{{  asset('themes/admin/js/functions.js') }}"></script>-->
+		
+						<!-- all Third Party Plugins and Whitelabel Plugins -->
+						<script src="{{  asset('themes/web/js/menu_jquery.js') }}"></script>
+							<script src="{{  asset('themes/web/js/jquery-1.10.1.min.js') }}"></script>
+							
+         <script>
+          	$.ajax({
+			      url : '{{ path("rar_web_getBanner") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divBanner').html(data);
+					   	setInterval(swapImages, 5000);
+						}
+			});
+          	$.ajax({
+			      url : '{{ path("rar_web_getAdvertiesment") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divAdvertiesment').html(data);
+					   	setInterval(swapImages, 5000);
+						}
+			});
+		$.ajax({
+			      url : '{{ path("rar_web_showCmsFooter") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divBanner2').append(data);
+					   	
+						}
+			});
+		
+			
+          </script>
+          <script>
+            function swapImages() 
+            {
+           //alert("hi");
+            
+							var $current = $('#myGallery img:visible');
+							var $next = $current.next();
+    					if($next.length === 0) 
+    					{
+        				$next = $('#myGallery img:first');
+    					}
+    					$current.hide();
+    					$next.show();
+						}
+						
+		
+						
+	$(document).ready(function() 
+					{
+    			setInterval(swapImages, 5000);
+				});
+				
+	
+	
+				
+				
+</script>
+          
+	         {% endblock %}
+	        
+</head>
+
+<body>
+<div class="wrapper top_header">
+  <div class="shell">
+    <header id="header">
+    <div id="logo"><a id="_brand2" itemprop="brand" itemscope itemtype="http://schema.org/Brand" href="{{ path('rar_web_homepage') }}"> <img src="{{ asset('themes/homepage/images/logo.png') }}" width="373" height="111" alt="Learn Price" title=""/>
+      <meta itemprop="name" content="[Learn Price]">
+      </a> </div>
+    <nav style="float: left !important;
+    margin: 25px 0 36px 64px;
+    width: 60%;">
+      <div id="cssmenu">
+        <ul>
+    <li  itemscope itemtype="http://schema.org/Product" id="linkHome"  itemref="agent-to-review-name _brand3"><a  itemprop="url" href="{{ path('rar_web_homepage') }}">HOME </a></li>
+          <li itemscope itemtype="http://schema.org/Product" itemref="agent-to-review-name _brand3" ><a itemprop="url" href="{{ path('rar_web_writeReview') }}">Write A Review</a></li>
+          <li itemscope itemtype="http://schema.org/Product" itemref="agent-to-review-name _brand3"><a itemprop="url" href="{{ path('rar_web_realtors') }}">Find A Realtor</a></li>
+          
+            {% if app.session.get('userType') !="3" %}
+          {% if app.session.get('userEmail') !="" %}
+          	<li id="linkDS" itemscope itemtype="http://schema.org/Product"><a itemprop="url" href="{{ path('rar_web_home') }}">My Dashboard</a></li>
+           	<li id="linkDS" itemscope itemtype="http://schema.org/Product"><a class="non" itemprop="url" href="{{ path('rar_web_logout') }}">Logout</a></li>
+          {% endif %}
+                    {% endif %}
+          
+          
+          
+        </ul>
+      </div>
+      <div class="login">
+        <ul>
+         {% if app.session.get('userEmail') !="" %}
+						Logged in as {{app.session.get('userEmail')}}
+						&nbsp;&nbsp;&nbsp;<a href="{{ path('rar_web_logout') }}">Logout</a>
+						{% else %}
+          <li> <a href="{{ path('rar_web_login') }}" class="active">login</a></li>
+          <li> <a href="{{ path('rar_web_registration') }}">Register</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </div>
+  </header>
+  <!-- end of wrapper --> 
+</div>
+<!-- content -->
+
+<div class="cl"></div>
+
+
+    <!--  Dashboard here -->
+    
+    <div class="dashboard"> 
+    <div class="dash_left">
+    
+   <div class="dash_list">
+   <ul>
+      <li  id="dashboard" itemscope itemtype="http://schema.org/Product"><a href="{{ path('rar_web_home',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}"><div class="icons"> <img src="{{ asset('themes/homepage/images/house.png') }}"></image></div>Dashboard</a></li>
+      <li  id="payment" itemscope itemtype="http://schema.org/Product"> <a href="{{ path('rar_web_managePlan',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}"><div class="icons"><img src="{{ asset('themes/homepage/images/bag.png') }}"></image></div>Manage Company Profile</a></li>
+   <li  id="business" itemscope itemtype="http://schema.org/Product"> <a href="{{ path('rar_web_manageListing',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}"><div class="icons"><img src="{{ asset('themes/homepage/images/chart_2.png') }}"></image></div>Manage Business Listing</a></li>
+   <li id="property"  itemscope itemtype="http://schema.org/Product"> <a href="{{ path('rar_web_property',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}"><div class="icons"><img src="{{ asset('themes/homepage/images/house_2.png') }}"></image></div>Manage Property Listings</a></li>
+      <li  id="reviews"  itemscope itemtype="http://schema.org/Product"><a href="{{ path('rar_web_feedback',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}"><div class="icons icon_star"><img src="{{ asset('themes/homepage/images/star.png') }}"></image></div>Reviews(View/Respond)</a></li>
+   <li></li>
+   
+   </ul>
+   </div></div>
+    
+    <div class="dash_right">
+    <div class="dash_right_top">
+  <div class="login login2">
+         
+					
+					</div>
+   
+    </div>
+    
+    
+    
+    {% block body %}
+<body>
+</body>
+{% endblock %}
+  </div>
+
+   <div id="divAdvertiesment" class="ads" style="
+    float: left;
+    width: 234px; height:250px; margin: 0 0 0 -29px;">
+
+
+
+
+    
+    </div>
+<div id="divBanner" style="float: left;height: 60;margin: 23 0 36px 24%;width: 468;">
+
+
+</div>
+   
+   
+   <!-- dashboard end -->
+    
+    
+    
+    
+    
+  </div>
+<div class="footer"> <!-- shell -->
+  <div class="wrapper">
+    <div class="shell">
+    <div class="social_icon">
+    <ul>                                         
+          <li><a href="#"><img src="{{ asset('themes/homepage/images/twiter_icon.png') }}" alt=""></a></li>
+             <li><a href="#"><img src= "{{ asset('themes/homepage/images/in_icon.png') }}"alt=""></a></li>
+                <li><a href="#"><img src="{{ asset('themes/homepage/images/fb_icon.png') }}" alt=""></a></li>
+               </ul>
+        
+     </div>
+            <div class="links">
+        <ul>                                         
+          <li><a href="{{ path('rar_web_homepage') }}">HOME</a></li>
+          <li><a href="{{ path('rar_web_writeReview') }}">WRITE A REVIEW </a></li>
+           <li><a href="{{ path('rar_web_realtors') }}">FIND A REALTOR </a></li>
+           <li><a href="#">ADD YOUR PROFILE </a></li>
+           <li><a href="{{ path('rar_web_registration') }}">CLAIM YOUR PROFILE </a></li>
+        </ul>
+              </div>
+      <div class="powerd-by">
+        <div class="browsw-logo">
+          <h5>Copyright © 2014 Review A Relator. All rights reserved </h5>
+         </div>
+        <div class="copyright-info">
+          <p class="copyright">
+          <ul id="divBanner2">
+         <!-- <li><a href="{{ path('rar_web_aboutUs') }}">About Us</a></li>
+          <li><a href="{{ path('rar_web_privacyPolicy') }}">Privacy Policy</a></li>
+          <li><a href="{{ path('rar_web_terms') }}">Terms of Use</a></li>
+          <li><a href="{{ path('rar_web_faq') }}">Contact Us</a></li>
+          <li><a href="{{ path('rar_web_siteMap') }}">Site Map </a></li>-->
+          </ul></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+      #myGallery{
+      position:relative;
+      
+      
+    }
+    #myGallery img{
+      display:none;
+      position:absolute;
+    
+
+    }
+    #myGallery img.active1{
+      display:block;
+    }
+  </style>
+  
+  
+</div>
+</body>
+</html>

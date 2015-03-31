@@ -1,0 +1,28 @@
+{% extends 'RARWebBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %}Confirmation |Email {% endblock %}</title>
+{% block meta %}
+    
+{% endblock %}
+
+		<div class="titles oranges border">
+			<h2>Review Submittion</h2>
+		</div>   
+<div class="sub_email" style="margin-top:91px;margin-bottom:31px;color:green; font-size:14px; float:left;">
+	<p>
+		<center style="font-family: sans-serif;">
+			<B>Thank you for submitting your review !</B>
+			<br><br>
+ 			Your review will be published once approved by the Administrator.
+		</center>
+	</p>
+</div>
+</div>
+
+
+
+
+
+
+
+  {% endblock %}

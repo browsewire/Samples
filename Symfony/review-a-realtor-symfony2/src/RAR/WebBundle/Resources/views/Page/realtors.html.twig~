@@ -1,0 +1,429 @@
+{% extends 'RARWebBundle::layout.html.twig' %}
+{% block body %}
+
+<title>{% block title %}Find A Realtor{% endblock %}</title>
+ <script src="{{  asset('themes/web/js/menu_jquery.js') }}"></script>
+ <script src="{{  asset('themes/web/js/jquery-1.10.1.min.js') }}"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="{{  asset('themes/web/js/jquery.slideControl.js') }}"></script>
+
+<script>
+function searchRealtorByName(a)
+{
+	if(a!="")
+	{
+		$("#divAjaxResults").show();
+
+		$.ajax({
+               		url : '{{ path("rar_web_searchRealtor",{ "id": '+a+' }) }}',
+                	type:'POST',
+                	data:'id='+a,
+                	dataType:'html',   
+                	success:function(data){
+                   	$('.ajx_div').html(data);
+                }
+            });
+
+
+	}
+	else
+	{
+
+		$('.ajx_div').html('');
+		$("#divAjaxResults").hide();
+	}
+
+
+}
+
+</script>
+
+<script>
+function swapImages() {
+    var $current = $('#myGallery1 img:visible');
+    var $next = $current.next();
+    if($next.length === 0) {
+        $next = $('#myGallery1 img:first');
+    }
+    $current.hide();
+    $next.show();
+}
+
+$(document).ready(function() {
+    // Run our swapImages() function every 0.5 secs
+    setInterval(swapImages, 5000);
+});
+
+function submitenter(myfield,e)
+{
+var keycode;
+if (window.event) keycode = window.event.keyCode;
+else if (e) keycode = e.which;
+else return true;
+
+if (keycode == 13)
+   {
+   myfield.form.submit();
+   return false;
+   }
+else
+   return true;
+}
+
+</script>
+ <script>
+
+$(document).ready(function(){
+  $("#btn").click(function(){
+ 
+ var a = $("#search").val();
+  var b = $("#address").val();
+  
+  if(a == "")
+  {
+  	document.getElementById('searchs').innerHTML='Please enter search keyword';
+  	document.getElementById('searchs').style.color = 'red';
+  }
+  else
+  {
+  	document.frmSearch.submit();
+  }
+  });
+});
+$(document).ready(function()
+	{
+	
+		$("#linkAR").addClass('active');
+	});
+</script>
+<script>
+function RealtorSorting(id)
+{
+
+	$("#sortRealtor").val(id);	
+	document.frmSearchByAlphabet.submit();
+}
+function updateRatingFilter(id)
+{
+//$( "#chooseRating" ).load( "/resources/load.html #projects li" );
+
+	$(".clsRatingFilter").removeAttr('checked');
+	$("#"+id).attr('checked','checked');
+	
+	if(id == "chooseRating")
+	{
+//alert(id);
+		$("#ratingSlider").css("display","block");
+	}
+	else
+	{ 
+                   
+	//alert("Hello"+id);
+		$("#ratingSlider").css("display","none");
+		$("#rateSlider").attr("disabled",true);
+	}
+}
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.slideControl').slideControl();
+	prettyPrint();
+});
+</script>
+<script>
+function updateSearchValue(value)
+{
+	$("#search").val(value);
+	$("#divAjaxResults").hide();
+}
+
+
+
+</script>
+  <div itemscope itemtype="http://schema.org/Product" itemref="_url2 _brand3" class="main"> <!-- search by state -->
+    <div class="map_container">
+        <div class="cont" style="top:-22px; width:54%;">
+          <div class="search_outer">
+           <form action="{{ path('rar_web_realtors') }}" method="POST" name="frmSearch" >
+            <div class="blue top"><a class="blue" href="#" itemprop="url" id="_url16">Find a Realtor:</a></div>
+           <input type="text" placeholder="Search by: Realtor Name, Address, City, Zip" name="search" id="search" onKeyPress="return submitenter(this,event)" onkeyup="searchRealtorByName(this.value);" autocomplete="off">
+                    <div id="divAjaxResults" class="ajx_div" style="display:none;" onclick="javascript:hideAjaxResults();">
+                 <ul>
+                 
+                 
+                 </ul>
+                  
+                  
+                  </div>
+                  
+            <div class="maor_in more_state go">
+            
+<!--<a class="browse_button more state_top goto"> Search </a>-->
+<input class="s browse_button more state_top goto" id="btn" type="button" value=SEARCH style="margin-top:-14px; color:white;">
+<div><span id="searchs" style= "float:left; width: 142; margin: 14 13 2 -312%;"></span></div>
+  </form>
+</div>
+ 
+  </div>
+</div>
+ 
+    <div class="cl"></div>
+    <div class="titles oranges border">
+      <h2>Realtors</h2>
+    </div>
+    <div class="left-sec-70 left-width">
+      <div class="filter">
+      <form action= "{{ path('rar_web_realtors') }}" method="POST">
+        <h2>Refine Your Search</h2>
+        <h4>Company</h4>
+        <input type="text" name="company"><br>
+         <h4>State</h4>
+        <input type="text" name="state" value={{stateCode}}><br>
+        <h4>Rating</h4>
+
+       <p><input type=checkbox name="anyRating" id="anyRating" onclick="javascript:updateRatingFilter(this.id);" class="clsRatingFilter"> Any</p>
+				<p><input type=checkbox name="chooseRating" id="chooseRating"  onclick="javascript:updateRatingFilter(this.id);" class="clsRatingFilter"> Choose</p>
+        <div id ="ratingSlider" class="filter none">
+<input type="text" value="1" class="slideControl" maxlength="10" name="ratings"  id="rateSlider"/>
+
+
+</div>
+<div class="check_b">
+<!--  <h4>Reviews</h4>
+ <p> 
+ <label> 
+<input type=checkbox name="first" id="0-20" onclick="javascript:updateFilter(this.id);" class="clsReviewFilter"> </label> between 0-20</p>
+<p><input type=checkbox name="second" id="21-30"  onclick="javascript:updateFilter(this.id);" class="clsReviewFilter"> between 21-30</p>
+<p><input type=checkbox name="third" id="31-40" onclick="javascript:updateFilter(this.id);" class="clsReviewFilter"> between 31-40</p>
+<p><input type=checkbox name="fourth" id="41-50"  onclick="javascript:updateFilter(this.id);" class="clsReviewFilter"> between 41-50</p>
+<p><input type=checkbox name="greater" id="50-200000" onclick="javascript:updateFilter(this.id);" class="clsReviewFilter"> >50</p>
+<input type="hidden" name="hidReviewFilter1" id="hidReviewFilter1">
+<input type="hidden" name="hidReviewFilter2" id="hidReviewFilter2">
+-->
+<input type="submit" id="search_button" value=submit>
+</div>
+
+     </form>
+      </div>
+     
+       <div class="realtor">
+          {% for realtor in realtors %}
+        <div class="column relators-inner">
+          <div class="name-hd">
+		  {% if realtor.first_name==""%}
+            <h3>{{realtor.business_name}}</h3>
+               {% else %}
+			    <h3>{{realtor.first_name}}</h3>
+				{% endif %}
+          </div>
+          
+          <div class="write-review"><a href="{{ path('rar_web_review', {'id': realtor.id  }) }}-{{realtor.first_name}}-reviewes">Write Review </a></div>
+          <div class="cl"></div>
+          <div class="image-box">
+            <div class="image" > <img style="width:144px; height:125px; margin-left:-5px;" alt="Client" src=" {{ asset(['uploads/', realtor.image]|join) }} "/></div>
+          </div>
+          <div class="content-box ">
+            <div class="left-side-realator">
+              <div id="agent-to-review-agency" class="wid-left">
+               <p>{{realtor.category1}}</p>
+                <p>{{realtor.business_name|default ("")}}</p>
+                <p><strong>Office </strong>{{realtor.phone|default ("N.A.")}} </p>
+                <p><strong>Fax: </strong>{{realtor.fax|default ("N.A.")}} </p>
+                <p><a href="{{ path('rar_web_profile', {'id': realtor.id }) }}-{{realtor.first_name}}-profile">View Full Profile</a></p>
+              </div>
+            </div>
+            <div id="agent-overall-rating-wrapper">
+              <div class="review-star-line" id="agent-overall-rating">
+                <div class="star-group-left"> <span class="rating">
+                 <form id="ratingsForm">
+								<div class="stars">
+						<input type="radio" class="star-{{realtor.avgRating|number_format(0)}}" id="star-{{realtor.avgRating}}" value={{realtor.avgRating|number_format(0)}}	 checked/>
+						
+								<span></span>
+								</div>
+								
+									</form>
+									</div>
+              </div>
+              <!--<img class="share" src="{{ asset('themes/web/images/share.jpg') }}" alt="Share">-->
+   </div>
+        </div>
+         
+        </div> 
+         {% endfor %}
+        </div>
+
+        
+        <div class="resultsPaging">
+      
+          <div class="wrap">
+		    {% if  totalRealtors == 0 %}
+		
+          {% else %}
+ <ul class="navBase pagingNav"style="margin-left:46%;">
+{% if current_page > 1 %}
+    <li class="page_color"><a href="{{path('rar_web_realtors')}}?page=1">First</a></li>
+    <li><a href="{{path('rar_web_realtors')}}?page={{ current_page > 1 ? current_page - 1 : 1 }}">Previous</a></li>
+{% endif %}
+ 
+{% if (current_page - 3) > 0 %}
+    <li><a href="{{path('rar_web_realtors')}}?page={{ current_page > 1 ? current_page - 3 : 1 }}">...</a></li>
+{% endif %}
+{% if (current_page - 2) > 0 %}
+    <li><a href="{{path('rar_web_realtors')}}?page={{ current_page - 2 }}">{{ current_page - 2 }}</a></li>
+{% endif %}
+{% if (current_page - 1) > 0 %}
+    <li><a href="{{path('rar_web_realtors')}}?page={{ current_page - 1 }}">{{ current_page - 1 }}</a></li>
+{% endif %}
+<li class="active"><a href="#" style="color:green; font-size:23px;">{{ current_page }}</a></li>
+{% if (current_page + 1) <= total_pages %}
+    <li><a href="{{path('rar_web_realtors')}}?page={{ current_page + 1 }}">{{ current_page + 1 }}</a></li>
+{% endif %}
+{% if (current_page + 2) <= total_pages %}
+    <li><a href="{{path('rar_web_realtors')}}?page={{ current_page + 2 }}">{{ current_page + 2 }}</a></li>
+{% endif %}
+{% if (current_page + 2) < total_pages %}
+    <li><a href="{{path('rar_web_realtors')}}?page={{ current_page < total_pages ? current_page + 3 : current_page }}">...</a></li>
+{% endif %}
+ 
+{% if current_page < total_pages %}
+    <li><a href="{{path('rar_web_realtors')}}?page={{ current_page < total_pages ? current_page + 1 : current_page }}">Next</a></li>
+    <li><a href="{{path('rar_web_realtors')}}?page={{ total_pages }}">Last</a></li>
+{% endif %}
+ 
+</ul>
+ {% endif %}
+<form action="{{ path('rar_web_realtors') }}" method="POST" name="frmSearchByAlphabet">
+ 
+            <input type="hidden" id="sortRealtor" name="hidsorting" value="">
+            </form>
+          <div class="countSummary" style="width:74%;margin-left:238px;">
+		  		    {% if  totalRealtors == 0 %}
+		
+          {% else %}
+            <ul class="actionBase resultsPerPage">
+		
+           <li class="{% if app.session.get('countPage')==10 %}sel{% endif %}"> Show<a href="#" id="10" onclick="RealtorSorting(this.id);">10</a></li>
+             <li class="{% if app.session.get('countPage')==20 %}sel{% endif %}"><a href="#" id="20" onclick="RealtorSorting(this.id);">20</a></li>
+            <li class="{% if app.session.get('countPage')==50 %}sel{% endif %}"><a href="#" id="50" onclick="RealtorSorting(this.id);">50</a>results per page </li>
+			
+            </ul>
+			{% endif %}
+            Found  {{a}} REALTOR</div>
+            <!--{{ realtors.getTotalItemCount }}-->
+        </div>
+ <!--{{ knp_pagination_render(realtors) }}-->
+      </div>
+    </div>
+    <div class="right-sec-30 border-left right-sec-23">
+      <div class="right border-left" id="content-right">
+        <div id="content-right-inner-wrapper">
+          <div class="ad google-ads ad_side">
+            <h3>Advertising Beverly Hills CA‎</h3>
+            <a href="#"> wow.com/Advertising+Beverly+Hills+CA‎</a>
+            <p>Search for Advertising Beverly Hills CA
+              Look Up Quick Results Now! </p>
+            <h3>Advertising Beverly Hills CA‎</h3>
+            <a href="#"> wow.com/Advertising+Beverly+Hills+CA‎</a>
+            <p>Search for Advertising Beverly Hills CA
+              Look Up Quick Results Now! </p>
+            <h3>Advertising Beverly Hills CA‎</h3>
+            <a href="#"> wow.com/Advertising+Beverly+Hills+CA‎</a>
+            <p>Search for Advertising Beverly Hills CA
+              Look Up Quick Results Now! </p>
+            <h3>Advertising Beverly Hills CA‎</h3>
+            <a href="#"> wow.com/Advertising+Beverly+Hills+CA‎</a>
+            <p>Search for Advertising Beverly Hills CA
+              Look Up Quick Results Now! </p>
+            <h3>Advertising Beverly Hills CA‎</h3>
+            <a href="#"> wow.com/Advertising+Beverly+Hills+CA‎</a>
+            <p>Search for Advertising Beverly Hills CA
+              Look Up Quick Results Now! </p>
+          </div>
+          <div class="ad" id= myGallery1>
+              <!--foreach($resImage as $i=>$r)-->
+              {% for advImage in adv %}
+              <a href="{{advImage.target_url}}">
+                <img  src=" {{ asset(['uploads/', advImage.image]|join) }}" class="active1"   alt="Ad"></a>
+          {% endfor %}
+          </div>
+         
+          <style>
+          
+          .check_b{
+								  width:100%;
+								  float:left;
+          }
+          
+.check_b > p {
+    float: left;
+    width: 100%;
+}
+
+					input[type="checkbox"], input[type="radio"] {
+					box-sizing: border-box;
+					padding: 0;
+					width: 20;
+					}
+					
+#ratingSlider > label {
+    display: none;
+}
+    #myGallery1{
+      position:relative;
+      width:300px; /* Set your image width */
+      height:500px; /* Set your image height */
+    }
+    #myGallery1 img{
+      display:none;
+      position:absolute;
+      top:0;
+      left:54;
+      height:500px;
+    }
+    #myGallery1 img.active1{
+      display:block;
+    }
+.ajx_div
+{
+     background-color: white !important;
+    border: 1px solid black;
+    border-radius: 2px 2px 2px 2px;
+    color: grey;
+    float: left;
+    max-height: 150px;
+    overflow-y: scroll;
+    width: 70.1%;
+}
+
+.ajx_li
+{
+    float: left !important;
+        text-align: left !important;
+        text-indent: 15px !important;
+        width: 100% !important;
+        margin-bottom:0px !important;
+        line-height: 18px !important;
+     font-size: 18px !important;
+}
+.ajx_li:hover
+{
+    cursor:pointer;
+	color: #000000;
+    background-color: #7BBF42 !important;
+    
+}
+.filter input[type="text"] {
+    padding: 10px 20px;
+    width: 192px;
+}
+.none
+{
+display:none;
+}
+          </style>
+          
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'RARWebBundle::layout.html.twig' %}
+{% block body %}
+ <div class="cl"></div>
+ <div class="titles oranges border">
+ {% for cmss in cms %}
+      <h2>{{cmss.name}}</h2>
+    </div>
+
+    <div class="new_cms" style="margin-left:93px;"> 
+    
+    {{cmss.content| raw }}  
+
+
+</div>
+   
+ {% endfor %}
+
+</div>
+
+
+
+
+
+{% endblock %}

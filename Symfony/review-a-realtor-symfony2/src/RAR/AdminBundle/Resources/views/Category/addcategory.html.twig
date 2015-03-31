@@ -1,0 +1,34 @@
+{% extends 'RARAdminBundle::layout.html.twig' %}
+{% block body %}
+		<section id="content">			
+			<div class="g12">			
+				<form id="form" action="{{ path('RARAdminBundle_addcategory') }}" method="post" autocomplete="off" data-validate="parsley">
+					<fieldset>
+						<label>Create New Category</label>
+						<section class="chromeD"><label>Name<font class=change>*</font></label>
+							<div>
+								<input id="required_field" class="txtBoxBig" type="text"  name="name" data-required="true" >
+							</div>
+							<label >Description<font class=change>*</font></label>
+							<div>
+								<textarea rows=5 cols=5  name=description data-required="true" ></textarea>
+							</div>
+						</section>
+						<section class="chrome"><label>Parent Category<font class=change>*</font></label>
+							<div>
+								<select name="category" class="drop">
+								{% for category in categories %}
+								<option value="{{category.ParentCategory}}">{{category.ParentCategory}}</option>
+								 {% endfor %}
+								</select>
+							</div>
+						</section>
+						<section class="chrome">
+							<div class="center">
+								<button class="submit" name="submitbuttonname" value="submitbuttonvalue">Submit</button>
+							</div>
+						</section>
+					</fieldset>
+				</form>	
+			</div>	
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'RARAdminBundle::layout.html.twig' %}
+{% block body %}
+		<div id="pageoptions">
+			<ul>
+				<li><a href="login.html">Logout</a></li>
+				<li><a href="#" id="wl_config">Configuration</a></li>
+				<li><a href="#">Settings</a></li>
+			</ul>
+		</div>	
+<header>
+		<div id="logo">
+			<a href="test.html">Logo Here</a>
+		</div>
+	</header>	
+<nav>
+			<ul id="nav">
+				<li class="i_house"><a href="{{ path('RARAdminBundle_dashboard') }}"><span>Dashboard</span></a></li>
+        <li class="i_book"><a class="active" href="{{ path('RARAdminBundle_user') }}"><span>Realtors</span></a></li>
+        <li class="i_create_write"><a href="{{ path('RARAdminBundle_category') }}"><span>Categories</span></a></li>
+        <li class="i_graph"><a href="{{ path('RARAdminBundle_plan') }}"><span>Plans</span></a></li>
+</nav>
+<section id="content">			
+			<div class="g12">			
+				<form id="form" action="{{ path('RARAdminBundle_userupdate',{ 'id': user.id }) }}" method="post" autocomplete="off">
+					<fieldset>
+						<label>Update User</label>
+						<section><label for="required_field"> First Name</label>
+					<div><input id="required_field" class="txtBoxMedium" type="text" required=""name="firstname" value={{user.firstname}}></div>
+						</section>
+						<section><label for="required_field_msg">Last Name</label>
+							<div><input id="required_field" class="txtBoxMedium" type="text" required="" name=lastname value={{user.lastname}}></div>
+						</section>
+					<section><label for="required_field_msg">Email</label>
+							<div><input id="required_field" class="txtBoxMedium" type="text" required="" name=email value={{user.email}}></div>
+						</section>
+					<section><label for="required_field_msg">Phone</label>
+							<div><input id="required_field" class="txtBoxMedium" type="text" required="" name=phone value={{user.phone}}></div>
+						</section>
+					<section><label for="required_field_msg">Address</label>
+							<div><input id="required_field" class="txtBoxMedium" type="text" required="" name=address value={{user.address}}></div>
+						</section>
+					<section><label for="required_field_msg">City</label>
+							<div><input id="required_field" class="txtBoxMedium" type="text" required="" name=city value={{user.city}}></div>
+						</section>
+					<section><label for="required_field_msg">State</label>
+							<div><input id="required_field" class="txtBoxMedium" type="text" required="" name=state value={{user.state}}></div>
+						</section>
+					<section><label for="required_field_msg">Country</label>
+							<div><input id="required_field" class="txtBoxMedium" type="text" required="" name=country value={{user.country}}></div>
+						</section>
+					<section><label for="required_field_msg">PinCode</label>
+							<div><input id="required_field" class="txtBoxMedium" type="text" required="" name=pincode value={{user.pincode}}></div>
+						</section>
+					<section>	
+							<div><button class="submit" name="submitbuttonname" value="submitbuttonvalue">Update</button></div>
+						</section>
+					</fieldset>
+				</form>	
+				</div>
+{% endblock %}

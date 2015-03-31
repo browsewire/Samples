@@ -1,0 +1,7 @@
+parameters:
+#    rar_admin.example.class: RAR\AdminBundle\Example
+
+services:
+#    rar_admin.example:
+#        class: %rar_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

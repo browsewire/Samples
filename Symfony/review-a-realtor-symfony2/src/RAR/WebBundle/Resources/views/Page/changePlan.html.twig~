@@ -1,0 +1,139 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %}Change Plan {% endblock %}</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	 <script>
+    $(document).ready(function () {
+        $('.box').hide();
+        $('#option1').show();
+        $('#plan').change(function () {
+            $('.box').hide();
+            $('#'+$(this).val()).show();
+        });
+    });
+    </script>	
+    
+    <script>
+    	$(document).ready(function()
+	{
+		$("#payment").addClass('active_background');
+	});
+    </script>				  
+	<script>
+	$(document).ready(function(){
+		updatePlan('{{userPlanId}}');
+		$("#plan").val('{{userPlanId}}');
+		$("#plan").change(function(){	
+            var id=$(this).val();
+            updatePlan(id);  
+        });	
+        
+      //var radio =$('input[name=planS]:checked', '#planK').text()  
+      //alert(radio);
+    $("#plan").change(function(){
+    var res=$("#plan option:selected").val();
+    $("#chooseP").val(res);
+    
+    });     
+	});
+	function updatePlan(id)
+	{
+ 
+		             	
+		$.ajax({
+		url : '{{ path("rar_web_getFeatures",{ "planId": '+id+' }) }}',
+		type:'POST',
+		data:'planId='+id,
+		dataType:'html',   
+		success:function(data){
+			//var category_product = $(data).find('.city').html();
+			$('#features').html(data);
+
+			}
+		});
+        $.ajax({
+		url : '{{ path("rar_web_getDescription",{ "planId": '+id+' }) }}',
+		type:'POST',
+		data:'planId='+id,
+		dataType:'html',   
+		success:function(data){
+			//var category_product = $(data).find('.city').html();
+            $('#planDesc').html(data);
+
+            }
+        });
+    }
+	</script>
+	<form action="{{ path('rar_web_transactionDetail') }}"  method=POST id="planK" >
+   <div class="titles oranges border">
+  <h2>Change Plan</h2>
+    </div>
+	<div class="change_new">
+		Choose Plan: <select name=plan id=plan class="dropDown">
+		{% for plan in plans %}
+		<option value={{plan.id}}>{{plan.name}}</option>
+		{% endfor  %}
+		</select>
+		<input type="hidden" name="chhosePlan" id="chooseP" value=""/>
+	 <div id="2" class="box" name="planS">
+					<input type="radio" name="planS" value="M" checked>Monthly ($19.95)
+					<input type="radio" name="planS" value="H">	 Half yearly ($99)
+						<input type="radio" name="planS" value="Y"> Yearly ($147)
+						  </div>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div class=rplans style="margin-left:15px;">
+		<div class=description>
+			<span class="myplan2">Description</span>
+			
+    	</div> 
+		<div class=planDescriptions2>
+			<div class="planDescription">
+				<div  id="planDesc" class="desc">
+				</div> 
+			</div>  
+		</div>
+	</div>
+	
+<div class=rplans2>
+	<div class=description>
+		<span class="myplan2">Features</span>
+    </div> 
+  	<div class=planDescriptions1>
+  		<div class="planDescription">
+			<div name=features id=features class="change">
+			</div>
+  		</div>  
+    </div>
+
+
+ <div class="buttonClass" style="margin: 0 39px 0 0;">
+     <input  id="b1" type="submit" value="Submit">     
+</div>
+	
+	</div>
+
+
+
+{% endblock %}

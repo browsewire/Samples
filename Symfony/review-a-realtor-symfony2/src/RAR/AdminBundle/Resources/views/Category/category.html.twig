@@ -1,0 +1,78 @@
+{% extends 'RARAdminBundle::layout.html.twig' %}
+{% block javascripts %}
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+	<script src="{{  asset('themes/admin/js/functions.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/functions.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/plugins.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/editor.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/calendar.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/flot.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/elfinder.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/datatables.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Alert.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Autocomplete.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Breadcrumb.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Calendar.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Chart.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Color.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Date.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Editor.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_File.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Dialog.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Fileexplorer.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Form.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Gallery.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Multiselect.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Number.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Password.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Slider.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Store.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Time.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Valid.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Widget.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/config.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/script.js') }}"></script>
+	<script>
+		$(document).ready(function(){
+		$("#colAction").removeClass("sorting");
+	});
+	</script>
+	<script type="text/javascript">
+	function addNewPlan()
+	{
+		window.location.href = '{{ path('RARAdminBundle_addcategory') }}';
+	}
+	</script>
+{% endblock %}
+{% block body %} 
+	<section id="content">
+		<div class="g12">
+			<h1>Manage Categories</h1>
+			<button class="btnAddNew" onclick="javascript:addNewPlan();">Add New</button>
+			<div class="dataTables_wrapper">
+				<table class="datatable">
+					<thead>
+						<tr>
+							<th class="sorting col-1" rowspan="1" colspan="1"># &nbsp;&nbsp;</th>
+							<th class="sorting col-2" rowspan="1" colspan="1">Name &nbsp;&nbsp;</th>
+							<th class="sorting col-4" rowspan="1" colspan="1">Description &nbsp;&nbsp;</th>
+							<th class="sorting col-3" rowspan="1" colspan="1">Parent Category &nbsp;&nbsp;</th>
+							<th class="col-2" id="colAction" rowspan="1" colspan="1"><label class="lblAction">Action &nbsp;&nbsp;</label></th>
+						</tr>
+					</thead>
+						<tbody>		
+							{% for category in categorys %}
+								<tr class="gradeA odd">
+									<td class="">{{category.id}}</td>
+									<td class="txtleft">{{category.name}}</td>
+									<td class="txtleft">{{category.description}}</td>
+									<td class="txtleft">{{category.parent_category}}</td>
+									<td><a href="{{ path('RARAdminBundle_categoryupdate',{ 'id': category.id }) }}"><img src="{{ asset('bundles/images/pencil.png') }}"></image></a><a href="{{ path('RARAdminBundle_categorydelete', { 'id': category.id }) }}"><img src="{{ asset('bundles/images/cross.png') }}"></image></a></td>			
+								</tr>
+		 					{% endfor %} 
+				</table>
+						</tbody>
+			</div>
+		</div>		
+{% endblock %}

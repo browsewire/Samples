@@ -1,0 +1,110 @@
+{% extends 'RARWebBundle::layout.html.twig' %}
+{% block body %}
+<script>
+	$(document).ready(function()
+	{
+		$("#payment").addClass('active_background');
+	});
+</script>
+  <div class="titles oranges border">
+      <h2 >Transaction Details</h2>
+  </div>
+  <div class="new_form">
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST" id="payPalForm"  name="payform">
+  <fieldset style="height:47%; margin-left:23%; width:67%;">
+    <p>
+  
+      <label>Plan Name</label>
+      <input type="text"  name="plan" value="{{planName}}" disabled >
+        <input type="hidden"  name="hidPlanName" value="{{planName}}">
+      </select>
+    </p>
+  <p>
+       <label>Subscription Type </label>
+       <input type="text" name="planS" value="{{subscriptionType}}" disabled>
+       <input type="hidden"  name="hidPlanSubscription" value="{{subscriptionType}}">
+   </p>    
+  
+<p>
+       <label>Charges</label>
+       <input type="text" class="dollar_charges" name="planC" value="{{planCharges}}" disabled>
+       <input type="hidden"  name="hidPlanCharges" value="{{planCharges}}">
+   </p>    
+  <input type="hidden" name="cmd" value="_xclick">
+						<input type="hidden" name="business" value="karana@ocodewire.com">
+						<input type="hidden" name="currency_code" value="USD">
+				  	<input type="hidden" name="return" value="{{web_url}}"/>
+				  	<input type="hidden" name="notify_url" value="{{web_url}}"/>
+						<input type="hidden" name="cancel_return" value="{{ path('rar_web_cancel') }}"/>				
+						<input type="hidden" name="custom" value="" id="customvalue">
+						<input type="hidden" name="item_name" value="{{subscriptionType}}" id="projectvalue">
+						<input type="hidden" name="item_number" value="21">
+						<input type="hidden" name="amount" value="{{planCharges}}">
+
+
+  <div class="buttonClass">
+   <div class="paypal" style="margin-top:-17px;"> <input type="image" style="height:80px;" src="https://www.sandbox.paypal.com/en_GB/i/btn/btn_paynowCC_LG.gif" name="submit" ></div>
+</div>
+
+  
+  </form>
+  </div>
+  
+  
+  
+  <style>
+  .new_form{
+    width:100%;
+    
+    }
+    
+    
+.new_form fieldset p, .sel-1 {
+    height: 67px;
+    width: 40%;
+}
+
+
+.new_form fieldset {
+    border: medium none;
+    float: left;
+    width: 98%;
+}
+
+
+.new_form fieldset p, .sel-1 {
+    height: 67px;
+    width: 48%;
+}
+.new_form fieldset p {
+    float: left;
+    margin:0 0 41px 0;
+}
+
+.buttonClass {
+    float: left;
+    margin-left: 0;
+    margin-top: 17px;
+}
+
+.new_form fieldset p, .sel-1 {
+    height: 67px;
+    width: 50%;
+}
+  
+  </style>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+{% endblock %}

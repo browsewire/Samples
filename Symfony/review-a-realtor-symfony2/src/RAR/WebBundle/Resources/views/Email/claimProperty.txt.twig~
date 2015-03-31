@@ -1,0 +1,15 @@
+{% block subject %}{% autoescape false %}
+    Review-An-Airline Password Reset
+{% endautoescape %}{% endblock %}
+
+{% block body_text %}{% autoescape false %}
+  	Hello! 		
+ 	{{firstname}} {{lastname}}
+	
+	You have request to claim property.
+			
+    Best regards,
+    Review-a-Realtor Team.
+{% endautoescape %}{% endblock %}
+
+{% block body_html %}{% endblock %}

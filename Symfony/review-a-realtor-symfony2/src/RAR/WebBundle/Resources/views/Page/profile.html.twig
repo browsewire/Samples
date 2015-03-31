@@ -1,0 +1,347 @@
+{# src/Blogger/BlogBundle/Resources/views/Page/index.html.twig #}
+{% extends 'RARWebBundle::layout.html.twig' %}
+{%block body %}
+<title>{% block title %}{{realtors.first_name}} {{realtors.last_name}} {% endblock %}</title>
+<script>
+
+ 	function submitReview()
+	{
+		
+		document.frmReview.submit();
+	
+	}
+	
+	function updatePropertyId(id)
+	{
+		$("#hidPropertyId").val(id);
+	
+	}
+	
+	</script>
+  
+      <div class="cl"></div>
+  <div class="titles oranges border">
+      <h2>Review A Realtor</h2>
+    </div>
+    <div class=realtors>
+   <div class="column relators-inner" style="margin-left:100px; margin-top:10px;">
+          <div class="name-hd" style="height:26px";>
+		  {%if realtors.first_name==""%}
+            <h3>{{realtors.business_name}}</h3>
+			{% else %}
+			 <h3>{{realtors.first_name}}</h3>
+			{% endif %}
+            <span> </span></div>
+          <div class="write-review view" style=height:23px;> <a href="{{ path('rar_web_review', { 'id': realtors.id }) }}-{{realtors.first_name}}-reviewes">Write a Review</a></div>
+          <div class="cl"></div>
+          <div class="image-box">
+            <div class="image"> <img src="{{ asset(['uploads/', realtors.image]|join) }}"  image not found" class="large" style="margin-left:-16px;"/></div>
+          </div>
+          <div class="content-box ">
+            <div class="left-side-realator">
+              <div id="agent-to-review-agency" class="wid-left">
+              <p>{{realtors.category1|default ("")}}</p>
+                <p>{{realtors.business_name|default ("")}}</p>
+                
+                <p><strong>Office: </strong>{{realtors.phone|default ("N.A.")}} </p>
+                <p><strong>Fax: </strong>{{realtors.fax|default ("N.A.")}}</p>
+                  <p><strong>Email: </strong>{{realtors.email|default ("N.A.")}}</p>
+                    <p><strong>Address: </strong>{{realtors.address|default ("N.A.")}}</p>
+                   
+              </div>
+            </div>
+            <div id="agent-overall-rating-wrapper" style="margin-right:-78px;">
+              <div class="review-star-line" id="agent-overall-rating">
+                <div class="star-group-left"> <span class="rating">
+                 <form id="ratingsForm">
+                 		{% for reviews in review %}
+								<div class="stars">
+				
+							<input type="radio" class="star-{{reviews.avgRating|number_format(0)}}" id="star-{{reviews.avgRating}}" value={{reviews.avgRating|number_format(0)}}	 checked/>
+								
+								<span></span>
+								</div>
+									{% endfor %}
+									</form>
+									</div>
+              </div>
+             <!-- <div id="star-rating-text">Click the stars to rate agent!</div>-->
+              <!--<img class="share" src="{{ asset('themes/web/images/share.jpg') }}" alt="Share">-->
+<div class="shareIcons" style="margin: 0 0 0 26px;">
+			<a title="Share on Facebook"
+                   href="http://www.facebook.com/sharer.php?s=100&p[title]=Check out this realtor on reviewarealtor.com:Check&p[url]={{fullUrl}}"
+                   target="_blank">
+                      <span>
+                        <img src="{{ asset('themes/homepage/images/facebook_16.png') }}"alt=""style="margin: 0 1px -6px; width:27px;">&nbsp;&nbsp;
+                      </span>
+                </a>
+            </li> 
+
+
+
+<a title="Share on Twitter"
+                   href="https://twitter.com/intent/tweet?text=Check out this realtor on reviewarealtor.com:&url={{fullUrl}}"
+                   target="_blank">
+                      <span>
+                       <img src="{{ asset('themes/homepage/images/twitter_16.png') }}"alt=""style="margin: 0 1px -6px;width:27px;">&nbsp;&nbsp;
+                      </span>
+                </a>
+ 
+            </li> 
+
+
+
+ <a title="Share on Linkedin"
+                   href="http://www.linkedin.com/shareArticle?mini=false&url={{fullUrl}}&title=Check out this realtor on reviewarealtor.com"
+                   target="_blank">
+ 
+                      <span>
+                       <img src="{{ asset('themes/homepage/images/linkedin_16.png') }}"style="margin: 0 1px -6px;width:27px;"alt="">&nbsp;&nbsp;
+                      </span>
+                </a>
+ 
+            </li> 
+
+</div>
+</div>
+
+
+
+
+        </div>
+        </div> 
+        </div>
+        <div class="over_outer">
+        <div class="overviewProfile1"><div class="overviewProfile2">Business Overview</div>
+        
+           <div id="gMap">     
+          <iframe width={{iframe_width}}  height={{iframe_height}} style="height:400px;width:481px;"frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q= {{address}}{{ads}}&aq=0&ie=UTF8&hq=&hnear={{address}}{{ads}}&t=m&ll={{longitude}},{{latitude}}&z=12&iwloc=&output=embed"> </iframe> 
+        </div>
+        </div>
+        <div class="des detail mapd">
+        <div class="image-box1"> 
+        
+        <img src="{{ asset(['logo/', realtors.logo]|join) }}"  image not found" class="large" />
+        </div>
+
+	<h3 class="text_right">{{realtors.business_name|default ("")}}</h3>
+        {% if realtors.overview == null %}
+          
+         <div><p id="Noverview">No Overview set</p></div>
+
+          {% endif %}
+ 			
+        <p class="mangedes">{{realtors.overview}}</p>
+
+        </div>
+        </div>
+         	<form action="{{ path('rar_web_claimLogin', { 'id': realtors.id }) }}" method=POST name="frmReview">
+        <div class="over_outer">
+				<div class="overviewProfile1">
+				<div class="overviewProfile2">Property</div>
+				</div>
+				  {%for properties in property %}
+			   <div class="des detail" style="width:82%">
+			 
+			   {% if properties.image_url is null %}
+					<div class="image-box1"> <img src="{{ asset('bundles/images/property_default.jpeg') }}"  image not found" class="prop_img" /></div>
+					{% else %}
+        <div class="image-box1"> <img src="{{ asset(['Property/', properties.image_url]|join) }}"  image not found" class="large" /></div>
+        {% endif %}
+        
+        <p class="mangeTextProperty"><b>Name:</b> <a href="{{ path('rar_web_searchDetail', {'id': properties.id }) }}-{{realtors.first_name}}-{{properties.name}}">{{properties.name|default ("N.A.")}}</a><br>
+        <b>Address:</b> {{properties.address|default ("N.A.")}}<br>
+        <b>Phone:</b> {{properties.phone|default ("N.A.")}}<br>
+        <b>Zip:</b> {{properties.zip|default ("N.A.")}}<br>
+       	<b>Price:</b> {{properties.price|default ("N.A.")}}</p>
+       	
+       	
+       	{% if app.session.get('userId') !="" %}
+			<div class="propertyPic"> <input id="{{properties.id}}" class="b1" type="submit" value="Claim" onclick="javascript:updatePropertyId({{properties.id}});"></div><br><br>
+					{% else %}
+					 	<a href="#login-box" class="login-window"><div class="propertyPic"> <input id="{{properties.id}}" class="b1" type="submit" value="Claim" onclick="javascript:updatePropertyId({{properties.id}});"></a></div><br><br>
+					{% endif %}
+       	
+       	
+       	
+       	
+        <b>Description:</b> {{properties.description|default ("Null")}}
+         </div>
+    {% endfor %}
+
+    {% if property == null %}
+          
+    <div class=propertiesListing><center class="no_property">No property listed</center></div>
+
+    {% endif %}
+    
+    	<input type="hidden" id="hidPropertyId" name="hidPropertyId">
+				
+{% include "RARWebBundle:Page:claimLogin.html.twig"%}
+        	</form>
+
+<div class="over_outer">
+				<div class="overviewProfile1">
+				<div class="overviewProfile2">Ratings & Reviews</div>
+				</div>
+				
+<div class="rating_n">				
+{% for givenReview in reviewProcess %}
+ <div id="agent-overall-rating-wrapper">
+              <div class="review-star-line" id="agent-overall-rating" style="width:50%;">
+                <div class="star-group-left"> <span class="rating">
+                 <form id="ratingsForm">
+								<div class="stars1" style="margin-top:25px;">
+							
+				 
+					
+							<input type="radio" class="star-{{givenReview.rating}}" id="star-{{givenReview.rating}}" value={{givenReview.rating}}	 checked/>
+								
+								<span></span>
+								</div>
+									
+									</form>
+									</div>
+              </div>
+              
+							<div class="content-box" style="width:100%; margin-left:-24px; margin-top:-15px;">
+            <div class="left-side-realator realator_n">
+              <div id="agent-to-review-agency" class="wid-left">
+                
+                <p><b>Review by</b>: {{givenReview.first_name|default("null")}} <b> ({{ givenReview.creation_timestamp|date('F j, Y') }})</b></p>
+                	
+                <p>{{givenReview.description}}</p>
+                   
+              </div>
+
+</div>
+</div>
+{% endfor %}
+</div>
+
+<div class="no_review">
+{% if reviewProcess == null %}
+          
+         No Reviews added Yet
+
+          {% endif %}
+  </div>   
+  
+  </div></div></div>     
+<div class=average_rating >
+<div class='rating_certeria'><b>{{realtors.business_name|default ("")}}</b></div>
+
+ <div id="agent-overall-rating-wrapper " >
+              <div class="review-star-line star_other" id="agent-overall-rating" style="margin-top:-18px;">
+                <div class="star-group-left"> <span class="rating">
+                 <form id="ratingsForm">
+                 		{% for reviews in review %}
+								<div class="stars">
+				
+							<input type="radio" class="star-{{reviews.avgRating|number_format(0)}}" id="star-{{reviews.avgRating}}" value={{reviews.avgRating|number_format(0)}}	 checked/>
+								
+								<span></span>
+								</div>
+									{% endfor %}
+									</form>
+									</div>
+              </div>
+
+</div>
+
+
+<div class='rating_certeria'><b>Rating By Certeira</b></div>
+
+
+
+
+
+<div style="margin-left:23px;"><b>Honesty</b></div>
+{% for otherReview in reviewOther%}
+<div id="agent-overall-rating-wrapper" style="margin-left:16px; margin-top:-25px;">
+              <div class="review-star-line" id="agent-overall-rating">
+                <div class="star-group-left"> <span class="rating">
+                 <form id="ratingsForm">
+								<div class="stars1" style="margin-top:5px;">
+				
+					
+							<input type="radio" class="star-{{otherReview.avgHonesty}}" id="star-{{otherReview.avgHonesty}}" value={{otherReview.avgHonesty}} checked/>
+								
+								<span></span>
+								</div>
+									
+									</form>
+									</div>
+              </div>
+
+</div>
+<div style="margin-left:23px;"><b>Responsivness</b></div>
+
+<div id="agent-overall-rating-wrapper" style="margin-left:16px; margin-top:-25px;">
+              <div class="review-star-line" id="agent-overall-rating">
+                <div class="star-group-left"> <span class="rating">
+                 <form id="ratingsForm">
+								<div class="stars1" style="margin-top:5px;">
+				
+					
+					<input type="radio" class="star-{{otherReview.avgResponsiveness}}" id="star-{{otherReview.avgResponsiveness}}" value={{otherReview.avgResponsiveness}} checked/>
+								
+								<span></span>
+								</div>
+									
+									</form>
+									</div>
+              </div>
+
+</div>
+
+<div style="margin-left:23px;"><b>Local market knowledge </b></div>
+
+
+<div id="agent-overall-rating-wrapper" style="margin-left:16px; margin-top:-25px;">
+              <div class="review-star-line" id="agent-overall-rating">
+                <div class="star-group-left"> <span class="rating">
+                 <form id="ratingsForm">
+								<div class="stars1" style="margin-top:5px;">
+				
+					
+							<input type="radio" class="star-{{otherReview.avgMarket|number_format(0)}}" id="star-{{otherReview.avgMarket|number_format(0)}}" value={{otherReview.avgMarket}} checked/>
+								
+								<span></span>
+								</div>
+									
+									</form>
+									</div>
+              </div>
+</div>
+
+{% endfor %}
+
+<div style="margin-left:23px;margin-top:25px;"><b>Rating Destribution </b></div>
+<div class="star_left"><b>5 stars </b> <h4></h4><p>{{rc[5]}}</p> </div>
+<div class="star_left"><b>4 stars </b> <h3></h3><p>{{rc[4]}}</p></div>
+<div class="star_left"><b>3 stars  </b> <h2></h2><p>{{rc[3]}}</p></div>
+<div class="star_left"><b>2 stars  </b> <h6></h6><p>{{rc[2]}}</p></div>
+<div class="star_left"><b>1 stars  </b> <h5></h5><p>{{rc[1]}}</p></div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+

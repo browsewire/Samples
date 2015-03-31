@@ -1,0 +1,80 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<script type="text/javascript">
+		function showimagepreview(input) 
+		{
+			if (input.files && input.files[0]) 
+			{
+				var filerdr = new FileReader();
+				filerdr.onload = function(e) 
+				{
+					$('#imgprvw').attr('src', e.target.result);
+				}
+				filerdr.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>
+	<script>
+	$(document).ready(function()
+	{
+		$("#property").addClass('active_background');
+	});
+</script>
+
+	<script>
+	function selectProperty()
+	{
+		if( document.select.propertyName.value == "" )
+   	{
+   	document.getElementById('selects').innerHTML='Please select property listing';
+     document.getElementById('selects').style.color = 'red';
+    //alert("please Select");
+    return false;
+    }
+document.select.submit();     
+}
+</script>	
+<div class="cl">
+	</div>
+	<div class="title orange border">
+		<h2>ADD Property Images</h2>
+	</div>
+<div class="form_cust">
+		<form action="{{ path('rar_web_addSliderImage') }}"  method="POST" enctype="multipart/form-data" name="select" id="custom_forms">
+		<label> ADD Property Image</label><br><br>
+ 		<input type="file" name="file" id="filUpload"  onchange="showimagepreview(this)" />
+ 		<div>
+			<img id="imgprvw" class="uploadImage slider_image"/ ">
+		</div>	
+</div>
+<div>
+			<label>Select Property</label><br><br>
+		<select name="propertyName" class="imageSlider">
+		{% for properties in property %}
+		<option value="{{properties.id}}">{{properties.name}}</option>
+		{% endfor %}
+		</select>
+		<span id="selects"></span>
+</div>
+		<input id="save" type="button" value="submit" onclick="selectProperty()">
+ 	</form>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

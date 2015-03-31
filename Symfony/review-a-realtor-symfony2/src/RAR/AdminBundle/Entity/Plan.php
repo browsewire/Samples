@@ -1,0 +1,303 @@
+<?php
+// src/Blogger/BlogBundle/Entity/Blog.php
+
+namespace RAR\AdminBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="rar_plan")
+ */
+class Plan
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    public $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $name;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $description;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $charges_monthly;
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $charges_half_yearly;
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $charges_yearly;
+    
+          /**
+     * @ORM\Column(type="integer")
+     */
+    public $creator_id;  
+    
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    public $creation_timestamp;
+    
+          /**
+     * @ORM\Column(type="integer")
+     */
+    public $modifier_id;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    public $modification_timestamp;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Plan
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Plan
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set plan_charges
+     *
+     * @param string $planCharges
+     * @return Plan
+     */
+    public function setPlanCharges($planCharges)
+    {
+        $this->plan_charges = $planCharges;
+    
+        return $this;
+    }
+
+    /**
+     * Get plan_charges
+     *
+     * @return string 
+     */
+    public function getPlanCharges()
+    {
+        return $this->plan_charges;
+    }
+
+    /**
+     * Set creator_id
+     *
+     * @param integer $creatorId
+     * @return Plan
+     */
+    public function setCreatorId($creatorId)
+    {
+        $this->creator_id = $creatorId;
+    
+        return $this;
+    }
+
+    /**
+     * Get creator_id
+     *
+     * @return integer 
+     */
+    public function getCreatorId()
+    {
+        return $this->creator_id;
+    }
+
+    /**
+     * Set creation_timestamp
+     *
+     * @param \DateTime $creationTimestamp
+     * @return Plan
+     */
+    public function setCreationTimestamp($creationTimestamp)
+    {
+        $this->creation_timestamp = $creationTimestamp;
+    
+        return $this;
+    }
+
+    /**
+     * Get creation_timestamp
+     *
+     * @return \DateTime 
+     */
+    public function getCreationTimestamp()
+    {
+        return $this->creation_timestamp;
+    }
+
+    /**
+     * Set modifier_id
+     *
+     * @param integer $modifierId
+     * @return Plan
+     */
+    public function setModifierId($modifierId)
+    {
+        $this->modifier_id = $modifierId;
+    
+        return $this;
+    }
+
+    /**
+     * Get modifier_id
+     *
+     * @return integer 
+     */
+    public function getModifierId()
+    {
+        return $this->modifier_id;
+    }
+
+    /**
+     * Set modification_timestamp
+     *
+     * @param \DateTime $modificationTimestamp
+     * @return Plan
+     */
+    public function setModificationTimestamp($modificationTimestamp)
+    {
+        $this->modification_timestamp = $modificationTimestamp;
+    
+        return $this;
+    }
+
+    /**
+     * Get modification_timestamp
+     *
+     * @return \DateTime 
+     */
+    public function getModificationTimestamp()
+    {
+        return $this->modification_timestamp;
+    }
+
+    /**
+     * Set charges_monthly
+     *
+     * @param string $chargesMonthly
+     * @return Plan
+     */
+    public function setChargesMonthly($chargesMonthly)
+    {
+        $this->charges_monthly = $chargesMonthly;
+    
+        return $this;
+    }
+
+    /**
+     * Get charges_monthly
+     *
+     * @return string 
+     */
+    public function getChargesMonthly()
+    {
+        return $this->charges_monthly;
+    }
+
+    /**
+     * Set charges_half_yearly
+     *
+     * @param string $chargesHalfYearly
+     * @return Plan
+     */
+    public function setChargesHalfYearly($chargesHalfYearly)
+    {
+        $this->charges_half_yearly = $chargesHalfYearly;
+    
+        return $this;
+    }
+
+    /**
+     * Get charges_half_yearly
+     *
+     * @return string 
+     */
+    public function getChargesHalfYearly()
+    {
+        return $this->charges_half_yearly;
+    }
+
+    /**
+     * Set charges_yearly
+     *
+     * @param string $chargesYearly
+     * @return Plan
+     */
+    public function setChargesYearly($chargesYearly)
+    {
+        $this->charges_yearly = $chargesYearly;
+    
+        return $this;
+    }
+
+    /**
+     * Get charges_yearly
+     *
+     * @return string 
+     */
+    public function getChargesYearly()
+    {
+        return $this->charges_yearly;
+    }
+}

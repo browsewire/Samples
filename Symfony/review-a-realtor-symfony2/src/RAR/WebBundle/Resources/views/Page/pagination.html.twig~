@@ -1,0 +1,18 @@
+<div class="count">
+    {{ pagination.getTotalItemCount }}
+</div>
+<table>
+
+
+{# table body #}
+{% for article in pagination %}
+<tr {% if loop.index is odd %}class="color"{% endif %}>
+    <td>{{ article.id }}</td>
+    <td>{{ article.city_name }}</td>
+</tr>
+{% endfor %}
+</table>
+{# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>

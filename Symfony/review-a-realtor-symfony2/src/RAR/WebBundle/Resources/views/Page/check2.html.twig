@@ -1,0 +1,283 @@
+{# src/Blogger/BlogBundle/Resources/views/Page/index.html.twig #}
+{% extends 'RARWebBundle::layout.html.twig' %}
+
+{% block body %}
+<div itemscope itemtype="http://schema.org/Product" itemref="_url2 _brand3" class="main"> <!-- search by state -->
+  
+      <div class="cl"></div>
+   
+    <!-- write review -->
+    <div class="title orange">
+      <h2>Review A Realtor</h2>
+    </div>
+    <div class="left-sec-70">
+      <div class="image-box">
+        <div class="image"> <img width="150" height="141" alt="Client" src="{{ asset('themes/web/images/inner-big.jpg') }}"/></div>
+      </div>
+      <div class="content-box">
+        <div itemprop="name" id="agent-to-review-name">Adam Scott</div>
+        <div id="agent-to-review-agency">Coronis Real Estate - Coorparoo</div>
+        <div id="agent-overall-rating-wrapper">
+          <div class="review-star-line" id="agent-overall-rating">
+            <div class="star-group-left"> <span class="rating">
+              <input type="radio" id="rating-input-0-5" class="rating-input" value="5" name="group-7"/>
+              <label class="rating-star" for="rating-input-0-5"></label>
+              <input type="radio" id="rating-input-0-4" class="rating-input" value="4" name="group-7"/>
+              <label class="rating-star" for="rating-input-0-4"></label>
+              <input type="radio" id="rating-input-0-3" class="rating-input" value="3" name="group-7"/>
+              <label class="rating-star" for="rating-input-0-3"></label>
+              <input type="radio" id="rating-input-0-2" class="rating-input" value="2" name="group-7"/>
+              <label class="rating-star" for="rating-input-0-2"></label>
+              <input type="radio" id="rating-input-0-1" class="rating-input" value="1" name="group-7"/>
+              <label class="rating-star" for="rating-input-0-1"></label>
+              </span> </div>
+          </div>
+          <div id="star-rating-text">Click the stars to rate agent!</div>
+        </div>
+      </div>
+      <div class="left" id="content-left">
+        <div id="info"></div>
+        <div class="content-left-wrapper">
+          <div id="review-agent-step-2-wrapper"> <!-- <div class="form-section-header rounded_5">Complete review</div> -->
+            <div class="form-section-padding" id="review-agent-step-2"> <!-- <p class="find-agent-heading">Your first hand experience really helps other sellers. Thanks!</p> -->
+              <form method="post" action="/api/AgentReview.aspx" id="review-agent-form-step-2">
+                <input type="hidden" value="0" id="aid" name="aid"/>
+                <input type="hidden" value="B30722E2-90CD-4233-82DB-62283DCB007C" id="akey" name="akey"/>
+                <input type="hidden" value="0" id="pid" name="pid"/>
+                <fieldset id="review-agent-form-step-2-fieldset">
+                  <div id="agent-to-review-details-wrapper">
+                    <div id="review-agent-avatar-wrapper"> </div>
+                  </div>
+                  <!-- <p class="agent-to-review-heading">Your overall rating of this agent *</p> -->
+                  <div id="agent-overall-rating-info"> </div>
+                  <div class="clear"><!-- / --></div>
+                  <div class="form-input"> <!-- <p class="agent-to-review-heading">Title of your review *</p> -->
+                    <input type="text" placeholder="Headline or summary for your review (required)" autocomplete="off" id="agent-review-title" name="agent-review-title"/>
+                  </div>
+                  <div id="written-review-wrapper" class="form-input"> <!-- <p class="agent-to-review-heading">Your review *</p> -->
+                    <textarea placeholder="Write your review here (required)" rows="10" cols="30" id="written-review" name="written-review"></textarea>
+                    <div class="written-review-char-length-wrapper"><span id="written-review-char-length">0/50</span> characters</div>
+                  </div>
+                  <p class="agent-to-review-heading">How did you use this agent?</p>
+                  <div class="form-input" id="agent-task-wrapper">
+                    <select id="agent-task" name="agent-task">
+                      <option disabled="disabled" value="1" selected="selected">Please select...</option>
+                      <option value="2">Sold property with this agent</option>
+                      <option value="3">Considered selling a property with this agent</option>
+                      <option value="4">Bought a property with this agent</option>
+                      <option value="5">Considered buying a property with this agent</option>
+                    </select>
+                  </div>
+                  <div class="form-input" id="recommend-box-wrapper">
+                    <div id="recommend-box-label" >Would you recommend this agent?</div>
+                    <div id="recommend-box">
+                      <label for="recommend-yes">
+                        <input type="radio" checked="checked" value="1" id="recommend-yes" name="recagent"/>
+                        Yes </label>
+                      <label for="recommend-no">
+                        <input type="radio" value="2" name="recagent" id="recommend-no"/>
+                        No </label>
+                      <label for="recommend-notsure">
+                        <input type="radio" value="3" name="recagent" id="recommend-notsure"/>
+                        Not sure</label>
+                    </div>
+                  </div>
+                  <div class="clear"><!-- / --></div>
+                  <p class="agent-to-review-heading">Can you tell us a little more about this agent? (optional)</p>
+                  <div class="review-star-line">
+                    <div class="star-label"> Honesty, integrity, professionalism </div>
+                    <div class="star-group"> <span class="rating">
+                      <input type="radio" id="rating-input-1-5" class="rating-input" value="5" name="group-1"/>
+                      <label class="rating-star" for="rating-input-1-5"></label>
+                      <input type="radio" id="rating-input-1-4" class="rating-input" value="4" name="group-1"/>
+                      <label class="rating-star" for="rating-input-1-4"></label>
+                      <input type="radio" id="rating-input-1-3" class="rating-input" value="3" name="group-1"/>
+                      <label class="rating-star" for="rating-input-1-3"></label>
+                      <input type="radio" id="rating-input-1-2" class="rating-input" value="2" name="group-1"/>
+                      <label class="rating-star" for="rating-input-1-2"></label>
+                      <input type="radio" id="rating-input-1-1" class="rating-input" value="1" name="group-1"/>
+                      <label class="rating-star" for="rating-input-1-1"></label>
+                      </span> </div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label"> Responsiveness </div>
+                    <div class="star-group"> <span class="rating">
+                      <input type="radio" id="rating-input-2-5" class="rating-input" value="5" name="group-2"/>
+                      <label class="rating-star" for="rating-input-2-5"></label>
+                      <input type="radio" id="rating-input-2-4" class="rating-input" value="4" name="group-2"/>
+                      <label class="rating-star" for="rating-input-2-4"></label>
+                      <input type="radio" id="rating-input-2-3" class="rating-input" value="3" name="group-2"/>
+                      <label class="rating-star" for="rating-input-2-3"></label>
+                      <input type="radio" id="rating-input-2-2" class="rating-input" value="2" name="group-2"/>
+                      <label class="rating-star" for="rating-input-2-2"></label>
+                      <input type="radio" id="rating-input-2-1" class="rating-input" value="1" name="group-2"/>
+                      <label class="rating-star" for="rating-input-2-1"></label>
+                      </span> </div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label"> Local market knowledge </div>
+                    <div class="star-group"> <span class="rating">
+                      <input type="radio" id="rating-input-3-5" class="rating-input" value="5" name="group-3"/>
+                      <label class="rating-star" for="rating-input-3-5"></label>
+                      <input type="radio" id="rating-input-3-4" class="rating-input" value="4" name="group-3"/>
+                      <label class="rating-star" for="rating-input-3-4"></label>
+                      <input type="radio" id="rating-input-3-3" class="rating-input" value="3" name="group-3"/>
+                      <label class="rating-star" for="rating-input-3-3"></label>
+                      <input type="radio" id="rating-input-3-2" class="rating-input" value="2" name="group-3"/>
+                      <label class="rating-star" for="rating-input-3-2"></label>
+                      <input type="radio" id="rating-input-3-1" class="rating-input" value="1" name="group-3"/>
+                      <label class="rating-star" for="rating-input-3-1"></label>
+                      </span> </div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label"> Service was value for money </div>
+                    <div class="star-group"> <span class="rating">
+                      <input type="radio" id="rating-input-4-5" class="rating-input" value="5" name="group-4"/>
+                      <label class="rating-star" for="rating-input-4-5"></label>
+                      <input type="radio" id="rating-input-4-4" class="rating-input" value="4" name="group-4"/>
+                      <label class="rating-star" for="rating-input-4-4"></label>
+                      <input type="radio" id="rating-input-4-3" class="rating-input" value="3" name="group-4"/>
+                      <label class="rating-star" for="rating-input-4-3"></label>
+                      <input type="radio" id="rating-input-4-2" class="rating-input" value="2" name="group-4"/>
+                      <label class="rating-star" for="rating-input-4-2"></label>
+                      <input type="radio" id="rating-input-4-1" class="rating-input" value="1" name="group-4"/>
+                      <label class="rating-star" for="rating-input-4-1"></label>
+                      </span> </div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label"> Sold for a good price </div>
+                    <div class="star-group"> <span class="rating">
+                      <input type="radio" id="rating-input-5-5" class="rating-input" value="5" name="group-5"/>
+                      <label class="rating-star" for="rating-input-5-5"></label>
+                      <input type="radio" id="rating-input-5-4" class="rating-input" value="4" name="group-5"/>
+                      <label class="rating-star" for="rating-input-5-4"></label>
+                      <input type="radio" id="rating-input-5-3" class="rating-input" value="3" name="group-5"/>
+                      <label class="rating-star" for="rating-input-5-3"></label>
+                      <input type="radio" id="rating-input-5-2" class="rating-input" value="2" name="group-5"/>
+                      <label class="rating-star" for="rating-input-5-2"></label>
+                      <input type="radio" id="rating-input-5-1" class="rating-input" value="1" name="group-5"/>
+                      <label class="rating-star" for="rating-input-5-1"></label>
+                      </span> </div>
+                  </div>
+                  <div class="review-star-line">
+                    <div class="star-label"> Sold quickly </div>
+                    <div class="star-group"> <span class="rating">
+                      <input type="radio" id="rating-input-6-5" class="rating-input" value="5" name="group-6"/>
+                      <label class="rating-star" for="rating-input-6-5"></label>
+                      <input type="radio" id="rating-input-6-4" class="rating-input" value="4" name="group-6"/>
+                      <label class="rating-star" for="rating-input-6-4"></label>
+                      <input type="radio" id="rating-input-6-3" class="rating-input" value="3" name="group-6"/>
+                      <label class="rating-star" for="rating-input-6-3"></label>
+                      <input type="radio" id="rating-input-6-2" class="rating-input" value="2" name="group-6"/>
+                      <label class="rating-star" for="rating-input-6-2"></label>
+                      <input type="radio" id="rating-input-6-1" class="rating-input" value="1" name="group-6"/>
+                      <label class="rating-star" for="rating-input-6-1"></label>
+                      </span> </div>
+                  </div>
+                  <div class="form-input padding_top_20">
+                    <div id="subscription-box">
+                      <input type="checkbox" id="subscribe-check" name="subscribe-check"/>
+                      <label for="subscribe-check">I would like to receive property market information and updates from OpenAgent.com.au.</label>
+                    </div>
+                  </div>
+                  <div class="input-line confirm-buttons">
+                    <button class="review-button" id="submit-review-step-2">Submit my review</button>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+          <div style="display:none;" id="review-agent-step-3-wrapper">
+            <div class="form-section-header rounded_5">Verify your review</div>
+            <div class="form-section-padding" id="review-agent-step-3">
+              <form method="post" action="/api/AgentReview.aspx" id="review-agent-form-step-3">
+                <input type="hidden" value="review-agent-form-step-3" id="review-agent-step-3-id" name="form-name"/>
+                <input type="hidden" id="postcodeid" name="postcodeid"/>
+                <input type="hidden" id="state" name="state"/>
+                <input type="hidden" id="suburb" name="suburb"/>
+                <input type="hidden" id="postcode" name="postcode"/>
+                <fieldset id="review-agent-form-step-3-fieldset">
+                  <p class="verify-heading"> To prevent fake reviews, we verify everything submitted on our website. Your details will ONLY be used to verify your review. We hate spam and know you do too. </p>
+                  <p class="agent-to-review-heading">Your email (required)</p>
+                  <div class="form-input">
+                    <input type="email" placeholder="Enter your email address" id="reviewer-email" name="reviewer-email"/>
+                  </div>
+                  <p class="agent-to-review-heading">Your street address</p>
+                  <div class="form-input">
+                    <input type="text" placeholder="Enter your street address" id="reviewer-street" name="reviewer-street"/>
+                  </div>
+                  <p class="agent-to-review-heading">Your suburb</p>
+                  <div class="form-input">
+                    <input type="text" autocomplete="off" placeholder="Enter your properties suburb" name="reviewer-suburb" id="f_suburb"/>
+                    
+                    
+                  </div>
+                  <p class="agent-to-review-heading">Your first name</p>
+                  <div class="form-input">
+                    <input type="text" placeholder="Enter your first name" id="reviewer-firstname" name="reviewer-firstname"/>
+                  </div>
+                  <div class="input-line confirm-buttons">
+                    <button class="review-button" id="submit-review-step-3">Verify my review</button>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right-sec-30 border-left">
+      <div class="right border-left" id="content-right">
+        <div id="content-right-inner-wrapper">
+          <div class="review-percentage-wrapper">
+            <div class="review-percentage">94<span class="review-percentage-symbol">%</span></div>
+            <div class="review-text">of people say that OpenAgent agent reviews factor into their decision</div>
+          </div>
+          <div class="title blue">
+            <h2>Recent Reviews</h2>
+          </div>
+          <div class="recent-reviews-wrapper">
+            <div class="recent-review">
+              <div class="cols right_col">
+                <div class=" people">
+                  <div class="name"> </div>
+                  <div class="rating">
+                    <h6>Lynn Martin</h6>
+                    <p>wrote a review about <a href="#">ReviewARealtor.com</a></p>
+                    <p>"Right first time, every time!"</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cols right_col">
+              <div class=" people">
+                <div class="name"> </div>
+                <div class="rating">
+                  <h6>Lynn Martin</h6>
+                  <p>wrote a review about <a href="#">ReviewARealtor.com</a></p>
+                  <p>Right first time, every time!</p>
+                </div>
+              </div>
+            </div>
+            <div class="cols right_col">
+              <div class=" people">
+                <div class="name"> </div>
+                <div class="rating">
+                  <h6>Lynn Martin</h6>
+                  <p>wrote a review about <a href="#">ReviewARealtor.com</a></p>
+                  <p>"Right first time, every time!"</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+{% endblock %}

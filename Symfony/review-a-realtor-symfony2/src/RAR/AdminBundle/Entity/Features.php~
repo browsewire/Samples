@@ -1,0 +1,55 @@
+<?php
+
+namespace RAR\AdminBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Features
+ */
+class Features
+{
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var string
+     */
+    private $plan_features;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set plan_features
+     *
+     * @param string $planFeatures
+     * @return Features
+     */
+    public function setPlanFeatures($planFeatures)
+    {
+        $this->plan_features = $planFeatures;
+    
+        return $this;
+    }
+
+    /**
+     * Get plan_features
+     *
+     * @return string 
+     */
+    public function getPlanFeatures()
+    {
+        return $this->plan_features;
+    }
+}

@@ -1,0 +1,404 @@
+{% extends 'RARWebBundle::layout.html.twig' %}
+
+
+{% block body %}
+<title>{% block title %}Registration{% endblock %}</title>
+
+<!-------facebook Registration script starts here----------->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+						<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function()
+    {
+        (function(d, s, id)
+            {
+                 var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                  js = d.createElement(s); js.id = id;
+                  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ fbAppId }}";
+                  fjs.parentNode.insertBefore(js, fjs);
+            }
+            (document, 'script', 'facebook-jssdk')
+            );
+
+            FB.init({appId: "{{ fbAppId }}", status: true, cookie: false, oauth  : true, xfbml  : true});
+
+       
+ 
+      });
+ 
+        function postToFeedbh()  
+        {
+            //alert(document.getElementById('hidSelectedLink').value);
+            FB.api('/me', {fields: "id,first_name,last_name,email,picture"}, function(response)  
+            {
+
+                console.log(response);
+                var facebookid = response.id;
+
+                if(response.first_name)
+                {
+                 
+                    document.getElementById('fbFirstName').value=response.first_name;
+                    document.getElementById('fbLastName').value=response.last_name;
+ 		    document.getElementById('fbpimage').value=response.picture.data.url;
+                    document.getElementById('fbUserFullName').value=response.first_name+' '+response.last_name;
+                    document.getElementById('fbEmail').value=response.email;
+
+			document.getElementById('user_form_email').value=response.id;
+         
+										document.newform.submit();
+                    
+                }
+    
+                
+           var userpass = response.first_name+response.last_name;
+              var facebookid = response.id;
+var imgurl = "https://graph.facebook.com/"+facebookid+"/picture?width=230&height=230";// "https://graph.facebook.com/"+facebookid+"/picture?type=large"; //response.picture.data.url;
+                $('#user_form_plainPassword_password').val(userpass);
+                $('#user_form_plainPassword_conf_password').val(userpass);
+                $('#user_form_avatar').val(imgurl);
+ 
+                $('#facebook_name').html(response.first_name+' '+response.last_name);
+ 
+                $('#facebook_img').html('<img style="margin:0px" id="avatar_img" src="'+imgurl+'">');
+                $('#facebook_img_section').show(); 
+                checkfacebookuser(facebookid);
+            });
+        }
+ 
+        function checkfacebookuser(facebookid)
+        {
+            var rootpath = '{{ path('verifyfbaccount') }}';
+            $.post(rootpath,{'facebookid':facebookid},
+                function(data)
+                {
+                       if(data)
+                    {
+                        alert(data);
+                      }
+                    else
+                    {
+                    }
+                }
+            );
+ 
+        }
+        function fblogin()  
+        {
+       
+            FB.login(function(response)  
+                {
+                    postToFeedbh();
+                },  
+                {scope:'email,read_stream,publish_stream,offline_access'});
+      
+}
+
+    </script>
+
+
+ <script src='https://connect.facebook.net/en_US/all.js'></script>
+
+
+<!-------facebook Registration script ends here----------->
+
+
+
+
+	
+						<script>
+			function capitalize(textboxid, str) {
+      // string with alteast one character
+      if (str && str.length >= 1)
+      {       
+          var firstChar = str.charAt(0);
+          var remainingStr = str.slice(1);
+          str = firstChar.toUpperCase() + remainingStr;
+      }
+      document.getElementById(textboxid).value = str;
+      document.getElementById(textboxid1).value = str;
+  }
+						
+						
+						
+						</script>
+						<script>
+									function getPayment()
+	{
+		window.location.href = '{{ path('rar_web_transactionSubmit') }}';
+	}
+			</script>			
+						
+ <script>
+    $(document).ready(function () {
+        $('.boxx').hide();
+        $('#plan').change(function () {
+            $('.boxx').hide();
+             $('.box1').hide();
+            $('#'+$(this).val()).show();
+        });
+       
+        
+    });
+    </script>							  
+<script>
+
+	
+$(document).ready(function(){
+
+updateCities('AK');
+		
+		$("#state").change(function(){	
+               var id=$(this).val();
+             updateCities(id);  
+
+        });	
+});
+
+function updateCities(id)
+{
+ 
+                //alert(id);              	
+               	
+               	$.ajax({
+               	url : '{{ path("RARAdminBundle_getCities",{ "stateCode": '+id+' }) }}',
+                type:'POST',
+                data:'stateCode='+id,
+                dataType:'html',   
+                success:function(data){
+                    //var category_product = $(data).find('.city').html();
+                    $('#city').html(data);
+
+                }
+            });
+
+
+}
+</script>
+<script>
+function checkUser()
+{
+var email=$('#email').val();
+//alert(email);
+
+	$.ajax({
+               	url : '{{ path("RARWebBundle_uniqueEmail") }}',
+                type:'POST',
+                data:'email='+email, 
+                success:function(data){
+                    //var category_product = $(data).find('.city').html();
+                   if(data=='SUCCESS')
+		   {
+			$("#save").attr("disabled",true);
+			document.getElementById('emailExists').innerHTML='Email already Registered';
+		   }
+	else
+	{
+		$("#save").attr("disabled",false);
+	}
+                }
+            });
+
+
+}
+
+</script>
+
+<div itemscope itemtype="http://schema.org/Product" itemref="_url2 _brand3" class="main"> <!-- search by state -->
+    
+    <div class="cl"></div>
+    
+    <!-- write review -->
+    <div class="titles oranges border">
+      <h2>Realtor Registration</h2>
+    </div>
+
+<!---------faceboook Registrtaion starts here--------->
+<form method="POST" class="signin" action="{{path('rar_web_fbLogin')}}" name="newform">
+		  <div class="fb">
+		  <a class="sn-button fb-login" href="#" onclick="fblogin();return false;">
+		       <input class="fb_btn" type="image" style="float: right;
+    margin: 0 95px -13px -14px;
+    width: 18%;"src= "{{ asset('themes/frontend/images/registration.png') }}" style=" /*margin:0 0 0 80%; */"> <!-- 12-23-2014 updates by grace -->
+		  </a>
+		  </div>
+		  </div>
+    <br/>
+ 
+    
+    <input type="hidden" name="fbUserFullName" id="fbUserFullName" style="border:none;background:white; color:#64829c;" readonly>
+    <input type="hidden" name="fbEmail" id="fbEmail" style="display:none;border:none;background:white; color:#64829c;" readonly>
+    <input type="hidden" name="fbFirstName" id="fbFirstName">
+    <input type="hidden" name="fbLastName" id="fbLastName"> 
+<input type="hidden" name="fbpimage" id="fbpimage">
+<input type="hidden" name="user_form_email" id="user_form_email">
+		</div>
+   
+ </div>
+
+
+</form>
+<!---------faceboook Registrtaion end here--------->
+
+
+
+
+
+
+<div class="new_form">
+	<form action="{{ path('rar_web_registration') }}"  method="POST" enctype="multipart/form-data" name="registrationForm"  data-validate="parsley" >
+ <fieldset style="margin:0 -96 0 154;">
+    <p>
+      <label>First Name <font class=star_cum>*</font></label>
+      <input type="text" id="mytextbox" onkeyup="javascript:capitalize(this.id, this.value);" name="firstname" autofocus  data-required="true"  data-error-message="Please enter your firstname " >
+      </select>
+    </p>
+    
+     <p class="form_right">
+      <label>Last Name<font class=star_cum>*</font></label>
+      <input type="text"  id="mytextbox1" onkeyup="javascript:capitalize(this.id, this.value);" name="lastname" autofocus data-required="true" data-error-message="Please enter your lastname " >
+    </p>
+
+ <p>
+      <label>Email <font class=star_cum>*</font></label>
+      <input type="text" id="email" name="email" autofocus   data-type="email" data-required="true" data-error-message="Please enter your email "><br>
+<b id="emailExists" style="color:red;"></b>
+    </p>
+
+ <p style="margin-bottom:0;">
+      <label> Password <font class=star_cum>*</font></label>
+      <input type="password" id="password"  name="password" data-required="true" class="required"  data-minlength="8" data-error-message="Please enter your password ">
+    </p>
+    <p style="margin-bottom:0;">
+      <label>Confirm Password <font class=star_cum>*</font></label>
+      <input type="password"  name="cpassword" data-equalto="#password" data-required="true" class="required" data-error-message="password not match ">
+    </p>
+    <p class="form_right">
+      <label> Address1 <font class=star_cum>*</font></label>
+      <input type="text" name="address" autofocus>
+    </p>
+    <p style="margin-bottom:0;">
+      <label>Address2 <font class=star_cum>*</font></label>
+      <input type="text" name="address2">
+    </p>
+    <p class="sel-1">
+      <label> State <font class=star_cum>*</font></label>
+    <select  name="state" id="state">
+   {% for state in states %}
+							<option value="{{state.StateCode}}">{{state.StateName}}</option>
+								 {% endfor %}
+    </select>
+    </p>
+    <p class="sel-1">
+      <label> city <font class=star_cum>*</font></label>
+    	<select name="city" id="city">								
+								</select>
+    </p>
+    
+    <p style="margin-bottom:0;">
+      <label>Phone <font class=star_cum>*</font></label>
+      <input type="text" name="phone"  data-type="number" maxlength=7  data-required="true" data-error-message="Please enter your valid number ">
+    </p>
+    
+    <p style="margin-bottom:0;">
+      <label>ZipCode  <font class=star_cum>*</font></label>
+      <input type="text" name="pincode" data-type="number" maxlength=5  data-required="true" data-error-message="Please enter your valid zipcode ">
+    </p>
+    <p style="margin-bottom:0;">
+      <label>Business Name <font class=star_cum>*</font></label>
+      <input type="text" name="business">
+    </p>
+    <p style="margin-bottom:0;">
+      <label>Fax <font class=star_cum>*</font></label>
+      <input type="text"name="fax" autofocus data-type="number"  maxlength=11 "data-required="true" >
+    </p>
+   
+    <p style="height: 120px;">
+      <label> Profile Image  </label>
+    <input type="file" tyle="margin-top: 13px;" name="file">
+     </p>
+        <p style="margin-bottom:0;">
+      <label> Business Logo </label>
+    <input type="file" tyle="margin-top: 13px;" name="logo">
+     </p>
+     
+     
+       <p style="margin-bottom:0;">
+      <label> Video </label>
+    <input type="text" name="video">
+     </p>
+     
+          
+   
+  
+      <p style="margin-bottom:0;">
+      <label> Twitter </label>
+    <input type="text" name="twitter">
+     </p>
+      <p style="margin-bottom:0;">
+      <label> Facebook </label>
+    <input type="text" name="facebook">
+     </p>
+      <p style="margin-bottom:0;">
+      <label> Google+</label>
+    <input type="text" name="google">
+     </p>
+      <p style="margin-bottom:0;">
+      <label> Linkedin  </label>
+    <input type="text" name="linkedin">
+     </p>
+     
+     
+     
+     
+     
+     <p class="sel-1">
+      <label> Choose plan </label>
+      <select name="planid" id="plan">
+   	{% for plan in plans %}
+	<option value="{{plan.id}}">{{plan.name}}</option>
+	 {% endfor %}
+    </select>
+    </p>
+    
+  
+    
+    <p style="height: 120px;">
+      <label>Business Overview
+ 			</label>
+     <textarea style="border:1px solid black;" name="overview" cols="40" rows="5"></textarea>
+    
+      
+	<div id="2" class="boxx" name="planS">
+		<input type="radio" name="planS" value="M" style="width:15px;height:15px;"checked>Monthly ($19.95)<br>
+		<input type="radio" name="planS" value="H" style="width:15px;height:15px;">	 Half yearly ($99)<br>
+		<input type="radio" name="planS" value="Y" style="width:15px;height:15px;"> Yearly ($147)
+		<div class="proceed_button"><input id="save" type="submit" value="Click to Proceed"></div>
+	</div>
+    <div class="registration_button box1" id="1">
+	 <input id="save" type="submit" value="Submit" onclick="checkUser();">     
+		</div>
+ <p style="width:0%;"></p>
+   
+    </form>
+  </fieldset>
+    
+    
+<div class="cl"></div>
+</div>
+
+		
+    <div id="2" class="box" >
+	   
+		</div>
+
+
+
+
+
+
+
+  {% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'RARAdminBundle::layout.html.twig' %}
+{% block javascripts %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+	
+	<script src="{{  asset('themes/admin/js/functions.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/functions.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/plugins.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/editor.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/calendar.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/flot.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/elfinder.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/datatables.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Alert.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Autocomplete.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Breadcrumb.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Calendar.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Chart.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Color.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Date.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Editor.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_File.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Dialog.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Fileexplorer.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Gallery.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Multiselect.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Number.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Password.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Slider.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Store.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Time.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Valid.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Widget.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/config.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/script.js') }}"></script>
+	<script>
+		function importUsers()
+	{
+		window.location.href = '{{ path('RARAdminBundle_manageCms') }}';
+	}
+	
+	</script>
+{% endblock %}
+
+{% block body %}
+<title>{% block title %} Edit Cms | Admin{% endblock %}</title>
+<section id="content">			
+		<div class="g12">			
+			<form id="form" action="{{ path('RARAdminBundle_editCms',{id:cms.id}) }}" method="POST" autocomplete="off" data-validate="parsley" enctype="multipart/form-data">
+					<fieldset>
+						<label>Edit Page</label>
+						<section class="chrome"><label for="text_field">Name</label>
+							<div><input type="text" id="text_field" name="name" value={{cms.name}}></div>
+						</section>
+						<section class="chrome"><label for="text_tooltip">Url</label>
+							<div><input type="text" id="text_tooltip" name="url" title="A Tooltip" value={{cms.url}}>
+							</div>
+						</section>
+						<!--<section><label for="text_tooltip">Placeholder Text</label>
+							<div><input type="text" id="text_placeholder" name="text_placeholder" placeholder="your placeholder text">
+							<span>use the placeholder attribute <code>placeholder="your placeholder text"</code></span>
+							</div>
+						</section>-->
+<section class="chrome"><label for="text_tooltip">Image</label>
+								<div><input type="file" name="image"></div>
+						</section>
+					<section class="chrome"><label for="text_tooltip">Type</label>
+							<div>
+							<select name="type" class="optionField drop">
+							<option value="1">Header</option>
+							<option value="2">Footer</option>
+							</select>
+							
+							</div>
+						</section>
+							<section style="height:380px;"><label for="textarea_auto">Editor<br></label>
+							<div style="width:100%;"><textarea id="textarea_wysiwyg" name="content" class="html"  rows="12">{{cms.content}}</textarea>
+							
+							</div>
+						</section>
+					
+						<!--<section><label for="textarea_auto">Autogrow Textarea<br><span>Some extra information</span></label>
+							<div><textarea id="textarea_auto" name="textarea_auto" data-autogrow="true"></textarea>
+								<span>will expand after you hit the bottom edge</span>
+							</div>
+						</section>-->
+									<section class="chrome">
+							<div class="center"><button class="submit" name="submitbuttonname" value="submitbuttonvalue">Submit</button>
+							<button class="center1" name="submitbuttonname" value="submitbuttonvalue" onclick="importUsers()">Cancel</button>
+							
+							</div>
+						</section>
+						</fieldset>
+				</form>
+		</div>
+{% endblock %}

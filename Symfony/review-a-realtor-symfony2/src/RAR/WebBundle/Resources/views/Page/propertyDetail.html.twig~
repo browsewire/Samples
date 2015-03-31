@@ -1,0 +1,102 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %}{{property.name}} | property{% endblock %}</title>
+<script>
+	$(document).ready(function()
+	{
+		$("#property").addClass('active_background');
+	});
+</script>
+
+	<div class="titles oranges border">
+		<h2>Property Detail</h2>
+		</div>
+		
+   <div class="perty"> 
+    <div class="perty_top tops">
+    <h4><b class="bolds"> {{property.name}}</b></h4>
+ 
+    </div>
+      <!-- <div class="reply">
+       <a class="reply_button">Reply to this ad</a>
+    <!--<h4>Price:{{property.phone}}</h4>
+    <h5> or Contact:<span>{{property.phone}}</span> </h5>
+      </div>-->
+      <div class="perty_left topss">
+         	{% if defaultPropertyImage == '' %}
+      		{% include "RARWebBundle:Page:images.html.twig"%}
+	{% else %}
+		{{defaultPropertyImage|raw}}
+	{% endif %}
+   
+      </div>
+      <div style="margin-top:35px;">
+     <div class="login addImages">
+        <ul>
+        <!--  <li><a href="{{ path('rar_web_addSliderImage') }}">Add Images</a></li>-->
+        </ul>
+      </div>
+      <div>
+    	 <p class=textP> <b>Description:</b></p><br>
+      <p class=textP> {{property.description}}</p><br>
+ 			 <p class=textP><b> Additional Information:</b></p> <br>
+    	<p class=textP> {{property.additionalinformation|default ("Null")}}</p><br>
+     <p class=textP><b> Price:</b> {{property.price}}</p><br>
+   
+      <p class=textP> <b>Phone:</b> {{property.phone}}
+     
+      </div>
+      </div>
+      
+      <div class="social">
+      <ul>
+               <li><a href="#"><img alt="" src="{{ asset('themes/login/images/yahoo_icon.png') }}"   /></a> </li>
+               <li><a href="#"><img alt="" src="{{ asset('themes/login/images/p_icon.png') }}"   /></a> </li>
+                  <li><a href="#"><img alt="" src="{{ asset('themes/login/images/f_icon.png') }}"   /></a> </li>
+                  <li><a href="#"><img alt="" src="{{ asset('themes/login/images/g_icon.png') }}"   /></a> </li>
+          <li><a href="#"><img alt="" src="{{ asset('themes/login/images/you_icon.png') }}"   /></a> </li>
+          
+      </ul>
+      </div>
+      <!--<div class="tool">
+      <h2> Tool</h2>
+      <ul>
+      <li><a href="#"> Favorite </a></li>
+       <li><a href="#"> Favorite </a></li>
+        <li><a href="#"> Favorite </a></li>
+         <li><a href="#"> Favorite </a></li>    
+      </ul>
+      
+       </div>-->
+       
+       <div class="video" style="width:41% ;">
+       <h4> Youtube video </h4>
+ <iframe class="youtub" style="width:100%;" height="250"
+src="{{property.video_url}}">
+</iframe> 
+        </div>
+        <div class="map">
+        <h4> Map</h4>
+<iframe width={{iframe_width}}  height={{iframe_height}} style="width:100%;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q= {{address}}&aq=0&ie=UTF8&hq=&hnear={{address}}&t=m&ll={{longitude}},{{latitude}}&z=12&iwloc=&output=embed"> 
+        </iframe>
+        
+    </div>
+    </div> 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+{% endblock %}

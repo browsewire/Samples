@@ -1,0 +1,24 @@
+{% block subject %}{% autoescape false %}
+     Review-a-realtor Registration
+{% endautoescape %}{% endblock %}
+
+{% block body_text %}{% autoescape false %}
+    Hello!
+	
+  		
+  		Hello {{firstname}} {{lastname}}
+  		
+  		Your account has been created with reviewarealtor.com.Your Account Details are as under:
+  		
+  		 Email Id: {{email}}
+  		 Password: {{password}}
+		
+		Please Confirm youe account to click on the link below:
+		{{confirmationLink}}	
+		
+			
+    Best regards,
+    Review-A-Realtor Team.
+{% endautoescape %}{% endblock %}
+
+{% block body_html %}{% endblock %}

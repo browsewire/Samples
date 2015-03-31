@@ -1,0 +1,138 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %}Edit Review -Review An Airline{% endblock %}</title>
+{% block meta %}
+    <meta name="description" content="Review An Airline is the Internets leading source for reviewing airline cheap tickets, airline tickets customer reviews and flights. Discover what other people say about their experiences with an airline and hopefully you’ll make a better choice, choosing the right cheap airline tickets.">
+    <!--<meta name="keywords" content=>-->
+{% endblock %}
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+						<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+						<script>
+			function capitalize(textboxid, str) {
+      // string with alteast one character
+      if (str && str.length >= 1)
+      {       
+          var firstChar = str.charAt(0);
+          var remainingStr = str.slice(1);
+          str = firstChar.toUpperCase() + remainingStr;
+      }
+      document.getElementById(textboxid).value = str;
+      document.getElementById(textboxid1).value = str;
+  }
+						
+						</script>
+
+
+
+	 <div class="cl"></div>
+    
+    <!-- write review -->
+  <div class="titles oranges border">
+      <h2>Edit Review</h2>
+    </div>
+    
+    
+    	
+<div class="new_form review" style="width:100%; margin-left:-14px;">
+{% for reviews in reviewz %}
+<form  action="{{ path('rar_web_editReview',{'id':reviews[0].id}) }}"  method="POST" enctype="multipart/form-data" id="loginform" data-validate="parsley" >
+<fieldset style="margin:0 0 0 65px;">
+<div class="fild_outer">
+
+
+ <div class="image-box">
+          <div class="image" style="height:132px; width:171px;"> <img src="{{ asset(['logo/', reviews.logo]|join) }}" class="large" /></div>
+      </div>
+   
+
+<div class="content-box" style="float: left;
+    margin: 0 0 0 28px;
+    width: 32%">
+
+     <div itemprop="name" id="agent-to-review-name">{{reviews.first_name |default ("N.A.")}}{{reviews.last_name |default ("N.A.")}}  </div>
+        <div id="agent-overall-rating-wrapper ">
+          <div class="review-star-line " id="agent-overall-rating">
+            <div class="star-group-left"> 
+            <div id="ratingsForm">
+							<div class="stars">
+								<input type="radio" name="stars" class="star-1" id="star-11" value=1 />
+								<label class="star-1" for="star-11">1</label>
+								<input type="radio" name="stars" class="star-2" id="star-12" value=2 />
+								<label class="star-2" for="star-12">2</label>
+								<input type="radio" name="stars" class="star-3" id="star-13" value=3 />
+								<label class="star-3" for="star-13">3</label>
+								<input type="radio" name="stars" class="star-4" id="star-14" value=4 />
+								<label class="star-4" for="star-14">4</label>
+								<input type="radio" name="stars" class="star-5" id="star-15" value=5 />
+								<label class="star-5" for="star-15">5</label>
+								<span></span>
+								</div>
+									</div>
+			</div>
+		  </div>
+		  
+		
+
+
+</div></div>
+
+
+
+
+
+
+
+
+<div style="float: left; margin: 0 0 0 -44px;">
+
+ <p style="width:100%">
+   
+      <label>Title <font class=star_cum>*</font></label>
+      <input type="text" id="mytextbox" name="title" data-required="true" data-error-message="Please enter title" value="{{reviews[0].headline}}" autofocus>
+      </select>
+    </p>
+<p style="width:100%">
+       <label>Description <font class=star_cum>*</font></label>
+<textarea style="margin: 0 0 0 13px;
+    padding: 10px 2px 2px 25px;
+    width: 83%;box-shadow: 0 1.5px 3px rgba(190, 190, 190, 0.4) inset, 0 0 0 5px #F5F7F8;" name="description" cols=30 rows=10  data-required="true" data-error-message="Please enter Description ">
+
+{{reviews[0].description}}
+
+</textarea>
+      
+      </select>
+</p>
+
+<p>
+{% endfor %}
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   </div>
+
+</div>
+</fieldset>
+</div>
+  <div class="buttonClass">
+     <input  id="b1" type="submit" value="Save" style="margin-right: 64; margin-top:68px;;">     
+</div>
+
+
+</form>
+
+<style>
+	.stars label
+	{
+		width: 30px !important;
+	}
+</style>
+
+{% endblock %}

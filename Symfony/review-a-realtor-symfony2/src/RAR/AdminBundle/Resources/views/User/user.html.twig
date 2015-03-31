@@ -1,0 +1,103 @@
+{% extends 'RARAdminBundle::layout.html.twig' %}
+{% block body %}
+		<div id="pageoptions">
+			<ul>
+				<li><a href="login.html">Logout</a></li>
+				<li><a href="#" id="wl_config">Configuration</a></li>
+				<li><a href="#">Settings</a></li>
+			</ul>
+		</div>	
+<header>
+		<div id="logo">
+			<a href="test.html">Logo Here</a>
+		</div>
+			<script type="text/javascript">
+			function addNewPlan()
+			{
+				window.location.href = '{{ path('RARAdminBundle_adduser') }}';
+			}
+		</script>
+	</header>	
+<nav>
+			<ul id="nav">
+				<li class="i_house"><a href="{{ path('RARAdminBundle_dashboard') }}"><span>Dashboard</span></a></li>
+        <li class="i_book"><a class="active" href="{{ path('RARAdminBundle_user') }}"><span>Realtors</span></a></li>
+        <li class="i_create_write"><a href="{{ path('RARAdminBundle_category') }}"><span>Categories</span></a></li>
+        <li class="i_graph"><a href="{{ path('RARAdminBundle_plan') }}"><span>Plans</span></a></li>
+</nav>
+<section id="content">
+<div class="g12">
+	<h1>Manage Realtors</h1>
+	<button class="btnAddNew" onclick="javascript:addNewPlan();">Add New</button>
+<div class="dataTables_wrapper">
+	<div class="dataTables_length">
+  	<!--<label>
+   		Show
+			<div id="uniform-undefined" class="selector">
+ 		<span style="-moz-user-select: none;">10</span>
+		<select size="1" style="opacity: 0;">
+			<option value="10" selected="selected">10</option>
+  		<option value="25">25</option>
+  		<option value="50">50</option>
+  		<option value="100">100</option>
+		</select>
+ </div>
+	entries
+</label>-->
+</div>
+<div class="dataTables_filter">
+		<label>
+			Search:
+			<input type="text">
+		</label>
+</div>
+<table class="datatable">
+	<thead>
+<tr>
+<th class="sorting_desc" rowspan="1" colspan="1" style="width: 147px;">Id</th>
+<th class="sorting" rowspan="1" colspan="1" style="width: 222px;">FirstName</th>
+<th class="sorting" rowspan="1" colspan="1" style="width: 214px;">LastName</th>
+<th class="sorting" rowspan="1" colspan="1" style="width: 54px;">Email</th>
+<th class="sorting" rowspan="1" colspan="1" style="width: 84px;">Phone</th>
+<th class="sorting" rowspan="1" colspan="1" style="width: 150px;">Address</th>
+<th class="sorting" rowspan="1" colspan="1" style="width: 150px;">State</th>
+<th class="sorting" rowspan="1" colspan="1" style="width: 120px;">City</th>
+<th class="sorting" rowspan="1" colspan="1" style="width: 180px;">Country</th>
+<th class="sorting" rowspan="1" colspan="1" style="width: 180px;">PinCode</th>
+<th class="sorting" rowspan="1" colspan="1" style="width: 180px;">Actions</th>
+</tr>
+</thead>
+		<tbody>		
+{% for user in users %}
+	<tr class="gradeA odd">
+<td class="">{{user.id}}</td>
+<td class="txtleft">{{user.firstname}}</td>
+<td class="txtleft">{{user.lastname}}</td>
+<td class="txtleft">{{user.email}}</td>
+<td class="txtleft">{{user.phone}}</td>
+<td class="txtleft">{{user.address}}</td>
+<td class="txtleft">{{user.city}}</td>
+<td class="txtleft">{{user.state}}</td>
+<td class="txtleft">{{user.country}}</td>
+<td class="txtleft">{{user.pincode}}</td>
+<td><a href="{{ path('RARAdminBundle_userupdate',{ 'id': user.id }) }}"><img src="{{ asset('bundles/images/pencil.png') }}"></image></a><a href="{{ path('RARAdminBundle_userdelete', { 'id': user.id }) }}"><img src="{{ asset('bundles/images/cross.png') }}"></image></a></td>			
+</tr>
+ {% endfor %}
+</table>
+<!--<div class="dataTables_info">Showing 1 to 10 of 58 entries</div>
+ <div class="dataTables_paginate paging_full_numbers">
+	<span class="first paginate_button paginate_button_disabled">First</span>
+	<span class="previous paginate_button paginate_button_disabled">Previous</span>
+<span>
+	<span class="paginate_active">1</span>
+	<span class="paginate_button">2</span>
+	<span class="paginate_button">3</span>
+	<span class="paginate_button">4</span>
+	<span class="paginate_button">5</span>
+</span>
+<span class="next paginate_button">Next</span>
+<span class="last paginate_button">Last</span>-->
+</div>
+</div>
+</div>	
+{% endblock %}

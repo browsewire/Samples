@@ -1,0 +1,19 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+ {% block javascripts %}
+ <script src="{{  asset('themes/web/js/menu_jquery.js') }}"></script>
+ <script src="{{  asset('themes/web/js/jquery-1.10.1.min.js') }}"></script>
+<script>
+
+	$(document).ready(function()
+	{
+		$("#linkAYP").addClass('active');
+	});
+</script>
+{% endblock %}
+ <div class="title orange border">
+      <h2>Claim Listing</h2>
+    </div>
+<p><center>No Claim Listing</center></p>
+
+{% endblock %}

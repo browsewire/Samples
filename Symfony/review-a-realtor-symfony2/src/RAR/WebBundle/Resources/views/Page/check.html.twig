@@ -1,0 +1,156 @@
+{# src/Blogger/BlogBundle/Resources/views/Page/index.html.twig #}
+{% extends 'RARWebBundle::layout.html.twig' %}
+
+{% block body %}
+ <div class="map_container">
+    <div class="cont">
+      <div class="trans-buton">
+        <div itemscope itemtype="http://schema.org/Product" class="orange"><a itemprop="url" href="#" class="orange active">Find a Realtor</a></div>
+        <div class="blue"><a id="_url16" itemprop="url" href="#" class="blue">Review a Realtor</a></div>
+      </div>
+      <div class="search_outer">
+        <input type="text" placeholder="Realtor Name"/>
+        <input type="text" placeholder="Address, City, Zip"/>
+        <input type="button" class="button" value="Go"/>
+      </div>
+    </div>
+  </div>
+  <!-- content -->
+  <div class="main"> <!-- search by state -->
+    <section>
+      <div itemscope itemtype="http://schema.org/Product" itemref="_url16" class="title orange">
+        <h2 itemprop="name">Find Realtors In Your State</h2>
+      </div>
+      <div class="category">
+        <ul>
+          <li itemscope itemtype="http://schema.org/Product" itemref="_url16"><a href="#"> <span itemprop="name">Dallas, TX</span> </a></li>
+          <li><a href="#"> Dallas, TX</a></li>
+          <li><a href="#"> Dallas, TX</a></li>
+          <li class="last_child"><a href="#"> Dallas, TX</a></li>
+          <li><a href="#">Denver, CO</a></li>
+          <li><a href="#"> Dallas, TX</a></li>
+          <li><a href="#"> Dallas, TX</a></li>
+          <li class="last_child"><a href="#"> Dallas, TX</a></li>
+         
+          <li itemscope itemtype="http://schema.org/Product"><a itemprop="url" href="#">Las Vegas, NV </a></li>
+          <li><a href="#"> Dallas, TX</a></li>
+          <li><a href="#"> Dallas, TX</a></li>
+          <li class="last_child"><a href="#"> Dallas, TX</a></li>
+          <li><a href="#"> Miami, FL</a></li>
+          <li><a href="#"> Dallas, TX</a></li>
+          <li><a href="#"> Dallas, TX</a></li>
+          <li class="last_child"><a href="#"> Dallas, TX</a></li>
+          <li><a href="#"> Raleigh, NC</a></li>
+          <li><a href="#"> Dallas, TX</a></li>
+          <li><a href="#"> Dallas, TX</a></li>
+          <li class="last_child"><a href="#"> Dallas, TX</a></li>
+          <li itemscope itemtype="http://schema.org/Product"><a href="#"> <span itemprop="name">San Diego, CA</span></a></li>
+         
+          <li><a href="#"> Dallas, TX</a></li>
+          <li><a href="#"> Dallas, TX</a></li>
+          <li itemscope itemtype="http://schema.org/Product" class="last_child"><a href="#" class="underline"> <strong>MORE</strong></a></li>
+        </ul>
+      </div>
+      <div class="cl"></div>
+    </section>
+    <!-- write review -->
+    <section class="review_outer">
+      <div class="title blue">
+        <h2>Recent Reviews</h2>
+      </div>
+      <div class="review">
+        <div class="cols"> </div>
+        <div class="cols right_col">
+          <div class=" people">
+            <div class="name">
+              <div class="image"> <img src="{{ asset('themes/web/images/client_15.jpg') }}" width="111" height="104" alt="Client"/></div>
+              <div class="time">3 hours ago</div>
+            </div>
+            <div class="rating">
+              <h6>Lynn Martin</h6>
+              <p>wrote a review about <a href="#">ReviewARealtor.com</a></p>
+              <div class="stars"><img src="{{ asset('themes/web/images/stars.png') }}" width="122" height="25" alt="Rating"/></div>
+              <p>Right first time, every time!</p>
+            </div>
+          </div>
+        </div>
+        <div class="cols left_col">
+          <div class=" people">
+            <div class="name">
+              <div class="image"><img src="{{ asset('themes/web/images/client_16.jpg') }}"width="111" height="104" alt="Client"/></div>
+              <div class="time">3 hours ago</div>
+            </div>
+            <div class="rating">
+              <h6>Lynn Martin</h6>
+              <p>wrote a review about <a href="#">ReviewARealtor.com</a></p>
+              <div class="stars"><img src="{{ asset('themes/web/images/stars.png') }}" width="122" height="25" alt="Rating"/></div>
+              <p>Right first time, every time!</p>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+        <div class="cols right_col">
+          <div class=" people">
+            <div class="name">
+              <div class="image"> <img src="{{ asset('themes/web/images/client_17.jpg') }}" width="111" height="104" alt="Client"/></div>
+              <div class="time">3 hours ago</div>
+            </div>
+            
+            <div class="rating">
+        
+              <h6>Lynn Martin</h6>
+              <p>wrote a review about <a href="#">ReviewARealtor.com</a></p>
+              <div class="stars"> <img src="{{ asset('themes/web/images/stars.png') }}" width="122" height="25" alt="Rating"/></div>
+              <p>Right first time, every time!</p>
+              
+            </div>
+            
+          </div>
+        </div>
+        <div class="cols left_col">
+          <div class=" people">
+            <div class="name">
+              <div class="image"> <img src="{{ asset('themes/web/images/client_18.jpg') }}" width="111" height="104" alt="Client"/></div>
+              <div class="time">3 hours ago</div>
+            </div>
+            <div class="rating">
+              <h6>Lynn Martin</h6>
+              <p>wrote a review about <a href="#">ReviewARealtor.com</a></p>
+              <div class="stars"> <img src="{{ asset('themes/web/images/stars.png') }}" width="122" height="25" alt="Rating"/></div>
+              <p>Right first time, every time!</p>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+        <div class="cols right_col">
+          <div class=" people">
+            <div class="name">
+              <div class="image"> <img src="{{ asset('themes/web/images/client_19.jpg') }}" width="111" height="104" alt="Client"/></div>
+              <div class="time">3 hours ago</div>
+            </div>
+            <div class="rating">
+              <h6>Lynn Martin</h6>
+              <p>wrote a review about <a href="#">ReviewARealtor.com</a></p>
+              <div class="stars"> <img src="{{ asset('themes/web/images/stars.png') }}" width="122" height="25" alt="Rating"/></div>
+              <p>Right first time, every time!</p>
+            </div>
+          </div>
+        </div>
+        <div class="cols left_col">
+          <div class=" people">
+            <div class="name">
+              <div class="image"> <img src="<img src="{{ asset('themes/web/images/client_15.jpg') }}" width="111" height="104" alt="Client"/></div>
+              <div class="time">3 hours ago</div>
+            </div>
+            <div class="rating">
+              <h6>Lynn Martin</h6>
+              <p>wrote a review about <a href="#">ReviewARealtor.com</a></p>
+              <div class="stars"> <img src="{{ asset('themes/web/images/stars.png') }}" width="122" height="25" alt="Rating"/></div>
+              <p>Right first time, every time!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}

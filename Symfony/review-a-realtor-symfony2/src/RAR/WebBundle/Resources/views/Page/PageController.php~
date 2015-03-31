@@ -1,0 +1,26 @@
+<?php
+
+namespace RAR\WebBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+class PageController extends Controller
+{
+    public function indexAction()
+    {
+        return $this->render('RARWebBundle:Page:index.html.twig');
+    }
+
+public function check2Action()
+    {
+        return $this->render('RARWebBundle:Page:writeReview.html.twig');
+    }
+
+
+
+
+
+
+
+
+}

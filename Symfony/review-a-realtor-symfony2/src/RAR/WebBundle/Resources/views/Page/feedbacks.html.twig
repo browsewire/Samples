@@ -1,0 +1,151 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %} Reviews {% endblock %}</title>
+
+     <script src="{{  asset('themes/web/js/rating.js') }}"></script>
+<script type="text/javascript">
+ function confirm_Delete(e) {
+    var answer = confirm("Are you sure you want to delete this record?")
+    if (!answer){
+        e.preventDefault();
+        return false;
+    }
+}
+ </script>
+
+<script>
+function toggleReplies(id)
+{
+//alert(id);
+    var arrId = id.split("-");
+    //alert(arrId[1])
+    //alert( id+"----"+$("#hidPanel-"+arrId[1]).val() );
+        //alert($("#hidPanel-"+arrId[1]).val());
+    if( $(".disc_tion #hidPanel-"+arrId[1]).val() == 0 )
+    {
+
+        $(".disc_tion #panel-"+arrId[1]).slideDown("slow");
+        $(".disc_tion #hidPanel-"+arrId[1]).val(1);
+    }
+    else
+    {
+        $(".disc_tion #panel-"+arrId[1]).slideUp("slow");
+        $(".disc_tion #hidPanel-"+arrId[1]).val(0);
+    }
+}
+
+
+</script>
+<script>
+    $(document).ready(function()
+    {
+        $("#reviews").addClass('active_background');
+    });
+</script>
+
+    <script>
+       
+       
+        function showReplyModal(parentId,reviewerId)
+        {
+            $("#hidParentId").val(parentId);
+            $("#hidReviewerId").val(reviewerId);
+            //window.location.href="#";
+        }
+    </script>
+
+
+    <div class="titles oranges border">
+        <h2>Reviews</h2>
+     </div>
+	
+	{% if review == null %}
+        <div class=propertyListingg><center style=" font-size: 19px;margin-top: 151px; ">No Reviews Yet</center></div>
+    {% endif %}
+
+
+
+    
+{% for reviews in review %}
+          {% if reviews.sender=="REVIEWER" %}
+<div class="disc_tion">
+<div class="col-1"><b>{{reviews.first_name}} {{reviews.last_name}}&nbsp;</b> </div>
+<div class="col-2">{{reviews.description}} &nbsp;</div>
+<div class="col-4" style="width:50px; float:left;margin-top:-10px;">
+{% if reviews.status==1 %}
+<img src="{{ asset('themes/web/images/verified.png') }}" style="width:50px; float:left;"/>
+{% else %}
+<img src="{{ asset('themes/web/images/unverified.jpg') }}" style="width:50px; float:left;"/>
+{% endif %}
+</div>
+<div class="col-3" style="width:19%; !important;margin-top:-10px; margin-left:96px;"> 
+<form id="ratingsForm" class="ratestar1" action="{{ path('rar_web_feedback',{'id':app.session.get('userId'),'name':app.session.get('realtorName')}) }}" method=POST style="margin:0px;">
+    <div class="stars" name=star>
+        <input type="radio"  class="star-{{reviews.rating}}" id="star-{{reviews.rating}}" value={{reviews.rating}}     checked/>
+
+        <span></span>
+    </div>
+    </form>
+
+</div>
+
+<div style="  float: right;
+    margin-bottom: -10px;
+    margin-top: -10px;
+    padding: 17px 0 0 0px;width:132px;">
+<a href="{{ path('rar_web_deleteReview',{'id':reviews.id}) }}" onclick="confirm_Delete(event);">Delete</a> |  <a id="reviews" href="{{ path('rar_web_editReview',{'id':reviews.id}) }}">Edit</a> | <a href="{{ path('rar_web_profile', { 'id': reviews.realtor_id }) }}">View</a>
+
+</div>
+
+<div class="reply1" style="">
+{% for disableButton in reviewDisable %}
+ {% if disableButton.plan_id == 2 %}   
+<a href="#login-box" class="login-window" onclick="javascript:showReplyModal({{reviews.id}},{{reviews.reviewer_id}});" style="float:left;" >Reply</a>
+{% else %}
+<a href="#login-box" class="login-window disableClick" onclick="javascript:showReplyModal({{reviews.id}},{{reviews.reviewer_id}});" style="float:left;" >Reply</a>
+{% endif %}
+{% endfor %}
+
+         {% if reviews.replies != 0 %}
+        <div id="flip-{{reviews.id}}" onclick="javascript:toggleReplies(this.id);" style="float:left;margin-left:3px;">( <label  title="View Replies" style="cursor: pointer; text-decoration: underline;">{{reviews.replies}}</label> )</div>
+    {% else %}
+        <div id="flip-{{reviews.id}}"  onclick="javascript:toggleReplies(this.id);" style="float:left;margin-left:3px;">({{reviews.replies}})</div>
+    {% endif %}
+    </div>
+ </div>
+
+{% endif %}
+{% if reviews.sender=="REALTOR" %}
+          <div class="disc_tion">
+          <!--<div class="col-1" id="panel"><b>You</b></div>-->
+          <div class="col-2 panel" id="panel-{{reviews.parent_id}}">{{reviews.description}} </div>
+          <input type="hidden" name="hidPanel-{{reviews.parent_id}}" id="hidPanel-{{reviews.parent_id}}" value="0">
+          </div>
+         {% endif %}
+
+
+    {% endfor %}
+
+
+
+
+   
+
+   
+   
+    <style>
+.panel,#flip
+{
+padding:5px;
+cursor:pointer;
+}
+.panel
+{
+background-color:#e5eecc;
+display:none;
+}
+   
+   
+   
+ {% include "RARWebBundle:Page:reply.html.twig"%}
+{% endblock %}

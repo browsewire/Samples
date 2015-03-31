@@ -1,0 +1,112 @@
+{% extends 'RARAdminBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %} Add New Property | Admin{% endblock %}</title>
+ <script>
+    $(document).ready(function () {
+        $('.box').hide();
+        $('#option1').show();
+        $('#plan').change(function () {
+            $('.box').hide();
+            $('#'+$(this).val()).show();
+        });
+    });
+    </script>
+						<script>
+			function capitalize(textboxid, str) {
+      // string with alteast one character
+      if (str && str.length >= 1)
+      {       
+          var firstChar = str.charAt(0);
+          var remainingStr = str.slice(1);
+          str = firstChar.toUpperCase() + remainingStr;
+      }
+      document.getElementById(textboxid).value = str;
+      document.getElementById(textboxid1).value = str;
+  }	
+						</script>
+					<script>
+	function importUsers()
+	{
+		window.location.href = '{{ path('RARAdminBundle_property') }}';
+	}
+	</script>
+
+<section id="content">			
+		<div class="g12">			
+			<form id="form" action="{{ path('RARAdminBundle_addproperty') }}" method="POST" autocomplete="off" data-validate="parsley" enctype="multipart/form-data">
+				<fieldset>				
+					<label>Add New Property</label>
+					<section class="descs"><label>Name<font class=change>*</font></label>
+						<div><input id="textboxid" class="txtBoxBig" type="text" name="name"  data-required="true"  onkeyup="javascript:capitalize(this.id, this.value);"  data-error-message="Please enter name." ></div>
+						<label class="chrome">Description <font class=change>*</font></label>					
+					<div><textarea rows=5 cols=40 name=description  data-error-message="Please enter description." data-required="true"></textarea></div>
+					</section>
+					<section class="chrome"><label>Address<font class=change>*</font></label>
+						<div><input id="email" class="txtBoxBig" type="text"  name="address" ></div>		
+						<label class="chrome">Phone<font class=change>*</font> </label>
+						<div><input id="required_field" class="txtBoxBig" type="text" name="phone"   ></div>
+					</section>
+					<section class="chrome">
+						<label class="chrome">Zip</label>
+						<div><input id="required_field" class="txtBoxBig" type="text"  name="zip"></div>	
+						<label class="chrome">VideoUrl</label>
+						<div><input id="required_field" class="txtBoxBig" type="text"  name="videourl"></div>						
+					</section>	
+					<section class="chrome">
+						<label>State</label>
+						<div>
+							<select name="state" id="state" class="drop" >
+							{% for state in states %}
+							<option value="{{state.StateCode}}">{{state.StateName}}</option>
+							{% endfor %}
+							</select>
+						</div>
+						<label class="chrome">City</label>
+						<div>							
+							<select name="city" id="city" class="drop">								
+							</select>
+						</div>
+				  	</section>								
+				
+				<section class="mozilla"><label>Price</label>
+						<div><input id="required_field" class="txtBoxBig" type="text"  name="price" ></div>
+					<label> Additional Information</label>
+						<div><textarea rows=5 cols=40 name=additional></textarea></div>
+					</section>
+						<section class="mozilla1">
+						<label class="chrome">Realtors</label>
+						<div>							
+							<select name="realtors" id="realtors" class="drop"   data-required="true"   data-error-message="Please select" style="width:72%">	
+												<option value=""></option>
+										{% for realtor in realtors %}
+								
+							<option value="{{realtor.id}}">{{realtor.first_name}}</option>
+								{% endfor %}						
+							</select>
+						</div>
+					</section>
+					<section class="chrome">	
+						<div class="center"><button class="submit" name="submitbuttonname" value="submitbuttonvalue">Submit</button>
+							<button class="center1" name="submitbuttonname" value="submitbuttonvalue" onclick="importUsers()">Cancel</button>
+						</div>
+					</section>
+				</fieldset>
+			</form>
+		</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

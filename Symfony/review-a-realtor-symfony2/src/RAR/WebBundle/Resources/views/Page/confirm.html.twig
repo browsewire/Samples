@@ -1,0 +1,23 @@
+{% extends 'RARWebBundle::layout.html.twig' %}
+{% block body %}
+<title>{% block title %}Password Reset{% endblock %}</title>
+	<div itemscope itemtype="http://schema.org/Product" itemref="_url2 _brand3" class="main"> <!-- search by state -->
+		<div class="cl"></div>
+		<div class="titles oranges">
+			<h2>Realtor Forgot Password</h2>
+		</div>
+		<div class=rforgot>
+			{% if name is defined%}
+			<div class="error2" style="margin: 0 0 37 38%;">
+			<div class=resetPassword>
+				<p>Your Password has been Reset Succesfully.<br><br>
+				Your new Password is sent to <strong>{{name}}</strong></p>
+				{%endif%}
+			</div>
+		</div>
+    </div>
+</div>
+
+
+
+{% endblock %}

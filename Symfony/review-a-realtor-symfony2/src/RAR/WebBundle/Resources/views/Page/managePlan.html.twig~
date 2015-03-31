@@ -1,0 +1,71 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %} Manage Plan {% endblock %}</title>
+
+
+<script>
+
+
+	$(document).ready(function()
+	{
+		$("#payment").addClass('active_background');
+	});
+</script>
+
+
+
+		
+
+    <div class="titles oranges border">
+      <h2>Manage Company Profile</h2>
+    </div>
+<div class="login">
+        <ul>
+          <li><a href="{{ path('rar_web_changeplan',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}">Change Plan</a></li>&nbsp;&nbsp;&nbsp;
+        </ul>
+      </div>
+
+<div class=plans>
+ 		<div class=plan>
+ 				<span class="myplan">My Plan</span>
+					 						
+		</div>
+ 	<div class="myplan1">
+		<div class=planName>
+		 	{% for plan in plans %}
+ 		{{plan.name}}.
+    
+	 			</div>
+     			</div>
+
+    <div class=description><span class="myplan2">Description</span>
+    	</div> 
+    <div class=planDescriptions><div class="planDescription">
+    {{plan.description}}.
+    	 {% endfor %} 
+			</div>  
+       </div>
+	<div class=planDescriptions>
+	
+	<div class=features><span class="myplan">Features</span>
+
+	 </div>
+	 <div class=planDesc><div class="planDescription"style="height:163px;";>
+       {% for plans in planss %}
+       <ul>
+        <li style="list-style: disc outside none;">{{plans.description}}.</li><br>
+         {% endfor %}
+        </ul> 
+			</div>  
+       </div>
+	
+
+	
+	</div>
+   
+   
+   </div>
+ 
+
+ 
+{% endblock %}

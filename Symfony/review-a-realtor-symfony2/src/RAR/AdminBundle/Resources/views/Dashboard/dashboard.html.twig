@@ -1,0 +1,62 @@
+{% extends 'RARAdminBundle::layout.html.twig' %}
+
+{% block javascripts %}
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+	<script src="{{  asset('themes/admin/js/functions.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/functions.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/plugins.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/editor.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/calendar.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/flot.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/elfinder.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/datatables.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Alert.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Autocomplete.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Breadcrumb.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Calendar.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Chart.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Color.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Date.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Editor.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_File.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Dialog.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Fileexplorer.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Form.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Gallery.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Multiselect.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Number.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Password.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Slider.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Store.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Time.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Valid.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Widget.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/config.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/script.js') }}"></script>
+{% endblock %}
+{% block body %}
+<title>{% block title %}Dashboard | Admin{% endblock %}</title>
+		<section id="content">		
+			<div class="g12 nodrop">
+				<h1>Dashboard</h1>
+				<p>This is a quick overview of some features</p>
+			</div>			
+			<div class="g6 widgets">
+				<div class="widget number-widget" id="widget_number">
+					<h3 class="handle">Overview</h3>
+					<div>
+						<ul>
+							<li><a href="{{ path('RARAdminBundle_realtor') }}"><span>{{dashboardDetails.totalRealtors}}</span> Realtors</a></li>
+							<!--<li><a href="{{ path('RARAdminBundle_category') }}"><span>{{dashboardDetails.totalCategories}}</span> Categories</a></li>-->
+							<li><a href="{{ path('RARAdminBundle_plan') }}"><span>{{dashboardDetails.totalPlans}}</span> Plans</a></li>	
+							<li><a href="{{ path('RARAdminBundle_claim') }}"><span>{{dashboardDetails.totalClaims}}</span> Claims</a></li>	
+							<li><a href="{{ path('RARAdminBundle_property') }}"><span>{{dashboardDetails.totalProperties}}</span> Properties</a></li>
+							<li><a href="{{ path('RARAdminBundle_reviewer') }}"><span>{{dashboardDetails.totalProperties}}</span> Reviewers</a></li>
+										
+						</ul>
+					</div>
+				</div>
+			</div>
+			</div>
+{% endblock %}

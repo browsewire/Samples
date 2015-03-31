@@ -1,0 +1,450 @@
+rar_web_homepage:
+    pattern:  /
+    defaults: { _controller: RARWebBundle:Web:index }
+    requirements:
+        _method:  GET
+        
+        
+rar_web_writeReview:
+    pattern:  /writeReview
+    defaults: { _controller: RARWebBundle:Web:writeReview }
+    requirements:
+        _method:  GET 
+               
+        
+rar_web_realtors:
+    pattern:  /realtors
+    defaults: { _controller: RARWebBundle:Web:realtors }
+    requirements:
+        _method:  GET|POST                     
+
+        
+rar_web_login:
+    pattern:  /realtor/reviewer/login
+    defaults: { _controller: RARWebBundle:Realtor:login }
+    requirements:
+        _method:  GET|POST
+        
+       
+rar_web_registration:
+    pattern:  /realtor/registration
+    defaults: { _controller: RARWebBundle:Web:registration }
+    requirements:
+        _method:  GET|POST  
+        
+rar_web_managePlan:
+    pattern:  /managepaymentplans
+    defaults: { _controller: RARWebBundle:Realtor:managePlan }
+    requirements:
+        _method:  GET|POST   
+
+rar_web_feedback:
+    pattern:  /manageReviews
+    defaults: { _controller: RARWebBundle:Realtor:feedback }
+    requirements:
+        _method:  GET|POST
+                  
+        
+rar_web_manageListing:
+    pattern:  /manageListing
+    defaults: { _controller: RARWebBundle:Realtor:manageListing }
+    requirements:
+        _method:  GET|POST  
+        
+rar_web_home:
+    pattern:  /realtor/dashboard
+    defaults: { _controller: RARWebBundle:Realtor:dashboard }
+    requirements:
+        _method:  GET|POST
+        
+rar_web_logout: 
+    pattern:  /logout
+    defaults: { _controller: RARWebBundle:Realtor:logout }
+    requirements:
+        _method:  GET     
+        
+rar_web_changeplan: 
+    pattern:  /changeplan
+    defaults: { _controller: RARWebBundle:Realtor:changePlan }
+    requirements:
+        _method:  GET|POST    
+       
+rar_web_forgotpassword: 
+    pattern:  /realtor/reviewer/forgotPassword
+    defaults: { _controller: RARWebBundle:Realtor:forgotPassword }
+    requirements:
+        _method:  GET|POST   
+        
+        
+rar_web_getFeatures:
+    pattern:  /plan/getFeatures/{planId}
+    defaults: { _controller: RARWebBundle:Realtor:getFeatures }
+    requirements:
+        _method:  GET|POST    
+        
+rar_web_getDescription:
+    pattern:  /plan/getDescription/{planId}
+    defaults: { _controller: RARWebBundle:Realtor:getDescription }
+    requirements:
+        _method:  GET|POST
+        
+rar_web_editListing:
+    pattern:  /editlisting
+    defaults: { _controller: RARWebBundle:Realtor:editListing }
+    requirements:
+        _method:  GET|POST     
+
+rar_web_changeImage:
+    pattern:  /changeImage
+    defaults: { _controller: RARWebBundle:Realtor:changeImage }
+    requirements:
+        _method:  GET|POST 
+                  
+rar_web_changeLogo:
+    pattern:  /changeLogo
+    defaults: { _controller: RARWebBundle:Realtor:changeLogo }
+    requirements:
+        _method:  GET|POST         
+
+rar_web_profile:
+    pattern:  /review/profile/{id}
+    defaults: { _controller: RARWebBundle:Web:showProfile }
+    requirements:
+        _method:  GET|POST
+
+rar_web_review:
+    pattern:  /realtor/writeReview/{id}
+    defaults: { _controller: RARWebBundle:Web:showReviews }
+    requirements:
+        _method:  GET|POST
+
+                   
+rar_web_reply:
+    pattern:  /reply
+    defaults: { _controller: RARWebBundle:Realtor:reply }
+    requirements:
+        _method:  GET|POST 
+                
+                   
+rar_web_property:
+    pattern:  /property
+    defaults: { _controller: RARWebBundle:Realtor:property }
+    requirements:
+        _method:  GET|POST
+ 
+rar_web_addProperty:
+    pattern:  /addproperty
+    defaults: { _controller: RARWebBundle:Realtor:addProperty }
+    requirements:
+        _method:  GET|POST 
+                           
+ 
+rar_web_updateProperty:
+    pattern:  /updateProperty/{id}
+    defaults: { _controller: RARWebBundle:Realtor:updateProperty }
+    requirements:
+        _method:  GET|POST    
+        
+rar_web_deleteProperty:
+    pattern:  /deleteProperty/{id}
+    defaults: { _controller: RARWebBundle:Realtor:deleteProperty }
+    requirements:
+        _method:  GET|POST
+        
+rar_web_addSliderImage:
+    pattern:  /addSliderImage
+    defaults: { _controller: RARWebBundle:Realtor:addSliderImage }
+    requirements:
+        _method:  GET|POST     
+        
+   
+        
+        
+rar_web_capture:
+    pattern:  /{id}/verfication/review
+    defaults: { _controller: RARWebBundle:Web:captureEmail }
+    requirements:
+        _method:  GET|POST 
+        
+rar_web_propertyDetail:
+    pattern:  /details/{id}
+    defaults: { _controller: RARWebBundle:Realtor:propertyDetail }
+    requirements:
+        _method:  GET|POST     
+        
+          
+rar_web_transactionDetail:
+    pattern:  /transactionDetail
+    defaults: { _controller: RARWebBundle:Realtor:transactionDetail }
+    requirements:
+        _method:  GET|POST      
+
+rar_web_paypal:
+   pattern:  /paypal
+   defaults: { _controller: RARWebBundle:Realtor:payPal }
+   requirements:
+        _method:  GET|POST      
+   
+rar_web_companies:
+   pattern:  /companies
+   defaults: { _controller: RARWebBundle:Realtor:countCompanies }
+   requirements:
+        _method:  GET|POST        
+        
+rar_web_cancel:
+   pattern:  /cancel
+   defaults: { _controller: RARWebBundle:Realtor:cancel }
+   requirements:
+        _method:  GET|POST 
+               
+rar_web_success:
+   pattern:  /success
+   defaults: { _controller: RARWebBundle:Realtor:success }
+   requirements:
+        _method:  GET|POST       
+                              
+rar_web_confirmationEmail:
+   pattern:  /confirmation/{id}
+   defaults: { _controller: RARWebBundle:Web:confirmationEmail }
+   requirements:
+        _method:  GET|POST       
+
+verifyfbaccount:
+    pattern: /verifyfbaccount
+    defaults: { _controller: RARWebBundle:Web:verifyfbaccount } 
+
+rar_web_searchDetail:
+   pattern:  /search/Property/{id}
+   defaults: { _controller: RARWebBundle:Web:propertySearchDetail }
+   requirements:
+        _method:  GET|POST       
+
+rar_web_claimLogin:
+   pattern:  /{id}propertyclaim
+   defaults: { _controller: RARWebBundle:Web:claimLogin }
+   requirements:
+        _method:  GET|POST       
+
+rar_web_page:
+   pattern:  /page{id}
+   defaults: { _controller: RARWebBundle:Web:page }
+   requirements:
+        _method:  GET|POST                                                                                                                                                                                                                                                                                                                                                                   
+
+rar_web_checkEmailExistance:
+   pattern:  /checkEmail
+   defaults: { _controller: RARWebBundle:Web:checkEmailExistance }
+   requirements:
+        _method:  GET|POST  
+        
+rar_web_checkUserExistance:
+   pattern:  /checkUser/{id}
+   defaults: { _controller: RARWebBundle:Web:checkUserExistance }
+   requirements:
+        _method:  GET|POST       
+
+rar_web_successClaim:
+   pattern:  /succesfull/claim
+   defaults: { _controller: RARWebBundle:Web:successfulClaim }
+   requirements:
+        _method:  GET|POST       
+
+        
+rar_web_getBanner:
+   pattern:  /getBanner
+   defaults: { _controller: RARWebBundle:Web:getBanner }
+   requirements:
+        _method:  GET|POST    
+
+              
+rar_web_showCms:
+   pattern:  /ss
+   defaults: { _controller: RARWebBundle:Web:showCms }
+   requirements:
+        _method:  GET|POST 
+            
+rar_web_transactionSubmit:
+   pattern:  /transactions
+   defaults: { _controller: RARWebBundle:Web:transactionSubmit }
+   requirements:
+        _method:  GET|POST    
+        
+rar_web_paymentSubmit:
+   pattern:  /registered
+   defaults: { _controller: RARWebBundle:Web:successPayment }
+   requirements:
+        _method:  GET|POST       
+
+
+
+rar_web_showPropertyImages:
+   pattern:  /showing/sdsd/sd/s/dsd/sd/s{id}
+   defaults: { _controller: RARWebBundle:Realtor:showPropertyImages }
+   requirements:
+        _method:  GET|POST  
+
+        
+rar_web_deleteRealtorPropertyImages:
+    pattern: delete/Realtor/Property/Image/{id}
+    defaults: { _controller: RARWebBundle:Realtor:deleteRealtorImages}
+    requirements:
+        _method:  GET|POST    
+        
+   
+
+RARWebBundle_updatePropertyMainImage:
+   pattern:  /property/mainImage
+   defaults: { _controller: RARWebBundle:Realtor:updatePropertyMainImage }
+   requirements:
+        _method:  GET|POST  
+
+rar_web_privacyPolicy:
+   pattern:  /privacyPolicy
+   defaults: { _controller: RARWebBundle:Web:privacyPolicy }
+   requirements:
+        _method:  GET|POST    
+        
+rar_web_aboutUs:
+   pattern:  /aboutus
+   defaults: { _controller: RARWebBundle:Web:aboutUs }
+   requirements:
+        _method:  GET|POST    
+
+rar_web_siteMap:
+   pattern:  /siteMap
+   defaults: { _controller: RARWebBundle:Web:siteMap }
+   requirements:
+        _method:  GET|POST
+        
+rar_web_terms:
+   pattern:  /terms
+   defaults: { _controller: RARWebBundle:Web:terms }
+   requirements:
+        _method:  GET|POST 
+
+rar_web_faq:
+   pattern:  /contact-us
+   defaults: { _controller: RARWebBundle:Web:faq }
+   requirements:
+        _method:  GET|POST      
+
+rar_web_disclaimer:
+   pattern:  /disclaimer
+   defaults: { _controller: RARWebBundle:Web:disclaimer }
+   requirements:
+        _method:  GET|POST     
+        
+        
+rar_web_subscriber:
+   pattern:  /subscribe
+   defaults: { _controller: RARWebBundle:Web:Subscriber }
+   requirements:
+        _method:  GET|POST   
+        
+rar_web_deleteReview:
+   pattern:  /delete/Review/{id}
+   defaults: { _controller: RARWebBundle:Realtor:deleteReviews }
+   requirements:
+        _method:  GET|POST 
+
+rar_web_editReview:
+   pattern:  /edit/Review/{id}
+   defaults: { _controller: RARWebBundle:Realtor:editReviews }
+   requirements:
+        _method:  GET|POST 
+        
+rar_web_recent:
+   pattern:  /recent
+   defaults: { _controller: RARWebBundle:Web:recentReviews }
+   requirements:
+        _method:  GET|POST
+
+RARWebBundle_uniqueEmail:
+   pattern:  /unique/Email
+   defaults: { _controller: RARWebBundle:Web:uniqueEmail }
+   requirements:
+        _method:  GET|POST   
+
+rar_web_showCmsFooter:
+   pattern:  /footer
+   defaults: { _controller: RARWebBundle:Web:showCmsFooter }
+   requirements:
+        _method:  GET|POST
+
+
+rar_web_airlineDetail:
+   pattern:  /airlineDetail
+   defaults: { _controller: RARWebBundle:Web:airlineDetail }
+   requirements:
+        _method:  GET|POST 
+
+rar_web_fbLogin:
+   pattern:  /facebook
+   defaults: { _controller: RARWebBundle:Web:facebookLogin }
+   requirements:
+        _method:  GET|POST
+
+
+rar_web_getRealtorName:
+   pattern:  /allRealtors/name
+   defaults: { _controller: RARWebBundle:Web:getRealtorName }
+   requirements:
+        _method:  GET|POST 
+
+rar_web_confirmRegistration:
+   pattern:  /confirmed/registration/{id}
+   defaults: { _controller: RARWebBundle:Web:confirmedRegistration }
+   requirements:
+        _method:  GET|POST
+
+rar_web_reviewerProfile:
+   pattern:  /reviewer/profile/{id}
+   defaults: { _controller: RARWebBundle:Web:reviewerProfile }
+   requirements:
+        _method:  GET|POST
+
+rar_web_reviewDetail:
+   pattern:  /review/detail/{headline}
+   defaults: { _controller: RARWebBundle:Web:reviewDetail }
+   requirements:
+        _method:  GET|POST
+
+rar_web_checkHeadline:
+   pattern:  /check/Headline
+   defaults: { _controller: RARWebBundle:Web:checkHeadline}
+   requirements:
+        _method:  GET|POST
+
+        
+rar_web_getAdvertiesment:
+   pattern:  /getAdvertiesment
+   defaults: { _controller: RARWebBundle:Web:getAdvertiesment }
+   requirements:
+        _method:  GET|POST 
+
+rar_web_realtorsPagination:
+   pattern:  /realtors/sorted
+   defaults: { _controller: RARWebBundle:Web:realtorsPagination }
+   requirements:
+        _method:  GET|POST  
+
+rar_web_searchRealtor:
+   pattern:  /search/realtors
+   defaults: { _controller: RARWebBundle:Web:searchRealtor }
+   requirements:
+        _method:  GET|POST
+
+rar_web_pagination:
+   pattern:  /pagination
+   defaults: { _controller: RARWebBundle:Web:paginate }
+   requirements:
+        _method:  GET|POST    
+
+rar_web_pageFooter:
+   pattern:  /{id}
+   defaults: { _controller: RARWebBundle:Web:pageFooter }
+   requirements:
+        _method:  GET|POST 
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 

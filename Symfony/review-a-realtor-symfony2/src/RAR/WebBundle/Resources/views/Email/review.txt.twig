@@ -1,0 +1,24 @@
+{% block subject %}{% autoescape false %}
+     Review-a-realtor Review
+{% endautoescape %}{% endblock %}
+
+{% block body_text %}{% autoescape false %}
+    Hello!
+    
+    {{firstname}} {{lastname}}  recently added a review.
+
+    Review details are as under:- 
+    Description: "{{writereview}}"	
+    Rating: {{stars}}/5	
+    
+    Please aprove  review by clicking on the link below:
+	
+    {{confirmationLink}}
+
+   
+	Best regards,
+    Review-A-Realtor Team.				
+
+{% endautoescape %}{% endblock %}
+
+{% block body_html %}{% endblock %}

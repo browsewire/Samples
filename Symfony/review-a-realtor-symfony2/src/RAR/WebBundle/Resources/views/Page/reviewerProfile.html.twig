@@ -1,0 +1,197 @@
+{# src/Blogger/BlogBundle/Resources/views/Page/index.html.twig #}
+{% extends 'RARWebBundle::layout.html.twig' %}
+{%block body %}
+<title>{% block title %}Profile{% endblock %}</title>
+<script>
+
+ 	function submitReview()
+	{
+		
+		document.frmReview.submit();
+	
+	}
+	
+	function updatePropertyId(id)
+	{
+		$("#hidPropertyId").val(id);
+	
+	}
+	function showFullReview(id)
+{
+
+var ids="#";
+var idsc="#arr";
+ var idnumber=ids+id;
+ var idnumbers=idsc+id;
+$(idnumber).hide();
+$(idnumbers).show();
+}
+
+function showhalfReview(id)
+{
+
+var ids="#";
+var idsc="#arr";
+ var idnumber=ids+id;
+ var idnumbers=idsc+id;
+$(idnumbers).hide();
+$(idnumber).show();
+
+
+}
+	</script>
+  
+      <div class="cl"></div>
+  <div class="titles oranges border">
+      <h2>Review A Realtor</h2>
+    </div>
+    <div class=realtors>
+   <div class="column relators-inner" style="margin-left:100px; margin-top:10px;">
+          <div class="name-hd" style="height:26px; width:96%";>
+		
+            <h3>{{reviewerName}}</h3>
+            <span> </span></div>
+          <div class="cl"></div>
+          <div class="image-box">
+	
+	<div class="image"> 
+	{% if  reviewerImage =="" %}
+	<img src="{{ asset('themes/web/images/review.gif') }}" style="width:130px;">
+	{% else %}
+	<img src="{{ asset(['uploads/', reviewerImage]|join) }}"  image not found" class="large" style="margin-left:-16px;"/>
+	{% endif %}
+
+</div>
+          </div>
+         
+
+ <div class="content-box ">
+            <div class="left-side-realator">
+              <div id="agent-to-review-agency" class="wid-left">
+              <p>{{reviewerEmail}}</p>
+
+                  
+              </div>
+            </div>
+</div>
+<div class="reviews_user">
+			<h2 class="recent_act">Reviews By this user</h2>
+		</div>
+<hr style="float:left;width:100%;">
+{% for reviewer in reviewsWr %}
+		<div class="disc_tion" style="width:100%; margin: 19px 0 -18px;">
+			<div class="col-1">
+				<b> 
+	{% if reviewer.logo == ""%}
+	<img src="{{ asset('themes/web/images/review.gif') }}" style="width:37%;">
+	{% else %}
+	<img alt="Client" src="{{ asset(['uploads/', reviewer.logo]|join) }}" style="width:37%;"></b> 
+{% endif %}
+			</div>
+			<div class="col-2 col_reviewer" style="width:47%;">
+				<span class="col_description">{{reviewer.description}}</span>
+			</div>
+			<div class="col-3" style="width:25%;"> 
+				<form id="ratingsForm" class="ratestar1" action="{{ path('rar_web_feedback') }}" method=POST style="margin:0px;">
+    					<div class="stars" name=star>
+        					<input type="radio"  class="star-{{reviewer.rating}}" id="star-{{reviewer.rating}}" value={{reviewer.rating}}     checked/>
+
+       						 <span></span>
+    					 </div>
+  				  </form>
+
+		</div>
+	</div>
+
+	<hr style="float:left;width:100%;">
+	{% endfor %}
+
+</div>
+
+
+
+</div>
+<!---------Right Side Section Here------------->
+<div class="right-sec-30 border-left">
+      <div class="right border-left" id="content-right">
+        <div id="content-right-inner-wrapper">
+  	  <div class="titles blue">
+            <h2>Recent Reviews</h2>
+          </div>
+
+{%for reviewer in reviews %}
+          <div class="recent-reviews-wrapper">
+            <div class="recent-review">
+              <div class="cols right_col">
+                <div class=" people" style="width:100%;">
+                  <div class="name"> </div>
+                  <div class="rating" style="width:88%;">
+                     
+		 <p><a href="{{ path('rar_web_reviewerProfile',{ 'id': reviewer.reviewer_id }) }}">{{reviewer.realtor_name}}</a> <b style="color: #5f6060;">Reviewed</b>  <a href="{{ path('rar_web_profile',{ 'id': reviewer.realtor_id }) }}-{{reviewer.first_name}}-profile">{{reviewer.business_name}}</a></p>
+		<p  class="wr_timestamp">on {{reviewer.creation_timestamp|date('F j, Y')}}</p>
+<p class="wr_head"><a href="{{ path('rar_web_reviewDetail',{ 'headline': reviewer.headline }) }}">"{{reviewer.headline}}"</a></p>
+
+                   
+                   
+                   <form id="ratingsForm">
+					<div class="stars1"style="float:left;">
+						<input type="radio" class="star-{{reviewer.rating}}" id="star-{{reviewer.rating}}" value={{reviewer.rating}}	 checked/>
+								
+								<span></span>
+								</div>
+									
+									</form>	
+                 
+
+
+									
+<p id="{{reviewer.id}}">{% if reviewer.description|length>(100) %}{{reviewer.description[:100] ~  '.....'}}<a style=""   id="{{reviewer.id}}"  onclick="showFullReview(this.id);" class="big-link" > Read More</a>{% else %}
+<p>{{reviewer.description}}</p>{% endif %}
+
+<p style="display:none;" id="arr{{reviewer.id}}">{{reviewer.description}}<a  id="{{reviewer.id}}" onclick="showhalfReview(this.id);" class="big-link" >&lt;&lt;Back</a></p>
+
+                 
+
+</div></div></div>
+
+
+</div>
+
+</div>
+ {% endfor %}
+</div>
+<!---------Right Side Section Here------------->
+
+
+</div>
+</div>
+</div>
+
+<style>
+.recent_act
+{
+ float: left;
+    margin: 53px 0 -13px;
+    text-align: center;
+    width: 100%;
+}
+.column {
+    border-bottom: 1px solid #eee;
+    float: left;
+    margin-bottom: 20px;
+    margin-left: 71px;
+    padding-bottom: 16px;
+    width: 50%;
+}
+
+.right-sec-30 {
+    float: left;
+    padding-left: 11%;
+    width: 27%;
+}
+</style>
+
+
+
+{% endblock %}
+

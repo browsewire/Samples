@@ -1,0 +1,302 @@
+{# src/Blogger/BlogBundle/Resources/views/Page/index.html.twig #}
+{% extends 'RARWebBundle::layout.html.twig' %}
+{%block body %}
+<title>{% block title %}{{realtors.first_name}} {{realtors.last_name}} {% endblock %}</title>
+<script>
+
+ 	function submitReview()
+	{
+		
+		document.frmReview.submit();
+	
+	}
+	
+	function updatePropertyId(id)
+	{
+		$("#hidPropertyId").val(id);
+	
+	}
+	
+	</script>
+  
+      <div class="cl"></div>
+  <div class="titles oranges border">
+      <h2>Review A Realtor</h2>
+    </div>
+
+
+    <div class=realtors>
+   <div class="column relators-inner" style="margin-left:100px; margin-top:10px; border-bottom: 1px solid #ccc;">
+          <div class="name-hd" style="height:26px";>
+            <h3>{{realtors.first_name}}</h3>
+            <span> </span></div>
+          <div class="write-review view" style=height:23px;> <a href="{{ path('rar_web_review', { 'id': realtors.id }) }}-{{realtors.first_name}}-reviewes">Write a Review</a></div>
+          <div class="cl"></div>
+          <div class="image-box">
+            <div class="image"> <img src="{{ asset(['uploads/', realtors.image]|join) }}"  image not found" class="large" style="margin-left:-16px;"/></div>
+          </div>
+          <div class="content-box ">
+            <div class="left-side-realator">
+              <div id="agent-to-review-agency" class="wid-left">
+              <p>{{realtors.category1|default ("")}}</p>
+                <p>{{realtors.business_name|default ("")}}</p>
+                
+                <p><strong>Office: </strong>{{realtors.phone|default ("N.A.")}} </p>
+                <p><strong>Fax: </strong>{{realtors.fax|default ("N.A.")}}</p>
+                  <p><strong>Email: </strong>{{realtors.email|default ("N.A.")}}</p>
+                    <p><strong>Address: </strong>{{realtors.address|default ("N.A.")}}</p>
+                   
+              </div>
+            </div>
+            <div id="agent-overall-rating-wrapper" style="margin-right:-78px;">
+              <div class="review-star-line" id="agent-overall-rating">
+                <div class="star-group-left"> <span class="rating">
+                 <form id="ratingsForm">
+                 		{% for reviews in review %}
+								<div class="stars">
+				
+							<input type="radio" class="star-{{reviews.avgRating|number_format(0)}}" id="star-{{reviews.avgRating}}" value={{reviews.avgRating|number_format(0)}}	 checked/>
+								
+								<span></span>
+								</div>
+									{% endfor %}
+									</form>
+									</div>
+              </div>
+             <!-- <div id="star-rating-text">Click the stars to rate agent!</div>-->
+              <!--<img class="share" src="{{ asset('themes/web/images/share.jpg') }}" alt="Share">-->
+<div class="shareIcons" style="margin: 0 0 0 26px;">
+			<a title="Share on Facebook"
+                   href="http://www.facebook.com/sharer.php?s=100&p[title]=Check out this realtor on reviewarealtor.com:Check&p[url]={{fullUrl}}"
+                   target="_blank">
+                      <span>
+                        <img src="{{ asset('themes/homepage/images/facebook_16.png') }}"alt=""style="margin: 0 1px -6px; width:27px;">&nbsp;&nbsp;
+                      </span>
+                </a>
+            </li> 
+
+
+
+<a title="Share on Twitter"
+                   href="https://twitter.com/intent/tweet?text=Check out this realtor on reviewarealtor.com:&url={{fullUrl}}"
+                   target="_blank">
+                      <span>
+                       <img src="{{ asset('themes/homepage/images/twitter_16.png') }}"alt=""style="margin: 0 1px -6px;width:27px;">&nbsp;&nbsp;
+                      </span>
+                </a>
+ 
+            </li> 
+
+
+
+ <a title="Share on Linkedin"
+                   href="http://www.linkedin.com/shareArticle?mini=false&url={{fullUrl}}&title=Check out this realtor on reviewarealtor.com"
+                   target="_blank">
+ 
+                      <span>
+                       <img src="{{ asset('themes/homepage/images/linkedin_16.png') }}"style="margin: 0 1px -6px;width:27px;"alt="">&nbsp;&nbsp;
+                      </span>
+                </a>
+ 
+            </li> 
+
+
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+{% for reviews in reviewsDetail %}
+<div class="revImage">
+<img src="{{ asset('themes/web/images/review.gif') }}" style="width:37%;">
+</div>
+
+
+<div class="reviewer_profile">
+ <div style="width:76%;">
+        
+            <p class="det_head">"{{reviews.headline}}"</p>
+         
+              </div>
+<p style="margin-top:2px;font-size: 14px">{{ reviews.creation_timestamp|date('F j, Y') }}</p>
+ <div class="review-star-line" id="agent-overall-rating" >
+                <div class="star-group-left"> <span class="rating">
+                 <form id="ratingsForm" style="margin: 6px 0 8px;
+    width: 0;">
+								<div class="stars1">
+					<input type="radio" class="star-{{reviews.rating}}" id="star-{{reviews.rating}}" value={{reviews.rating}}	 checked/>
+								
+								<span></span>
+								</div>
+									
+									</form>
+
+
+  <p class="reviewDesc">{{ reviews.description }}</p>
+              
+									</div>
+             </div>
+
+{% endfor %}
+
+
+
+
+</div>
+
+<div class="detail">
+{% for reviews in reviewsDetail %}
+ <div class="review-star-line ">
+                    <div class="star-label"> Honesty, integrity, professionalism </div>
+                    <div class="star-group"> 
+                    <div id="ratingsForm">  <form id="ratingsForm" >
+								<div class="stars">
+								<input type="radio" name="starH" class="star-{{reviews.honesty}}" id="star-{{reviews.honesty}}" value="{{reviews.honesty}}" checked/>
+								
+								<span></span>
+								</div>
+</form>
+									</div>
+									</div>
+                  </div>
+					
+
+
+
+<div class="review-star-line ">
+                    <div class="star-label">Responsiveness </div>
+                    <div class="star-group"> 
+                    <div id="ratingsForm">  <form id="ratingsForm" >
+								<div class="stars">
+								<input type="radio" name="starH" class="star-{{reviews.responsiveness}}" id="star-{{reviews.responsiveness}}" value="{{reviews.responsiveness}}" checked/>
+								
+								<span></span>
+								</div>
+</form>
+									</div>
+									</div>
+                  </div>
+					
+
+
+
+<div class="review-star-line ">
+                    <div class="star-label"> Local market knowledge </div>
+                    <div class="star-group"> 
+                    <div id="ratingsForm">  <form id="ratingsForm" >
+								<div class="stars">
+								<input type="radio" name="starH" class="star-{{reviews.market_knowldege}}" id="star-{{reviews.market_knowldege}}" value="{{reviews.market_knowldege}}" checked/>
+								
+								<span></span>
+								</div>
+</form>
+									</div>
+									</div>
+                  </div>
+					
+
+<div class="review-star-line ">
+                    <div class="star-label"> Service was value for money </div>
+                    <div class="star-group"> 
+                    <div id="ratingsForm">  <form id="ratingsForm" >
+								<div class="stars">
+								<input type="radio" name="starH" class="star-{{reviews.service}}" id="star-{{reviews.service}}" value="{{reviews.service}}" checked/>
+								
+								<span></span>
+								</div>
+</form>
+									</div>
+									</div>
+                  </div>
+					
+
+
+<div class="review-star-line ">
+                    <div class="star-label"> Sold for a good price</div>
+                    <div class="star-group"> 
+                    <div id="ratingsForm">  <form id="ratingsForm" >
+								<div class="stars">
+								<input type="radio" name="starH" class="star-{{reviews.sold_price}}" id="star-{{reviews.sold_price}}" value="{{reviews.sold_price}}" checked/>
+								
+								<span></span>
+								</div>
+</form>
+									</div>
+									</div>
+                  </div>
+					
+
+
+
+<div class="review-star-line ">
+                    <div class="star-label"> Sold quickly </div>
+                    <div class="star-group"> 
+                    <div id="ratingsForm">  <form id="ratingsForm" >
+								<div class="stars">
+								<input type="radio" name="starH" class="star-{{reviews.sold_quickly}}" id="star-{{reviews.sold_quickly}}" value="{{reviews.sold_quickly}}" checked/>
+								
+								<span></span>
+								</div>
+</form>
+									</div>
+									</div>
+                  </div>
+					
+
+</div>
+</div>
+{% endfor %}
+</div>
+
+
+<style>
+.detail
+{
+float: left;
+    margin: 40 0 55px 136px;
+    width:68%;
+
+}
+.det_head {
+    color: #0070bf;
+    font-size: 18px;
+    font-weight: lighter;
+    margin: 0 0 11px -1px;
+font-size: 18px;
+}
+.reviewer_profile
+{
+ float: left;
+    margin: 30px 0 -24px 140px;
+    width: 57%;
+}
+
+.reviewDesc {
+    font-size: 14px;
+    line-height: 1.2;
+}
+.revImage
+{
+ float: left;
+    margin: 0 -253px 33px 119px;
+    width: 16%;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+

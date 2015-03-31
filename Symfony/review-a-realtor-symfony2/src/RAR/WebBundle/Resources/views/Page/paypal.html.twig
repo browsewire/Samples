@@ -1,0 +1,36 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<script>
+
+	$(document).ready(function()
+	{
+		$("#payment").addClass('active_background');
+	});
+</script>
+  <div class="title orange border">
+      <h2 >Checkout</h2>
+  </div>
+
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="payPalForm"  name="payform">
+
+						<input type="hidden" name="cmd" value="_xclick">
+						<input type="hidden" name="business" value="karana@ocodewire.com">
+						<input type="hidden" name="currency_code" value="USD">
+				  	<input type="hidden" name="return" value="http://bwcmultimedia.com/PS/review-a-realtor/web/success"/>
+						<input type="hidden" name="cancel_return" value="{{ path('rar_web_cancel') }}"/>				
+						<input type="hidden" name="custom" value="" id="customvalue">
+						<input type="hidden" name="item_name" value="{{planSubscription}}" id="projectvalue">
+						<input type="hidden" name="item_number" value="21">
+						<input type="hidden" name="amount" value="{{planCharges}}">
+				   <div class="paypal"> <input  class="paypalImage" type="image" src="https://www.sandbox.paypal.com/en_GB/i/btn/btn_paynowCC_LG.gif" name="submit" ></div>
+</form>	
+
+
+
+
+
+
+
+
+
+  {% endblock %}

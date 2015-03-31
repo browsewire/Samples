@@ -1,0 +1,219 @@
+<html>
+<head>
+<title>{% block title %}Review A Realtor{% endblock %}</title>
+{% block stylesheets %}
+
+            <!--<link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
+            <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
+            <link href="{{ asset('css/screen.css') }}" type="text/css" rel="stylesheet" />--> 
+     
+            <!-- Google Font and style definitions -->
+				<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:regular,bold">
+				<link href="{{asset('bundles/loginlogin/css/parsley/parsley.css')}}" rel="stylesheet">			
+				<link rel="stylesheet" href="{{  asset('themes/homepage/css/style.css') }}">	
+<link rel="stylesheet" href="{{  asset('themes/homepage/css/mediaqueries.css') }}">
+<link rel="stylesheet" href="{{  asset('themes/homepage/css/media.css') }}">		
+				<link rel="stylesheet" href="{{  asset('themes/homepage/css/slideControl.css') }}">
+				
+	
+						<!-- Apple iOS and Android stuff -->
+						<meta name="apple-mobile-web-app-capable" content="no">
+						<meta name="apple-mobile-web-app-status-bar-style" content="black">
+						<link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+	
+						<!-- Apple iOS and Android stuff - don't remove! -->
+						<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1">
+	       {% endblock %}
+	        {% block javascripts %}
+						<!-- Use Google CDN for jQuery and jQuery UI -->
+						<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+						<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+						<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		      <script src="{{asset('bundles/loginlogin/js/parsley/parsley-standalone.min.js')}}"></script>
+						<!-- Loading JS Files this way is not recommended! Merge them but keep their order -->
+	
+						<!-- some basic functions -->
+						<!--<script src="{{  asset('themes/admin/js/functions.js') }}"></script>-->
+		
+						<!-- all Third Party Plugins and Whitelabel Plugins -->
+						<script src="{{  asset('themes/web/js/menu_jquery.js') }}"></script>
+							<script src="{{  asset('themes/web/js/jquery-1.10.1.min.js') }}"></script>
+						
+						<!-- configuration to overwrite settings -->
+						<script src="{{  asset('themes/admin/js/config.js') }}"></script>
+		
+						<!-- the script which handles all the access to plugins etc... -->
+						<script src="{{  asset('themes/admin/js/script.js') }}"></script>
+    
+         <script>
+          	function getBanner()
+          	{
+          		
+          		//alert('karan');
+  			$.ajax({
+			      url : '{{ path("rar_web_getBanner") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divBanner').html(data);
+					   	setInterval(swapImages, 5000);
+						}
+			});
+		
+			$.ajax({
+			      url : '{{ path("rar_web_showCms") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divBanner1').append(data);
+					   	setInterval(swapImages, 5000);
+						}
+			});
+	$.ajax({
+			      url : '{{ path("rar_web_showCmsFooter") }}',
+			      type:'POST',
+			    //  data: 'email='+email,
+			      success:function(data)
+			      {
+					   	$('#divBanner2').append(data);
+					   	
+						}
+			});
+		
+		
+          	
+		
+		
+		}
+          	
+          </script>
+<script>
+            function swapImages() 
+            {
+           // alert("hi");
+            
+							var $current = $('#myGallery img:visible');
+							var $next = $current.next();
+    					if($next.length === 0) 
+    					{
+        				$next = $('#myGallery img:first');
+    					}
+    					$current.hide();
+    					$next.show();
+						}
+						
+		
+						
+	$(document).ready(function() 
+					{
+    			setInterval(swapImages, 5);
+				});
+							
+				
+</script>
+
+        {% endblock %}
+</head>
+
+
+<body  onload="getBanner();" >  
+<div class="wrapper top_header">
+  <div class="shell">
+    <header id="header">
+    <div id="logo"><a id="linkHome" itemprop="brand" itemscope itemtype="http://schema.org/Brand" href="{{ path('rar_web_homepage') }}"> <img src="{{ asset('themes/web/images/logo.png') }}" style="width:269;height:63;" alt="Learn Price" title=""/>
+      <meta itemprop="name" content="[Learn Price]">
+      </a> </div>
+    <nav>
+      <div id="cssmenu">
+        <ul id="divBanner1">
+          <li itemscope itemtype="http://schema.org/Product" id="linkHome"  itemref="agent-to-review-name _brand3"><a  itemprop="url" href="{{ path('rar_web_homepage') }}">HOME </a></li>
+          <li itemscope itemtype="http://schema.org/Product" id="linkRV"  itemref="agent-to-review-name _brand3" ><a itemprop="url" href="{{ path('rar_web_writeReview') }}">Write A Review</a></li>
+          <li itemscope itemtype="http://schema.org/Product" id="linkAR" itemref="agent-to-review-name _brand3"><a itemprop="url" href="{{ path('rar_web_realtors') }}">Find A Realtor</a></li>
+          
+<li itemscope itemtype="http://schema.org/Product" id="linkAR" itemref="agent-to-review-name _brand3"><a   class="non"  itemprop="url" href="{{ path('rar_web_login') }}">login</a></li>
+            <li itemscope itemtype="http://schema.org/Product" id="linkAR" itemref="agent-to-review-name _brand3"><a class="non" itemprop="url" href="{{ path('rar_web_realtors') }}">Register</a></li>
+          
+            {% if app.session.get('userType') !="3" %}
+          {% if app.session.get('userEmail') !="" %}
+          	<li id="linkDS" itemscope itemtype="http://schema.org/Product"><a itemprop="url" href="{{ path('rar_web_home',{id:app.session.get('userId')}) }}-{{app.session.get('realtorName')}}">My Dashboard</a></li>
+ 
+          {% endif %}
+                    {% endif %}
+          
+          
+          
+        </ul>
+      </div>
+      <div class="login">
+        <ul>
+         {% if app.session.get('userEmail') !="" %}
+						Logged in as {{app.session.get('userEmail')}}
+						&nbsp;&nbsp;&nbsp;<a href="{{ path('rar_web_logout') }}">Logout</a>
+						{% else %}
+          <li> <a href="{{ path('rar_web_login') }}" class="active">login</a></li>
+          <li> <a href="{{ path('rar_web_registration') }}">Register</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </div>
+  </header>
+  <!-- end of wrapper --> 
+</div>
+<!-- content -->
+
+<div class="cl"></div>
+
+
+<div>
+
+{% block body %}
+<body>
+</body>
+{% endblock %}
+
+
+<!-- end of footer -->
+<div class="footer"> <!-- shell -->
+  <div class="wrapper">
+    <div class="shell">
+    <div class="social_icon">
+    <ul>                                         
+          <li><a href="#"><img src="{{ asset('themes/homepage/images/twiter_icon.png') }}" alt=""></a></li>
+             <li><a href="#"><img src= "{{ asset('themes/homepage/images/in_icon.png') }}"alt=""></a></li>
+                <li><a href="#"><img src="{{ asset('themes/homepage/images/fb_icon.png') }}" alt=""></a></li>
+               </ul>
+        
+     </div>
+            <div class="links">
+        <ul>                                         
+          <li><a href="{{ path('rar_web_homepage') }}">HOME</a></li>
+          <li><a href="{{ path('rar_web_writeReview') }}">WRITE A REVIEW </a></li>
+           <li><a href="{{ path('rar_web_realtors') }}">FIND A REALTOR </a></li>
+           <li><a href="#">ADD YOUR PROFILE </a></li>
+           <li><a href="{{ path('rar_web_registration') }}">CLAIM YOUR PROFILE </a></li>
+        </ul>
+              </div>
+      <div class="powerd-by">
+        <div class="browsw-logo">
+          <h5>Copyright © 2014 Review A Relator. All rights reserved </h5>
+         </div>
+        <div class="copyright-info">
+          <p class="copyright">
+          <ul id="divBanner2">
+          <!--<li><a href="{{ path('rar_web_aboutUs') }}">About Us</a></li>
+          <li><a href="{{ path('rar_web_privacyPolicy') }}">Privacy Policy</a></li>
+          <li><a href="{{ path('rar_web_terms') }}">Terms of Use</a></li>
+          <li><a href="{{ path('rar_web_faq') }}">Contact Us</a></li>
+          <li><a href="{{ path('rar_web_siteMap') }}">Site Map </a></li>-->
+          </ul></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

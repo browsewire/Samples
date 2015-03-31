@@ -1,0 +1,48 @@
+{% extends 'RARAdminBundle::layout.html.twig' %}
+{% block body %}
+	<script>
+	function importUsers()
+	{
+		window.location.href = '{{ path('RARAdminBundle_plan') }}';
+	}
+	</script>
+<title>{% block title %} Update Plan | Admin{% endblock %}</title>
+	<section id="content">			
+		<div class="g12">			
+			<form id="form" action="{{ path('RARAdminBundle_planupdate',{ 'id': plan.id }) }}" method="post" autocomplete="off" data-validate="parsley">
+				<fieldset>
+						<label>Update Plan</label>
+						<section class="chromeD"><label for="required_field">Name<font class=change>*</font></label>
+							<div>
+								<input id="required_field" class="txtBoxMedium" type="text" data-required="true"  name="name" value={{plan.name}}>
+							</div>
+							<label for="required_field_msg">Description <font class=change>*</font></label>
+							<div>
+								<textarea data-required="true" rows=5 cols=5 name="description">{{plan.description}}</textarea>
+							</div>
+					
+						</section>
+							<section class="chrome"><label for="required_field_msg">Plan Charges(monthly) <font class=change></font></label>
+								<div>
+									<input id="required_field" class="txtBoxMedium" type="text" name="charges"value={{plan.chargesmonthly}}>
+								</div>
+								<label for="required_field_msg">Plan Charges(halfYearly) <font class=change></font></label>
+								<div>
+									<input id="required_field" class="txtBoxMedium" type="text" name="chargesh"value={{plan.chargeshalfyearly}}>
+								</div>
+							</section>
+							
+							<section class="chrome"><label for="required_field_msg">Plan Charges(Yearly) <font class=change></font></label>
+								<div>
+									<input id="required_field" class="txtBoxMedium" type="text" name="chargesy"value={{plan.chargesyearly}}>
+								</div>
+							</section>
+							<section class="chrome">
+								<div class="center"><button class="submit" name="submitbuttonname" value="submitbuttonvalue">Update</button>
+											<button class="center1" name="submitbuttonname" value="submitbuttonvalue" onclick="importUsers()">Cancel</button>
+								</div>
+							</section>
+					</fieldset>
+				</form>	
+			</div>
+{% endblock %}

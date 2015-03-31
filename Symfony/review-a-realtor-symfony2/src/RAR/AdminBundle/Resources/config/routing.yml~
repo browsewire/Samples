@@ -1,0 +1,282 @@
+RARAdminBundle_realtor:
+    pattern:  /realtor/admin
+    defaults: { _controller: RARAdminBundle:Admin:realtor }
+    requirements:
+        _method:  GET
+
+RARAdminBundle_plan:
+    pattern:  /plan/admin
+    defaults: { _controller: RARAdminBundle:Admin:plan }
+    requirements:
+        _method:  GET 
+
+RARAdminBundle_category:
+    pattern:  /category/admin
+    defaults: { _controller: RARAdminBundle:Category:category }
+    requirements:
+        _method:  GET 
+          
+RARAdminBundle_realtordelete:
+    pattern:  /delete/admin{id}
+    defaults: { _controller: RARAdminBundle:Admin:deleteRealtor }
+    requirements:
+        _method:  GET             
+
+RARAdminBundle_categorydelete:
+    pattern:  /categorydelete/admin{id}
+    defaults: { _controller: RARAdminBundle:Category:delete }
+    requirements:
+        _method:  GET    
+        
+RARAdminBundle_categoryupdate:
+    pattern:  /categoryupdate/admin{id}
+    defaults: { _controller: RARAdminBundle:Category:update }
+    requirements:
+        _method:  GET|POST 
+                
+RARAdminBundle_plandelete:
+    pattern:  /plandelete/admin{id}
+    defaults: { _controller: RARAdminBundle:Admin:deletePlan }
+    requirements:
+        _method:  GET 
+                                        
+RARAdminBundle_realtorupdate:
+    pattern:  /realtorupdate/admin{id}
+    defaults: { _controller: RARAdminBundle:Admin:updateRealtor }
+    requirements:
+        _method:  GET|POST     
+        
+RARAdminBundle_planupdate:
+    pattern:  /planupdate{id}
+    defaults: { _controller: RARAdminBundle:Admin:updatePlan }
+    requirements:
+        _method:  GET|POST    
+        
+RARAdminBundle_dashboard:
+    pattern:  /dashboard/admin
+    defaults: { _controller: RARAdminBundle:Admin:dashboard }
+    requirements:
+        _method:  GET   
+
+RARAdminBundle_addrealtor: 
+    pattern:  /addrealtor/admin
+    defaults: { _controller: RARAdminBundle:Admin:addrealtor }
+    requirements:
+        _method:  GET|POST
+        
+RARAdminBundle_addcategory: 
+    pattern:  /addcategory/admin
+    defaults: { _controller: RARAdminBundle:Category:addcategory }
+    requirements:
+        _method:  GET|POST 
+        
+RARAdminBundle_addplan: 
+    pattern:  /addplan/admin
+    defaults: { _controller: RARAdminBundle:Admin:addplan }
+    requirements:
+        _method:  GET|POST
+        
+RARAdminBundle_login: 
+    pattern:  /admin/login
+    defaults: { _controller: RARAdminBundle:Admin:index }
+    requirements:
+        _method:  GET|POST        
+
+RARAdminBundle_logout: 
+    pattern:  /admin/logout
+    defaults: { _controller: RARAdminBundle:Admin:logout }
+    requirements:
+        _method:  GET  
+        
+RARAdminBundle_getCities:
+    pattern:  /realtorgetCities/admin{stateCode}
+    defaults: { _controller: RARAdminBundle:Admin:getCities }
+    requirements:
+        _method:  GET|POST    
+
+        
+RARAdminBundle_forgotpassword:
+    pattern:  adminforgotpassword/admin
+    defaults: { _controller: RARAdminBundle:Admin:forgot }
+    requirements:
+        _method:  GET|POST
+                 
+RARAdminBundle_request:
+    pattern:  adminrequest/admin
+    defaults: { _controller: RARAdminBundle:Request:request }
+    requirements:
+        _method:  GET|POST 
+
+RARAdminBundle_status:
+    pattern:  status/admin{id}
+    defaults: { _controller: RARAdminBundle:Request:setStatus }
+    requirements:
+        _method:  GET|POST 
+
+
+RARAdminBundle_property:
+    pattern:  propertyListing/admin
+    defaults: { _controller: RARAdminBundle:Admin:property }
+    requirements:
+        _method:  GET|POST
+
+RARAdminBundle_addproperty:
+    pattern:  addProperty/admin
+    defaults: { _controller: RARAdminBundle:Admin:addproperty }
+    requirements:
+        _method:  GET|POST 
+        
+RARAdminBundle_propertydelete:
+    pattern: Property/admin{id}
+    defaults: { _controller: RARAdminBundle:Admin:deleteproperty }
+    requirements:
+        _method:  GET|POST
+        
+        
+RARAdminBundle_updateproperty:
+    pattern:  updateProperty/admin{id}
+    defaults: { _controller: RARAdminBundle:Admin:updateproperty }
+    requirements:
+        _method:  GET|POST
+        
+RARAdminBundle_images:
+    pattern: images{id}
+    defaults: { _controller: RARAdminBundle:Admin:images }
+    requirements:
+        _method:  GET|POST 
+
+RARAdminBundle_claim:
+    pattern:  claimAdmin/admin
+    defaults: { _controller: RARAdminBundle:Admin:claim }
+    requirements:
+        _method:  GET|POST  
+
+RARAdminBundle_accepted:
+    pattern:  acceptedClaim/admin{id}
+    defaults: { _controller: RARAdminBundle:Admin:accepted }
+    requirements:
+        _method:  GET|POST
+
+RARAdminBundle_rejected:
+    pattern:  rejectedClaim/admin{id}
+    defaults: { _controller: RARAdminBundle:Admin:rejected }
+    requirements:
+        _method:  GET|POST  
+        
+RARAdminBundle_manageCms:
+    pattern:  cms/admin
+    defaults: { _controller: RARAdminBundle:Admin:manageCms }
+    requirements:
+        _method:  GET|POST  
+
+        
+RARAdminBundle_addCms:
+    pattern:  addcms/admin
+    defaults: { _controller: RARAdminBundle:Admin:addCms }
+    requirements:
+        _method:  GET|POST
+        
+        
+RARAdminBundle_editCms:
+    pattern:  adminEditcms/admin{id}
+    defaults: { _controller: RARAdminBundle:Admin:editCms }
+    requirements:
+        _method:  GET|POST  
+
+        
+RARAdminBundle_deleteCms:
+    pattern: CMS{id}
+    defaults: { _controller: RARAdminBundle:Admin:deleteCms }
+    requirements:
+        _method:  GET|POST
+          
+RARAdminBundle_importRealtors:
+    pattern:  import/Realtors/admin
+    defaults: { _controller: RARAdminBundle:Admin:importRealtors }
+    requirements:
+        _method:  GET|POST 
+        
+RARAdminBundle_view:
+    pattern:  viewcms/{id}
+    defaults: { _controller: RARAdminBundle:Admin:viewCms }
+    requirements:
+        _method:  GET|POST  
+          
+RARAdminBundle_advertiesment:
+    pattern:  advertiesment/admin
+    defaults: { _controller: RARAdminBundle:Admin:manageAdvertiesment }
+    requirements:
+        _method:  GET|POST
+        
+RARAdminBundle_addAdvertiesment:
+    pattern:  addAdvertiesment/admin
+    defaults: { _controller: RARAdminBundle:Admin:addAdvertiesment }
+    requirements:
+        _method:  GET|POST      
+        
+RARAdminBundle_editAdvertiesment:
+    pattern:  editAdvertiesment/admin{id}
+    defaults: { _controller: RARAdminBundle:Admin:editAdvertiesment }
+    requirements:
+        _method:  GET|POST   
+
+RARAdminBundle_deleteAdvertiesment:
+    pattern: Advertiesment/admin{id}
+    defaults: { _controller: RARAdminBundle:Admin:deleteAdvertiesment }
+    requirements:
+        _method:  GET|POST   
+        
+ 
+RARAdminBundle_getCsv:
+    pattern:  csv/admin
+    defaults: { _controller: RARAdminBundle:Admin:getCsv}
+    requirements:
+        _method:  GET|POST    
+
+ 
+RARAdminBundle_getPdf:
+    pattern: Pdf
+    defaults: { _controller: RARAdminBundle:Admin:getPdf}
+    requirements:
+        _method:  GET|POST                     
+        
+ 
+RARAdminBundle_reviewer:
+    pattern: reviewer/admin
+    defaults: { _controller: RARAdminBundle:Admin:manageReviewer}
+    requirements:
+        _method:  GET|POST     
+        
+RARAdminBundle_deleteReviewer:
+    pattern: Reviewer/admin{id}
+    defaults: { _controller: RARAdminBundle:Admin:deleteReviewer}
+    requirements:
+        _method:  GET|POST    
+        
+RARAdminBundle_deletePropertyImages:
+    pattern: deletePropertyImage/admin{id}
+    defaults: { _controller: RARAdminBundle:Admin:deleteImages}
+    requirements:
+        _method:  GET|POST 
+
+RARAdminBundle_suspenedRealtors:
+    pattern: suspenedrealtor/admin{id}
+    defaults: { _controller: RARAdminBundle:Admin:suspenedRealtor}
+    requirements:
+        _method:  GET|POST 
+                
+        
+RARAdminBundle_error:
+    pattern: adminerror
+    defaults: { _controller: RARAdminBundle:Admin:error}
+    requirements:
+        _method:  GET|POST
+        
+RARAdminBundle_changePassword:
+    pattern: adminchangepassword/admin
+    defaults: { _controller: RARAdminBundle:Admin:adminChangePassword}
+    requirements:
+        _method:  GET|POST
+                
+        
+                                                                                                                                                                                                                                                                                                                 

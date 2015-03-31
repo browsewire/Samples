@@ -1,0 +1,125 @@
+{% extends 'RARAdminBundle::layout.html.twig' %}
+
+{% block javascripts %}
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+	<script src="{{  asset('themes/admin/js/functions.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/functions.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/plugins.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/editor.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/calendar.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/flot.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/elfinder.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/datatables.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Alert.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Autocomplete.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Breadcrumb.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Calendar.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Chart.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Color.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Date.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Editor.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_File.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Dialog.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Fileexplorer.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Form.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Gallery.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Multiselect.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Number.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Password.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Slider.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Store.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Time.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Valid.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/wl_Widget.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/config.js') }}"></script>
+	<script src="{{  asset('themes/admin/js/script.js') }}"></script>
+	<script type="text/javascript">
+ function confirm_Delete(e) {
+    var answer = confirm("Are you sure you want to delete this record?")
+    if (!answer){
+        e.preventDefault();
+        return false;
+    }
+}
+ </script>
+	<script>
+	$(document).ready(function(){
+		$("#colAction").removeClass("sorting");
+	});
+	</script>
+	<script type="text/javascript">		
+	function addNewPlan()
+	{
+		window.location.href = '{{ path('RARAdminBundle_addrealtor') }}';
+	}
+	</script>
+	<script>
+	function importUsers()
+	{
+		window.location.href = '{{ path('RARAdminBundle_importRealtors') }}';
+	}
+		function importUsers1()
+	{
+		window.location.href = '{{ path('RARAdminBundle_getCsv') }}';
+	}
+			function getPdf()
+	{
+		window.location.href = '{{ path('RARAdminBundle_getPdf') }}';
+	}
+	</script>
+{% endblock %}
+{% block body %}
+<title>{% block title %} Manage Realtors | Admin{% endblock %}</title>
+	<section id="content">
+	<div class="g12">
+		<h1>Manage Realtors</h1>
+		<button class="btnAddNew" onclick="javascript:addNewPlan();">Add New</button>
+		<button class="btnAddNew" onclick="javascript:importUsers();">Import Realtors</button>
+		<button class="btnAddNew" onclick="javascript:importUsers1();">Export Realtors in Csv</button>
+		<!--<button class="btnAddNew" onclick="javascript:getPdf();">Export Realtors in Pdf</button>-->
+		<div class="dataTables_wrapper">
+			<table class="datatable">
+			<thead>
+				<tr>
+					<th class="sorting col-2" style="width: 58px;" rowspan="1" colspan="1"> # &nbsp;&nbsp;</th>
+					<th class="sorting col-3" style="width: 109px;" rowspan="1" colspan="1">Name &nbsp;&nbsp;</th>
+					<!--<th class="sorting col-3" style="width: 104px;" rowspan="1" colspan="1">LastName &nbsp;&nbsp;</th>-->
+					<th class="sorting col-2" style="width: 120px;" rowspan="1" colspan="1">Email &nbsp;&nbsp;</th>
+					<th class="sorting col-2" style="width: 75px;" rowspan="1" colspan="1">Phone &nbsp;&nbsp;</th>
+					<th class="sorting col-6" style="width: 240px;" rowspan="1" colspan="1">Address &nbsp;&nbsp;</th>
+					<th class="sorting col-2" style="width: 77px;" rowspan="1" colspan="1">City &nbsp;&nbsp;</th>
+					<th class="sorting col-3" style="width: 75px;" rowspan="1" colspan="1">State &nbsp;&nbsp;</th>
+					<!--<th class="sorting col-2" rowspan="1" colspan="1" style="width: 180px;">Country</th>-->
+					<th class="sorting col-3" style="width: 48px;" rowspan="1" colspan="1">Zip &nbsp;&nbsp;</th>
+					<th class="col-2" id="colAction"style="width:100px;" rowspan="1" colspan="1"><label class="lblAction">Action &nbsp;&nbsp;</label></th>
+				</tr>
+			</thead>
+			<tbody>		
+				{% for realtor in realtors %}
+				<tr class="gradeA odd">
+					<td class="">{{realtor.id}}</td>
+					<td class="txtleft">{{realtor.first_name}} {{realtor.last_name}}</td>
+
+					<td class="txtleft">{{realtor.email}}</td>
+					<td class="txtleft">{{realtor.phone}}</td>
+					<td class="txtleft">{{realtor.address}},{{realtor.address2}}</td>
+					<td class="txtleft">{{realtor.city_name}}</td>
+					<td class="txtleft">{{realtor.state_name}}</td>
+					<!--<td class="txtleft">{{realtor.country}}</td>-->
+					<td class="txtleft">{{realtor.pincode}}</td>
+					<td><a href="{{ path('RARAdminBundle_realtorupdate',{ 'id': realtor.id }) }}"><img src="{{ asset('bundles/images/pencil.png') }}"></image></a><a href="{{ path('RARAdminBundle_realtordelete', { 'id': realtor.id }) }}"><img src="{{ asset('bundles/images/cross.png') }}" onclick="confirm_Delete(event);"></image></a>
+					
+					<!--<a href= "{{ path('RARAdminBundle_suspenedRealtors', { 'id': realtor.id }) }}"><img src="{{ asset('bundles/images/suspened.png') }}"></image></a>-->
+					
+					
+					</td>			
+				</tr>
+				{% endfor %}
+			</table>
+
+			
+			</form>
+		</div>
+	</div>	
+{% endblock %}

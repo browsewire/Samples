@@ -1,0 +1,139 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %}Add Property{% endblock %}</title>
+	
+   	<script src="{{  asset('themes/web/js/script.js') }}"></script>
+	<script>
+		function capitalize(textboxid, str) 
+	      	{
+			if (str && str.length >= 1)
+			{       
+			  var firstChar = str.charAt(0);
+			  var remainingStr = str.slice(1);
+			  str = firstChar.toUpperCase() + remainingStr;
+			}
+		      	document.getElementById(textboxid).value = str;
+		      	document.getElementById(textboxid1).value = str;
+	      	}
+									
+	</script>		
+	<script>
+		$(document).ready(function()
+		{
+			$("#property").addClass('active_background');
+		});
+	</script>
+				  
+  	<script>
+	    $(document).ready(function()
+	    {
+	      updateCities('AK');
+			  $("#state").change(function()
+	      {	
+		var id=$(this).val();
+		updateCities(id);  
+
+	      });	
+	    });
+
+		function updateMainImage(id)
+		{
+			//alert("hello");
+			$('#hidMainImageId').val(id);
+		}
+
+	    function updateCities(id)
+	    {
+		       	
+	     	$.ajax({
+	     	url : '{{ path("RARAdminBundle_getCities",{ "stateCode": '+id+' }) }}',
+	      type:'POST',
+	      data:'stateCode='+id,
+	      dataType:'html',   
+	      success:function(data)
+	      {
+		$('#city').html(data);
+	      }
+	    });
+	  }
+	</script>
+
+	<div class="titles oranges border">
+		<h2>ADD PROPERTY</h2>
+	</div>
+	<div class="new_form " style="width:136%; margin-left:-14px;">
+	  	<form action="{{ path('rar_web_addProperty') }}" method="POST" data-validate="parsley" enctype="multipart/form-data">
+			<fieldset>
+			    <p class="add-sect">
+			      <label> Name <font class=star_cum>*</font></label>
+			      <input type="text" id="mytextbox" onkeyup="javascript:capitalize(this.id, this.value);" name="name" autofocus data-required="true" autofocus data-error-message="Please enter your name ">
+			      </select>
+			    </p>
+			    <p style="height: 120px;">
+			      <label>Description<font class=star_cum>*</font>
+			      </label>
+			      <textarea style="border: 1px solid #cccccc;"name="description" cols="30" rows="5" data-required="true" autofocus data-error-message="Please enter description "></textarea>
+			    </p>
+
+			    <p class="form_right">
+			      <label> Address<font class=star_cum>*</font></label>
+			      <input type="text" name="address" autofocus>
+			    </p>
+
+			    <p class="sel-1">
+			      <label> State <font class=star_cum>*</font></label>
+			      <select  name="state" id="state" class="selectbox">
+			      {% for state in states %}
+							<option value="{{state.StateCode}}">{{state.StateName}}</option>
+							{% endfor %}
+			      </select>
+			    </p>
+
+			    <p class="sel-1">
+			      <label> city <font class=star_cum>*</font></label>
+			    	<select name="city" id="city" class="selectbox">								
+						</select>
+			    </p>
+
+			    <p style="margin-bottom:0;">
+			      <label>Phone <font class=star_cum>*</font></label>
+			      <input type="text" name="phone"  data-type="number" maxlength=7  data-required="true" data-required="true" autofocus data-error-message="Please enter your valid number ">
+			    </p>
+			    
+			    <p style="margin-bottom:0;">
+			      <label>ZipCode <font class=star_cum>*</font></label>
+			      <input type="text" name="zip" data-type="number" maxlength=5  data-required="true" data-required="true" autofocus data-error-message="Please enter your valid zipcode ">
+			    </p>
+
+			    <p style="margin-bottom:0;">
+			      <label> Video Url <font class=star_cum>*</font></label>
+			      <input type="text" name="videourl">
+			    </p>
+			     
+			    <p style="margin-bottom:0;">
+			      <label> Price <font class=star_cum>*</font></label>
+			      <input type="text" name="price" class="dollar_charges  " data-required="true" autofocus data-error-message="Please enter your price ">
+			    </p>
+			     
+			    <p style="height: 120px;">
+			      <label>Additional Information
+			      </label>
+			      <textarea style="border: 1px solid #cccccc;" name="additional" cols="40" rows="5"></textarea>
+			    </p>
+
+				<div class="divPropImages">
+			      		<label style="margin-left:43px;">Property Image(s) </label>
+					<input type="hidden" name="hidMainImageId" id="hidMainImageId" value=0 /><br/><br/>
+				    	<input type="file" id="file" name="file[]" style="margin-top: 13px;margin-left:55px;"/><br/>   
+			     		<input type="button" id="add_more" class="upload" value="Add More Files" style="width:127px;margin-left:20px;"/>
+					<div class="buttonClass  submit_n">
+		<input  id="b1" type="submit" value="Submit">     
+	</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+	
+
+{% endblock %}

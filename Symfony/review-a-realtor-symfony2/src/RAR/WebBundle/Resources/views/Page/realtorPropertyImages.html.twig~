@@ -1,0 +1,126 @@
+{% extends 'RARWebBundle::layout2.html.twig' %}
+{% block body %}
+<title>{% block title %} Property Images {% endblock %}</title>
+	
+	<script type="text/javascript">
+
+		function showimagepreview(input) 
+		{
+			if (input.files && input.files[0]) 
+			{
+				var filerdr = new FileReader();
+				filerdr.onload = function(e) 
+				{
+					$('#imgprvw').attr('src', e.target.result);
+				}
+				filerdr.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>	
+	
+	
+<script>
+function showLargeImage(src)
+{
+//alert(src);
+$("#divLargeImage").css('display','block')
+$("#imgLargeImage").prop('src',src)   
+}
+	function updateMainImage(id)
+	{
+		//alert("hello");
+		$('#hidMainImageId').val(id);
+		$.ajax(
+		{
+	     		url : '{{ path("RARWebBundle_updatePropertyMainImage") }}',
+	      		type:'POST',
+	      		data:'mainImageId='+id,
+	      		dataType:'html',   
+	      		success:function(data)
+	      		{
+				//location.reload(true);
+	      		}
+	    	});
+	}
+	function deleteImage(imageId)
+	{
+		var arrImageId = imageId.split("-");
+		var imageId = arrImageId[1];
+		
+		$.ajax(
+		{
+	     		url : '{{ path("rar_web_deleteRealtorPropertyImages",{ "id": '+imageId+' }) }}',
+	      		type:'POST',
+	      		data:'imageId='+imageId,
+	      		dataType:'html',   
+	      		success:function(data)
+	      		{
+							if( data == 'SUCCESS' )
+							{
+								$("#div-"+imageId).css("display", "none");
+								return false;
+							}
+	      		}
+  	});
+	
+	
+	
+	}
+	
+	
+</script>
+   
+    <!-- write review -->
+    <div class="titles oranges border">
+      <h2>Property Images</h2>
+    </div>
+    
+    
+    
+    	<div class="new_form" style="float: left;">
+		<fieldset>
+			<form method="POST" action="{{ path('rar_web_showPropertyImages',{ 'id': property.id }) }}" enctype="multipart/form-data">
+				<p style="width:100%;">
+					<label> Add New Image</label>
+					<input type="file" name="file" style="float:left;" onchange="showimagepreview(this)">
+					<button class="" id="save" type="submit" style="float: left; padding: 8px 20px; margin-top: 12px;">Add</button>
+					{% if fileError is defined %}
+          <div>{{ fileError }}</div>
+          {% endif %}
+				</p>
+				 <div class="show_image" style="margin-left:206px; float:left;margin-top:47px;"><img id="imgprvw" src="{{ asset('themes/homepage/images/select.jpeg') }}"></div>
+				<div id="divLargeImage" style="display:none;">
+					<div style="width:100%; float:left;">
+						<img id="imgLargeImage" src="" class="mainImage center_image">
+					</div>
+				</div>
+			</form>
+		
+		</fieldset>
+	</div>
+		
+<div class=property_imagess>
+
+				{% for image in images%}
+					        <div id="div-{{image.id}}" class="delete_outer">
+				 <img src="{{  asset(['Property/', image.image_url]|join) }}" class="set_images" onclick="showLargeImage(this.src);" />
+				 {% if loop.first %}
+					<input id="{{image.id}}" type="radio" name="mainImage" onchange="javascript:updateMainImage(this.id);" checked class="radio_button"> Set as Main
+				{% else %}
+					<input id="{{image.id}}" type="radio" name="mainImage" onchange="javascript:updateMainImage(this.id);"  class="radio_button"> Set as Main
+				{% endif %}
+		
+				<!--<a href="{{ path('rar_web_deleteRealtorPropertyImages',{ 'id': image.id }) }}" class="link_images"><img src="{{ asset('x.png') }}" onclick="deleteImage();"></a>-->
+				<label class="link_images"><img id="del-{{image.id}}" src="{{ asset('themes/homepage/images/x.png') }}" onclick="deleteImage(this.id);"></label>	 	 
+
+</div>
+
+{% endfor %}
+<input type="hidden" name="hidMainImageId" id="hidMainImageId" />
+</div>
+
+
+
+
+
+{% endblock %}
