@@ -1,0 +1,320 @@
+/* Empty. Add your own CSS if you like */
+
+video {
+width: 100%;
+max-width: 100%;
+height: auto;
+border: 0px solid red;
+}
+.bar-header{
+padding:5px 10px 0px;
+background: none repeat scroll 0 0 #6b6778;
+}
+.scroll-content{
+margin-bottom:40px!important;
+}
+.button-bar{
+padding:10px;
+background: none repeat scroll 0 0 #6b6778;
+}
+
+.bar-footer{
+background:none repeat scroll 0 0 rgba(0, 0, 0, 0);
+float:right;
+height: auto;
+color: #867877;
+font-size: 14px;
+}
+.bar-footer span{
+color: #484849;
+font-size: 14px;
+float:right;
+padding:10px;
+}
+.bar-footer img{
+width:40%;
+vertical-align:middle;
+max-width:200px;
+}
+
+.footer-text{
+float:right;
+width:100%;
+text-align:right;
+}
+.button-bar .button {
+    background-color: #504c5e;
+    border-color: #504c5e;
+    color: #fff;
+    line-height: 25px;
+    min-height: 30px;
+}
+
+.button-bar .button:hover,
+.button-bar .button.active{
+ background-color:#363345;
+ border-color: #363345;
+}
+
+h2.title {
+    color: #867877;
+    font-size: 18px;
+    padding: 0 0 0 15px;
+    
+}
+.church-timer{
+float:left;
+width:100%;
+padding:0px 0px 20px 0px;
+}
+.center-align{
+width:100%;
+text-align:center;
+}
+h4.center-align{
+margin-top:0px;
+margin-bottom:20px;
+}
+
+
+.button-bar.timer{
+background: rgba(0,0,0,0.0);
+padding:0px;
+}
+.button-bar.timer .button{
+    background: rgba(0,0,0,0.0);
+    border: 0px;
+    color: #fff;
+    line-height: auto;
+    min-height: 30px;
+    white-space:normal;
+    padding:0px;
+    
+}
+
+
+.timer-time{
+font-size:35px;
+float:left;
+width:100%;
+text-align:center;
+font-weight:bold;
+}
+.timer-label{
+float:left;
+font-size:16px;
+width:100%;
+text-align:center;
+}
+
+
+.church-banner{
+width:100%;
+}
+.church-avatar{
+    border-radius: 50%;
+    height: 50px;
+    margin: -40px 20px 0px;
+    width: 50px;
+}
+.church-avatar-inner{
+    border-radius: 50%;
+    height: 45px;
+    margin: 20px 20px 0px;
+    width: 45px;
+}
+
+.church-content{
+float:left;
+width:100%;
+padding:10px;
+}
+.church-content-left{
+float:left;
+width:25px;
+}
+.church-content-right{
+float:left;
+width:90%;
+}
+
+.church-content-right h2{
+font-size:20px;
+}
+.church-content-right .address{
+color:#fff;
+}
+
+.church-content-right .description{
+color:#484849;
+}
+
+.button-bar.footer{
+padding:20px 10px;
+background: rgba(0,0,0,0.2);
+
+}
+
+.button-bar.footer .button{
+    background: rgba(0,0,0,0.0);
+    border: 0px;
+    color: #fff;
+    line-height: 18px;
+    min-height: 30px;
+    font-size:14px;
+    white-space:normal;
+    padding:0 10px;
+}
+.button-bar.footerbottom{
+padding:20px 10px;
+background: rgba(0,0,0,0.0);
+}
+.button-bar.footerbottom .button{
+    background: rgba(0,0,0,0.0);
+    border: 0px;
+    color: #fff;
+    line-height: 18px;
+    min-height: 30px;
+    font-size:14px;
+    white-space:normal;
+    padding:0 10px;
+}
+
+.button-bar.footer img{
+max-width:40%;
+}
+.button-bar.footerbottom img{
+max-width:25%;
+}
+
+.list {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.item-avatar{
+border-top:0px!important;
+border-left:0px!important;
+border-right:0px!important;
+border-bottom:1px solid #58555b!important;
+}
+.tabs, .bar-header{
+
+}
+a{
+color:#fff;
+text-decoration:none;
+}
+.pane, .view{
+background:url("../img/bg.jpg")
+}
+
+.scroll{
+height: 100%;
+}
+.splash {
+    position:relative;
+    height: 100%;
+    width:100%;
+}
+
+.splash img {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+}
+
+.item-complex .item-content, .item-radio .item-content, .item{
+background:none;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+color:#fff;
+}
+
+.item-avatar img
+{
+ border-radius: 50%;
+    height: 100%;
+    left: 16px;
+    max-height: 40px;
+    max-width: 40px;
+    position: absolute;
+    top: 16px;
+    width: 100%;
+}
+form {
+    padding: 20px;
+}
+
+form .input-label {
+    color: #fff;
+}
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]
+{
+color:#fff;
+}
+.item-input input{
+margin-right:10px;
+padding-right:0px;
+}
+
+.error-container {
+  margin: 5px 0;
+}
+ 
+.error-container:last-child {
+    margin: 5px 0 0;
+}
+.star-icon{
+width:15px;
+float:left;
+}
+.ion-chevron-right:before{
+color:#c7c7cc;
+}
+.star-icon .ion-star{
+width:20px;
+font-size:20px;
+position:relative;
+color:#908e8f;
+}
+.star-icon .ion-star.favourite{
+color:#ffcc00;
+}
+.ion-chevron-right:before{
+color:#c7c7cc;
+}
+.item p {
+    color: #666163;
+}
+.distance{
+width:50px;
+float:left;
+}
+.error {
+  padding: 10px 16px;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #B83E2C;
+  vertical-align: middle;
+}
+ 
+.error i {
+  font-size: 24px;
+  color: #B83E2C; 
+  vertical-align: middle;
+}
+ 
+.last-error-container > .error {
+  padding: 10px 16px 0;
+}
+ 
+.has-errors {
+  border-bottom: 3px solid #B83E2C;
+}
+ 
+.no-errors {
+  border-bottom: 3px solid green;
+}

@@ -1,0 +1,62 @@
+<ion-view>
+  <ion-content>
+    <div class="bar-header">
+       <a href="/#login">Login </a> 
+       <a href="/#register">Signup </a>
+    </div>
+    
+   <div class="button-bar">
+      <a ng-class="{ 'active': denomination }" class="button" href="" ng-click="toggleListden()">Denomination</a> 
+      <a ng-class="{ 'active': bylocation }" class="button" href="" ng-click="togglebylocation()">Location</a>
+      
+    </div>
+    
+    <h2 class="title">CHURCH LIST</h2>
+    
+    <ion-list ng-show="denomination">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="x in allchurch" type="item-text-wrap">
+        <a href="/#church/{{x.Client.id}}">
+        <img ng-if="x.Client.logo === ''"  alt="{{ x.Client.name }}"  ng-src="/img/sample.png" />
+        <img ng-if="x.Client.logo !== ''"  alt="{{ x.Client.name }}" ng-src="http://www.vlifetech.com/img/client/logo/{{ x.Client.logo }}" width="100" height="100"/>
+       </a>
+        
+       <div class="star-icon">
+         <i class="icon ion-star"></i>
+       </div>
+       <a href="/#church/{{x.Client.id}}">
+        <h2>{{x.Client.name}} {{ authtoken }}</h2>
+        <p>{{x.Client.description}}</p>
+        </a>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      
+      </ion-item>
+    </ion-list>
+    
+    <ion-list ng-show="bylocation" ng-if='locationchannel.length > 1'>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="x in locationchannel" type="item-text-wrap" >
+        <a href="/#church/{{x.Client.id}}">
+         <img ng-if="x.Client.logo === ''"  alt="{{ x.Client.name }}"  ng-src="/img/sample.png" />
+         <img ng-if="x.Client.logo !== ''"  alt="{{ x.Client.name }}" ng-src="http://www.vlifetech.com/img/client/logo/{{ x.Client.logo }}" width="100" height="100"/>
+        </a>
+       <div class="star-icon">
+         <i class="icon ion-star"></i>
+       </div>
+        <div class="distance">
+        {{ x.Client.distance }} Miles
+        </div>
+        
+        <a href="/#church/{{x.Client.id}}">
+        <h2>{{x.Client.name}} {{ authtoken }}</h2>
+        <p>{{x.Client.description}}</p>
+        </a>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      
+      </ion-item>
+    </ion-list>
+    
+    
+   
+    
+    
+  </ion-content>
+</ion-view>

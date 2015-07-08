@@ -1,0 +1,76 @@
+
+<ion-view>
+  <ion-content>
+     
+    <img ng-if="church.Client.logo === ''" class="church-avatar-inner" alt="{{ church.Client.name }}"  ng-src="/img/sample.png" />
+    <img ng-if="church.Client.logo !== ''" class="church-avatar-inner" alt="{{ church.Client.name }}"  ng-src="http://www.vlifetech.com/img/client/logo/{{ church.Client.logo }}" />
+    
+    <div class="church-timer" ng-if="countdownVal">
+    <h4 class="center-align">Next Online experience in:</h4>
+    <div class="button-bar timer">
+     
+    <timer ng-if="countdownVal" countdown="countdownVal" max-time-unit="'day'" interval="1000">
+  
+    <a class="button">
+    <span class="timer-time">{{days}}</span> 
+    <span class="timer-label">days</span>
+   </a>
+    <a class="button">
+     <span class="timer-time">{{hours}}</span> 
+    <span class="timer-label">hours</span>
+   </a>
+    <a class="button">
+     <span class="timer-time">{{minutes}}</span> 
+    <span class="timer-label">minutes</span>
+    </a>
+    <a class="button">
+     <span class="timer-time">{{seconds}}</span> 
+    <span class="timer-label">seconds</span>
+    </a>
+    </timer>
+  
+  </div>
+    </div>
+    
+    <video ng-if="countdownVal == 0" controls='controls' autoplay='autoplay' src='{{ church.Client.iphone_event_url }}'></video> 
+    <img ng-show="countdownVal" ng-if="church.Client.image === ''"  class="church-banner" alt="{{ church.Client.name }}"  ng-src="/img/mobile_live.jpg" />
+    <img ng-show="countdownVal" ng-if="church.Client.image !== ''"  class="church-banner" alt="{{ church.Client.name }}"  ng-src="http://www.vlifetech.com/img/client/{{ church.Client.image }}" />
+    
+  
+   
+   <div class="button-bar footer">
+      <a class="button" href="">
+      <img alt="Live Streaming" title="Live Streaming" ng-src="/img/icon/icon_01.png" /><br />
+      Live Streaming
+      </a>
+       
+      <a class="button" href="" >
+      <img alt="Prayer/Praise Report" title="Prayer/Praise Report" ng-src="/img/icon/icon_02.png" /><br />
+      Prayer/Praise Report
+      </a>
+      
+      <a  class="button" href="{{church.Client.donation_url}}">
+      <img alt="Give" title="Give"  ng-src="/img/icon/icon_03.png" /><br />
+      Give
+      </a>
+      
+    </div>
+    
+    <div class="button-bar footerbottom">
+      <a class="button" href="/#24-7/{{church.Client.id}}" >
+      <img alt="24x7 Streaming" title="24x7 Streaming" ng-src="/img/icon/icon_011.png" /><br />
+      24x7 Streaming
+      </a> 
+      
+      <a class="button" href="/#archive/{{church.Client.id}}">
+      <img alt="Live Streaming" title="Live Streaming"  ng-src="/img/icon/icon_022.png" /><br />
+      On Demand
+      </a>
+      
+    </div>
+ 
+  
+
+
+  </ion-content>
+</ion-view>

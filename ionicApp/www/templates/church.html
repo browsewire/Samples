@@ -1,0 +1,63 @@
+<ion-view>
+  <ion-content>
+     
+    <img ng-if="church.Client.image === ''"  class="church-banner" alt="{{ church.Client.name }}"  ng-src="/img/mobile_live.jpg" />
+    <img ng-if="church.Client.image !== ''"  class="church-banner" alt="{{ church.Client.name }}"  ng-src="http://www.vlifetech.com/img/client/{{ church.Client.image }}" />
+    
+    <img ng-if="church.Client.logo === ''" class="church-avatar" alt="{{ church.Client.name }}"  ng-src="/img/sample.png" />
+    <img ng-if="church.Client.logo !== ''" class="church-avatar" alt="{{ church.Client.name }}"  ng-src="http://www.vlifetech.com/img/client/logo/{{ church.Client.logo }}" />
+    
+    <div class="church-content">
+    
+        <div class="church-content-left">
+          <div class="star-icon">
+             <i class="icon ion-star favourite" ng-if="favouritechannel.indexOf(church.Client.id)!=-1"></i>
+             <i class="icon ion-star" ng-if="favouritechannel.indexOf(church.Client.id)==-1"></i>
+          </div>
+        </div>
+        
+        <div class="church-content-right">
+            <h2>{{ church.Client.name}} <i class="icon ion-email"></i></h2>
+            
+            <p class="address " ng-if="{{ church.Client.address_1}}"><i class="ion-ios-location"> </i> {{ church.Client.address_1}}, {{ church.Client.address_2}}</p>
+            <p class="description">{{ church.Client.description}}</p>
+        </div>
+    
+   </div>
+   
+   <div class="button-bar footer">
+      <a class="button" href="/#live/{{church.Client.id}}">
+      <img alt="Live Streaming" title="Live Streaming" ng-src="/img/icon/icon_01.png" /><br />
+      Live Streaming
+      </a>
+       
+      <a class="button" href="/#live/{{church.Client.id}}" >
+      <img alt="Prayer/Praise Report" title="Prayer/Praise Report" ng-src="/img/icon/icon_02.png" /><br />
+      Prayer/Praise Report
+      </a>
+      
+      <a  class="button" href="{{church.Client.donation_url}}">
+      <img alt="Give" title="Give"  ng-src="/img/icon/icon_03.png" /><br />
+      Give
+      </a>
+      
+    </div>
+    
+  <div class="button-bar footerbottom">
+      <a class="button" href="/#24-7/{{church.Client.id}}" >
+      <img alt="24x7 Streaming" title="24x7 Streaming" ng-src="/img/icon/icon_011.png" /><br />
+      24x7 Streaming
+      </a> 
+      
+      <a class="button" href="/#archive/{{church.Client.id}}">
+      <img alt="Live Streaming" title="Live Streaming"  ng-src="/img/icon/icon_022.png" /><br />
+      On Demand
+      </a>
+      
+    </div>
+ 
+  
+
+
+  </ion-content>
+</ion-view>

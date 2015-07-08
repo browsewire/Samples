@@ -1,0 +1,88 @@
+<ion-view>
+  <ion-content>
+    <!--<div class="button-bar">
+      
+    </div>-->
+    
+    <div class="bar-header">
+      <a href="/#profile">Profile</a> 
+      <a href="/#logout">LogOut</a>
+    </div>
+   
+    <div class="button-bar">
+      <a ng-class="{ 'active': denomination }" class="button" href="" ng-click="toggleListden()">Denomination</a> 
+      <a ng-class="{ 'active': bylocation }" class="button" href="" ng-click="togglebylocation()">Location</a>
+      <a ng-class="{ 'active': favourite }" class="button" href="" ng-click="toggleListfav()">Favorites</a>
+    </div>
+    
+    
+   
+    
+    <h2 class="title">CHURCH LIST</h2>
+
+
+     
+    <ion-list ng-show="denomination">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="x in allchurch" type="item-text-wrap" >
+       <a href="/#church/{{x.Client.id}}">
+        <img ng-if="x.Client.logo === ''"  alt="{{ x.Client.name }}"  ng-src="/img/sample.png" />
+        <img ng-if="x.Client.logo !== ''"  alt="{{ x.Client.name }}" ng-src="http://www.vlifetech.com/img/client/logo/{{ x.Client.logo }}" width="100" height="100"/>
+       </a>
+       
+        <div class="star-icon">
+         <i class="icon ion-star favourite" ng-if="favouritechannel.indexOf(x.Client.id)!=-1" ng-click="appaddtoav(x.Client.id,'remove')"></i>
+         <i class="icon ion-star" ng-if="favouritechannel.indexOf(x.Client.id)==-1" ng-click="appaddtoav(x.Client.id,'add')"></i>
+        </div>
+        <a href="/#church/{{x.Client.id}}">
+        <h2>{{x.Client.name}} {{ authtoken }}</h2>
+        <p>{{x.Client.description}}</p>
+        </a>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      
+      </ion-item>
+    </ion-list>
+    
+    <ion-list ng-show="bylocation" ng-if='locationchannel.length > 1'>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="x in locationchannel" type="item-text-wrap">
+        <a href="/#church/{{x.Client.id}}">
+        <img ng-if="x.Client.logo === ''"  alt="{{ x.Client.name }}"  ng-src="/img/sample.png" />
+        <img ng-if="x.Client.logo !== ''"  alt="{{ x.Client.name }}" ng-src="http://www.vlifetech.com/img/client/logo/{{ x.Client.logo }}" width="100" height="100"/>
+        </a>
+        <div class="star-icon">
+         <i class="icon ion-star favourite" ng-if="favouritechannel.indexOf(x.Client.id)!=-1" ng-click="appaddtoav(x.Client.id,'remove')"></i>
+         <i class="icon ion-star" ng-if="favouritechannel.indexOf(x.Client.id)==-1" ng-click="appaddtoav(x.Client.id,'add')"></i>
+        </div>
+         <div style="float:left;width:50px;">
+          {{ x.Client.distance }} Miles 
+        </div>
+        <a href="/#church/{{x.Client.id}}">
+        <h2>{{x.Client.name}} {{ authtoken }}</h2>
+        <p>{{x.Client.description}}</p>
+        </a>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      
+      </ion-item>
+    </ion-list>
+    
+    
+    <ion-list ng-show="favourite">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="f in allchurch" type="item-text-wrap" ng-show ="favouritechannel.indexOf(f.Client.id)!=-1">
+        <a href="/#church/{{f.Client.id}}">
+        <img ng-if="f.Client.logo === ''"  alt="{{ f.Client.name }}"  ng-src="/img/sample.png" />
+        <img ng-if="f.Client.logo !== ''"  alt="{{ f.Client.name }}" ng-src="http://www.vlifetech.com/img/client/logo/{{ f.Client.logo }}" width="100" height="100"/>
+        </a>
+        <div class="star-icon">
+         <i class="icon ion-star favourite" ng-click="appaddtoav(f.Client.id,'remove')"></i>
+        </div>
+        <a href="/#church/{{f.Client.id}}">
+        <h2>{{f.Client.name}} {{ authtoken }}</h2>
+        <p>{{f.Client.description}}</p>
+        </a>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      
+      </ion-item>
+    </ion-list>
+    
+    
+  </ion-content>
+</ion-view>

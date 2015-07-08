@@ -1,0 +1,104 @@
+<ion-view>
+  <ion-content>
+     <div class="bar-header">
+      <a href="/#profile">Profile</a> 
+      <a href="/#logout">LogOut</a>
+      <a href="/#home">Home</a>
+    </div>
+    <form name="authorizationForm" ng-submit="updateprofile(authorizationForm)">
+ <h2>Profile Information</h2>
+ {{ error }}
+    <div class="list">
+     
+      <label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.name.$invalid, 'no-errors' : authorizationForm.name.$valid}" ng-messages-include="error-list.html">
+        <span class="input-label">Name:</span>
+        <input type="text" name="name" ng-model="profile.User.name" ng-minlength="5" ng-maxlength="20" required>
+      </label>
+       
+      <div class="error-container" ng-show="authorizationForm.name.$error" ng-messages="authorizationForm.name.$error" ng-messages-include="error-list.html">
+       
+      </div>
+       
+      <label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.address1.$invalid, 'no-errors' : authorizationForm.address1.$valid}" ng-messages-include="error-list.html">
+        <span class="input-label">Address Line 1:</span>
+        <input type="text" name="address1" ng-model="profile.User.address1" ng-minlength="5" ng-maxlength="20" required>
+      </label>
+       
+      <div class="error-container" ng-show="authorizationForm.address1.$error" ng-messages="authorizationForm.address1.$error" ng-messages-include="error-list.html">
+       
+      </div>
+      
+      
+      <label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.address2.$invalid, 'no-errors' : authorizationForm.address2.$valid}" ng-messages-include="error-list.html">
+        <span class="input-label">Address Line 2:</span>
+        <input type="text" name="address2" ng-model="profile.User.address2" ng-minlength="5" ng-maxlength="20" required>
+      </label>
+       
+      <div class="error-container" ng-show="authorizationForm.address2.$error" ng-messages="authorizationForm.address2.$error" ng-messages-include="error-list.html">
+       
+      </div>
+      
+      
+      <label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.city.$invalid, 'no-errors' : authorizationForm.city.$valid}" ng-messages-include="error-list.html">
+        <span class="input-label">City:</span>
+        <input type="text" name="city" ng-model="profile.User.city" required>
+      </label>
+       
+      <div class="error-container" ng-show="authorizationForm.city.$error" ng-messages="authorizationForm.city.$error" ng-messages-include="error-list.html">
+       
+      </div>
+      
+      
+      <label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.state.$invalid, 'no-errors' : authorizationForm.state.$valid}" ng-messages-include="error-list.html">
+        <span class="input-label">State:</span>
+        <input type="text" name="state" ng-model="profile.User.state" required>
+      </label>
+       
+      <div class="error-container" ng-show="authorizationForm.state.$error" ng-messages="authorizationForm.state.$error" ng-messages-include="error-list.html">
+       
+      </div>
+      
+      
+      <label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.country.$invalid, 'no-errors' : authorizationForm.country.$valid}" ng-messages-include="error-list.html">
+        <span class="input-label">Country:</span>
+        <input type="text" name="country" ng-model="profile.User.country" required>
+      </label>
+       
+      <div class="error-container" ng-show="authorizationForm.country.$error" ng-messages="authorizationForm.country.$error" ng-messages-include="error-list.html">
+       
+      </div> 
+      
+      <label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.zip.$invalid, 'no-errors' : authorizationForm.zip.$valid}" ng-messages-include="error-list.html">
+        <span class="input-label">Zip:</span>
+        <input type="text" name="zip" ng-model="profile.User.zip" required>
+      </label>
+       
+      <div class="error-container" ng-show="authorizationForm.zip.$error" ng-messages="authorizationForm.zip.$error" ng-messages-include="error-list.html">
+       
+      </div>       
+       
+    </div>    
+     
+    <button class="button button-full button-positive" type="submit">
+      Update
+    </button>
+    <a href="/#updatepassword">Update Password</a> 
+     
+</form> 
+
+<script id="error-list.html" type="text/ng-template"> 
+    <div class="error" ng-message="required">
+        <i class="ion-information-circled"></i>
+        This field is required!
+    </div>
+    <div class="error" ng-message="minlength">
+        <i class="ion-information-circled"></i>
+        Minimum length of this field is 5 characters!
+    </div>
+    <div class="error" ng-message="maxlength">
+        <i class="ion-information-circled"></i>
+        Maximum length of this field is 20 characters!
+    </div>
+</script> 
+  </ion-content>
+</ion-view>
