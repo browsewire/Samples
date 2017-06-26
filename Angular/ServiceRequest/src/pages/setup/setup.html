@@ -1,0 +1,74 @@
+<ion-content >
+<div class="header-bar">
+   <h1>{{ title }}</h1>
+   <span>{{ subtitle}} {{ loginName }}</span>
+   </div>
+      <div padding class="inner-content">
+
+
+      <div class="request_form">
+      <ion-list>
+        <ion-item>
+          <ion-label>{{ 'Login Name' }}</ion-label>
+          <ion-input type="text" [(ngModel)]="login_name" value="{{ login_name }}"></ion-input>
+        </ion-item>
+     </ion-list>
+      </div>
+      
+      <div class="request_form">
+      <ion-list>
+        <ion-item>
+          <ion-label>{{ 'Password' }}</ion-label>
+          <ion-input type="password" [(ngModel)]="login_password" value="{{ login_password }}"></ion-input>
+        </ion-item>
+     </ion-list>
+      </div>
+      
+      <div class="request_form">
+      <ion-list>
+        <ion-item>
+          <ion-label>{{ 'Host IP' }}</ion-label>
+          <ion-input type="text" [(ngModel)]="host_ip" value="{{ host_ip }}"></ion-input>
+        </ion-item>
+     </ion-list>
+      </div>
+      
+      <div class="request_form">
+      <ion-list>
+        <ion-item>
+          <ion-label>{{ 'DB Name' }}</ion-label>
+          <ion-input type="text" [(ngModel)]="db_name" value="{{ db_name }}"></ion-input>
+        </ion-item>
+     </ion-list>
+      </div>
+      
+      <div class="request_form">
+      <ion-list>
+        <ion-item>
+          <ion-label>{{ 'Language' }}</ion-label>
+          <ion-select [(ngModel)]="language">
+            <ion-option *ngFor="let language of languageList" value="{{language.value}}" >{{language.text}}</ion-option>
+          </ion-select>
+        </ion-item>
+     </ion-list>
+
+
+      </div>
+
+      
+
+      <div class="request_form">
+      <button ion-button class="greenbtn" style="float: left;" (click)="gotToBack()">
+         <ion-icon ios="ios-arrow-back"  md="md-arrow-back"></ion-icon>&nbsp;&nbsp;{{ 'Back' }}
+      </button>
+
+      <button ion-button class="greenbtn" style="float: right;" (click)="updateSetup()">
+         <ion-icon ios="ios-done-all" md="md-done-all"></ion-icon>&nbsp;&nbsp; {{ 'Update System Data' }}
+      </button>
+      </div>
+
+
+
+     </div>
+</ion-content>
+

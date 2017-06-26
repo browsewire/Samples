@@ -1,0 +1,61 @@
+page-annotation {
+
+body {
+    -webkit-text-size-adjust: 62%;
+}
+
+.align_left{float:left;position: absolute;left: 1%;bottom: 0px;}
+.align_right{float: right;position: absolute;right: 1%;bottom: 0px;}
+
+.annotate_option{
+width:100%;
+margin:0 auto;
+text-align:center;
+}
+canvas{
+display: block;
+margin: 0 auto;
+position: absolute;
+}
+.bottom-tabs{
+position: fixed;
+bottom: 0px;
+width:100%;
+background:#D6D6D6;
+z-index:9;
+}
+
+.greenbtn_sml{
+  color:#FFFFFF;font-size:20px;border-radius:5px;
+  background: #8EC543;
+  background-image: -webkit-linear-gradient(top, #8EC543, #76A835);
+  background-image: -moz-linear-gradient(top, #8EC543, #76A835);
+  background-image: -ms-linear-gradient(top, #8EC543, #76A835);
+  background-image: -o-linear-gradient(top, #8EC543, #76A835);
+  background-image: linear-gradient(to bottom, #8EC543, #76A835);
+  width:40%;
+}
+
+.greybtn_sml{
+  color:#FFFFFF;font-size:20px;border-radius:5px;
+  background: #ddd;
+  background-image: -webkit-linear-gradient(top, #ddd, #ddd);
+  background-image: -moz-linear-gradient(top, #ddd, #ddd);
+  background-image: -ms-linear-gradient(top, #ddd, #ddd);
+  background-image: -o-linear-gradient(top, #ddd, #ddd);
+  background-image: linear-gradient(to bottom, #ddd, #ddd);
+  width:40%;
+}
+
+.annotationoption .button .icon::before,.annotationoption  .button.icon::before,.annotationoption  .button.icon-left::before,.annotationoption  .button.icon-right::before{
+line-height:normal;
+}
+.annotationoption .button{
+min-height: 15px;
+min-width: 10px !important;
+width: 35px;
+padding: 0px 1px;
+height: 33px;
+margin: 10px 1px;
+}
+}

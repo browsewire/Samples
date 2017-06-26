@@ -1,0 +1,71 @@
+page-page1 {
+.scroll-content{overflow-y:auto}
+body {
+    -webkit-text-size-adjust: 62%;
+}
+
+
+[icon-left] ion-icon{font-size: 2.5em;
+left: 20px;
+position: absolute;
+line-height: normal;
+vertical-align: top;
+top: 0px;}
+ion-icon{font-size: 2.5em;}
+.bottom-setup{
+position: fixed;
+bottom: 70px;
+width:100%
+}
+.bottomsetup{
+margin-top:40%;
+}
+.bottom-tabs{
+position: fixed;
+bottom: 0px;
+width:100%;
+background:#D6D6D6;
+z-index:9;
+}
+.bottom-tabs a{
+width:33.33%;
+float:left;
+color:#000;
+padding:8px 0px;
+font-size:20px;
+text-align:center;
+text-decoration:none;
+}
+.bottom-tabs a ion-icon{font-size: 1.5em;}
+.bottom-tabs a.active{
+  background: #8EC543;
+  background-image: -webkit-linear-gradient(top, #8EC543, #76A835);
+  background-image: -moz-linear-gradient(top, #8EC543, #76A835);
+  background-image: -ms-linear-gradient(top, #8EC543, #76A835);
+  background-image: -o-linear-gradient(top, #8EC543, #76A835);
+  background-image: linear-gradient(to bottom, #8EC543, #76A835);
+}
+
+.bottom-tabs ion-icon{
+vertical-align: top;
+}
+
+.header-bar{float:left;color:#FFFFFF;background:#38353c;border-color:#38353c;margin: 0;padding:5px 0 5px;;width: 100%;}
+.header-bar h1{color:#B4EA6E;float:left;width: 100%;text-align:center;margin:0px;font-size:20px;}
+.header-bar span{color:#FFFFFF;width: 100%;text-align:center;float:left;}
+.inner-content{background:#F0E6E4;float:left;width:100%;margin-bottom:45px;}
+.scroll-content{background:#F0E6E4;}
+.greenbtn{color:#FFFFFF;border-radius:5px;
+  background: #8EC543;
+  background-image: -webkit-linear-gradient(top, #8EC543, #76A835);
+  background-image: -moz-linear-gradient(top, #8EC543, #76A835);
+  background-image: -ms-linear-gradient(top, #8EC543, #76A835);
+  background-image: -o-linear-gradient(top, #8EC543, #76A835);
+  background-image: linear-gradient(to bottom, #8EC543, #76A835);
+  border-radius:5px;
+  margin-bottom:10px;
+  font-size:1.7rem;
+  }
+
+
+}

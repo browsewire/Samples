@@ -1,0 +1,35 @@
+
+
+<ion-content >
+<div class="header-bar">
+   <h1>{{ title }}</h1>
+   <span>{{ subtitle  }} {{ loginName }}</span>
+   </div>
+      <div padding class="inner-content">
+
+      <button ion-button full large icon-left class="greenbtn" (click)="takePicture()">
+         <ion-icon name="md-camera"></ion-icon> {{ 'Take Photo' }}
+      </button>
+
+      <button ion-button full large icon-left class="greenbtn" (click)="selectPicture()">
+         <ion-icon name="md-image"></ion-icon> {{ 'Select Photo' }}
+      </button>
+
+      <button ion-button full large icon-left class="greenbtn" (click)="itemTapped()">
+         <ion-icon name="md-play"></ion-icon> {{ 'Skip Photo' }}
+      </button>
+
+      <button ion-button full large icon-left class="greenbtn bottomsetup" (click)="itemTappedSetup()">
+         <ion-icon name="ios-construct"></ion-icon> {{ 'Setup' }}
+      </button>
+     </div>
+
+</ion-content>
+
+<div class="bottom-tabs">
+<a href="javscript:void(0)" class="active">1 <ion-icon ios="ios-camera" md="md-camera"></ion-icon></a>
+<a href="javscript:void(0)">2 <ion-icon ios="ios-create" md="md-create"></ion-icon></a>
+<a href="javscript:void(0)">3 <ion-icon ios="ios-checkmark" md="md-checkmark"></ion-icon></a>
+</div>
+
+

@@ -1,0 +1,38 @@
+<ion-content>
+  
+  <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+  
+</ion-content>
+ <div class="bottom-tabs">
+ 
+<div class = "tabs annotationoption">
+      <button class="button greenbtn_sml align_left"  (click)="goToStep1()">
+       <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+      </button>
+      
+      
+    	<div class="annotate_option">
+    	
+      <button class="button greenbtn_sml" style="background:#000;" (click)="chooseColor('#000')">
+      </button>
+      
+      <button class="button greenbtn_sml" style="background:#fff;" (click)="chooseColor('#fff')">
+      </button>
+      
+      <button class="button greenbtn_sml" style="background:#ff0000;" (click)="chooseColor('#ff0000')">
+      </button>
+      
+      <button class="button greenbtn_sml" style="background:#FFFF00;" (click)="chooseColor('#FFFF00')">
+      </button>
+      
+      <button class="button greenbtn_sml" style="" (click)="clearPad()">
+      <ion-icon ios="ios-undo" md="md-undo"></ion-icon>
+      </button>
+      
+      </div>
+      
+      <button class="button greenbtn_sml align_right"  (click)="savePad()">
+      <ion-icon ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
+      </button>
+    </div>
+</div>

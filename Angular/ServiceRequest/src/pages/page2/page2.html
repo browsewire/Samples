@@ -1,0 +1,180 @@
+
+
+<ion-content >
+<div class="header-bar">
+   <h1>{{ title  }}</h1>
+   <span>{{ subtitle }} {{ loginName }}</span>
+   </div>
+      <div padding class="inner-content">
+
+
+     <div class="request_form">
+
+
+      <div class="request_form_left">
+      <div class="img-div">
+      <img *ngIf="annotatedImage" [src]="annotatedImage" (click)="annotateAgain()">
+      </div>
+
+      </div>
+
+      <div class="request_form_right">
+
+      <div class="request_form_right_top audiopart" *ngIf='!isrecording'>
+      <div class="microphonesection" *ngIf='!isplaying'>
+      <ion-icon  name="ios-mic" (click)="startRecording()"></ion-icon>
+      </div>
+       <div class="microphonesection disable-mic" *ngIf='isplaying'>
+      <ion-icon  name="ios-mic"></ion-icon>
+      </div>
+      <div class="microphonedetail" *ngIf='!isplaying'>
+      <p *ngIf='tduration'>{{ 'Duration' }}: {{tduration}} {{ 'Sec' }}</p>
+
+      <div *ngIf='tduration' class="audio_player">
+      <div class="audio_action" (click)="startPlayback()">
+      <ion-icon name="ios-play" ></ion-icon>
+      </div>
+      <div class="progress-outer" (click)="startPlayback()">
+        <div class="progress-inner">
+        </div>
+      </div>
+
+      </div>
+
+      </div>
+
+      <div class="microphonedetail" *ngIf='isplaying'>
+      <p *ngIf='tduration'>{{ 'Duration' }}: {{tduration}} {{ 'Sec' }}</p>
+
+      <div class="audio_player">
+      <div class="audio_action" (click)="stopPlayback()">
+      <ion-icon class="square-icon_bh" ios="ios-square" md="md-square"></ion-icon>
+      </div>
+      <div class="progress-outer" (click)="stopPlayback()">
+        <div class="progress-inner" [style.width]="lduration + '%'">
+        </div>
+      </div>
+
+      </div>
+
+
+      </div>
+
+      </div>
+
+
+      <div class="request_form_right_top  audiopart" *ngIf='isrecording'>
+      <div class="microphonesection stop-recording">
+      <ion-icon ios="ios-square" md="md-square" (click)="stopRecording()"></ion-icon>
+      </div>
+      <div class="microphonedetail" >
+
+        <p>{{ 'Duration' }}: {{tduration}} {{ 'Sec' }}</p>
+        <div class="audio_player" style="margin-top:-12px;">
+        <ion-icon ios="ios-recording" md="md-recording"></ion-icon> {{ 'Recording....' }}
+        </div>
+
+      </div>
+      </div>
+
+
+
+      <div class="request_form_right_top">
+
+
+
+      <ion-list>
+        <ion-item>
+          <ion-label>{{ 'Priority' }}</ion-label>
+          <ion-select [(ngModel)]="servicePriority">
+             <ion-option *ngFor="let item of priprityList" value="{{item.value}}" selected="(item.value == servicePriority)">{{item.text}}</ion-option>
+          </ion-select>
+        </ion-item>
+     </ion-list>
+      </div>
+
+      </div>
+
+      </div>
+
+      <div class="request_form location-field">
+      <div class="locationpart-left">
+      <ion-list class="location-label">
+        <ion-item>
+          <ion-label>{{ 'Location' }}</ion-label>
+        </ion-item>
+     </ion-list>
+
+
+
+
+      <ion-list class="barcode-pintner">
+        <ion-icon class="location_icon" style="color:#8EC543;" ios="ios-barcode" md="md-barcode" (click)="startScan()"></ion-icon>
+
+     </ion-list>
+
+    <!-- <ion-list class="barcode-pintner">
+        <ion-icon class="location_icon" style="color:#5099FE;" ios="ios-pin" md="md-pin"></ion-icon>
+     </ion-list>-->
+     </div>
+     <div class="locationpart-right">
+     <ion-list class="location-input">
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="locationId" value="{{ locationId }}" (blur)="onChange2();"></ion-input>
+          <ion-label style="display:none">{{ 'Location' }}</ion-label>
+          <ion-select [(ngModel)]="serviceLocation" (ngModelChange)="onChange()">
+            <ion-option *ngFor="let location of locationList" value="{{location.Location_ID}}" selected="(location.Location_ID == serviceLocation)">{{location.Location_ID}} {{location.Location_Name}}</ion-option>
+
+          </ion-select>
+        </ion-item>
+     </ion-list>
+
+     </div>
+     </div>
+     <p *ngIf='locationText' class="location-text-p" style="width:100%;text-align:right;margin:0px 0px 16px;float:left;">{{ locationText }}</p>
+
+      <div class="request_form">
+      <ion-list>
+        <ion-item>
+          <ion-label>{{ 'Category' }}</ion-label>
+          <ion-select [(ngModel)]="serviceCategory">
+            <ion-option *ngFor="let category of categoryList" value="{{category.value}}" >{{category.text}}</ion-option>
+          </ion-select>
+        </ion-item>
+     </ion-list>
+
+
+      </div>
+
+      <div class="request_form">
+      <ion-list>
+      <ion-item>
+       <ion-label>{{ 'Remarks' }}</ion-label>
+       <ion-textarea [(ngModel)]="serviceRemarks"></ion-textarea>
+     </ion-item>
+     </ion-list>
+      </div>
+
+      <div class="request_form">
+      <button ion-button class="greenbtn" style="float: left;" (click)="backTapped()">
+         <ion-icon ios="ios-arrow-back"  md="md-arrow-back"></ion-icon>&nbsp;&nbsp;{{ 'Back' }}
+      </button>
+
+      <button ion-button *ngIf='!isrecording && !isplaying' class="greenbtn" style="float: right;" (click)="submitForm()">
+         <ion-icon ios="ios-done-all" md="md-done-all"></ion-icon>&nbsp;&nbsp; {{ 'Submit' }}
+      </button>
+      
+      <button ion-button *ngIf='isrecording || isplaying' class="greenbtn" style="float: right;background:#ddd;">
+         <ion-icon ios="ios-done-all" md="md-done-all"></ion-icon>&nbsp;&nbsp; {{ 'Submit' }}
+      </button>
+      </div>
+
+
+
+     </div>
+</ion-content>
+<div class="bottom-tabs">
+<a href="javscript:void(0)">1 <ion-icon ios="ios-camera" md="md-camera"></ion-icon></a>
+<a href="javscript:void(0)" class="{{ createClass}}">2 <ion-icon ios="ios-create" md="md-create"></ion-icon></a>
+<a href="javscript:void(0)" class="{{ checkmarkClass}}">3 <ion-icon ios="ios-checkmark" md="md-checkmark"></ion-icon></a>
+</div>
